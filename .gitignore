@@ -1,0 +1,14 @@
+# Réglages locaux de l'outil d'assistance (chemins et autorisations propres au poste)
+.claude/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Fichiers temporaires
+_tmp*/
+*.tmp
+Thumbs.db
+desktop.ini
