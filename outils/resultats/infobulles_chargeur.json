@@ -1,0 +1,82 @@
+[
+ {
+  "label": "",
+  "tip": "The maximum number of tokens the model can attend to in one prompt. See the Conversation Overflow options under \"Inference params\" for more ways to manage this The maximum number of tokens the model can attend to in one prompt. See the Conversation Overflow options under \"Inference params\" for more ways to manage this"
+ },
+ {
+  "label": "",
+  "tip": "Number of discrete model layers to compute on the GPU for GPU acceleration Number of discrete model layers to compute on the GPU for GPU acceleration"
+ },
+ {
+  "label": "",
+  "tip": "Number of CPU threads to allocate to the thread pool used for model computation Number of CPU threads to allocate to the thread pool used for model computation"
+ },
+ {
+  "label": "",
+  "tip": "Maximum number of prompt tokens to schedule during prompt processing. Larger values may improve performance, but can use more memory Maximum number of prompt tokens to schedule during prompt processing. Larger values may improve performance, but can use more memory"
+ },
+ {
+  "label": "",
+  "tip": "Maximum number of prompt tokens to process in one chunk. Larger values may improve performance, but can use more memory Maximum number of prompt tokens to process in one chunk. Larger values may improve performance, but can use more memory"
+ },
+ {
+  "label": "",
+  "tip": "Maximum number of predictions the model can run at a given time. The speed of each individual prediction may decrease with concurrency, but each prediction will start faster and higher total throughput can be achieved Maximum number of predictions the model can run at a given time. The speed of each individual prediction may decrease with concurrency, but each prediction will start faster and higher total throughput can be achieved"
+ },
+ {
+  "label": "",
+  "tip": "Controls whether concurrent predictions share a single KV cache, saving memory. Disabling this ensures each prediction can utilize the full context length, at the cost of using more memory Controls whether concurrent predictions share a single KV cache, saving memory. Disabling this ensures each prediction can utilize the full context length, at the cost of using more memory"
+ },
+ {
+  "label": "",
+  "tip": "Maximum number of context checkpoints to keep per llama-server slot. 0 disables checkpoints. Maximum number of context checkpoints to keep per llama-server slot. 0 disables checkpoints."
+ },
+ {
+  "label": "",
+  "tip": "Message injected before the end-of-thinking tag when reasoning budget is exhausted (default: none) Message injected before the end-of-thinking tag when reasoning budget is exhausted (default: none)"
+ },
+ {
+  "label": "",
+  "tip": "Custom base frequency for rotary positional embeddings (RoPE). Increasing this may enable better performance at high context lengths Custom base frequency for rotary positional embeddings (RoPE). Increasing this may enable better performance at high context lengths"
+ },
+ {
+  "label": "",
+  "tip": "Context length is scaled by this factor to extend effective context using RoPE Context length is scaled by this factor to extend effective context using RoPE"
+ },
+ {
+  "label": "",
+  "tip": "Offload the KV cache to GPU memory. Improves performance but requires more GPU memory Offload the KV cache to GPU memory. Improves performance but requires more GPU memory"
+ },
+ {
+  "label": "",
+  "tip": "Reserve system memory for the model, even when offloaded to GPU. Improves performance but requires more system RAM Reserve system memory for the model, even when offloaded to GPU. Improves performance but requires more system RAM"
+ },
+ {
+  "label": "",
+  "tip": "Improves load time for the model. Disabling this may improve performance when the model is larger than the available system RAM Improves load time for the model. Disabling this may improve performance when the model is larger than the available system RAM"
+ },
+ {
+  "label": "",
+  "tip": "The seed for the random number generator used in text generation. -1 is random The seed for the random number generator used in text generation. -1 is random"
+ },
+ {
+  "label": "",
+  "tip": "Configure load-time speculative decoding. Configure load-time speculative decoding."
+ },
+ {
+  "label": "",
+  "tip": "The template used by engine protocol for chat, tools, reasoning, and multimodal formatting. Changing this requires reloading the model. The template used by engine protocol for chat, tools, reasoning, and multimodal formatting. Changing this requires reloading the model."
+ },
+ {
+  "label": "",
+  "tip": "Decreases memory usage and generation time on some models Decreases memory usage and generation time on some models"
+ },
+ {
+  "label": "",
+  "tip": "Lower values reduce memory usage but may decrease quality. The effect varies significantly between models. Lower values reduce memory usage but may decrease quality. The effect varies significantly between models."
+ },
+ {
+  "label": "",
+  "tip": "Lower values reduce memory usage but may decrease quality. The effect varies significantly between models. Lower values reduce memory usage but may decrease quality. The effect varies significantly between models."
+ }
+]

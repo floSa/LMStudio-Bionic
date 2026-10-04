@@ -1,0 +1,15 @@
+{
+  "_note": "Relevés de l'« Estimated Memory Usage » (Go) affichée par la fenêtre de chargement de LM Studio 0.4.25, modèle Gemma 4 E4B Q4_K_M, poste de test. Valeurs stabilisées (lecture après attente). Consolidation des séries produites par mesures_estimation_gui.py et des relevés manuels du 06/10/2026.",
+  "contexte_total_go": {"2048": 6.31, "4096": 6.41, "8192": 6.61, "16384": 7.02, "32768": 7.83, "65536": 9.45, "131072": 12.69},
+  "contexte_8192": {
+    "gpu_offload_couches__part_gpu_go": {"0": 0.00246, "12": 1.89, "24": 3.94, "36": 5.83, "42": 6.61},
+    "total_go_quel_que_soit_offload": 6.61,
+    "offload_kv_cache_desactive__part_gpu_go": 6.21,
+    "physical_batch_size__total_go": {"128": 6.49, "512": 6.61, "1024": 6.77, "2048": 7.09},
+    "evaluation_batch_size__total_go": {"512": 6.61, "2048": 6.61, "8192": 6.61},
+    "max_concurrent_predictions_4_vers_1__total_go": 6.61
+  },
+  "contexte_32768_quantification_cache_kv__total_go": {"K_F16_V_F16": 7.83, "K_Q8_0_V_F16": 7.45, "K_Q8_0_V_Q8_0": 7.07, "K_Q4_0_V_Q4_0": 6.67},
+  "flash_attention_contexte_32768__total_go": {"active": 7.83, "desactive": 7.85},
+  "cli_estimate_only_gib": {"2048": 6.18, "8192": 6.52, "32768": 7.85, "131072": 13.18}
+}
