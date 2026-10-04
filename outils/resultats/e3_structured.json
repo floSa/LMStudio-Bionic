@@ -1,0 +1,15 @@
+{
+ "content": "{\n  \"numero\": \"F-2026-0042\",\n  \"date\": \"06/10/2026\",\n  \"client\": \"Atelier Démo SARL\",\n  \"total_ttc\": 3060.00\n}",
+ "reasoning": "",
+ "finish": "stop",
+ "prompt_tokens": 63,
+ "completion_tokens": 73,
+ "seconds": 8.8,
+ "tok_s_global": 8.3,
+ "parsed": {
+  "numero": "F-2026-0042",
+  "date": "06/10/2026",
+  "client": "Atelier Démo SARL",
+  "total_ttc": 3060.0
+ }
+}

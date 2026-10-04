@@ -1,0 +1,54 @@
+{
+ "0": {
+  "distinct": 1,
+  "contents": [
+   "Le bourdonnement régulier des serveurs, habituellement apaisant pour Elias, s'était soudainement troublé par un murmure électronique discordant émanant du panneau central. En examinant les flux de données projetés sur le mur, il remarqua une fluctuation subtile mais persistante dans la lecture énergétique qui défiait toute modélisation connue.",
+   "Le bourdonnement régulier des serveurs, habituellement apaisant pour Elias, s'était soudainement troublé par un murmure électronique discordant émanant du panneau central. En examinant les flux de données projetés sur le mur, il remarqua une fluctuation subtile mais persistante dans la lecture énergétique qui défiait toute modélisation connue.",
+   "Le bourdonnement régulier des serveurs, habituellement apaisant pour Elias, s'était soudainement troublé par un murmure électronique discordant émanant du panneau central. En examinant les flux de données projetés sur le mur, il remarqua une fluctuation subtile mais persistante dans la lecture énergétique qui défiait toute modélisation connue."
+  ],
+  "tok_s": [
+   11.92,
+   13.5,
+   13.55
+  ]
+ },
+ "0.5": {
+  "distinct": 3,
+  "contents": [
+   "Le bourdonnement régulier des serveurs était la seule musique familière de la salle de contrôle, jusqu'à ce que l'ingénieur Marc remarque une fluctuation subtile et inexplicable sur le moniteur principal. C'était un point de données qui ne correspondait à aucun protocole connu, comme si la réalité elle-même venait d'afficher une erreur critique.",
+   "Le bourdonnement régulier des serveurs, habituellement apaisant pour Elias, s'était soudainement troublé par un murmure discordant émanant du panneau central. En examinant les flux de données projetés sur l'écran principal, il remarqua une fluctuation impossible, une signature énergétique qui défiait toutes les lois connues de la physique qu'il maîtrisait si bien.",
+   "Le bruit régulier des serveurs, habituellement apaisant pour Elias, fut soudainement troublé par un murmure électronique discordant émanant du panneau central. En examinant les vagues de données projetées sur l'écran principal, il remarqua alors une fluctuation subtile, un point noir impossible dans le flux parfait qu'il connaissait si bien."
+  ],
+  "tok_s": [
+   13.29,
+   13.65,
+   13.49
+  ]
+ },
+ "1.0": {
+  "distinct": 3,
+  "contents": [
+   "L'ingénieur Marc Dubois, les yeux rivés sur les flux de données complexes de la salle de contrôle, fut soudainement interpellé par une lecture erratique et inexplicable sur l'écran principal. Une fluctuation, trop régulière pour être aléatoire, signalait une anomalie énergétique jusque-là ignorée dans le cœur du système.",
+   "Le bourdonnement régulier des serveurs, habituellement réconfortant pour Elias, fut soudainement ponctué par un clignotement inhabituel sur l'écran principal. Un motif géométrique, impossible selon toute loi connue d'ingénierie, scintillait au cœur du flux de données habituel de la salle de contrôle.",
+   "Le bourdonnement habituel de la salle de contrôle, habituellement réconfortant dans sa monotonie numérique, fut brutalement perturbé par une alerte rouge clignotante que personne n'avait programmé. En zoomant sur le flux de données habituellement stable du Réseau Global, il repéra un pic énergétique inexplicable, comme si quelque chose d'étranger venait de percer les couches sécurisées du système."
+  ],
+  "tok_s": [
+   13.04,
+   13.29,
+   13.65
+  ]
+ },
+ "1.5": {
+  "distinct": 3,
+  "contents": [
+   "L'ingénieur, habituellement maître de la routine des consoles bleutées, sentit un frisson parcourir son dos devant l'écran principal. Une série de lectures anormales clignotait au centre du tableau de bord, une signature énergétique qu'il n'avait jamais rencontrée dans les vastes données du réseau.",
+   "Le bruit familier des ventilateurs de la salle de contrôle habituellement rassurant devint soudainement discordant, accompagné d'un clignotement rouge vif et inhabituel sur l'écran principal. L'ingénieur se raidit devant le panneau de bord, réalisant que ce signal n'était pas une simple panne, mais plutôt un prélude à quelque chose d'inconnu et d'extrêmement préoccupant.",
+   "L'odeur métallique des circuits chauffés était familière pour Elias, mais ce matin-là, l'affichage principal vacillait avec une irrégularité rythmique que rien des manuels n'expliquait. Alors qu'il ajustait ses lunettes anti-pollution, il remarqua un pic de données erratique émanant d'une console habituellement silencieuse, comme si quelque chose tentait désespérément de"
+  ],
+  "tok_s": [
+   13.68,
+   13.83,
+   13.87
+  ]
+ }
+}

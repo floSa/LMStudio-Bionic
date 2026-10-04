@@ -1,0 +1,9 @@
+{
+ "content": "La production d'électricité est un processus qui dépend d'un ensemble complexe de procédés industriels.",
+ "reasoning": "",
+ "finish": "stop",
+ "prompt_tokens": 2119,
+ "completion_tokens": 21,
+ "seconds": 8.55,
+ "tok_s_global": 2.45
+}

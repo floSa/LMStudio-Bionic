@@ -1,0 +1,25 @@
+{
+ "max_tokens=15": {
+  "content": "## Le Fonctionnement d'une Turbine à Vapeur : Une Description D",
+  "reasoning": "",
+  "finish": "length",
+  "prompt_tokens": 20,
+  "completion_tokens": 15,
+  "seconds": 2.1,
+  "tok_s_global": 7.15
+ },
+ "stop=['2.']": {
+  "content": "Voici 5 conseils essentiels pour bien écrire un rapport technique :\n\n1. **Connaître son public et adapter le niveau de détail :** Avant de commencer à rédiger, identifiez clairement qui lira votre rapport (experts du domaine, décideurs non techniques, étudiants, etc.). Adaptez votre langage, votre profondeur d'analyse et la quantité de jargon technique en conséquence. Un rapport pour des dirigeants doit être concis et axé sur les *implications* et les *recommandations*, tandis qu'un rapport pour des ingénieurs peut détailler davantage la méthodologie.\n\n",
+  "reasoning": "",
+  "finish": "stop",
+  "prompt_tokens": 35,
+  "completion_tokens": 122,
+  "seconds": 9.13,
+  "tok_s_global": 13.36
+ },
+ "seed_repeat": [
+  "Voici différentes catégories de noms originaux pour un robot ménager, selon l'ambiance que vous",
+  "Voici différentes catégories de noms originaux pour un robot ménager, selon l'ambiance que vous",
+  "Voici différentes catégories de noms originaux pour un robot ménager, selon l'ambiance que vous"
+ ]
+}
