@@ -1,0 +1,46 @@
+[
+ {
+  "label": "llm",
+  "tip": ""
+ },
+ {
+  "label": "llm",
+  "tip": ""
+ },
+ {
+  "label": "Server Port",
+  "tip": "Set which networking port the local server will use. By default, LM Studio uses the port 1234. You might need to change this if the port is already in use."
+ },
+ {
+  "label": "Require Authentication",
+  "tip": "When enabled, only requests that include the Authorization header with a Bearer $LM_API_TOKEN value will be allowed."
+ },
+ {
+  "label": "Serve on Local Network",
+  "tip": "Whether to allow connections from other devices on the network. If not checked, the server will only listen on localhost."
+ },
+ {
+  "label": "Allow per-request MCPs",
+  "tip": "Allow using MCPs that are not in your mcp.json. These MCP connections are ephemeral, only existing as long as the request. At the moment, only remote MCPs are supported."
+ },
+ {
+  "label": "Allow calling servers from mcp.json",
+  "tip": "When enabled, allows API clients to use servers you defined in your mcp.json in LM Studio. This can be a security risk: in case you defined MCP servers that have access to your file system or private data. This option requires \"Require Authentication\" to be enabled."
+ },
+ {
+  "label": "Enable CORS",
+  "tip": "Enabling CORS (Cross-origin Resource Sharing) would allow websites you visit to make requests to LM Studio server. CORS might be required when making requests from a web page or VS Code / other extension."
+ },
+ {
+  "label": "Just-in-Time Model Loading",
+  "tip": "When enabled, if a request specified a model that is not loaded, it will be automatically loaded and used. In addition, the \"/v1/models\" endpoint will also include models that are not yet loaded."
+ },
+ {
+  "label": "Auto unload unused JIT loaded models",
+  "tip": "A model that was loaded Just-in-time (JIT) to serve an API request will be automatically unloaded after being unused for some duration (TTL)."
+ },
+ {
+  "label": "Only Keep Last JIT Loaded Model",
+  "tip": "Ensure at most 1 model is loaded via JIT at any given time (unloads previous model)"
+ }
+]

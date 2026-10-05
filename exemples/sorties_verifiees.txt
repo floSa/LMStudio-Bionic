@@ -1,0 +1,63 @@
+﻿===== python 01_lister_modeles.py
+== API compatible OpenAI : /v1/models
+ - google/gemma-4-e4b
+ - text-embedding-nomic-embed-text-v1.5
+
+== API native LM Studio : /api/v1/models
+ - google/gemma-4-e4b                            type=llm       taille= 6.33 Go  contexte max=131072  chargé=True
+     instance google/gemma-4-e4b : contexte=8192, parallèle=4, flash_attention=True
+ - text-embedding-nomic-embed-text-v1.5          type=embedding taille= 0.08 Go  contexte max=2048  chargé=False
+
+===== python 02_chat_simple.py
+La quantification réduit la précision des poids et activations du modèle (ex: de 32 bits à 8 bits) pour diminuer significativement sa taille mémoire et ses exigences de calcul. Cela permet ainsi de déployer des modèles plus grands sur des appareils matériels moins puissants sans perte de performance critique.
+
+[stop] 42 tokens en entrée, 62 en sortie, 5.5 s (11.3 tok/s global)
+
+===== python 03_streaming.py
+Un, deux, trois, quatre, cinq, six, sept, huit, neuf, dix, onze, douze, treize, quatorze, quinze, seize, dix-sept, dix-huit, dix-neuf, vingt
+
+TTFT = 0.94 s ; 50 morceaux en 4.13 s
+
+===== python 04_sortie_json_schema.py
+{
+  "numero": "F-2026-0042",
+  "date": "06/10/2026",
+  "client": "Atelier Démo SARL",
+  "total_ttc": 3060.0
+}
+
+===== python 05_embeddings.py
+dimension des vecteurs : 768
+« La centrale produit de l'électricité. » ~ « Une usine génère du courant électrique. » : 0.740
+« La centrale produit de l'électricité. » ~ « Le chat dort sur le canapé. » : 0.545
+
+===== python 06_ocr_image.py
+**SOCIÉTÉ EXEMPLE SAS**
+
+12 rue des Tests, 75000 Paris - SIRET 123 456 789 00012
+
+**FACTURE N° F-2026-0042**
+
+Date : 06/10/2026
+Échéance : 05/11/2026
+
+Client : Atelier Démo SARL
+
+| Désignation | Qté | PU HT | Total HT |
+| :--- | :---: | :---: | :---: |
+| Audit de configuration | 2 | 450,00 € | 900,00 € |
+| Formation prise en main | 1 | 1 200,00 € | 1 200,00 € |
+| Support mensuel | 3 | 150,00 € | 450,00 € |
+
+Total HT : 2 550,00 €
+TVA 20 % : 510,00 €
+**Total TTC : 3 060,00 €**
+
+Paiement par virement sous 30 jours. Pénalités de retard : 3 fois le taux légal.
+
+[548 tokens en entrée (dont l'image), 292 en sortie, 25.1 s]
+
+===== python 07_appel_outil.py
+finish_reason : tool_calls
+fonction demandée : get_meteo avec {'ville': 'Lyon'}
+
