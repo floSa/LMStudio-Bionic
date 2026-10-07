@@ -1,0 +1,109 @@
+{
+ "plugin_un_outil": {
+  "status": 200,
+  "secondes": 5.5,
+  "sortie": [
+   {
+    "type": "tool_call",
+    "tool": "convertir_temperature",
+    "arguments": {
+     "de": "C",
+     "valeur": 100,
+     "vers": "F"
+    },
+    "output": "[{\"type\":\"text\",\"text\":\"100 C = 212.0 F\"}]",
+    "provider_info": {
+     "plugin_id": "mcp/demo-notes",
+     "type": "plugin"
+    }
+   }
+  ],
+  "stats": {
+   "input_tokens": 167,
+   "total_output_tokens": 30,
+   "reasoning_output_tokens": 0,
+   "tokens_per_second": 13.560060212011205,
+   "time_to_first_token_seconds": 1.337765
+  }
+ },
+ "plugin_forme_courte_plusieurs_outils": {
+  "status": 200,
+  "secondes": 8.7,
+  "sortie": [
+   {
+    "type": "tool_call",
+    "tool": "lister_notes",
+    "arguments": {},
+    "output": "[{\"type\":\"text\",\"text\":\"courses.txt\\nreunion.txt\"}]",
+    "provider_info": {
+     "plugin_id": "mcp/demo-notes",
+     "type": "plugin"
+    }
+   },
+   {
+    "type": "tool_call",
+    "tool": "lire_note",
+    "arguments": {
+     "nom": "courses.txt"
+    },
+    "output": "[{\"type\":\"text\",\"text\":\"Liste de courses (fictive) : cafe, filtres, sucre, 12 gobelets.\\n\"}]",
+    "provider_info": {
+     "plugin_id": "mcp/demo-notes",
+     "type": "plugin"
+    }
+   },
+   {
+    "type": "message",
+    "content": "Le contenu du fichier `courses.txt` est :\nListe de courses (fictive) : cafe, filtres, sucre, 12 gobelets."
+   }
+  ]
+ },
+ "outil_non_autorise": {
+  "status": 200,
+  "sortie": [
+   {
+    "type": "message",
+    "content": "Pour convertir des degrés Celsius (°C) en degrés Fahrenheit (°F), vous utilisez la formule suivante :\n\n$$\\text{°F} = (\\text{°C} \\times \\frac{9}{5}) + 32$$\n\nEn appliquant cette formule avec $100$ degré"
+   }
+  ]
+ },
+ "plugin_inexistant": {
+  "status": 400,
+  "corps": {
+   "error": {
+    "message": "Unable to get plugin tools for 'mcp/inexistant'. Unable to get plugin tools for plugin identifier 'mcp/inexistant'. Error: Cannot find plugin handle for plugin: mcp/inexistant",
+    "type": "plugin_connection_error",
+    "param": "integrations"
+   }
+  }
+ },
+ "flux_types": {
+  "status": 200,
+  "secondes": 4.6,
+  "types": [
+   "chat.start",
+   "prompt_processing.start",
+   "prompt_processing.end",
+   "tool_call.start",
+   "tool_call.name",
+   "tool_call.arguments",
+   "tool_call.success",
+   "prompt_processing.start",
+   "prompt_processing.end",
+   "message.start",
+   "message.end",
+   "chat.end"
+  ]
+ },
+ "ephemeral_mcp_local": {
+  "status": 400,
+  "secondes": 0.0,
+  "sortie": {
+   "error": {
+    "message": "Unable to connect to remote MCP server 'demo-http' at url 'http://127.0.0.1:8765/mcp'. URL resolves to a non-public address. We only allow public addresses for dynamic remote MCP connections.",
+    "type": "mcp_connection_error",
+    "param": "integrations"
+   }
+  }
+ }
+}

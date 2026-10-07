@@ -1,0 +1,179 @@
+{
+ "api_v1_chat": {
+  "secondes_client": 8.21,
+  "stats": {
+   "input_tokens": 30,
+   "total_output_tokens": 102,
+   "reasoning_output_tokens": 0,
+   "tokens_per_second": 13.78196494796012,
+   "time_to_first_token_seconds": 0.68861
+  },
+  "cles": [
+   "model_instance_id",
+   "output",
+   "stats"
+  ]
+ },
+ "openai_chat_completions": {
+  "secondes_client": 7.84,
+  "usage": {
+   "prompt_tokens": 30,
+   "completion_tokens": 102,
+   "total_tokens": 132,
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "cles": [
+   "choices",
+   "created",
+   "id",
+   "model",
+   "object",
+   "stats",
+   "system_fingerprint",
+   "usage"
+  ],
+  "stats": {},
+  "timings": null
+ },
+ "flux_api_v1_chat": {
+  "secondes_client": 7.72,
+  "types": [
+   "chat.start",
+   "prompt_processing.start",
+   "prompt_processing.progress",
+   "prompt_processing.progress",
+   "prompt_processing.progress",
+   "prompt_processing.end",
+   "message.start",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.delta",
+   "message.end",
+   "chat.end"
+  ],
+  "chat_end": [
+   {
+    "event": "chat.end",
+    "data": {
+     "type": "chat.end",
+     "result": {
+      "model_instance_id": "google/gemma-4-e4b",
+      "output": [
+       {
+        "type": "message",
+        "content": "Un jeton est l'unité fondamentale de texte que le modèle de langage traite, représentant soit un mot entier, soit une partie de mot (comme un préfixe ou un suffixe). Au lieu d'analyser des caractères individuels, le modèle découpe les entrées et les sorties en ces unités discrètes pour comprendre la structure linguistique. C'est cette tokenisation qui permet au modèle de gérer efficacement le vocabulaire et de calculer les probabilités statistiques entre ces segments textuels."
+       }
+      ],
+      "stats": {
+       "input_tokens": 30,
+       "total_output_tokens": 102,
+       "reasoning_output_tokens": 0,
+       "tokens_per_second": 13.843084118528598,
+       "time_to_first_token_seconds": 0.372244
+      }
+     }
+    }
+   }
+  ]
+ }
+}

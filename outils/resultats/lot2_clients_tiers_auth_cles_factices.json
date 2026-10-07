@@ -1,0 +1,52 @@
+{
+ "Claude Code : POST /v1/messages (flux, outils, système en blocs, x-api-key)": {
+  "status": 401,
+  "secondes": 0.1,
+  "extrait": "{\"type\":\"error\",\"error\":{\"type\":\"authentication_error\",\"message\":\"Malformed LM Studio API token provided: lm-studio. Ensure you are using a valid token. Learn more at: https://lmstudio.ai/docs/developer/core/authentication.\"}}"
+ },
+ "Claude Code : POST /v1/messages/count_tokens": {
+  "status": 401,
+  "secondes": 0.0,
+  "extrait": "{\"type\":\"error\",\"error\":{\"type\":\"authentication_error\",\"message\":\"Malformed LM Studio API token provided: lm-studio. Ensure you are using a valid token. Learn more at: https://lmstudio.ai/docs/developer/core/authentication.\"}}"
+ },
+ "Codex : POST /v1/responses (flux, outil, store=false)": {
+  "status": 401,
+  "secondes": 0.0,
+  "extrait": "{     \"error\": {         \"message\": \"Malformed LM Studio API token provided: lm-studio. Ensure you are using a valid token. Learn more at: https://lmstudio.ai/docs/developer/core/authentication.\",         \"type\": \"invalid_request_error\",         \"param\": null,"
+ },
+ "Cline / Roo Code / Open WebUI : GET /v1/models": {
+  "status": 401,
+  "secondes": 0.0,
+  "extrait": "{     \"error\": {         \"message\": \"Malformed LM Studio API token provided: lm-studio. Ensure you are using a valid token. Learn more at: https://lmstudio.ai/docs/developer/core/authentication.\",         \"type\": \"invalid_request_error\",         \"param\": null,"
+ },
+ "Cline / Roo Code : GET /api/v0/models (ancienne API REST)": {
+  "status": 401,
+  "secondes": 0.0,
+  "extrait": "{\"error\":{\"type\":\"invalid_request\",\"code\":\"invalid_api_key\",\"message\":\"Malformed LM Studio API token provided: lm-studio. Ensure you are using a valid token. Learn more at: https://lmstudio.ai/docs/developer/core/authentication.\"}}"
+ },
+ "Cline / Roo Code / Open WebUI : POST /v1/chat/completions (flux, usage)": {
+  "status": 401,
+  "secondes": 0.0,
+  "extrait": "{     \"error\": {         \"message\": \"Malformed LM Studio API token provided: lm-studio. Ensure you are using a valid token. Learn more at: https://lmstudio.ai/docs/developer/core/authentication.\",         \"type\": \"invalid_request_error\",         \"param\": null,"
+ },
+ "Continue : POST /v1/chat/completions (outil)": {
+  "status": 401,
+  "secondes": 0.0,
+  "extrait": "{     \"error\": {         \"message\": \"Malformed LM Studio API token provided: lm-studio. Ensure you are using a valid token. Learn more at: https://lmstudio.ai/docs/developer/core/authentication.\",         \"type\": \"invalid_request_error\",         \"param\": null,"
+ },
+ "Continue (autocomplétion) : POST /v1/completions": {
+  "status": 401,
+  "secondes": 0.0,
+  "extrait": "{     \"error\": {         \"message\": \"Malformed LM Studio API token provided: lm-studio. Ensure you are using a valid token. Learn more at: https://lmstudio.ai/docs/developer/core/authentication.\",         \"type\": \"invalid_request_error\",         \"param\": null,"
+ },
+ "Continue (indexation) : POST /v1/embeddings": {
+  "status": 401,
+  "secondes": 0.0,
+  "extrait": "{     \"error\": {         \"message\": \"Malformed LM Studio API token provided: lm-studio. Ensure you are using a valid token. Learn more at: https://lmstudio.ai/docs/developer/core/authentication.\",         \"type\": \"invalid_request_error\",         \"param\": null,"
+ },
+ "Aider (litellm) : POST /v1/chat/completions, clé factice 'dummy-api-key'": {
+  "status": 401,
+  "secondes": 0.0,
+  "extrait": "{     \"error\": {         \"message\": \"Malformed LM Studio API token provided: dummy-api-***. Ensure you are using a valid token. Learn more at: https://lmstudio.ai/docs/developer/core/authentication.\",         \"type\": \"invalid_request_error\",         \"param\": n"
+ }
+}

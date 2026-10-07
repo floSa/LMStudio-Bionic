@@ -1,0 +1,52 @@
+{
+ "Claude Code : POST /v1/messages (flux, outils, système en blocs, x-api-key)": {
+  "status": 200,
+  "secondes": 1.3,
+  "extrait": "event: message_start data: {\"type\":\"message_start\",\"message\":{\"id\":\"msg_qqdhxocyibkbyskdnxwh\",\"type\":\"message\",\"role\":\"assistant\",\"content\":[],\"model\":\"google/gemma-4-e4b\",\"stop_reason\":null,\"stop_sequence\":null,\"usage\":{\"input_tokens\":63,\"output_tokens\":0,\"ca"
+ },
+ "Claude Code : POST /v1/messages/count_tokens": {
+  "status": 200,
+  "secondes": 0.0,
+  "extrait": "{\"error\":\"Unexpected endpoint or method. (POST /v1/messages/count_tokens)\"}"
+ },
+ "Codex : POST /v1/responses (flux, outil, store=false)": {
+  "status": 200,
+  "secondes": 0.8,
+  "extrait": "event: response.created data: {\"type\":\"response.created\",\"response\":{\"id\":\"resp_e9111494d7ad166c1d5e9d011fa4cd3060fc9981ed85ff1e\",\"object\":\"response\",\"created_at\":1791361160,\"completed_at\":null,\"status\":\"in_progress\",\"incomplete_details\":null,\"model\":\"google/g"
+ },
+ "Cline / Roo Code / Open WebUI : GET /v1/models": {
+  "status": 200,
+  "secondes": 0.0,
+  "extrait": "{   \"data\": [     {       \"id\": \"google/gemma-4-e4b\",       \"object\": \"model\",       \"owned_by\": \"organization_owner\"     },     {       \"id\": \"google/gemma-4-12b-qat\",       \"object\": \"model\",       \"owned_by\": \"organization_owner\"     },     {       \"id\": \"t"
+ },
+ "Cline / Roo Code : GET /api/v0/models (ancienne API REST)": {
+  "status": 200,
+  "secondes": 0.0,
+  "extrait": "{   \"data\": [     {       \"id\": \"google/gemma-4-e4b\",       \"object\": \"model\",       \"type\": \"vlm\",       \"publisher\": \"google\",       \"arch\": \"gemma4\",       \"compatibility_type\": \"gguf\",       \"quantization\": \"Q4_K_M\",       \"state\": \"loaded\",       \"max_con"
+ },
+ "Cline / Roo Code / Open WebUI : POST /v1/chat/completions (flux, usage)": {
+  "status": 200,
+  "secondes": 0.6,
+  "extrait": "data: {\"id\":\"chatcmpl-poskitbx70l4tm4f7o5gyb\",\"object\":\"chat.completion.chunk\",\"created\":1791361161,\"model\":\"google/gemma-4-e4b\",\"system_fingerprint\":\"google/gemma-4-e4b\",\"choices\":[{\"index\":0,\"delta\":{\"role\":\"assistant\",\"content\":\"Ok\"},\"logprobs\":null,\"finish"
+ },
+ "Continue : POST /v1/chat/completions (outil)": {
+  "status": 200,
+  "secondes": 0.7,
+  "extrait": "{   \"id\": \"chatcmpl-9ihbkz1y5qhdfzbhx0nksf\",   \"object\": \"chat.completion\",   \"created\": 1791361162,   \"model\": \"google/gemma-4-e4b\",   \"choices\": [     {       \"index\": 0,       \"message\": {         \"role\": \"assistant\",         \"content\": \"Ok.\",         \"reas"
+ },
+ "Continue (autocomplétion) : POST /v1/completions": {
+  "status": 200,
+  "secondes": 1.0,
+  "extrait": "{   \"id\": \"cmpl-vqsr24uwb44rwsm159bji\",   \"object\": \"text_completion\",   \"created\": 1791361162,   \"model\": \"google/gemma-4-e4b\",   \"choices\": [     {       \"index\": 0,       \"text\": \" a + b\\n\\n# Test cases\\n\",       \"logprobs\": null,       \"finish_reason\": \"le"
+ },
+ "Continue (indexation) : POST /v1/embeddings": {
+  "status": 200,
+  "secondes": 2.5,
+  "extrait": "{   \"object\": \"list\",   \"data\": [     {       \"object\": \"embedding\",       \"embedding\": [         0.03364463150501251,         0.0583408884704113,         -0.14980584383010864,         -0.024817397817969322,         0.052589647471904755,         -0.06639806181"
+ },
+ "Aider (litellm) : POST /v1/chat/completions, clé factice 'dummy-api-key'": {
+  "status": 200,
+  "secondes": 1.6,
+  "extrait": "{   \"id\": \"chatcmpl-2v3ln9n3ff5zp2jqs13mwb\",   \"object\": \"chat.completion\",   \"created\": 1791361166,   \"model\": \"google/gemma-4-e4b\",   \"choices\": [     {       \"index\": 0,       \"message\": {         \"role\": \"assistant\",         \"content\": \"\\\"Dis ok\\\" is a ver"
+ }
+}

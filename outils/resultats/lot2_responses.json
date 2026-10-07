@@ -1,0 +1,171 @@
+{
+ "tour1": {
+  "status": 200,
+  "cles": [
+   "background",
+   "completed_at",
+   "created_at",
+   "error",
+   "frequency_penalty",
+   "id",
+   "incomplete_details",
+   "instructions",
+   "max_output_tokens",
+   "max_tool_calls",
+   "metadata",
+   "model",
+   "object",
+   "output",
+   "parallel_tool_calls",
+   "presence_penalty",
+   "previous_response_id",
+   "prompt_cache_key",
+   "reasoning",
+   "safety_identifier",
+   "service_tier",
+   "status",
+   "store",
+   "temperature",
+   "text",
+   "tool_choice",
+   "tools",
+   "top_logprobs",
+   "top_p",
+   "truncation",
+   "usage"
+  ],
+  "id": "resp_4df58ed6f8889bfa01799aa9e4a6a76aaf76c35a9cbc55f4",
+  "usage": {
+   "input_tokens": 41,
+   "output_tokens": 2,
+   "total_tokens": 43,
+   "input_tokens_details": {
+    "cached_tokens": 0
+   },
+   "output_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "output": [
+   {
+    "id": "msg_itn6zb65fo8f5kl1veb3x",
+    "type": "message",
+    "role": "assistant",
+    "status": "completed",
+    "content": [
+     {
+      "type": "output_text",
+      "text": "noté",
+      "annotations": [],
+      "logprobs": []
+     }
+    ]
+   }
+  ],
+  "store": true,
+  "instructions": "Réponds en français, très brièvement."
+ },
+ "tour2_previous_response_id": {
+  "status": 200,
+  "output": [
+   {
+    "id": "msg_f30zctdte6b4zoai4sclbu",
+    "type": "message",
+    "role": "assistant",
+    "status": "completed",
+    "content": [
+     {
+      "type": "output_text",
+      "text": "ZEBRE-42",
+      "annotations": [],
+      "logprobs": []
+     }
+    ]
+   }
+  ],
+  "usage": {
+   "input_tokens": 44,
+   "output_tokens": 5,
+   "total_tokens": 49,
+   "input_tokens_details": {
+    "cached_tokens": 29
+   },
+   "output_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  },
+  "previous_response_id": "resp_4df58ed6f8889bfa01799aa9e4a6a76aaf76c35a9cbc55f4"
+ },
+ "flux": {
+  "status": 200,
+  "secondes": 1.24,
+  "types": [
+   "response.created",
+   "response.in_progress",
+   "response.output_item.added",
+   "response.content_part.added",
+   "response.output_text.delta",
+   "response.output_text.delta",
+   "response.output_text.delta",
+   "response.output_text.delta",
+   "response.output_text.delta",
+   "response.output_text.delta",
+   "response.output_text.done",
+   "response.content_part.done",
+   "response.output_item.done",
+   "response.completed"
+  ]
+ },
+ "outil": {
+  "status": 200,
+  "output": [
+   {
+    "id": "fc_wxrbcw530bn86h0hxb14zh",
+    "call_id": "call_133149822260004",
+    "type": "function_call",
+    "name": "convertir_temperature",
+    "arguments": "{\"de\":\"C\",\"valeur\":100,\"vers\":\"F\"}",
+    "status": "completed"
+   }
+  ]
+ },
+ "outil_retour": {
+  "status": 200,
+  "resultat_outil": "100 C = 212.0 F",
+  "output": [
+   {
+    "id": "msg_ccuha0v2orly1c7zt39t17",
+    "type": "message",
+    "role": "assistant",
+    "status": "completed",
+    "content": [
+     {
+      "type": "output_text",
+      "text": "La conversion de **100 degrés Celsius (°C)** en Fahrenheit (°F) est de **212 degrés Fahrenheit (°F)**.",
+      "annotations": [],
+      "logprobs": []
+     }
+    ]
+   }
+  ]
+ },
+ "sortie_structuree": {
+  "status": 200,
+  "output": [
+   {
+    "id": "msg_bq5wd4hblfqbiupa82ile7",
+    "type": "message",
+    "role": "assistant",
+    "status": "completed",
+    "content": [
+     {
+      "type": "output_text",
+      "text": "La France, dont la capitale est Paris.",
+      "annotations": [],
+      "logprobs": []
+     }
+    ]
+   }
+  ]
+ }
+}

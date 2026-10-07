@@ -1,0 +1,90 @@
+{
+ "parallele": {
+  "finish": "tool_calls",
+  "appels": [
+   [
+    "convertir_temperature",
+    "{\"de\":\"C\",\"valeur\":0,\"vers\":\"F\"}"
+   ],
+   [
+    "convertir_temperature",
+    "{\"de\":\"C\",\"valeur\":100,\"vers\":\"K\"}"
+   ]
+  ]
+ },
+ "boucle_finale": {
+  "finish": "stop",
+  "reponse": "Pour résumer :\n\n*   **0 degré Celsius** équivaut à **32.0 degrés Fahrenheit**.\n*   **100 degrés Celsius** équivaut à **373.15 Kelvin**.",
+  "usage": {
+   "prompt_tokens": 549,
+   "completion_tokens": 48,
+   "total_tokens": 597,
+   "completion_tokens_details": {
+    "reasoning_tokens": 0
+   }
+  }
+ },
+ "tool_choice_\"auto\"": {
+  "finish": "stop",
+  "appels": [],
+  "texte": "La capitale de l'Italie est Rome."
+ },
+ "tool_choice_\"none\"": {
+  "finish": "stop",
+  "appels": [],
+  "texte": "La capitale de l'Italie est **Rome**."
+ },
+ "tool_choice_\"required\"": {
+  "finish": "tool_calls",
+  "appels": [
+   "convertir_temperature"
+  ],
+  "texte": ""
+ },
+ "tool_choice_{\"type\": \"function\", \"function": {
+  "status": 400,
+  "corps": "{\"error\": \"Invalid tool_choice type: 'object'. Supported string values: none, auto, required\"}"
+ },
+ "flux_tool_calls": {
+  "morceaux": 22,
+  "avec_tool_calls": 21,
+  "exemple": [
+   {
+    "role": "assistant",
+    "tool_calls": [
+     {
+      "index": 0,
+      "id": "DxcoyNpZufFJzr6zSCC6b3I8ErFFop3x",
+      "type": "function",
+      "function": {
+       "name": "convertir_temperature",
+       "arguments": ""
+      }
+     }
+    ]
+   },
+   {
+    "tool_calls": [
+     {
+      "index": 0,
+      "type": "function",
+      "function": {
+       "arguments": "{"
+      }
+     }
+    ]
+   },
+   {
+    "tool_calls": [
+     {
+      "index": 0,
+      "type": "function",
+      "function": {
+       "arguments": "\"de"
+      }
+     }
+    ]
+   }
+  ]
+ }
+}

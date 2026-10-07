@@ -1,0 +1,182 @@
+{
+ "multi_tours": {
+  "status": 200,
+  "reponse": {
+   "id": "msg_b77uhel819v4saafu3hm5w",
+   "type": "message",
+   "role": "assistant",
+   "content": [
+    {
+     "type": "text",
+     "text": "Votre prénom est Camille."
+    }
+   ],
+   "model": "google/gemma-4-e4b",
+   "stop_reason": "end_turn",
+   "stop_sequence": null,
+   "usage": {
+    "input_tokens": 46,
+    "output_tokens": 6,
+    "cache_read_input_tokens": 41
+   }
+  }
+ },
+ "flux": {
+  "status": 200,
+  "types": [
+   "message_start",
+   "content_block_start",
+   "content_block_delta",
+   "content_block_delta",
+   "content_block_delta",
+   "content_block_delta",
+   "content_block_delta",
+   "content_block_delta",
+   "content_block_stop",
+   "message_delta",
+   "message_stop"
+  ],
+  "premiers": [
+   {
+    "event": "message_start",
+    "data": {
+     "type": "message_start",
+     "message": {
+      "id": "msg_k04yf8tlr4kgc5rhywpx2a",
+      "type": "message",
+      "role": "assistant",
+      "content": [],
+      "model": "google/gemma-4-e4b",
+      "stop_reason": null,
+      "stop_sequence": null,
+      "usage": {
+       "input_tokens": 18,
+       "output_tokens": 0,
+       "cache_read_input_tokens": 13
+      }
+     }
+    }
+   },
+   {
+    "event": "content_block_start",
+    "data": {
+     "type": "content_block_start",
+     "index": 0,
+     "content_block": {
+      "type": "text",
+      "text": ""
+     }
+    }
+   },
+   {
+    "event": "content_block_delta",
+    "data": {
+     "type": "content_block_delta",
+     "index": 0,
+     "delta": {
+      "type": "text_delta",
+      "text": "Un"
+     }
+    }
+   }
+  ]
+ },
+ "outil": {
+  "status": 200,
+  "reponse": {
+   "id": "msg_kt1cddx8iley5ion0i04gf",
+   "type": "message",
+   "role": "assistant",
+   "content": [
+    {
+     "type": "tool_use",
+     "id": "YGuLYE2MKZlIkglldJzpH7fZAUZ5ckXN",
+     "name": "convertir_temperature",
+     "input": {
+      "de": "C",
+      "valeur": 100,
+      "vers": "F"
+     }
+    }
+   ],
+   "model": "google/gemma-4-e4b",
+   "stop_reason": "tool_use",
+   "stop_sequence": null,
+   "usage": {
+    "input_tokens": 437,
+    "output_tokens": 29,
+    "cache_read_input_tokens": 431
+   }
+  }
+ },
+ "outil_retour": {
+  "status": 200,
+  "resultat_outil": "100 C = 212.0 F",
+  "reponse": {
+   "id": "msg_xivfms1bep0zk4umtagf",
+   "type": "message",
+   "role": "assistant",
+   "content": [],
+   "model": "google/gemma-4-e4b",
+   "stop_reason": "end_turn",
+   "stop_sequence": null,
+   "usage": {
+    "input_tokens": 491,
+    "output_tokens": 1,
+    "cache_read_input_tokens": 432
+   }
+  }
+ },
+ "outil_retour_variantes": {
+  "tools_declares_tool_result_seul": [
+   {
+    "tokens_sortie": 1,
+    "texte": ""
+   },
+   {
+    "tokens_sortie": 1,
+    "texte": ""
+   },
+   {
+    "tokens_sortie": 1,
+    "texte": ""
+   }
+  ],
+  "tools_omis": [
+   {
+    "tokens_sortie": 30,
+    "texte": "La conversion de **100 degrés Celsius (°C)** en Fahrenheit (°F) est de **212 deg"
+   },
+   {
+    "tokens_sortie": 46,
+    "texte": "La conversion de **100 degrés Celsius (°C) en Fahrenheit (°F)** est :\n\n**$100^\\c"
+   },
+   {
+    "tokens_sortie": 18,
+    "texte": "**100 degrés Celsius équivaut à 212 degrés Fahrenheit.**"
+   }
+  ],
+  "tool_result_plus_texte": [
+   {
+    "tokens_sortie": 19,
+    "texte": "100 degrés Celsius équivaut à 212.0 degrés Fahrenheit."
+   },
+   {
+    "tokens_sortie": 19,
+    "texte": "100 degrés Celsius équivaut à 212.0 degrés Fahrenheit."
+   },
+   {
+    "tokens_sortie": 19,
+    "texte": "100 degrés Celsius équivaut à 212.0 degrés Fahrenheit."
+   }
+  ]
+ },
+ "entetes_anthropic": {
+  "status": 200,
+  "reponse": "{\"id\": \"msg_l486pm8ba7nua1b61ygbhc\", \"type\": \"message\", \"role\": \"assistant\", \"content\": [{\"type\": \"text\", \"text\": \"\\\"Dis ok\\\" is a very informal and incomplete phrase. To give you the best response, I…"
+ },
+ "sans_max_tokens": {
+  "status": 400,
+  "reponse": "{\"type\": \"error\", \"error\": {\"type\": \"invalid_request_error\", \"message\": \"request.max_tokens: Required\"}}"
+ }
+}

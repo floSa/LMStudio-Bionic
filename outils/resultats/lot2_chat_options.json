@@ -1,0 +1,34 @@
+{
+ "system_prompt": {
+  "status": 200,
+  "reponse": "Je corrige votre orthographe avec précision."
+ },
+ "context_length_2048_sur_modele_charge_16384": {
+  "status": 200,
+  "corps": {
+   "stats": {
+    "input_tokens": 12,
+    "total_output_tokens": 10,
+    "reasoning_output_tokens": 0,
+    "tokens_per_second": 12.83838048109691,
+    "time_to_first_token_seconds": 0.92428,
+    "model_load_time_seconds": 20.707
+   },
+   "reponse": "\"Ok\" is a very versatile word! To"
+  }
+ },
+ "parametres_echantillonnage": {
+  "status": 200,
+  "reponse": "\"Ok\" is a very versatile word! To"
+ },
+ "parametre_inconnu": {
+  "status": 400,
+  "corps": {
+   "error": {
+    "message": "Unrecognized key(s) in object: 'parametre_inconnu'",
+    "type": "invalid_request",
+    "code": "unrecognized_keys"
+   }
+  }
+ }
+}

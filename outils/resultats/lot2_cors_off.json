@@ -1,0 +1,17 @@
+{
+ "GET /v1/models avec Origin (jeton valide)": {
+  "status": 200,
+  "en_tetes_cors": "aucun",
+  "corps": "{   \"data\": [     {       \"id\": \"google/gemma-4-e4b\",       \"object\": \"model\",       \"owned_by\": \"organization_owner\"   "
+ },
+ "GET /v1/models avec Origin (sans jeton)": {
+  "status": 401,
+  "en_tetes_cors": "aucun",
+  "corps": "{     \"error\": {         \"message\": \"An LM Studio API token is required to make requests to this server, but none was pr"
+ },
+ "OPTIONS /v1/chat/completions (requête préalable du navigateur)": {
+  "status": 401,
+  "en_tetes_cors": "aucun",
+  "corps": "{     \"error\": {         \"message\": \"An LM Studio API token is required to make requests to this server, but none was pr"
+ }
+}

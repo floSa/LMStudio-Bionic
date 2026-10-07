@@ -1,0 +1,437 @@
+{
+ "synthese": {
+  "modele": "google/gemma-4-12b-qat",
+  "difficile": true,
+  "outils_declares": 17,
+  "essais": 39,
+  "corrects": 36,
+  "taux": 0.923,
+  "par_statut": {
+   "correct": 36,
+   "appel_inutile": 3
+  },
+  "secondes_moyennes": 13.9
+ },
+ "essais": [
+  {
+   "consigne": "Convertis 37 degrés Celsius en Kelvin.",
+   "attendu": "convertir_temperature",
+   "statut": "correct",
+   "detail": {
+    "de": "C",
+    "valeur": 37,
+    "vers": "K"
+   },
+   "secondes": 28.6,
+   "tokens": 28
+  },
+  {
+   "consigne": "Convertis 37 degrés Celsius en Kelvin.",
+   "attendu": "convertir_temperature",
+   "statut": "correct",
+   "detail": {
+    "de": "C",
+    "valeur": 37,
+    "vers": "K"
+   },
+   "secondes": 9.2,
+   "tokens": 28
+  },
+  {
+   "consigne": "Convertis 37 degrés Celsius en Kelvin.",
+   "attendu": "convertir_temperature",
+   "statut": "correct",
+   "detail": {
+    "de": "C",
+    "valeur": 37,
+    "vers": "K"
+   },
+   "secondes": 9.8,
+   "tokens": 28
+  },
+  {
+   "consigne": "Combien font 98,6 degrés Fahrenheit en Celsius ?",
+   "attendu": "convertir_temperature",
+   "statut": "correct",
+   "detail": {
+    "de": "F",
+    "valeur": 98.6,
+    "vers": "C"
+   },
+   "secondes": 16.3,
+   "tokens": 30
+  },
+  {
+   "consigne": "Combien font 98,6 degrés Fahrenheit en Celsius ?",
+   "attendu": "convertir_temperature",
+   "statut": "correct",
+   "detail": {
+    "de": "F",
+    "valeur": 98.6,
+    "vers": "C"
+   },
+   "secondes": 9.7,
+   "tokens": 30
+  },
+  {
+   "consigne": "Combien font 98,6 degrés Fahrenheit en Celsius ?",
+   "attendu": "convertir_temperature",
+   "statut": "correct",
+   "detail": {
+    "de": "F",
+    "valeur": 98.6,
+    "vers": "C"
+   },
+   "secondes": 10.0,
+   "tokens": 30
+  },
+  {
+   "consigne": "Donne les statistiques de la série 5, 1, 9, 3, 12.",
+   "attendu": "calculer_statistiques",
+   "statut": "correct",
+   "detail": {
+    "nombres": [
+     5,
+     1,
+     9,
+     3,
+     12
+    ]
+   },
+   "secondes": 15.3,
+   "tokens": 25
+  },
+  {
+   "consigne": "Donne les statistiques de la série 5, 1, 9, 3, 12.",
+   "attendu": "calculer_statistiques",
+   "statut": "correct",
+   "detail": {
+    "nombres": [
+     5,
+     1,
+     9,
+     3,
+     12
+    ]
+   },
+   "secondes": 9.0,
+   "tokens": 25
+  },
+  {
+   "consigne": "Donne les statistiques de la série 5, 1, 9, 3, 12.",
+   "attendu": "calculer_statistiques",
+   "statut": "correct",
+   "detail": {
+    "nombres": [
+     5,
+     1,
+     9,
+     3,
+     12
+    ]
+   },
+   "secondes": 8.9,
+   "tokens": 25
+  },
+  {
+   "consigne": "Quelles notes sont disponibles ?",
+   "attendu": "lister_notes",
+   "statut": "correct",
+   "detail": {},
+   "secondes": 11.8,
+   "tokens": 10
+  },
+  {
+   "consigne": "Quelles notes sont disponibles ?",
+   "attendu": "lister_notes",
+   "statut": "correct",
+   "detail": {},
+   "secondes": 6.2,
+   "tokens": 10
+  },
+  {
+   "consigne": "Quelles notes sont disponibles ?",
+   "attendu": "lister_notes",
+   "statut": "correct",
+   "detail": {},
+   "secondes": 6.3,
+   "tokens": 10
+  },
+  {
+   "consigne": "Lis la note courses.txt.",
+   "attendu": "lire_note",
+   "statut": "correct",
+   "detail": {
+    "nom": "courses.txt"
+   },
+   "secondes": 12.9,
+   "tokens": 17
+  },
+  {
+   "consigne": "Lis la note courses.txt.",
+   "attendu": "lire_note",
+   "statut": "correct",
+   "detail": {
+    "nom": "courses.txt"
+   },
+   "secondes": 7.8,
+   "tokens": 17
+  },
+  {
+   "consigne": "Lis la note courses.txt.",
+   "attendu": "lire_note",
+   "statut": "correct",
+   "detail": {
+    "nom": "courses.txt"
+   },
+   "secondes": 7.2,
+   "tokens": 17
+  },
+  {
+   "consigne": "Enregistre une note rappel.txt contenant : Appeler le fournisseur.",
+   "attendu": "ecrire_note",
+   "statut": "correct",
+   "detail": {
+    "contenu": "Appeler le fournisseur.",
+    "nom": "rappel.txt"
+   },
+   "secondes": 14.2,
+   "tokens": 30
+  },
+  {
+   "consigne": "Enregistre une note rappel.txt contenant : Appeler le fournisseur.",
+   "attendu": "ecrire_note",
+   "statut": "correct",
+   "detail": {
+    "contenu": "Appeler le fournisseur.",
+    "nom": "rappel.txt"
+   },
+   "secondes": 9.9,
+   "tokens": 30
+  },
+  {
+   "consigne": "Enregistre une note rappel.txt contenant : Appeler le fournisseur.",
+   "attendu": "ecrire_note",
+   "statut": "correct",
+   "detail": {
+    "contenu": "Appeler le fournisseur.",
+    "nom": "rappel.txt"
+   },
+   "secondes": 10.1,
+   "tokens": 30
+  },
+  {
+   "consigne": "Quelle est la capitale du Portugal ?",
+   "attendu": null,
+   "statut": "correct",
+   "detail": "La capitale du Portugal est Lisbonne.",
+   "secondes": 11.6,
+   "tokens": 9
+  },
+  {
+   "consigne": "Quelle est la capitale du Portugal ?",
+   "attendu": null,
+   "statut": "correct",
+   "detail": "La capitale du Portugal est Lisbonne.",
+   "secondes": 6.1,
+   "tokens": 9
+  },
+  {
+   "consigne": "Quelle est la capitale du Portugal ?",
+   "attendu": null,
+   "statut": "correct",
+   "detail": "La capitale du Portugal est Lisbonne.",
+   "secondes": 6.0,
+   "tokens": 9
+  },
+  {
+   "consigne": "Il fait 20 degrés dehors : faut-il prendre une veste ?",
+   "attendu": null,
+   "statut": "correct",
+   "detail": "Tout dépend de plusieurs facteurs, mais voici quelques éléments pour vous aider à décider :\n\n1.  **Le moment de la journ",
+   "secondes": 50.9,
+   "tokens": 217
+  },
+  {
+   "consigne": "Il fait 20 degrés dehors : faut-il prendre une veste ?",
+   "attendu": null,
+   "statut": "correct",
+   "detail": "Il est difficile de répondre avec certitude sans connaître la ville où vous vous trouvez et le moment de la journée, car",
+   "secondes": 51.7,
+   "tokens": 250
+  },
+  {
+   "consigne": "Il fait 20 degrés dehors : faut-il prendre une veste ?",
+   "attendu": null,
+   "statut": "correct",
+   "detail": "Cela dépend de plusieurs facteurs, mais voici quelques points à considérer pour décider si vous avez besoin d'une veste ",
+   "secondes": 55.8,
+   "tokens": 273
+  },
+  {
+   "consigne": "Quelle est la moyenne de 4 et 8 ?",
+   "attendu": "calculer_moyenne",
+   "statut": "correct",
+   "detail": {
+    "nombres": [
+     4,
+     8
+    ]
+   },
+   "secondes": 13.4,
+   "tokens": 18
+  },
+  {
+   "consigne": "Quelle est la moyenne de 4 et 8 ?",
+   "attendu": "calculer_moyenne",
+   "statut": "correct",
+   "detail": {
+    "nombres": [
+     4,
+     8
+    ]
+   },
+   "secondes": 7.6,
+   "tokens": 18
+  },
+  {
+   "consigne": "Quelle est la moyenne de 4 et 8 ?",
+   "attendu": "calculer_moyenne",
+   "statut": "correct",
+   "detail": {
+    "nombres": [
+     4,
+     8
+    ]
+   },
+   "secondes": 7.7,
+   "tokens": 18
+  },
+  {
+   "consigne": "Convertis 5 kilomètres en miles.",
+   "attendu": "convertir_longueur",
+   "statut": "correct",
+   "detail": {
+    "de": "km",
+    "valeur": 5,
+    "vers": "mi"
+   },
+   "secondes": 15.0,
+   "tokens": 28
+  },
+  {
+   "consigne": "Convertis 5 kilomètres en miles.",
+   "attendu": "convertir_longueur",
+   "statut": "correct",
+   "detail": {
+    "de": "km",
+    "valeur": 5,
+    "vers": "mi"
+   },
+   "secondes": 9.5,
+   "tokens": 28
+  },
+  {
+   "consigne": "Convertis 5 kilomètres en miles.",
+   "attendu": "convertir_longueur",
+   "statut": "correct",
+   "detail": {
+    "de": "km",
+    "valeur": 5,
+    "vers": "mi"
+   },
+   "secondes": 9.7,
+   "tokens": 28
+  },
+  {
+   "consigne": "Supprime la note courses.txt.",
+   "attendu": "supprimer_note",
+   "statut": "correct",
+   "detail": {
+    "nom": "courses.txt"
+   },
+   "secondes": 13.3,
+   "tokens": 18
+  },
+  {
+   "consigne": "Supprime la note courses.txt.",
+   "attendu": "supprimer_note",
+   "statut": "correct",
+   "detail": {
+    "nom": "courses.txt"
+   },
+   "secondes": 7.7,
+   "tokens": 18
+  },
+  {
+   "consigne": "Supprime la note courses.txt.",
+   "attendu": "supprimer_note",
+   "statut": "correct",
+   "detail": {
+    "nom": "courses.txt"
+   },
+   "secondes": 7.8,
+   "tokens": 18
+  },
+  {
+   "consigne": "Y a-t-il une note qui parle du budget ?",
+   "attendu": "rechercher_dans_notes",
+   "statut": "correct",
+   "detail": {
+    "mot": "budget"
+   },
+   "secondes": 12.9,
+   "tokens": 19
+  },
+  {
+   "consigne": "Y a-t-il une note qui parle du budget ?",
+   "attendu": "rechercher_dans_notes",
+   "statut": "correct",
+   "detail": {
+    "mot": "budget"
+   },
+   "secondes": 7.9,
+   "tokens": 19
+  },
+  {
+   "consigne": "Y a-t-il une note qui parle du budget ?",
+   "attendu": "rechercher_dans_notes",
+   "statut": "correct",
+   "detail": {
+    "mot": "budget"
+   },
+   "secondes": 7.8,
+   "tokens": 19
+  },
+  {
+   "consigne": "Convertis 100 en Fahrenheit.",
+   "attendu": null,
+   "statut": "appel_inutile",
+   "detail": [
+    "convertir_temperature"
+   ],
+   "secondes": 15.1,
+   "tokens": 29
+  },
+  {
+   "consigne": "Convertis 100 en Fahrenheit.",
+   "attendu": null,
+   "statut": "appel_inutile",
+   "detail": [
+    "convertir_temperature"
+   ],
+   "secondes": 9.8,
+   "tokens": 29
+  },
+  {
+   "consigne": "Convertis 100 en Fahrenheit.",
+   "attendu": null,
+   "statut": "appel_inutile",
+   "detail": [
+    "convertir_temperature"
+   ],
+   "secondes": 9.7,
+   "tokens": 29
+  }
+ ]
+}
