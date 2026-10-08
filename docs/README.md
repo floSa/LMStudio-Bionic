@@ -4,11 +4,13 @@ Manuels et tutoriels illustrés pour installer, configurer et utiliser **LM Stud
 
 **Deux ensembles de manuels** : [LM Studio](#manuels-lm-studio) (ci-dessous) et [Bionic](#manuels-bionic) (après).
 
+**Pour savoir où se trouve une information** : [plan détaillé des manuels LM Studio](lmstudio/plan-des-manuels.md) et [plan détaillé des manuels Bionic](bionic/plan-des-manuels.md) (une phrase par manuel, puis le contenu de chaque section, avec liens).
+
 | | |
 |---|---|
 | **Version décrite** | LM Studio 0.4.25 (Build 1), Windows 11 |
-| **Date des captures et mesures** | 6 octobre 2026 (manuels 00 à 09) ; 7 octobre 2026 (manuels 10 à 13) |
-| **Poste de test** | Intel Core Ultra 7 255H, 31 Go de RAM, GPU intégré Intel Arc 140T (Vulkan) |
+| **Date des captures et mesures** | 6 octobre 2026 (manuels 00 à 09, poste à GPU intégré) ; 7 octobre 2026 (manuels 10 à 14, puis passage sur GPU dédié : manuels 15 et 16 et mises à jour des manuels 00 à 13) |
+| **Postes de test** | (1) Intel Core Ultra 7 255H, 31 Go de RAM, GPU intégré Intel Arc 140T (Vulkan) ; (2) AMD Ryzen 5 9600X, 61,6 Go de RAM, **NVIDIA RTX 4060 Ti 16 Go** (CUDA 12, pilote 616.92). Les valeurs du poste (1) sont conservées entre parenthèses « GPU intégré : … » |
 | **Langue de l'interface** | Anglais (les libellés sont cités tels quels) |
 
 ## Manuels LM Studio
@@ -30,6 +32,8 @@ Manuels et tutoriels illustrés pour installer, configurer et utiliser **LM Stud
 | 12 | [API avancée](lmstudio/12-api-avancee.md) | Chat à état, *Responses*, compatibilité Anthropic, statistiques, outils, sortie structurée, MCP par l'API |
 | 13 | [Intégrations avec des outils tiers](lmstudio/13-integrations-outils-tiers.md) | Claude Code, Codex, Cline, Roo Code, Continue, Open WebUI, Aider |
 | 14 | [Personnaliser les modèles](lmstudio/14-personnaliser-les-modeles.md) | Niveaux de réglage, défauts d'un modèle (effet mesuré sur l'API), gabarit de conversation, `model.yaml`, Hub, stockage des conversations, diagrammes Mermaid |
+| 15 | [Performances sur GPU dédié](lmstudio/15-performances-gpu-dedie.md) | RTX 4060 Ti 16 Go : moteurs, offload, Flash Attention, lots, cache K/V, mémoire réelle et estimation, modèles plus gros que la VRAM (MoE, `--n-cpu-moe`), décodage spéculatif, contexte maximal |
+| 16 | [SDK et plugins](lmstudio/16-sdk-et-plugins.md) | `@lmstudio/sdk` : paramètres de chargement absents de `lms load`, plugin `lms dev`, mode sans interface (llmster) |
 | — | [Glossaire](lmstudio/annexe-glossaire.md) | Termes techniques |
 
 ## Manuels Bionic
@@ -55,7 +59,7 @@ Application agent (code, documents, recherche, voix). Version décrite : Bionic 
 | 14 | [Commandes `/`, compaction, navigateur](bionic/14-commandes-compaction-navigateur.md) | Menu `/`, `/compact` mesuré, navigateur intégré et essai avec l'agent, fonctions non reproduites |
 | — | [Glossaire Bionic](bionic/annexe-glossaire.md) | Termes techniques |
 
-Limites connues de la partie Bionic : aucun compte connecté (cloud, crédits, LM Link décrits sans exécution) ; dictée vocale non exécutée ; niveau `too_destructive` d'Auto Review non reproduit (aucun test sans danger).
+Limites connues de la partie Bionic : aucun compte connecté (cloud, crédits, LM Link, recherche web et serveurs MCP du catalogue décrits sans exécution) ; dictée vocale non exécutée ; Canvas et points de sauvegarde non reproduits ; niveau `too_destructive` d'Auto Review **non obtenu** malgré des essais destructifs réels. **Un essai (`shred` sur `~/*.txt`, modèle 26B) a été approuvé automatiquement et a détruit un fichier réel** : lire le [manuel Bionic 12](bionic/12-auto-review.md#essais-sur-des-commandes-destructives-poste-à-gpu-dédié) avant tout essai.
 
 **Parcours conseillés (LM Studio)**
 
@@ -66,6 +70,7 @@ Limites connues de la partie Bionic : aucun compte connecté (cloud, crédits, L
 - *Exploitation et sécurité* : 01 (section 8) → 06 (section 5) → 11 → 10.
 - *Agents et outils (MCP)* : 04 → 10 → 12 → 13.
 - *Assistants de code locaux* : 03 → 06 → 11 → 13.
+- *Machine à GPU dédié* : 00 (section 4) → 03 (section 5) → **15** → 16.
 
 ## Conventions
 
@@ -76,10 +81,10 @@ Limites connues de la partie Bionic : aucun compte connecté (cloud, crédits, L
 
 ## Limites connues
 
-- **OlmOCR 2 7B n'a pas été téléchargé** (connexion limitée) : le manuel 08 est une procédure à valider, pas un résultat mesuré.
-- Les mesures de vitesse sont propres au poste de test (GPU intégré) ; sur GPU dédié, les écarts et le comportement en concurrence diffèrent.
-- `lms get`, `lms import` (cas nominal) et l'installation de `llmster` n'ont pas été exécutées. Les jetons d'API ont été créés, testés puis supprimés ([Manuel 11](lmstudio/11-securiser-le-serveur.md)).
-- Les outils tiers du [Manuel 13](lmstudio/13-integrations-outils-tiers.md) n'ont pas été lancés : seules leurs requêtes ont été rejouées. *Serve on Local Network* et `--bind` n'ont jamais été activés.
+- **OlmOCR 2 7B** (Q4_K_M et Q8_0) a été **testé sur le poste à GPU dédié** (4 pages fictives, 100 % d'exactitude) : [Manuel 05, section 7](lmstudio/05-vision-images-et-ocr.md). Aucun scan réel ni PDF volumineux n'a été essayé.
+- Les mesures de vitesse sont données **pour les deux postes** ; elles restent propres à ces deux configurations. Le comportement en concurrence est inverse (GPU intégré : pas de gain ; GPU dédié : × 3,4 avec 4 requêtes).
+- **Non exécutés** : `lms get`, `lms import` (cas nominal), `lms daemon up` / `down` / `update` et l'installation de `llmster` ; quantification **Q6_K** (non installée) ; lignes « **Mtp** » du catalogue (téléchargement évité : le décodage spéculatif a été testé avec les modèles installés) ; **Roo Code** (extension sans ligne de commande) et **Open WebUI** (Docker absent, création de compte). Les jetons d'API ont été créés, testés puis supprimés ([Manuel 11](lmstudio/11-securiser-le-serveur.md)).
+- Les outils tiers du [Manuel 13](lmstudio/13-integrations-outils-tiers.md) **ont été lancés** (Claude Code, Cline, Continue, Aider ; Codex connecté mais bac à sable en lecture seule) ; *Serve on Local Network* et `--bind` n'ont jamais été activés.
 - **LM Studio Bionic** est documenté dans un ensemble distinct ([docs/bionic](bionic/README.md)).
 
 ## Arborescence
@@ -88,8 +93,8 @@ Limites connues de la partie Bionic : aucun compte connecté (cloud, crédits, L
 EDF/
 ├── docs/
 │   ├── README.md                (cette page)
-│   ├── lmstudio/                (manuels 00 à 13 et glossaire)
-│   ├── bionic/                  (manuels Bionic 00 à 13 et glossaire)
+│   ├── lmstudio/                (manuels 00 à 16 et glossaire)
+│   ├── bionic/                  (manuels Bionic 00 à 14 et glossaire)
 │   └── img/                     (captures et figures : lmstudio/, bionic/)
 ├── exemples/                    (scripts d'API exécutables, sans dépendance)
 └── outils/                      (production des captures et des mesures)

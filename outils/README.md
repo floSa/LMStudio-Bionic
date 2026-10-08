@@ -32,7 +32,23 @@ LM Studio et Bionic sont des applications Electron. Lancées avec `--remote-debu
 | `competences_demo/`, `mcp_demo_notes/` | Compétences et notes **fictives** utilisées pour les essais |
 | `verifier_docs.py` | Contrôle liens, ancres et ton de la documentation |
 | `nettoyer_conversations_test.py` | Supprime les conversations de test créées pendant la production |
-| `resultats/` | Résultats bruts (JSON) et images de test fictives |
+| `gpu_bench.py` | Bibliothèque des mesures sur GPU dédié (chargement par l'API, vitesse du prompt et de la génération, VRAM par `nvidia-smi`, RAM du moteur) |
+| `gpu_offload_moteurs.py` | Moteurs (CUDA, Vulkan, CPU) et part de couches sur le GPU ([Manuel 15, section 2](../docs/lmstudio/15-performances-gpu-dedie.md#2-moteurs-et-nombre-de-couches-sur-le-gpu)) |
+| `gpu_parametres_charge.py` | Flash Attention, lots, cache K/V en VRAM ou en RAM, parallélisme (API `/api/v1/models/load`) |
+| `gpu_sdk_params.py` | Paramètres de chargement absents de `lms load`, par le SDK (quantification du cache K/V, `--n-cpu-moe`, lot physique) |
+| `gpu_gros_modeles.py` | Modèles plus gros que la VRAM (MoE 26B, dense 27 Md) : répartition, vitesse, grand contexte |
+| `gpu_contexte_memoire.py` | Mémoire réelle (VRAM, RAM) selon le contexte, comparée à l'estimation de `lms load --estimate-only` |
+| `gpu_decodage_specul.py` | Décodage spéculatif : MTP intégré et modèle brouillon séparé |
+| `essai_olmocr.py` | Protocole OCR du [Manuel 05, section 7](../docs/lmstudio/05-vision-images-et-ocr.md) (4 pages fictives, exactitude par champ, VRAM) |
+| `sdk_js/` | `charger.mjs`, `essai_sdk.mjs` et `plugin-demo/` (plugin `lms dev`) ; `npm install` crée `node_modules/` (ignoré par Git) |
+| `captures/capture_02b_badges_gpu_dedie.py` | Régénère la figure des badges d'adéquation sur le poste à GPU dédié |
+| `bionic_tache.py` | Lance **une tâche** dans une nouvelle session Bionic (projet, modèle, effort, mode shell, consigne), mesure la durée, relève le **modèle réel** dans la base de sessions, les commandes et leur approbation ; résultat `resultats/gpu_dedie/bionic_<étiquette>.json` |
+| `bionic_compact.py` | Mesure `/compact` (contexte avant et après, durée, modèles réels des sous-sessions) |
+| `bionic_arobase.py` | Déclenchement manuel d'une compétence de projet avec `@` (palette) dans une nouvelle session, avec modèle réel vérifié |
+| `bionic_essai.py` | Essai libre dans une nouvelle session (consigne ou commande `/`), avec mode shell, capture et relevé du modèle réel, des outils et de la réponse ; **`MSYS_NO_PATHCONV=1`** est nécessaire sous Git Bash pour passer un texte commençant par `/` |
+| `bionic_parallele.py` | Sessions Bionic **simultanées** (N sessions lancées à 15 s d'intervalle) ; durées lues dans la base de sessions (`durees_sessions`) |
+| `bionic_memoire.py` | Mémoire occupée par un modèle chargé par Bionic (AutoFit : contexte, VRAM, RAM du moteur) |
+| `resultats/` | Résultats bruts (JSON) et images de test fictives ; `resultats/gpu_dedie/` : série du poste à GPU dédié |
 
 ## Prérequis
 
@@ -57,3 +73,6 @@ python -m venv $env:TEMP\venv-lmcdp
 - Les images de test (`resultats/facture_test_*.png`) sont **fictives**.
 - Lot 2 : aucun serveur MCP tiers ni outil externe n'est installé ; les jetons d'API des essais sont **factices**, créés puis supprimés ; *Serve on Local Network* n'est jamais activé. Les journaux `resultats/mcp_demo_appels.log` et `resultats/lot2_*.json` ne contiennent aucun jeton.
 - Les menus contextuels de Bionic (menu **…** des sessions) sont natifs : non pilotables par CDP ; les sessions de test se suppriment à la main.
+- **Pilote Bionic (`bionic_lib.py`)** : (1) la fenêtre est **mise en plein écran** à chaque connexion et l'émulation de taille (1440 × 900) est **levée** en fin de script, sinon la page n'occupe qu'une partie de la fenêtre ; (2) l'écran peut être scindé en **colonnes** : le pilote agit sur la colonne de la session qu'il vient de créer (`COLX`) ; (3) **ne jamais lancer deux scripts de pilotage en même temps** : ils se disputent l'interface ; (4) le modèle sélectionné est **vérifié** sur le bouton, puis relu dans la base (`modele_reel`) : un résultat dont le modèle réel diffère du modèle demandé est à écarter.
+- **Essais destructifs** : jamais sur le vrai profil. Un essai `shred -u -z ~/*.txt` (modèle 26B) a été **approuvé automatiquement par Auto Review** alors que `HOME` n'était pas redirigé : au moins un fichier réel a été détruit ([Manuel Bionic 12](../docs/bionic/12-auto-review.md#essais-sur-des-commandes-destructives-poste-à-gpu-dédié)). Exiger une variable `HOME` factice **et** des chemins explicites.
+- Les options d'approbation automatique de `bionic_tache.py` (`--oui-shell`) valident **toutes** les boîtes « Yes », y compris l'installation d'une compétence globale : à réserver à un projet jetable.

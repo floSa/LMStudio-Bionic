@@ -121,3 +121,41 @@ Sélection : seulement ce qui se fait **sans compte, sans installation, sans té
 Rien n'a été téléchargé ni installé ; aucun compte connecté. Le serveur web de démonstration (port 3000, 127.0.0.1) a été arrêté.
 
 **À supprimer à la main** (menu « … » natif de Bionic, non pilotable) : sessions de test du projet « Démo code » dont « Tâche de navigation et extraction… » et la session compactée ; elles s'ajoutent à celles de la section 10.
+
+
+## 12. Passage sur machine à GPU dédié (7 octobre 2026)
+
+Poste : AMD Ryzen 5 9600X, 61,6 Go de RAM, NVIDIA RTX 4060 Ti 16 Go (pilote 616.92, CUDA 13.4), Windows 11 Pro ; LM Studio 0.4.25, Bionic 1.1.7. Consigne : **aucun téléchargement de modèle**, aucun compte. Modèles utilisés (déjà installés) : *Gemma 4 E4B* (Q8_0), *Gemma 4 26B A4B* (MoE, Q4_K_M), *Qwen3.8 27B*, OlmOCR 2 7B (Q4_K_M et Q8_0). Le *12B QAT* des manuels n'est pas installé : remplacé par le 26B A4B. Liste de contrôle : [A-FAIRE-SUR-MACHINE-GPU.md](A-FAIRE-SUR-MACHINE-GPU.md). Résultats bruts : `outils/resultats/gpu_*.json` et `outils/resultats/gpu_dedie/`.
+
+| Point | Statut | Constats principaux |
+|---|---|---|
+| Badges d'adéquation (D8) | Fait | Vert → bleu à 14,5–14,8 Go (≈ 91–93 % de la VRAM) ; bleu → rouge à 59,1–60,5 Go (≈ 96–98 % de la RAM seule) ; aucun effet du contexte par défaut, des garde-fous ni de « Limit offload » ; figure 5 du manuel 02 régénérée |
+| Moteurs et offload | Fait | E4B Q8_0 : CUDA 3 746 tok/s (prompt) et 45 (génération) ; Vulkan 2 659 et 46 ; CPU 49 et 8,8 ; CUDA accélère le prompt même à 0 couche (700 tok/s) |
+| Parallélisme | Fait | 45 → 83 → 152 → 264 tok/s pour 1, 2, 4, 8 requêtes : **inverse** du GPU intégré |
+| Flash Attention, lots, cache K/V | Fait | Flash Attention : prompt × 3 ; lot physique < 256 : −25 à −30 % ; cache K/V en RAM : −18 % en génération ; cache quantifié : −0,16 à −0,56 Go sans perte de vitesse |
+| Estimation et mémoire réelle | Fait | L'estimation surestime la VRAM de +2,7 à +7,5 Go ; cache K/V réel ≈ 17 Ko/jeton contre ≈ 57 estimé ; ≈ 8 Go de RAM toujours mobilisés |
+| Modèles plus gros que la VRAM | Fait | MoE 26B : 36,7 tok/s (auto), 25,9 (`max`), 54,6 (`--n-cpu-moe 8`) ; dense 27 Md : 3–19 tok/s, instable ; 262 144 jetons : 26B = 15,2 Go de VRAM + 19 Go de RAM, Qwen = 37 Go de RAM |
+| Décodage spéculatif | Partiel | MTP refusé sur E4B (pas de tête) ; Qwen : code jusqu'à +31 %, prose −11 à −41 % ; brouillon E4B pour le 26B : 3,6 tok/s ; lignes « Mtp » du catalogue **non téléchargées** |
+| OlmOCR 2 | Fait | 4 pages fictives, 100 % d'exactitude (Q4, Q8, Gemma) ; rotation corrigée dans `exemples/08_olmocr_lot.py` |
+| Outils tiers (D6) | Partiel | Claude Code, Cline, Continue : réussis ; Aider : édition exacte mais `pytest` absent de son environnement ; Codex : connecté, bac à sable en lecture seule (assouplissement refusé par le classifieur de sécurité) ; Roo Code et Open WebUI non lancés |
+| SDK et plugins (D9), llmster (D4) | Partiel | Plugin `lms dev` fonctionnel ; `lms daemon` et `lms status` existent mais sont cachés de `--help` ; `up`, `down`, `update` non exécutées |
+| Bionic : durées et modèle réel | Fait | Modèle vérifié dans la base de sessions. Mémo 29 s (≈ 15 s sans raisonnement) ; facture E4B 31 s sans fichier, 26B ≈ 51 s avec fichier ; bogue E4B 1 min 38 s (tests non lancés), 26B 43 s (corrigé, tests relancés) |
+| Bionic : AutoFit et mémoire | Fait | E4B : contexte 131 072, VRAM 8,28 Go ; 26B : 16 384, 14,03 Go ; Qwen : 16 384, 11,67 Go ; `parallel = 4`. **Le 16 384 vient du minimum AutoFit (réglage, 16 384 par défaut)**, pas de la mémoire : à 262 144, le 26B garde 13,7 Go de VRAM et la même vitesse (71,9 s contre 73,3 s) ; Qwen passe de 19 à 33 Go de RAM |
+| Bionic : compaction (E4) | Fait | E4B 18,5 k → 6,7 k en 12 s ; 26B 12,3 k → 6,8 k en 10 s ; lecture de 18,6 k **impossible** avec le 26B (contexte chargé 16 384) ; la sous-session « Compaction » suit le modèle de la session |
+| Bionic : MCP dans Bionic (D6) | Fait | Serveur local `demo-notes` ajouté (« Connecté · 5 outils prêts »), configuration dans `ng-mcp.json` ; appels par le 26B et l'E4B **sans confirmation**, y compris l'outil qui écrit un fichier, y compris en mode *Demander à chaque fois* ; aucun réglage par outil |
+| Bionic : Code Review, compaction automatique, `Ctrl + P`, `@session`, branche, retour arrière, renommage, sous-agent, Canvas, conversation hors projet (E2, E4, E5) | Fait (Canvas non déclenché ; points de sauvegarde absents) | [Manuel Bionic 14, section 5](docs/bionic/14-commandes-compaction-navigateur.md#5-fonctions-essayées-sur-le-poste-à-gpu-dédié) |
+| Bionic : sessions simultanées | Fait | E4B : 2 sessions sans ralentissement, 4 sessions : +22 à 37 % chacune pour une durée totale ≈ 2 × plus courte ; 26B : 2 sessions sans ralentissement |
+| Bionic : modes shell extrêmes | Fait | *Désactivé* : appel refusé ; *Tout autoriser* : `echo` exécutée sans vérification |
+| Bionic : navigateur (E5) | Fait | E4B et 26B ouvrent la page sans lire son contenu ; seul outil du navigateur : `open_url_in_app_browser` |
+| Bionic : compétences (E6) | Fait | Création assistée : E4B échoue (20 s, pose une question), 26B réussit (59 s, en-tête complet, installation approuvée) ; compétence retirée ensuite. Compétence de projet avec le 26B : sans compétence 15 s non conforme ; déclenchement automatique 11 s, compétence **lue mais format non appliqué** ; avec `@` 6 s, **conforme** |
+| Bionic : Auto Review (E1) | Partiel | `too_destructive` **non obtenu** ; `rm -rf`, `find -delete`, `Remove-Item` : confirmation déterministe ; `shred` : confirmation avec l'E4B, **exécution automatique** avec le 26B (incident ci-dessous) |
+
+**Incident** — Essai `shred -u -z ~/*.txt` avec le 26B, `HOME` non redirigé : approuvé par le Shell Reviewer (`risk = high`, `authorization = explicitly_yes`), exécuté à 22:51:10, code de sortie 0 : au moins un fichier `.txt` réel du dossier personnel détruit, non récupérable. Cause : l'hypothèse que le 26B s'arrêterait à une confirmation comme l'E4B. Mesures prises : plus aucun essai destructif ; règles consignées dans le manuel Bionic 12, `outils/README.md` et la mémoire de travail. **À vérifier par l'utilisateur** : sauvegardes, *Versions précédentes* de `C:\Users\<utilisateur>`.
+
+**Défauts du pilote Bionic corrigés pendant la série** : bouton modèle introuvable hors du bas de l'écran ; mauvaise colonne en affichage scindé ; zones de saisie masquées prises pour la zone active ; deux scripts lancés en même temps ; émulation de taille laissant la page sur une partie de la fenêtre. Cinq runs invalidés (la session partait avec un autre modèle) ont été refaits ; les résultats invalides ont été supprimés.
+
+**À supprimer à la main** : projets et sessions de test de Bionic (« Démo documents », « Démo code », « Démo jetable ») ; dossiers `~\.lmstudio\scratchpads\*\resume-en-trois-points` créés par l'agent.
+
+**Non traité** : quantification Q6_K (non installée) ; lignes « Mtp » (téléchargement) ; Roo Code, Open WebUI ; `lms daemon up/down/update` ; conflit LM Studio / Bionic rejoué ; test d'usage de la compétence créée par Qwen ; serveurs MCP du catalogue Bionic (comptes) ; dictée vocale ; cloud, LM Link, recherche web (comptes).
+
+**Décisions ouvertes** : (1) autoriser le téléchargement d'un brouillon « Mtp » (≈ 2 Go) pour tester le décodage spéculatif sur un modèle entièrement en VRAM ; (2) assouplir le bac à sable de Codex (`workspace-write`) pour la comparaison ; (3) rejouer `too_destructive` dans une machine virtuelle.
