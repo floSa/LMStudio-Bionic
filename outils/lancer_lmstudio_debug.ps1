@@ -4,7 +4,9 @@ param([int]$Port = 9222)
 
 Get-Process 'LM Studio' -ErrorAction SilentlyContinue | Stop-Process -Force
 Start-Sleep 3
-Start-Process "C:\Program Files\LM Studio\LM Studio.exe" -ArgumentList "--remote-debugging-port=$Port"
+$exe = @("$env:LOCALAPPDATA\Programs\LM Studio\LM Studio.exe", "C:\Program Files\LM Studio\LM Studio.exe") | Where-Object { Test-Path $_ } | Select-Object -First 1
+if (-not $exe) { throw "LM Studio.exe introuvable (emplacements testés : %LOCALAPPDATA%\Programs et Program Files)." }
+Start-Process $exe -ArgumentList "--remote-debugging-port=$Port"
 Start-Sleep 8
 try {
     (Invoke-RestMethod "http://127.0.0.1:$Port/json/version").Browser

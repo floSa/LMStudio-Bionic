@@ -1,0 +1,11 @@
+{
+  "name": "essais-sdk-lmstudio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Essais du SDK JavaScript de LM Studio (chargement paramétré, génération, outils) pour les manuels",
+  "dependencies": {
+    "@lmstudio/sdk": "2.0.0",
+    "zod": "^3.24.1"
+  }
+}

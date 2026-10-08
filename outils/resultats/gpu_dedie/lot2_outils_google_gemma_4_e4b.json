@@ -1,0 +1,356 @@
+{
+ "synthese": {
+  "modele": "google/gemma-4-e4b",
+  "difficile": false,
+  "outils_declares": 5,
+  "essais": 32,
+  "corrects": 32,
+  "taux": 1.0,
+  "par_statut": {
+   "correct": 32
+  },
+  "secondes_moyennes": 1.1
+ },
+ "essais": [
+  {
+   "consigne": "Convertis 37 degrés Celsius en Kelvin.",
+   "attendu": "convertir_temperature",
+   "statut": "correct",
+   "detail": {
+    "de": "C",
+    "valeur": 37,
+    "vers": "K"
+   },
+   "secondes": 0.8,
+   "tokens": 28
+  },
+  {
+   "consigne": "Convertis 37 degrés Celsius en Kelvin.",
+   "attendu": "convertir_temperature",
+   "statut": "correct",
+   "detail": {
+    "de": "C",
+    "valeur": 37,
+    "vers": "K"
+   },
+   "secondes": 0.7,
+   "tokens": 28
+  },
+  {
+   "consigne": "Convertis 37 degrés Celsius en Kelvin.",
+   "attendu": "convertir_temperature",
+   "statut": "correct",
+   "detail": {
+    "de": "C",
+    "valeur": 37,
+    "vers": "K"
+   },
+   "secondes": 0.7,
+   "tokens": 28
+  },
+  {
+   "consigne": "Convertis 37 degrés Celsius en Kelvin.",
+   "attendu": "convertir_temperature",
+   "statut": "correct",
+   "detail": {
+    "de": "C",
+    "valeur": 37,
+    "vers": "K"
+   },
+   "secondes": 0.7,
+   "tokens": 28
+  },
+  {
+   "consigne": "Combien font 98,6 degrés Fahrenheit en Celsius ?",
+   "attendu": "convertir_temperature",
+   "statut": "correct",
+   "detail": {
+    "de": "F",
+    "valeur": 98.6,
+    "vers": "C"
+   },
+   "secondes": 0.8,
+   "tokens": 30
+  },
+  {
+   "consigne": "Combien font 98,6 degrés Fahrenheit en Celsius ?",
+   "attendu": "convertir_temperature",
+   "statut": "correct",
+   "detail": {
+    "de": "F",
+    "valeur": 98.6,
+    "vers": "C"
+   },
+   "secondes": 0.8,
+   "tokens": 30
+  },
+  {
+   "consigne": "Combien font 98,6 degrés Fahrenheit en Celsius ?",
+   "attendu": "convertir_temperature",
+   "statut": "correct",
+   "detail": {
+    "de": "F",
+    "valeur": 98.6,
+    "vers": "C"
+   },
+   "secondes": 0.8,
+   "tokens": 30
+  },
+  {
+   "consigne": "Combien font 98,6 degrés Fahrenheit en Celsius ?",
+   "attendu": "convertir_temperature",
+   "statut": "correct",
+   "detail": {
+    "de": "F",
+    "valeur": 98.6,
+    "vers": "C"
+   },
+   "secondes": 0.8,
+   "tokens": 30
+  },
+  {
+   "consigne": "Donne les statistiques de la série 5, 1, 9, 3, 12.",
+   "attendu": "calculer_statistiques",
+   "statut": "correct",
+   "detail": {
+    "nombres": [
+     5,
+     1,
+     9,
+     3,
+     12
+    ]
+   },
+   "secondes": 0.7,
+   "tokens": 25
+  },
+  {
+   "consigne": "Donne les statistiques de la série 5, 1, 9, 3, 12.",
+   "attendu": "calculer_statistiques",
+   "statut": "correct",
+   "detail": {
+    "nombres": [
+     5,
+     1,
+     9,
+     3,
+     12
+    ]
+   },
+   "secondes": 0.8,
+   "tokens": 29
+  },
+  {
+   "consigne": "Donne les statistiques de la série 5, 1, 9, 3, 12.",
+   "attendu": "calculer_statistiques",
+   "statut": "correct",
+   "detail": {
+    "nombres": [
+     5,
+     1,
+     9,
+     3,
+     12
+    ]
+   },
+   "secondes": 0.8,
+   "tokens": 29
+  },
+  {
+   "consigne": "Donne les statistiques de la série 5, 1, 9, 3, 12.",
+   "attendu": "calculer_statistiques",
+   "statut": "correct",
+   "detail": {
+    "nombres": [
+     5,
+     1,
+     9,
+     3,
+     12
+    ]
+   },
+   "secondes": 0.8,
+   "tokens": 29
+  },
+  {
+   "consigne": "Quelles notes sont disponibles ?",
+   "attendu": "lister_notes",
+   "statut": "correct",
+   "detail": {},
+   "secondes": 0.3,
+   "tokens": 10
+  },
+  {
+   "consigne": "Quelles notes sont disponibles ?",
+   "attendu": "lister_notes",
+   "statut": "correct",
+   "detail": {},
+   "secondes": 0.3,
+   "tokens": 10
+  },
+  {
+   "consigne": "Quelles notes sont disponibles ?",
+   "attendu": "lister_notes",
+   "statut": "correct",
+   "detail": {},
+   "secondes": 0.3,
+   "tokens": 10
+  },
+  {
+   "consigne": "Quelles notes sont disponibles ?",
+   "attendu": "lister_notes",
+   "statut": "correct",
+   "detail": {},
+   "secondes": 0.3,
+   "tokens": 10
+  },
+  {
+   "consigne": "Lis la note courses.txt.",
+   "attendu": "lire_note",
+   "statut": "correct",
+   "detail": {
+    "nom": "courses.txt"
+   },
+   "secondes": 0.5,
+   "tokens": 17
+  },
+  {
+   "consigne": "Lis la note courses.txt.",
+   "attendu": "lire_note",
+   "statut": "correct",
+   "detail": {
+    "nom": "courses.txt"
+   },
+   "secondes": 0.5,
+   "tokens": 17
+  },
+  {
+   "consigne": "Lis la note courses.txt.",
+   "attendu": "lire_note",
+   "statut": "correct",
+   "detail": {
+    "nom": "courses.txt"
+   },
+   "secondes": 0.5,
+   "tokens": 17
+  },
+  {
+   "consigne": "Lis la note courses.txt.",
+   "attendu": "lire_note",
+   "statut": "correct",
+   "detail": {
+    "nom": "courses.txt"
+   },
+   "secondes": 0.5,
+   "tokens": 17
+  },
+  {
+   "consigne": "Enregistre une note rappel.txt contenant : Appeler le fournisseur.",
+   "attendu": "ecrire_note",
+   "statut": "correct",
+   "detail": {
+    "contenu": "Appeler le fournisseur.",
+    "nom": "rappel.txt"
+   },
+   "secondes": 0.8,
+   "tokens": 30
+  },
+  {
+   "consigne": "Enregistre une note rappel.txt contenant : Appeler le fournisseur.",
+   "attendu": "ecrire_note",
+   "statut": "correct",
+   "detail": {
+    "contenu": "Appeler le fournisseur.",
+    "nom": "rappel.txt"
+   },
+   "secondes": 0.8,
+   "tokens": 30
+  },
+  {
+   "consigne": "Enregistre une note rappel.txt contenant : Appeler le fournisseur.",
+   "attendu": "ecrire_note",
+   "statut": "correct",
+   "detail": {
+    "contenu": "Appeler le fournisseur.",
+    "nom": "rappel.txt"
+   },
+   "secondes": 0.8,
+   "tokens": 30
+  },
+  {
+   "consigne": "Enregistre une note rappel.txt contenant : Appeler le fournisseur.",
+   "attendu": "ecrire_note",
+   "statut": "correct",
+   "detail": {
+    "contenu": "Appeler le fournisseur.",
+    "nom": "rappel.txt"
+   },
+   "secondes": 0.8,
+   "tokens": 30
+  },
+  {
+   "consigne": "Quelle est la capitale du Portugal ?",
+   "attendu": null,
+   "statut": "correct",
+   "detail": "La capitale du Portugal est Lisbonne.",
+   "secondes": 0.3,
+   "tokens": 9
+  },
+  {
+   "consigne": "Quelle est la capitale du Portugal ?",
+   "attendu": null,
+   "statut": "correct",
+   "detail": "La capitale du Portugal est Lisbonne.",
+   "secondes": 0.3,
+   "tokens": 9
+  },
+  {
+   "consigne": "Quelle est la capitale du Portugal ?",
+   "attendu": null,
+   "statut": "correct",
+   "detail": "La capitale du Portugal est Lisbonne.",
+   "secondes": 0.3,
+   "tokens": 9
+  },
+  {
+   "consigne": "Quelle est la capitale du Portugal ?",
+   "attendu": null,
+   "statut": "correct",
+   "detail": "La capitale du Portugal est Lisbonne.",
+   "secondes": 0.3,
+   "tokens": 9
+  },
+  {
+   "consigne": "Il fait 20 degrés dehors : faut-il prendre une veste ?",
+   "attendu": null,
+   "statut": "correct",
+   "detail": "Pour vous donner un conseil plus précis, j'aurais besoin de savoir **où** vous êtes (quelle est la saison et le climat h",
+   "secondes": 4.2,
+   "tokens": 176
+  },
+  {
+   "consigne": "Il fait 20 degrés dehors : faut-il prendre une veste ?",
+   "attendu": null,
+   "statut": "correct",
+   "detail": "Pour vous donner un conseil pertinent sur la veste, j'ai besoin de savoir **quelle est votre sensibilité au froid** et *",
+   "secondes": 3.9,
+   "tokens": 163
+  },
+  {
+   "consigne": "Il fait 20 degrés dehors : faut-il prendre une veste ?",
+   "attendu": null,
+   "statut": "correct",
+   "detail": "Pour vous donner un conseil pertinent sur la nécessité de prendre une veste, j'ai besoin d'un peu plus d'informations !\n",
+   "secondes": 4.9,
+   "tokens": 202
+  },
+  {
+   "consigne": "Il fait 20 degrés dehors : faut-il prendre une veste ?",
+   "attendu": null,
+   "statut": "correct",
+   "detail": "Pour vous donner un conseil précis sur le port d'une veste, j'aurais besoin de savoir **où** vous êtes et **quelle est l",
+   "secondes": 4.1,
+   "tokens": 172
+  }
+ ]
+}

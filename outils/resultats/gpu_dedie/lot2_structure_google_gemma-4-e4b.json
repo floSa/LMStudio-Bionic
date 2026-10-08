@@ -1,0 +1,180 @@
+{
+ "modele": "google/gemma-4-e4b",
+ "valides": 10,
+ "essais": [
+  {
+   "valide": true,
+   "secondes": 1.7,
+   "finish": "stop",
+   "contenu": {
+    "titre": "Les Ombres du Nord",
+    "annee": 2019,
+    "genre": "drame",
+    "acteurs": [
+     "Léa Martin",
+     "Paul Roche"
+    ]
+   },
+   "tokens_reflexion": 0,
+   "tokens": 66
+  },
+  {
+   "valide": true,
+   "secondes": 1.62,
+   "finish": "stop",
+   "contenu": {
+    "titre": "Les Ombres du Nord",
+    "annee": 2019,
+    "genre": "drame",
+    "acteurs": [
+     "Léa Martin",
+     "Paul Roche"
+    ]
+   },
+   "tokens_reflexion": 0,
+   "tokens": 66
+  },
+  {
+   "valide": true,
+   "secondes": 1.63,
+   "finish": "stop",
+   "contenu": {
+    "titre": "Les Ombres du Nord",
+    "annee": 2019,
+    "genre": "drame",
+    "acteurs": [
+     "Léa Martin",
+     "Paul Roche"
+    ]
+   },
+   "tokens_reflexion": 0,
+   "tokens": 66
+  },
+  {
+   "valide": true,
+   "secondes": 1.62,
+   "finish": "stop",
+   "contenu": {
+    "titre": "Les Ombres du Nord",
+    "annee": 2019,
+    "genre": "drame",
+    "acteurs": [
+     "Léa Martin",
+     "Paul Roche"
+    ]
+   },
+   "tokens_reflexion": 0,
+   "tokens": 66
+  },
+  {
+   "valide": true,
+   "secondes": 1.61,
+   "finish": "stop",
+   "contenu": {
+    "titre": "Les Ombres du Nord",
+    "annee": 2019,
+    "genre": "drame",
+    "acteurs": [
+     "Léa Martin",
+     "Paul Roche"
+    ]
+   },
+   "tokens_reflexion": 0,
+   "tokens": 66
+  },
+  {
+   "valide": true,
+   "secondes": 1.66,
+   "finish": "stop",
+   "contenu": {
+    "titre": "Les Ombres du Nord",
+    "annee": 2019,
+    "genre": "drame",
+    "acteurs": [
+     "Léa Martin",
+     "Paul Roche"
+    ]
+   },
+   "tokens_reflexion": 0,
+   "tokens": 66
+  },
+  {
+   "valide": true,
+   "secondes": 1.74,
+   "finish": "stop",
+   "contenu": {
+    "titre": "Les Ombres du Nord",
+    "annee": 2019,
+    "genre": "drame",
+    "acteurs": [
+     "Léa Martin",
+     "Paul Roche"
+    ]
+   },
+   "tokens_reflexion": 0,
+   "tokens": 66
+  },
+  {
+   "valide": true,
+   "secondes": 1.83,
+   "finish": "stop",
+   "contenu": {
+    "titre": "Les Ombres du Nord",
+    "annee": 2019,
+    "genre": "drame",
+    "acteurs": [
+     "Léa Martin",
+     "Paul Roche"
+    ]
+   },
+   "tokens_reflexion": 0,
+   "tokens": 66
+  },
+  {
+   "valide": true,
+   "secondes": 1.96,
+   "finish": "stop",
+   "contenu": {
+    "titre": "Les Ombres du Nord",
+    "annee": 2019,
+    "genre": "drame",
+    "acteurs": [
+     "Léa Martin",
+     "Paul Roche"
+    ]
+   },
+   "tokens_reflexion": 0,
+   "tokens": 66
+  },
+  {
+   "valide": true,
+   "secondes": 1.84,
+   "finish": "stop",
+   "contenu": {
+    "titre": "Les Ombres du Nord",
+    "annee": 2019,
+    "genre": "drame",
+    "acteurs": [
+     "Léa Martin",
+     "Paul Roche"
+    ]
+   },
+   "tokens_reflexion": 0,
+   "tokens": 66
+  }
+ ],
+ "creatif": {
+  "secondes": 17.89,
+  "tokens": 639,
+  "tokens_reflexion": 563,
+  "finish": "stop"
+ },
+ "tronque": {
+  "finish": "length",
+  "contenu": "{\n  \"titre\": \"Les"
+ },
+ "json_object": {
+  "status": 400,
+  "corps": "{\"error\": \"'response_format.type' must be 'json_schema' or 'text'\"}"
+ }
+}

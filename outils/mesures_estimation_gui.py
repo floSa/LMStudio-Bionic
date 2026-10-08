@@ -61,9 +61,18 @@ def open_loader():
     lm.send("Input.dispatchKeyEvent", type="keyDown", key="l", code="KeyL", modifiers=2, windowsVirtualKeyCode=76)
     lm.send("Input.dispatchKeyEvent", type="keyUp", key="l", code="KeyL", modifiers=2, windowsVirtualKeyCode=76)
     lm.wait(1.5)
+    # Version 0.4.25 (poste à GPU dédié) : le sélecteur charge directement le modèle sauf si « Manually choose model load parameters » est activé
+    sw = lm.ev("""(() => { const b=[...document.querySelectorAll('button[role=switch]')].find(b=>(b.parentElement.innerText||'').includes('Manually choose'));
+      if(!b) return null; const r=b.getBoundingClientRect(); return [r.x+r.width/2,r.y+r.height/2,b.getAttribute('aria-checked')]; })()""")
+    if sw and sw[2] != "true":
+        lm.click_xy(sw[0], sw[1]); lm.wait(0.6)
     r = lm.rect(selector="[role=dialog] *", text="Gemma 4 E4B", exact=False)
     lm.click_xy(r[0] + 20, r[1] + r[3] / 2); lm.wait(2)
     assert "Estimated Memory Usage" in lm.ev("document.querySelector('[role=dialog]').innerText"), "chargeur non ouvert"
+    adv = lm.ev("""(() => { const b=[...document.querySelectorAll('[role=dialog] button[role=switch]')].find(b=>(b.parentElement.innerText||'').includes('Show advanced settings'));
+      if(!b) return null; const r=b.getBoundingClientRect(); return [r.x+r.width/2,r.y+r.height/2,b.getAttribute('aria-checked')]; })()""")
+    if adv and adv[2] != "true":
+        lm.click_xy(adv[0], adv[1]); lm.wait(1.2)
 
 
 def pick_quant(label, value):
@@ -107,7 +116,7 @@ for ctx in (32768, 131072):
         c = controls(lab); chk = [x for x in c if x[0] == "BUTTON"][0]; lm.click_xy(chk[1], chk[2]); lm.wait(0.6)
     print(ctx, {k: v for k, v in res.items() if k.startswith(f"ctx{ctx}")}, flush=True)
 set_num("Context Length", 8192)
-json.dump(res, open(os.path.join(OUT, "estimation_gui.json"), "w"), indent=1)
+json.dump(res, open(os.path.join(OUT, os.environ.get("SORTIE_JSON", "estimation_gui.json")), "w"), indent=1)
 print(json.dumps(res, indent=1))
 lm.click(selector="[role=dialog] button", text="Cancel"); lm.wait(1)
 lm.close_dialogs()

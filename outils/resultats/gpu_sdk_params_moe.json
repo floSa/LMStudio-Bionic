@@ -1,0 +1,421 @@
+[
+ {
+  "essai": "26B A4B, automatique",
+  "modele": "google/gemma-4-26b-a4b",
+  "config": {
+   "contextLength": 8192
+  },
+  "ok": true,
+  "load_s": 14.8,
+  "sdk": {
+   "ok": true,
+   "secondes": 14.624,
+   "identifiant": "bench",
+   "contexte": 8192,
+   "config": {
+    "contextLength": 8192
+   }
+  },
+  "memoire": {
+   "vram_go": 12.5,
+   "ram_moteur_ws_go": 16.19,
+   "ram_moteur_privee_go": 13.84,
+   "ram_systeme_delta_go": 16.55
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1776,
+    "ttft_s": 1.92,
+    "prompt_tok_s": 924.4
+   },
+   "prompt_6000": {
+    "tokens": 5301,
+    "ttft_s": 3.23,
+    "prompt_tok_s": 1643.6
+   },
+   "generation_tok_s": 37.0,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.499
+  }
+ },
+ {
+  "essai": "26B A4B, GPU max imposé",
+  "modele": "google/gemma-4-26b-a4b",
+  "config": {
+   "contextLength": 8192,
+   "gpu": {
+    "ratio": "max"
+   }
+  },
+  "ok": true,
+  "load_s": 11.4,
+  "sdk": {
+   "ok": true,
+   "secondes": 11.172,
+   "identifiant": "bench",
+   "contexte": 8192,
+   "config": {
+    "contextLength": 8192,
+    "gpu": {
+     "ratio": "max"
+    }
+   }
+  },
+  "memoire": {
+   "vram_go": 15.26,
+   "ram_moteur_ws_go": 19.11,
+   "ram_moteur_privee_go": 19.17,
+   "ram_systeme_delta_go": 19.26
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1776,
+    "ttft_s": 5.41,
+    "prompt_tok_s": 328.3
+   },
+   "prompt_6000": {
+    "tokens": 5301,
+    "ttft_s": 16.4,
+    "prompt_tok_s": 323.3
+   },
+   "generation_tok_s": 26.65,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.373
+  }
+ },
+ {
+  "essai": "26B A4B, experts des 0 premières couches sur le CPU (--n-cpu-moe 0)",
+  "modele": "google/gemma-4-26b-a4b",
+  "config": {
+   "contextLength": 8192,
+   "gpu": {
+    "ratio": "max"
+   },
+   "llamaCppArgumentsOverride": {
+    "enabled": true,
+    "disabledParameters": [],
+    "excludeAllConfig": false,
+    "overrideParameters": [
+     {
+      "key": "--n-cpu-moe",
+      "value": "0"
+     }
+    ]
+   }
+  },
+  "ok": true,
+  "load_s": 10.6,
+  "sdk": {
+   "ok": true,
+   "secondes": 10.421,
+   "identifiant": "bench",
+   "contexte": 8192,
+   "config": {
+    "contextLength": 8192,
+    "gpu": {
+     "ratio": "max"
+    },
+    "llamaCppArgumentsOverride": {
+     "enabled": true,
+     "disabledParameters": [],
+     "excludeAllConfig": false,
+     "overrideParameters": [
+      {
+       "key": "--n-cpu-moe",
+       "value": "0"
+      }
+     ]
+    }
+   }
+  },
+  "memoire": {
+   "vram_go": 15.26,
+   "ram_moteur_ws_go": 19.11,
+   "ram_moteur_privee_go": 19.17,
+   "ram_systeme_delta_go": 19.24
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1776,
+    "ttft_s": 5.39,
+    "prompt_tok_s": 329.8
+   },
+   "prompt_6000": {
+    "tokens": 5301,
+    "ttft_s": 16.39,
+    "prompt_tok_s": 323.5
+   },
+   "generation_tok_s": 26.57,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.523
+  }
+ },
+ {
+  "essai": "26B A4B, experts des 8 premières couches sur le CPU (--n-cpu-moe 8)",
+  "modele": "google/gemma-4-26b-a4b",
+  "config": {
+   "contextLength": 8192,
+   "gpu": {
+    "ratio": "max"
+   },
+   "llamaCppArgumentsOverride": {
+    "enabled": true,
+    "disabledParameters": [],
+    "excludeAllConfig": false,
+    "overrideParameters": [
+     {
+      "key": "--n-cpu-moe",
+      "value": "8"
+     }
+    ]
+   }
+  },
+  "ok": true,
+  "load_s": 9.2,
+  "sdk": {
+   "ok": true,
+   "secondes": 9.045,
+   "identifiant": "bench",
+   "contexte": 8192,
+   "config": {
+    "contextLength": 8192,
+    "gpu": {
+     "ratio": "max"
+    },
+    "llamaCppArgumentsOverride": {
+     "enabled": true,
+     "disabledParameters": [],
+     "excludeAllConfig": false,
+     "overrideParameters": [
+      {
+       "key": "--n-cpu-moe",
+       "value": "8"
+      }
+     ]
+    }
+   }
+  },
+  "memoire": {
+   "vram_go": 14.75,
+   "ram_moteur_ws_go": 16.16,
+   "ram_moteur_privee_go": 15.71,
+   "ram_systeme_delta_go": 16.29
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1776,
+    "ttft_s": 1.3,
+    "prompt_tok_s": 1370.6
+   },
+   "prompt_6000": {
+    "tokens": 5301,
+    "ttft_s": 2.09,
+    "prompt_tok_s": 2533.3
+   },
+   "generation_tok_s": 54.57,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.307
+  }
+ },
+ {
+  "essai": "26B A4B, experts des 16 premières couches sur le CPU (--n-cpu-moe 16)",
+  "modele": "google/gemma-4-26b-a4b",
+  "config": {
+   "contextLength": 8192,
+   "gpu": {
+    "ratio": "max"
+   },
+   "llamaCppArgumentsOverride": {
+    "enabled": true,
+    "disabledParameters": [],
+    "excludeAllConfig": false,
+    "overrideParameters": [
+     {
+      "key": "--n-cpu-moe",
+      "value": "16"
+     }
+    ]
+   }
+  },
+  "ok": true,
+  "load_s": 9.7,
+  "sdk": {
+   "ok": true,
+   "secondes": 9.557,
+   "identifiant": "bench",
+   "contexte": 8192,
+   "config": {
+    "contextLength": 8192,
+    "gpu": {
+     "ratio": "max"
+    },
+    "llamaCppArgumentsOverride": {
+     "enabled": true,
+     "disabledParameters": [],
+     "excludeAllConfig": false,
+     "overrideParameters": [
+      {
+       "key": "--n-cpu-moe",
+       "value": "16"
+      }
+     ]
+    }
+   }
+  },
+  "memoire": {
+   "vram_go": 11.05,
+   "ram_moteur_ws_go": 16.16,
+   "ram_moteur_privee_go": 12.01,
+   "ram_systeme_delta_go": 16.37
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1776,
+    "ttft_s": 2.21,
+    "prompt_tok_s": 803.7
+   },
+   "prompt_6000": {
+    "tokens": 5301,
+    "ttft_s": 3.55,
+    "prompt_tok_s": 1494.5
+   },
+   "generation_tok_s": 42.54,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.392
+  }
+ },
+ {
+  "essai": "26B A4B, experts des 30 premières couches sur le CPU (--n-cpu-moe 30)",
+  "modele": "google/gemma-4-26b-a4b",
+  "config": {
+   "contextLength": 8192,
+   "gpu": {
+    "ratio": "max"
+   },
+   "llamaCppArgumentsOverride": {
+    "enabled": true,
+    "disabledParameters": [],
+    "excludeAllConfig": false,
+    "overrideParameters": [
+     {
+      "key": "--n-cpu-moe",
+      "value": "30"
+     }
+    ]
+   }
+  },
+  "ok": true,
+  "load_s": 10.8,
+  "sdk": {
+   "ok": true,
+   "secondes": 10.641,
+   "identifiant": "bench",
+   "contexte": 8192,
+   "config": {
+    "contextLength": 8192,
+    "gpu": {
+     "ratio": "max"
+    },
+    "llamaCppArgumentsOverride": {
+     "enabled": true,
+     "disabledParameters": [],
+     "excludeAllConfig": false,
+     "overrideParameters": [
+      {
+       "key": "--n-cpu-moe",
+       "value": "30"
+      }
+     ]
+    }
+   }
+  },
+  "memoire": {
+   "vram_go": 4.43,
+   "ram_moteur_ws_go": 16.16,
+   "ram_moteur_privee_go": 5.38,
+   "ram_systeme_delta_go": 17.01
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1776,
+    "ttft_s": 3.94,
+    "prompt_tok_s": 450.3
+   },
+   "prompt_6000": {
+    "tokens": 5301,
+    "ttft_s": 6.05,
+    "prompt_tok_s": 876.0
+   },
+   "generation_tok_s": 26.87,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.548
+  }
+ },
+ {
+  "essai": "26B A4B, tous les experts sur le CPU (--cpu-moe)",
+  "modele": "google/gemma-4-26b-a4b",
+  "config": {
+   "contextLength": 8192,
+   "gpu": {
+    "ratio": "max"
+   },
+   "llamaCppArgumentsOverride": {
+    "enabled": true,
+    "disabledParameters": [],
+    "excludeAllConfig": false,
+    "overrideParameters": [
+     {
+      "key": "--cpu-moe",
+      "value": ""
+     }
+    ]
+   }
+  },
+  "ok": true,
+  "load_s": 10.6,
+  "sdk": {
+   "ok": true,
+   "secondes": 10.397,
+   "identifiant": "bench",
+   "contexte": 8192,
+   "config": {
+    "contextLength": 8192,
+    "gpu": {
+     "ratio": "max"
+    },
+    "llamaCppArgumentsOverride": {
+     "enabled": true,
+     "disabledParameters": [],
+     "excludeAllConfig": false,
+     "overrideParameters": [
+      {
+       "key": "--cpu-moe",
+       "value": ""
+      }
+     ]
+    }
+   }
+  },
+  "memoire": {
+   "vram_go": 4.43,
+   "ram_moteur_ws_go": 16.16,
+   "ram_moteur_privee_go": 5.37,
+   "ram_systeme_delta_go": 16.25
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1776,
+    "ttft_s": 3.93,
+    "prompt_tok_s": 451.8
+   },
+   "prompt_6000": {
+    "tokens": 5301,
+    "ttft_s": 6.06,
+    "prompt_tok_s": 875.3
+   },
+   "generation_tok_s": 26.7,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.545
+  }
+ }
+]

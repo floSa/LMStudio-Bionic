@@ -1,0 +1,52 @@
+{
+ "estimates": {
+  "2048": "Model: google/gemma-4-e4b\nContext Length: 2 048\nEstimated GPU Memory:   8.77 GiB\nEstimated Total Memory: 8.77 GiB\n\nEstimate: This model may be loaded based on your resource guardrails settings.",
+  "8192": "Model: google/gemma-4-e4b\nContext Length: 8 192\nEstimated GPU Memory:   9.10 GiB\nEstimated Total Memory: 9.10 GiB\n\nEstimate: This model may be loaded based on your resource guardrails settings.",
+  "32768": "Model: google/gemma-4-e4b\nContext Length: 32 768\nEstimated GPU Memory:   10.44 GiB\nEstimated Total Memory: 10.44 GiB\n\nEstimate: This model may be loaded based on your resource guardrails settings.",
+  "131072": "Model: google/gemma-4-e4b\nContext Length: 131 072\nEstimated GPU Memory:   15.77 GiB\nEstimated Total Memory: 15.77 GiB\n\nEstimate: This model may be loaded based on your resource guardrails settings."
+ },
+ "runs": [
+  {
+   "label": "GPU max, parallel 4 (défaut)",
+   "gpu": "max",
+   "ctx": 8192,
+   "parallel": 4,
+   "load_s": 6.2,
+   "prompt_2100_tokens_ttft_s": 0.57,
+   "prompt_eval_tok_s": 3737.0,
+   "decode_tok_s_single": 47.09,
+   "parallel_total_tok_s": 159.74,
+   "parallel_per_request_tok_s": 41.22
+  },
+  {
+   "label": "GPU max, parallel 1",
+   "gpu": "max",
+   "ctx": 8192,
+   "parallel": 1,
+   "load_s": 5.9,
+   "prompt_2100_tokens_ttft_s": 0.53,
+   "prompt_eval_tok_s": 3986.0,
+   "decode_tok_s_single": 47.09
+  },
+  {
+   "label": "GPU 50 %, parallel 1",
+   "gpu": "0.5",
+   "ctx": 8192,
+   "parallel": 1,
+   "load_s": 6.4,
+   "prompt_2100_tokens_ttft_s": 1.67,
+   "prompt_eval_tok_s": 1271.0,
+   "decode_tok_s_single": 14.57
+  },
+  {
+   "label": "GPU off (CPU), parallel 1",
+   "gpu": "off",
+   "ctx": 8192,
+   "parallel": 1,
+   "load_s": 6.7,
+   "prompt_2100_tokens_ttft_s": 2.89,
+   "prompt_eval_tok_s": 734.0,
+   "decode_tok_s_single": 9.1
+  }
+ ]
+}

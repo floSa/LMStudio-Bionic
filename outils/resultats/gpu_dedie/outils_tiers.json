@@ -1,0 +1,32 @@
+{
+  "_note": "Essais réels d'outils tiers contre LM Studio 0.4.25 (7 octobre 2026). Modèle : Gemma 4 26B A4B (Q4_K_M), contexte 65 536, experts MoE des 14 premières couches sur le CPU (--n-cpu-moe 14), ≈ 38 tok/s en génération. Tâche : corriger un bogue dans un petit projet jetable (tarifs.py : remise soustraite au lieu d'être appliquée en taux ; 3 tests pytest, 1 en échec). Installation dans un dossier temporaire, configuration isolée, aucune connexion à un compte.",
+  "tache": "Les tests de ce dossier échouent. Lance pytest, trouve la cause dans tarifs.py, corrige le code (pas les tests) puis relance pytest. Termine par un résumé en deux phrases.",
+  "outils": [
+    {"outil": "Claude Code", "version": "2.1.292", "installation": "npm install @anthropic-ai/claude-code (dossier temporaire)",
+     "reglage": "ANTHROPIC_BASE_URL=http://localhost:1234, ANTHROPIC_AUTH_TOKEN=<valeur quelconque>, CLAUDE_CONFIG_DIR isolé, DISABLE_TELEMETRY=1, CLAUDE_CODE_DISABLE_NONESSENTIAL_TRAFFIC=1 ; claude -p --model google/gemma-4-26b-a4b --permission-mode acceptEdits --allowedTools \"Read,Edit,Bash(python -m pytest:*)\"",
+     "route": "POST /v1/messages (API Anthropic)",
+     "question_triviale": {"duree_s": 30.9, "jetons_entree": 17823, "jetons_sortie": 7, "ttft_s": 26.7, "reponse": "Paris."},
+     "tache": {"resultat": "réussi (3 tests sur 3)", "duree_s": 17.7, "tours": 5, "jetons_entree_cumules": 92617, "jetons_sortie": 229}},
+    {"outil": "Codex", "version": "0.161.0", "installation": "npm install @openai/codex (dossier temporaire)",
+     "reglage": "CODEX_HOME isolé ; codex exec --oss --local-provider lmstudio -m google/gemma-4-26b-a4b",
+     "route": "POST /v1/responses (API Responses)",
+     "tache": {"resultat": "connexion et réponse obtenues, mais AUCUNE commande exécutée : bac à sable « read-only » et approbation « never » par défaut, commandes PowerShell rejetées (« blocked by policy ») ; l'assouplissement du bac à sable n'a pas été tenté (refusé par la protection de la session)", "duree_s": 15.5, "jetons": 6762},
+     "avertissement": "Model metadata for `google/gemma-4-26b-a4b` not found. Defaulting to fallback metadata"},
+    {"outil": "Cline (CLI)", "version": "3.0.69", "installation": "npm install cline (dossier temporaire)",
+     "reglage": "cline auth lmstudio -m google/gemma-4-26b-a4b -k <valeur quelconque> --data-dir <dossier isolé> ; cline -P lmstudio -m google/gemma-4-26b-a4b --cwd <projet> --json",
+     "route": "POST /v1/chat/completions",
+     "mode_plan": {"resultat": "diagnostic exact, aucun fichier modifié", "duree_s": 14.6},
+     "mode_action": {"resultat": "1re consigne (« corrige… ») : s'arrête après un plan sans appeler d'outil (0 modification) ; 2e consigne explicite (« lis d'abord… puis modifie… puis lance pytest ») : réussi (3 tests sur 3)", "duree_s": 20.9, "iterations": 4, "jetons_entree": 20316, "jetons_sortie": 557}},
+    {"outil": "Continue (CLI cn)", "version": "1.5.47", "installation": "npm install @continuedev/cli (dossier temporaire)",
+     "reglage": "fichier config.yaml local (provider: lmstudio, model: google/gemma-4-26b-a4b, apiBase: http://localhost:1234/v1) ; cn --config <fichier> -p [--readonly | --allow Edit --allow Write --allow \"Bash(python -m pytest*)\"]",
+     "route": "POST /v1/chat/completions",
+     "mode_lecture_seule": {"resultat": "diagnostic exact", "duree_s": 11.6},
+     "mode_action": {"resultat": "réussi (3 tests sur 3)", "duree_s": 16.5}},
+    {"outil": "Aider", "version": "0.86.2", "installation": "uvx --python 3.12 --from aider-chat aider (environnement éphémère)",
+     "reglage": "LM_STUDIO_API_BASE=http://localhost:1234/v1, LM_STUDIO_API_KEY=<valeur quelconque>, aider --model lm_studio/google/gemma-4-26b-a4b --no-auto-commits --yes-always",
+     "route": "POST /v1/chat/completions",
+     "tache": {"resultat": "modification appliquée et exacte (3 tests sur 3 au contrôle manuel) ; l'exécution des tests par Aider a échoué (pytest absent de l'environnement éphémère d'Aider) puis le modèle a produit deux réponses hors format d'édition (« The LLM did not conform to the edit format »)", "duree_s": 58.0}},
+    {"outil": "Roo Code", "statut": "non lancé : extension d'éditeur sans interface en ligne de commande ; réglages [Source tierce] inchangés"},
+    {"outil": "Open WebUI", "statut": "non lancé : Docker absent, et le premier démarrage impose la création d'un compte administrateur (action non réalisée dans ce cadre)"}
+  ]
+}

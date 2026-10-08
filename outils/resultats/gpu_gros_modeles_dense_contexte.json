@@ -1,0 +1,95 @@
+[
+ {
+  "essai": "Qwen3.8 27B, auto, ctx 32768",
+  "modele": "qwen/qwen3.8-27b",
+  "gpu": null,
+  "ctx": 32768,
+  "estimation_cli": "Estimated GPU Memory:   22.15 GiB | Estimated Total Memory: 22.15 GiB",
+  "ok": true,
+  "load_s": 20.9,
+  "sortie": "Model loaded successfully in 20.55s.\n(16.52 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 15.24,
+   "ram_moteur_ws_go": 19.05,
+   "ram_moteur_privee_go": 20.38,
+   "ram_systeme_delta_go": 19.53
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1891,
+    "ttft_s": 27.15,
+    "prompt_tok_s": 69.6
+   },
+   "prompt_6000": {
+    "tokens": 5651,
+    "ttft_s": 64.07,
+    "prompt_tok_s": 88.2
+   },
+   "generation_tok_s": 10.61,
+   "generation_tokens": 200,
+   "ttft_court_s": 1.126
+  }
+ },
+ {
+  "essai": "Qwen3.8 27B, auto, ctx 131072",
+  "modele": "qwen/qwen3.8-27b",
+  "gpu": null,
+  "ctx": 131072,
+  "estimation_cli": "Estimated GPU Memory:   33.79 GiB | Estimated Total Memory: 33.79 GiB",
+  "ok": true,
+  "load_s": 16.3,
+  "sortie": "Model loaded successfully in 15.96s.\n(16.52 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 15.26,
+   "ram_moteur_ws_go": 26.19,
+   "ram_moteur_privee_go": 27.56,
+   "ram_systeme_delta_go": 18.84
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1891,
+    "ttft_s": 27.73,
+    "prompt_tok_s": 68.2
+   },
+   "prompt_6000": {
+    "tokens": 5651,
+    "ttft_s": 68.75,
+    "prompt_tok_s": 82.2
+   },
+   "generation_tok_s": 10.51,
+   "generation_tokens": 200,
+   "ttft_court_s": 1.14
+  }
+ },
+ {
+  "essai": "Qwen3.8 27B, auto, ctx 262144",
+  "modele": "qwen/qwen3.8-27b",
+  "gpu": null,
+  "ctx": 262144,
+  "estimation_cli": "Estimated GPU Memory:   49.32 GiB | Estimated Total Memory: 49.32 GiB",
+  "ok": true,
+  "load_s": 21.0,
+  "sortie": "Model loaded successfully in 20.66s.\n(16.52 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 15.24,
+   "ram_moteur_ws_go": 35.73,
+   "ram_moteur_privee_go": 37.09,
+   "ram_systeme_delta_go": 28.68
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1891,
+    "ttft_s": 27.88,
+    "prompt_tok_s": 67.8
+   },
+   "prompt_6000": {
+    "tokens": 5651,
+    "ttft_s": 69.44,
+    "prompt_tok_s": 81.4
+   },
+   "generation_tok_s": 10.53,
+   "generation_tokens": 200,
+   "ttft_court_s": 1.157
+  }
+ }
+]

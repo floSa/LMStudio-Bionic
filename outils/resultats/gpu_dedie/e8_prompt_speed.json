@@ -1,0 +1,9 @@
+{
+ "content": "La production d'électricité est un processus industriel complexe impliquant divers procédés.",
+ "reasoning": "",
+ "finish": "stop",
+ "prompt_tokens": 2119,
+ "completion_tokens": 16,
+ "seconds": 0.91,
+ "tok_s_global": 17.56
+}

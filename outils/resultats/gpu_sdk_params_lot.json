@@ -1,0 +1,217 @@
+[
+ {
+  "essai": "physicalBatchSize=128 (evalBatchSize=2048)",
+  "modele": "google/gemma-4-e4b",
+  "config": {
+   "contextLength": 16384,
+   "evalBatchSize": 2048,
+   "physicalBatchSize": 128
+  },
+  "ok": true,
+  "load_s": 5.8,
+  "sdk": {
+   "ok": true,
+   "secondes": 5.638,
+   "identifiant": "bench",
+   "contexte": 16384,
+   "config": {
+    "contextLength": 16384,
+    "evalBatchSize": 2048,
+    "physicalBatchSize": 128
+   }
+  },
+  "memoire": {
+   "vram_go": 6.3,
+   "ram_moteur_ws_go": 7.97,
+   "ram_moteur_privee_go": 7.36,
+   "ram_systeme_delta_go": 8.06
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1772,
+    "ttft_s": 0.62,
+    "prompt_tok_s": 2837.4
+   },
+   "prompt_6000": {
+    "tokens": 5297,
+    "ttft_s": 1.1,
+    "prompt_tok_s": 4804.9
+   },
+   "generation_tok_s": 47.45,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.107
+  }
+ },
+ {
+  "essai": "physicalBatchSize=256 (evalBatchSize=2048)",
+  "modele": "google/gemma-4-e4b",
+  "config": {
+   "contextLength": 16384,
+   "evalBatchSize": 2048,
+   "physicalBatchSize": 256
+  },
+  "ok": true,
+  "load_s": 5.8,
+  "sdk": {
+   "ok": true,
+   "secondes": 5.634,
+   "identifiant": "bench",
+   "contexte": 16384,
+   "config": {
+    "contextLength": 16384,
+    "evalBatchSize": 2048,
+    "physicalBatchSize": 256
+   }
+  },
+  "memoire": {
+   "vram_go": 6.33,
+   "ram_moteur_ws_go": 7.98,
+   "ram_moteur_privee_go": 7.41,
+   "ram_systeme_delta_go": 8.02
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1772,
+    "ttft_s": 0.5,
+    "prompt_tok_s": 3553.8
+   },
+   "prompt_6000": {
+    "tokens": 5297,
+    "ttft_s": 0.86,
+    "prompt_tok_s": 6176.9
+   },
+   "generation_tok_s": 47.42,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.11
+  }
+ },
+ {
+  "essai": "physicalBatchSize=512 (evalBatchSize=2048)",
+  "modele": "google/gemma-4-e4b",
+  "config": {
+   "contextLength": 16384,
+   "evalBatchSize": 2048,
+   "physicalBatchSize": 512
+  },
+  "ok": true,
+  "load_s": 5.8,
+  "sdk": {
+   "ok": true,
+   "secondes": 5.657,
+   "identifiant": "bench",
+   "contexte": 16384,
+   "config": {
+    "contextLength": 16384,
+    "evalBatchSize": 2048,
+    "physicalBatchSize": 512
+   }
+  },
+  "memoire": {
+   "vram_go": 6.4,
+   "ram_moteur_ws_go": 8.02,
+   "ram_moteur_privee_go": 7.51,
+   "ram_systeme_delta_go": 8.03
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1772,
+    "ttft_s": 0.48,
+    "prompt_tok_s": 3693.5
+   },
+   "prompt_6000": {
+    "tokens": 5297,
+    "ttft_s": 0.81,
+    "prompt_tok_s": 6530.0
+   },
+   "generation_tok_s": 47.36,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.1
+  }
+ },
+ {
+  "essai": "physicalBatchSize=1024 (evalBatchSize=2048)",
+  "modele": "google/gemma-4-e4b",
+  "config": {
+   "contextLength": 16384,
+   "evalBatchSize": 2048,
+   "physicalBatchSize": 1024
+  },
+  "ok": true,
+  "load_s": 5.8,
+  "sdk": {
+   "ok": true,
+   "secondes": 5.625,
+   "identifiant": "bench",
+   "contexte": 16384,
+   "config": {
+    "contextLength": 16384,
+    "evalBatchSize": 2048,
+    "physicalBatchSize": 1024
+   }
+  },
+  "memoire": {
+   "vram_go": 6.54,
+   "ram_moteur_ws_go": 8.08,
+   "ram_moteur_privee_go": 7.71,
+   "ram_systeme_delta_go": 8.1
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1772,
+    "ttft_s": 0.49,
+    "prompt_tok_s": 3613.8
+   },
+   "prompt_6000": {
+    "tokens": 5297,
+    "ttft_s": 0.8,
+    "prompt_tok_s": 6590.1
+   },
+   "generation_tok_s": 47.35,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.099
+  }
+ },
+ {
+  "essai": "physicalBatchSize=2048 (evalBatchSize=2048)",
+  "modele": "google/gemma-4-e4b",
+  "config": {
+   "contextLength": 16384,
+   "evalBatchSize": 2048,
+   "physicalBatchSize": 2048
+  },
+  "ok": true,
+  "load_s": 5.8,
+  "sdk": {
+   "ok": true,
+   "secondes": 5.614,
+   "identifiant": "bench",
+   "contexte": 16384,
+   "config": {
+    "contextLength": 16384,
+    "evalBatchSize": 2048,
+    "physicalBatchSize": 2048
+   }
+  },
+  "memoire": {
+   "vram_go": 6.81,
+   "ram_moteur_ws_go": 8.21,
+   "ram_moteur_privee_go": 8.12,
+   "ram_systeme_delta_go": 8.24
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1772,
+    "ttft_s": 0.48,
+    "prompt_tok_s": 3664.9
+   },
+   "prompt_6000": {
+    "tokens": 5297,
+    "ttft_s": 0.87,
+    "prompt_tok_s": 6114.8
+   },
+   "generation_tok_s": 47.44,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.097
+  }
+ }
+]

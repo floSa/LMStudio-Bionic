@@ -1,5 +1,5 @@
 """Benchmark de paramètres de chargement (GPU offload, parallélisme) sur Gemma 4 E4B via `lms` + API locale.
-Résultats : outils/resultats/benchmark_chargement.json. Le modèle est rechargé dans sa configuration d'origine à la fin."""
+Résultats : outils/resultats/benchmark_chargement.json (ou le fichier donné par la variable SORTIE_JSON). Le modèle est rechargé dans sa configuration d'origine à la fin."""
 import json, os, subprocess, threading, time, urllib.request
 
 BASE = "http://127.0.0.1:1234"
@@ -68,7 +68,7 @@ if __name__ == "__main__":
               run("GPU max, parallel 1", "max", 8192, 1),
               run("GPU 50 %, parallel 1", "0.5", 8192, 1),
               run("GPU off (CPU), parallel 1", "off", 8192, 1)]
-    json.dump({"estimates": est, "runs": results}, open(os.path.join(OUT, "benchmark_chargement.json"), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+    json.dump({"estimates": est, "runs": results}, open(os.path.join(OUT, os.environ.get("SORTIE_JSON", "benchmark_chargement.json")), "w", encoding="utf-8"), ensure_ascii=False, indent=1)
     lms("unload", "--all")
     dt, out = lms("load", MODEL, "--gpu", "max", "-c", "8192", "--parallel", "4", "--identifier", MODEL, "-y")
     print("restauré", round(dt, 1), out[-200:], flush=True)

@@ -1,0 +1,34 @@
+{
+ "system_prompt": {
+  "status": 200,
+  "reponse": "Je corrige l'orthographe de vos textes."
+ },
+ "context_length_2048_sur_modele_charge_16384": {
+  "status": 200,
+  "corps": {
+   "stats": {
+    "input_tokens": 12,
+    "total_output_tokens": 10,
+    "reasoning_output_tokens": 0,
+    "tokens_per_second": 16.649831836698446,
+    "time_to_first_token_seconds": 0.27431,
+    "model_load_time_seconds": 7.969
+   },
+   "reponse": "\"Dis ok\" is a very informal and abbreviated"
+  }
+ },
+ "parametres_echantillonnage": {
+  "status": 200,
+  "reponse": "\"Dis ok\" is a very informal way of"
+ },
+ "parametre_inconnu": {
+  "status": 400,
+  "corps": {
+   "error": {
+    "message": "Unrecognized key(s) in object: 'parametre_inconnu'",
+    "type": "invalid_request",
+    "code": "unrecognized_keys"
+   }
+  }
+ }
+}

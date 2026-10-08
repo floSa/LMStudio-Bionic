@@ -1,0 +1,232 @@
+[
+ {
+  "moteur": "CUDA 12 (2.53.0)",
+  "gpu": "off",
+  "ok": true,
+  "load_s": 8.1,
+  "sortie": "Model loaded successfully in 7.75s.\n(8.40 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 1.35,
+   "ram_moteur_ws_go": 7.75,
+   "ram_moteur_privee_go": 2.53,
+   "ram_systeme_delta_go": 8.02
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1772,
+    "ttft_s": 2.53,
+    "prompt_tok_s": 699.8
+   },
+   "generation_tok_s": 8.9,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.727
+  }
+ },
+ {
+  "moteur": "CUDA 12 (2.53.0)",
+  "gpu": "0.25",
+  "ok": true,
+  "load_s": 7.7,
+  "sortie": "Model loaded successfully in 7.43s.\n(8.40 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 3.04,
+   "ram_moteur_ws_go": 7.8,
+   "ram_moteur_privee_go": 4.28,
+   "ram_systeme_delta_go": 8.1
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1772,
+    "ttft_s": 2.0,
+    "prompt_tok_s": 887.9
+   },
+   "generation_tok_s": 10.02,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.725
+  }
+ },
+ {
+  "moteur": "CUDA 12 (2.53.0)",
+  "gpu": "0.5",
+  "ok": true,
+  "load_s": 7.7,
+  "sortie": "Model loaded successfully in 7.42s.\n(8.40 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 4.06,
+   "ram_moteur_ws_go": 7.77,
+   "ram_moteur_privee_go": 5.27,
+   "ram_systeme_delta_go": 8.08
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1772,
+    "ttft_s": 1.42,
+    "prompt_tok_s": 1247.4
+   },
+   "generation_tok_s": 13.69,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.4
+  }
+ },
+ {
+  "moteur": "CUDA 12 (2.53.0)",
+  "gpu": "0.75",
+  "ok": true,
+  "load_s": 7.5,
+  "sortie": "Model loaded successfully in 7.20s.\n(8.40 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 5.07,
+   "ram_moteur_ws_go": 7.7,
+   "ram_moteur_privee_go": 6.23,
+   "ram_systeme_delta_go": 8.01
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1772,
+    "ttft_s": 1.08,
+    "prompt_tok_s": 1643.6
+   },
+   "generation_tok_s": 22.39,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.266
+  }
+ },
+ {
+  "moteur": "CUDA 12 (2.53.0)",
+  "gpu": "max",
+  "ok": true,
+  "load_s": 7.5,
+  "sortie": "Model loaded successfully in 7.17s.\n(8.40 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 6.2,
+   "ram_moteur_ws_go": 8.0,
+   "ram_moteur_privee_go": 7.3,
+   "ram_systeme_delta_go": 8.04
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1772,
+    "ttft_s": 0.47,
+    "prompt_tok_s": 3746.0
+   },
+   "generation_tok_s": 44.99,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.089
+  }
+ },
+ {
+  "moteur": "CUDA 12 (2.51.0)",
+  "gpu": "max",
+  "ok": true,
+  "load_s": 6.5,
+  "sortie": "Model loaded successfully in 6.15s.\n(8.40 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 6.21,
+   "ram_moteur_ws_go": 7.99,
+   "ram_moteur_privee_go": 7.29,
+   "ram_systeme_delta_go": 8.01
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1772,
+    "ttft_s": 0.49,
+    "prompt_tok_s": 3608.2
+   },
+   "generation_tok_s": 45.02,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.093
+  }
+ },
+ {
+  "moteur": "Vulkan (2.51.0)",
+  "gpu": "off",
+  "ok": true,
+  "load_s": 8.1,
+  "sortie": "Model loaded successfully in 7.80s.\n(8.40 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 1.23,
+   "ram_moteur_ws_go": 7.8,
+   "ram_moteur_privee_go": 2.15,
+   "ram_systeme_delta_go": 7.95
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1772,
+    "ttft_s": 12.46,
+    "prompt_tok_s": 142.3
+   },
+   "generation_tok_s": 8.45,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.899
+  }
+ },
+ {
+  "moteur": "Vulkan (2.51.0)",
+  "gpu": "0.5",
+  "ok": true,
+  "load_s": 9.1,
+  "sortie": "Model loaded successfully in 8.79s.\n(8.40 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 3.94,
+   "ram_moteur_ws_go": 7.79,
+   "ram_moteur_privee_go": 4.84,
+   "ram_systeme_delta_go": 7.93
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1772,
+    "ttft_s": 1.64,
+    "prompt_tok_s": 1077.6
+   },
+   "generation_tok_s": 13.02,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.548
+  }
+ },
+ {
+  "moteur": "Vulkan (2.51.0)",
+  "gpu": "max",
+  "ok": true,
+  "load_s": 7.2,
+  "sortie": "Model loaded successfully in 6.92s.\n(8.40 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 6.1,
+   "ram_moteur_ws_go": 7.81,
+   "ram_moteur_privee_go": 6.86,
+   "ram_systeme_delta_go": 7.83
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1772,
+    "ttft_s": 0.67,
+    "prompt_tok_s": 2659.4
+   },
+   "generation_tok_s": 46.03,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.193
+  }
+ },
+ {
+  "moteur": "CPU AVX2 (2.51.0)",
+  "gpu": "off",
+  "ok": true,
+  "load_s": 6.3,
+  "sortie": "Model loaded successfully in 5.99s.\n(8.40 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": -0.01,
+   "ram_moteur_ws_go": 8.62,
+   "ram_moteur_privee_go": 2.27,
+   "ram_systeme_delta_go": 8.74
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1772,
+    "ttft_s": 36.52,
+    "prompt_tok_s": 48.5
+   },
+   "generation_tok_s": 8.83,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.725
+  }
+ }
+]

@@ -1,0 +1,83 @@
+{
+ "tour1": {
+  "status": 200,
+  "secondes": 0.47,
+  "reponse": "noté",
+  "stats": {
+   "input_tokens": 27,
+   "total_output_tokens": 3,
+   "reasoning_output_tokens": 0,
+   "tokens_per_second": 38.23580017970826,
+   "time_to_first_token_seconds": 0.365019
+  },
+  "response_id": "resp_733b8b54b107b101c2c0d044d08d25813e9f22c6caf15bf9",
+  "cles": [
+   "model_instance_id",
+   "output",
+   "response_id",
+   "stats"
+  ]
+ },
+ "tour2_avec_id": {
+  "status": 200,
+  "reponse": "ZEBRE-42.",
+  "stats": {
+   "input_tokens": 53,
+   "total_output_tokens": 7,
+   "reasoning_output_tokens": 0,
+   "tokens_per_second": 42.47907905356611,
+   "time_to_first_token_seconds": 0.089161
+  },
+  "response_id": "resp_426ef29cb2d6e27f2fae2bb01f83345f560cc02cb2fbcae8"
+ },
+ "branche_depuis_tour1": {
+  "status": 200,
+  "reponse": "zebra-42",
+  "stats": {
+   "input_tokens": 48,
+   "total_output_tokens": 5,
+   "reasoning_output_tokens": 0,
+   "tokens_per_second": 42.01106991692311,
+   "time_to_first_token_seconds": 0.087033
+  },
+  "response_id": "resp_4f5f9924fe601ce737fd74de1df5fa5ca5347215da17676f"
+ },
+ "tour3_apres_tour2": {
+  "status": 200,
+  "reponse": "Votre toute première question était : \"Retiens ce code : ZEBRE-42. Réponds seulement : noté.\"",
+  "stats": {
+   "input_tokens": 76,
+   "total_output_tokens": 26,
+   "reasoning_output_tokens": 0,
+   "tokens_per_second": 44.48192788233997,
+   "time_to_first_token_seconds": 0.09035699999999999
+  }
+ },
+ "sans_previous_response_id": {
+  "status": 200,
+  "reponse": "Je suis désolé, mais **vous ne m'avez pas donné de code à retenir** dans notre conversation actuelle.\n\nPourriez-vous me rappeler quel était ce code ou quelle information vous souhaitez que je retienne ? 😊",
+  "stats": {
+   "input_tokens": 23,
+   "total_output_tokens": 48,
+   "reasoning_output_tokens": 0,
+   "tokens_per_second": 44.606123186927185,
+   "time_to_first_token_seconds": 0.058891
+  }
+ },
+ "store_false": {
+  "status": 200,
+  "reponse": "Bonjour.",
+  "response_id_present": false
+ },
+ "id_inconnu": {
+  "status": 400,
+  "corps": {
+   "error": {
+    "message": "Could not find stored response for previous_response_id 'resp_inexistant'. Please ensure the ID is correct. Current previous response auto-deletion policy: Responses older than 30 days are automatically deleted.",
+    "type": "invalid_request",
+    "param": "previous_response_id",
+    "code": "invalid_value"
+   }
+  }
+ }
+}

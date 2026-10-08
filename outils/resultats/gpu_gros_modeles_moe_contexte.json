@@ -1,0 +1,95 @@
+[
+ {
+  "essai": "26B A4B, auto, ctx 32768",
+  "modele": "google/gemma-4-26b-a4b",
+  "gpu": null,
+  "ctx": 32768,
+  "estimation_cli": "Estimated GPU Memory:   19.85 GiB | Estimated Total Memory: 19.85 GiB",
+  "ok": true,
+  "load_s": 16.5,
+  "sortie": "Model loaded successfully in 16.20s.\n(16.76 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 12.69,
+   "ram_moteur_ws_go": 16.07,
+   "ram_moteur_privee_go": 13.9,
+   "ram_systeme_delta_go": 16.42
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1776,
+    "ttft_s": 1.96,
+    "prompt_tok_s": 907.7
+   },
+   "prompt_6000": {
+    "tokens": 5301,
+    "ttft_s": 3.0,
+    "prompt_tok_s": 1766.0
+   },
+   "generation_tok_s": 36.58,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.477
+  }
+ },
+ {
+  "essai": "26B A4B, auto, ctx 131072",
+  "modele": "google/gemma-4-26b-a4b",
+  "gpu": null,
+  "ctx": 131072,
+  "estimation_cli": "Estimated GPU Memory:   27.62 GiB | Estimated Total Memory: 27.62 GiB",
+  "ok": true,
+  "load_s": 11.6,
+  "sortie": "Model loaded successfully in 11.35s.\n(16.76 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 14.39,
+   "ram_moteur_ws_go": 16.54,
+   "ram_moteur_privee_go": 16.08,
+   "ram_systeme_delta_go": 16.97
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1776,
+    "ttft_s": 1.87,
+    "prompt_tok_s": 948.9
+   },
+   "prompt_6000": {
+    "tokens": 5301,
+    "ttft_s": 2.97,
+    "prompt_tok_s": 1784.1
+   },
+   "generation_tok_s": 36.92,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.454
+  }
+ },
+ {
+  "essai": "26B A4B, auto, ctx 262144",
+  "modele": "google/gemma-4-26b-a4b",
+  "gpu": null,
+  "ctx": 262144,
+  "estimation_cli": "Estimated GPU Memory:   37.97 GiB | Estimated Total Memory: 37.97 GiB",
+  "ok": true,
+  "load_s": 12.2,
+  "sortie": "Model loaded successfully in 11.89s.\n(16.76 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 15.2,
+   "ram_moteur_ws_go": 18.93,
+   "ram_moteur_privee_go": 19.35,
+   "ram_systeme_delta_go": 19.3
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1776,
+    "ttft_s": 3.28,
+    "prompt_tok_s": 540.7
+   },
+   "prompt_6000": {
+    "tokens": 5301,
+    "ttft_s": 5.94,
+    "prompt_tok_s": 892.7
+   },
+   "generation_tok_s": 36.55,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.478
+  }
+ }
+]

@@ -5,7 +5,7 @@ température 0,7 ; le script vérifie : outil attendu appelé, arguments conform
 Aucun outil n'est exécuté (la mesure porte sur la décision et le format de l'appel).
 
 Usage : python mesure_outils_fiabilite.py <identifiant_modele> [N]
-Sortie : outils/resultats/lot2_outils_<modele>.json
+Sortie : outils/resultats/lot2_outils_<modele>.json (dossier modifiable par la variable RESULTATS_DIR)
 """
 import json
 import os
@@ -130,5 +130,5 @@ synthese = {"modele": MODELE, "difficile": DIFFICILE, "outils_declares": len(OUT
             "secondes_moyennes": round(sum(r["secondes"] for r in resultats) / total, 1)}
 print(json.dumps(synthese, ensure_ascii=False))
 nom = re.sub(r"[^a-z0-9]+", "_", MODELE.lower()).strip("_") + ("_difficile" if DIFFICILE else "")
-with open(os.path.join(ICI, "resultats", f"lot2_outils_{nom}.json"), "w", encoding="utf-8") as f:
+with open(os.path.join(os.environ.get("RESULTATS_DIR") or os.path.join(ICI, "resultats"), f"lot2_outils_{nom}.json"), "w", encoding="utf-8") as f:
     json.dump({"synthese": synthese, "essais": resultats}, f, ensure_ascii=False, indent=1)

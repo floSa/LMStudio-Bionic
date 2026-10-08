@@ -1,0 +1,67 @@
+{
+ "version": {
+  "version": "0.4.25",
+  "build": 1
+ },
+ "modeles": [
+  {
+   "cle": "qwen/qwen3.8-27b",
+   "type": "llm",
+   "taille_go": 16.52
+  },
+  {
+   "cle": "google/gemma-4-e4b",
+   "type": "llm",
+   "taille_go": 8.4
+  },
+  {
+   "cle": "allenai/olmocr-2-7b",
+   "type": "llm",
+   "taille_go": 5.62
+  },
+  {
+   "cle": "google/gemma-4-26b-a4b",
+   "type": "llm",
+   "taille_go": 16.76
+  },
+  {
+   "cle": "text-embedding-nomic-embed-text-v1.5",
+   "type": "embedding",
+   "taille_go": 0.08
+  }
+ ],
+ "generation": {
+  "texte": "Here's a thinking process to arrive at the suggested answer:\n\n1.  **Analyze the Request:** The user is asking, \"What is the purpose of a KV cache?\" (À quoi sert le cache KV?).\n2.  **Constraint:** The ",
+  "secondes": 8.761,
+  "stats": {
+   "stopReason": "eosFound",
+   "tokensPerSecond": 44.79547028204507,
+   "timeToFirstTokenSec": 0.150743,
+   "totalTimeSec": 8.745362000000002,
+   "promptTokensCount": 29,
+   "predictedTokensCount": 386,
+   "totalTokensCount": 415
+  }
+ },
+ "structure": {
+  "erreur_sdk": "Failed to parse structured output: \"Thinking Process:\\n\\n1.  **Analyze the Reque",
+  "json_apres_marqueur": {
+   "numero": "F-2026-0042",
+   "total_ttc": 3060
+  }
+ },
+ "agent": {
+  "appels": [
+   {
+    "valeur": 100,
+    "de": "C",
+    "vers": "F"
+   }
+  ],
+  "secondes": 3.38,
+  "tours": 2
+ },
+ "embeddings": {
+  "dimension": 768
+ }
+}

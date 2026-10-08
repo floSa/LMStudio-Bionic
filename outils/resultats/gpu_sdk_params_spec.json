@@ -1,0 +1,144 @@
+[
+ {
+  "essai": "E4B sans décodage spéculatif",
+  "modele": "google/gemma-4-e4b",
+  "config": {
+   "contextLength": 8192
+  },
+  "ok": true,
+  "load_s": 6.1,
+  "sdk": {
+   "ok": true,
+   "secondes": 5.921,
+   "identifiant": "bench",
+   "contexte": 8192,
+   "config": {
+    "contextLength": 8192
+   }
+  },
+  "memoire": {
+   "vram_go": 6.26,
+   "ram_moteur_ws_go": 8.01,
+   "ram_moteur_privee_go": 7.37,
+   "ram_systeme_delta_go": 8.1
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1772,
+    "ttft_s": 0.48,
+    "prompt_tok_s": 3711.4
+   },
+   "prompt_6000": {
+    "tokens": 5297,
+    "ttft_s": 0.81,
+    "prompt_tok_s": 6554.2
+   },
+   "generation_tok_s": 47.43,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.099
+  }
+ },
+ {
+  "essai": "E4B, décodage spéculatif MTP",
+  "modele": "google/gemma-4-e4b",
+  "config": {
+   "contextLength": 8192,
+   "speculativeDraftMtp": true
+  },
+  "ok": false,
+  "load_s": 0.3,
+  "sdk": {
+   "ok": false,
+   "secondes": 0.155,
+   "erreur": "MTP speculative decoding requires a GGUF model with a bundled supported MTP head. ",
+   "config": {
+    "contextLength": 8192,
+    "speculativeDraftMtp": true
+   }
+  }
+ },
+ {
+  "essai": "26B A4B (auto) sans décodage spéculatif",
+  "modele": "google/gemma-4-26b-a4b",
+  "config": {
+   "contextLength": 8192
+  },
+  "ok": true,
+  "load_s": 9.8,
+  "sdk": {
+   "ok": true,
+   "secondes": 9.585,
+   "identifiant": "bench",
+   "contexte": 8192,
+   "config": {
+    "contextLength": 8192
+   }
+  },
+  "memoire": {
+   "vram_go": 12.5,
+   "ram_moteur_ws_go": 16.19,
+   "ram_moteur_privee_go": 13.84,
+   "ram_systeme_delta_go": 16.03
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1776,
+    "ttft_s": 1.89,
+    "prompt_tok_s": 939.3
+   },
+   "prompt_6000": {
+    "tokens": 5301,
+    "ttft_s": 3.16,
+    "prompt_tok_s": 1678.1
+   },
+   "generation_tok_s": 36.67,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.431
+  }
+ },
+ {
+  "essai": "26B A4B (auto) avec brouillon E4B (Draft Simple)",
+  "modele": "google/gemma-4-26b-a4b",
+  "config": {
+   "contextLength": 8192,
+   "speculativeDraftSimple": true,
+   "speculativeDraftModel": "google/gemma-4-e4b",
+   "speculativeDraftMaxTokens": 8
+  },
+  "ok": true,
+  "load_s": 14.8,
+  "sdk": {
+   "ok": true,
+   "secondes": 14.583,
+   "identifiant": "bench",
+   "contexte": 8192,
+   "config": {
+    "contextLength": 8192,
+    "speculativeDraftSimple": true,
+    "speculativeDraftModel": "google/gemma-4-e4b",
+    "speculativeDraftMaxTokens": 8
+   }
+  },
+  "memoire": {
+   "vram_go": 15.22,
+   "ram_moteur_ws_go": 19.48,
+   "ram_moteur_privee_go": 19.18,
+   "ram_systeme_delta_go": 19.89
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1776,
+    "ttft_s": 6.51,
+    "prompt_tok_s": 272.9
+   },
+   "prompt_6000": {
+    "tokens": 5301,
+    "ttft_s": 13.87,
+    "prompt_tok_s": 382.2
+   },
+   "generation_tok_s": 3.59,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.709
+  }
+ }
+]

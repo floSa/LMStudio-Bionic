@@ -1,0 +1,148 @@
+[
+ {
+  "essai": "Qwen3.8 27B (auto) sans décodage spéculatif",
+  "modele": "qwen/qwen3.8-27b",
+  "config": {
+   "contextLength": 8192
+  },
+  "ok": true,
+  "load_s": 14.5,
+  "sdk": {
+   "ok": true,
+   "secondes": 14.344,
+   "identifiant": "bench",
+   "contexte": 8192,
+   "config": {
+    "contextLength": 8192
+   }
+  },
+  "memoire": {
+   "vram_go": 14.95,
+   "ram_moteur_ws_go": 19.22,
+   "ram_moteur_privee_go": 20.42,
+   "ram_systeme_delta_go": 19.27
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1891,
+    "ttft_s": 27.5,
+    "prompt_tok_s": 68.8
+   },
+   "generation_tok_s": 10.07,
+   "generation_tokens": 200,
+   "ttft_court_s": 1.062
+  }
+ },
+ {
+  "essai": "Qwen3.8 27B (auto), MTP, 2 jetons brouillon max",
+  "modele": "qwen/qwen3.8-27b",
+  "config": {
+   "contextLength": 8192,
+   "speculativeDraftMtp": true,
+   "speculativeDraftMaxTokens": 2
+  },
+  "ok": true,
+  "load_s": 11.7,
+  "sdk": {
+   "ok": true,
+   "secondes": 11.476,
+   "identifiant": "bench",
+   "contexte": 8192,
+   "config": {
+    "contextLength": 8192,
+    "speculativeDraftMtp": true,
+    "speculativeDraftMaxTokens": 2
+   }
+  },
+  "memoire": {
+   "vram_go": 15.09,
+   "ram_moteur_ws_go": 18.57,
+   "ram_moteur_privee_go": 19.8,
+   "ram_systeme_delta_go": 18.95
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1891,
+    "ttft_s": 27.06,
+    "prompt_tok_s": 69.9
+   },
+   "generation_tok_s": 11.56,
+   "generation_tokens": 200,
+   "ttft_court_s": 1.169
+  }
+ },
+ {
+  "essai": "Qwen3.8 27B (auto), MTP, 4 jetons brouillon max",
+  "modele": "qwen/qwen3.8-27b",
+  "config": {
+   "contextLength": 8192,
+   "speculativeDraftMtp": true,
+   "speculativeDraftMaxTokens": 4
+  },
+  "ok": true,
+  "load_s": 11.9,
+  "sdk": {
+   "ok": true,
+   "secondes": 11.673,
+   "identifiant": "bench",
+   "contexte": 8192,
+   "config": {
+    "contextLength": 8192,
+    "speculativeDraftMtp": true,
+    "speculativeDraftMaxTokens": 4
+   }
+  },
+  "memoire": {
+   "vram_go": 15.11,
+   "ram_moteur_ws_go": 19.83,
+   "ram_moteur_privee_go": 21.03,
+   "ram_systeme_delta_go": 20.23
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1891,
+    "ttft_s": 27.5,
+    "prompt_tok_s": 68.8
+   },
+   "generation_tok_s": 9.3,
+   "generation_tokens": 200,
+   "ttft_court_s": 1.071
+  }
+ },
+ {
+  "essai": "Qwen3.8 27B (auto), MTP, réglages par défaut",
+  "modele": "qwen/qwen3.8-27b",
+  "config": {
+   "contextLength": 8192,
+   "speculativeDraftMtp": true
+  },
+  "ok": true,
+  "load_s": 11.3,
+  "sdk": {
+   "ok": true,
+   "secondes": 11.129,
+   "identifiant": "bench",
+   "contexte": 8192,
+   "config": {
+    "contextLength": 8192,
+    "speculativeDraftMtp": true
+   }
+  },
+  "memoire": {
+   "vram_go": 15.13,
+   "ram_moteur_ws_go": 19.22,
+   "ram_moteur_privee_go": 20.43,
+   "ram_systeme_delta_go": 19.63
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1891,
+    "ttft_s": 36.24,
+    "prompt_tok_s": 52.2
+   },
+   "generation_tok_s": 8.66,
+   "generation_tokens": 200,
+   "ttft_court_s": 1.224
+  }
+ }
+]

@@ -1,0 +1,20 @@
+{
+ "1288px": {
+  "content": "# SOCIÉTÉ EXEMPLE SAS\n\n12 rue des Tests, 75000 Paris - SIRET 123 456 789 00012\n\n## FACTURE N° F-2026-0042\n\nDate : 06/10/2026 Échéance : 05/11/2026\n\nClient : Atelier Démo SARL\n\n| Désignation | Qté | PU HT | Total HT |\n| :--- | :---: | :---: | :---: |\n| Audit de configuration | 2 | 450,00 € | 900,00 € |\n| Formation prise en main | 1 | 1 200,00 € | 1 200,00 € |\n| Support mensuel | 3 | 150,00 € | 450,00 € |\n\nTotal HT : 2 550,00 €\nTVA 20 % : 510,00 €\n**Total TTC : 3 060,00 €**\n\nPaiement par virement sous 30 jours. Pénalités de retard : 3 fois le taux légal.",
+  "reasoning": "",
+  "finish": "stop",
+  "prompt_tokens": 548,
+  "completion_tokens": 288,
+  "seconds": 7.77,
+  "tok_s_global": 37.05
+ },
+ "640px": {
+  "content": "# SOCIÉTÉ EXEMPLE SAS\n\n12 rue des Tests, 75000 Paris - SIRET 123 456 789 00012\n\n## FACTURE N° F-2026-0042\n\nDate : 06/10/2026\nÉchéance : 05/11/2026\n\nClient : Atelier Démo SARL\n\n| Désignation | Qté | PU HT | Total HT |\n| :--- | :---: | :---: | :---: |\n| Audit de configuration | 2 | 450,00 € | 900,00 € |\n| Formation prise en main | 1 | 1 200,00 € | 1 200,00 € |\n| Support mensuel | 3 | 150,00 € | 450,00 € |\n\nTotal HT : 2 550,00 €\nTVA 20 % : 510,00 €\n**Total TTC : 3 060,00 €**\n\nPaiement par virement sous 30 jours. Pénalités de retard : 3 fois le taux légal.",
+  "reasoning": "",
+  "finish": "stop",
+  "prompt_tokens": 152,
+  "completion_tokens": 289,
+  "seconds": 6.72,
+  "tok_s_global": 42.99
+ }
+}

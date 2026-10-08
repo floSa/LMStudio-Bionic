@@ -1,0 +1,160 @@
+[
+ {
+  "essai": "sans décodage spéculatif",
+  "extra": [
+   "--no-speculative-draft-mtp"
+  ],
+  "ok": true,
+  "load_s": 10.4,
+  "sortie": "Model loaded successfully in 10.04s.\n(16.52 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 15.09,
+   "ram_moteur_ws_go": 16.57,
+   "ram_moteur_privee_go": 17.46,
+   "ram_systeme_delta_go": 16.95
+  },
+  "generation": {
+   "prose": [
+    10.51,
+    10.5
+   ],
+   "code": [
+    10.51,
+    10.51
+   ]
+  }
+ },
+ {
+  "essai": "MTP, brouillon max 2",
+  "extra": [
+   "--speculative-draft-mtp",
+   "--speculative-draft-max-tokens",
+   "2"
+  ],
+  "ok": true,
+  "load_s": 11.6,
+  "sortie": "Model loaded successfully in 11.27s.\n(16.52 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 15.11,
+   "ram_moteur_ws_go": 18.63,
+   "ram_moteur_privee_go": 19.82,
+   "ram_systeme_delta_go": 19.03
+  },
+  "generation": {
+   "prose": [
+    9.89,
+    9.65
+   ],
+   "code": [
+    11.74,
+    11.68
+   ]
+  }
+ },
+ {
+  "essai": "MTP, brouillon max 3",
+  "extra": [
+   "--speculative-draft-mtp",
+   "--speculative-draft-max-tokens",
+   "3"
+  ],
+  "ok": true,
+  "load_s": 11.4,
+  "sortie": "Model loaded successfully in 11.11s.\n(16.52 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 15.13,
+   "ram_moteur_ws_go": 19.19,
+   "ram_moteur_privee_go": 20.41,
+   "ram_systeme_delta_go": 19.61
+  },
+  "generation": {
+   "prose": [
+    8.75,
+    8.74
+   ],
+   "code": [
+    11.76,
+    11.72
+   ]
+  }
+ },
+ {
+  "essai": "MTP, brouillon max 4",
+  "extra": [
+   "--speculative-draft-mtp",
+   "--speculative-draft-max-tokens",
+   "4"
+  ],
+  "ok": true,
+  "load_s": 11.7,
+  "sortie": "Model loaded successfully in 11.39s.\n(16.52 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 15.11,
+   "ram_moteur_ws_go": 19.82,
+   "ram_moteur_privee_go": 21.03,
+   "ram_systeme_delta_go": 20.24
+  },
+  "generation": {
+   "prose": [
+    9.35,
+    9.26
+   ],
+   "code": [
+    13.78,
+    13.75
+   ]
+  }
+ },
+ {
+  "essai": "MTP, brouillon max 8",
+  "extra": [
+   "--speculative-draft-mtp",
+   "--speculative-draft-max-tokens",
+   "8"
+  ],
+  "ok": true,
+  "load_s": 13.0,
+  "sortie": "Model loaded successfully in 12.69s.\n(16.52 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 15.12,
+   "ram_moteur_ws_go": 22.28,
+   "ram_moteur_privee_go": 23.5,
+   "ram_systeme_delta_go": 22.71
+  },
+  "generation": {
+   "prose": [
+    6.17,
+    6.18
+   ],
+   "code": [
+    11.57,
+    10.4
+   ]
+  }
+ },
+ {
+  "essai": "MTP, réglages par défaut",
+  "extra": [
+   "--speculative-draft-mtp"
+  ],
+  "ok": true,
+  "load_s": 12.5,
+  "sortie": "Model loaded successfully in 12.19s.\n(16.52 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 15.05,
+   "ram_moteur_ws_go": 19.3,
+   "ram_moteur_privee_go": 20.41,
+   "ram_systeme_delta_go": 18.95
+  },
+  "generation": {
+   "prose": [
+    8.05,
+    8.17
+   ],
+   "code": [
+    10.74,
+    10.76
+   ]
+  }
+ }
+]

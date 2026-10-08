@@ -1,0 +1,38 @@
+{
+ "id": "chatcmpl-rmf34curtknu17i0hok5oj",
+ "object": "chat.completion",
+ "created": 1791395132,
+ "model": "google/gemma-4-e4b",
+ "choices": [
+  {
+   "index": 0,
+   "message": {
+    "role": "assistant",
+    "content": "",
+    "reasoning_content": "",
+    "tool_calls": [
+     {
+      "type": "function",
+      "id": "Yr7Lqh68cnV7RR6MWH4MjLAuEGV0pgCV",
+      "function": {
+       "name": "get_meteo",
+       "arguments": "{\"ville\":\"Lyon\"}"
+      }
+     }
+    ]
+   },
+   "logprobs": null,
+   "finish_reason": "tool_calls"
+  }
+ ],
+ "usage": {
+  "prompt_tokens": 69,
+  "completion_tokens": 16,
+  "total_tokens": 85,
+  "completion_tokens_details": {
+   "reasoning_tokens": 0
+  }
+ },
+ "stats": {},
+ "system_fingerprint": "google/gemma-4-e4b"
+}

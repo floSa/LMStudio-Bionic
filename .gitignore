@@ -12,3 +12,6 @@ _tmp*/
 *.tmp
 Thumbs.db
 desktop.ini
+
+# Dépendances Node (SDK de LM Studio)
+node_modules/

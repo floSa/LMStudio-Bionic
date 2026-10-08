@@ -6,7 +6,7 @@ import base64, io, json, os, sys, time, urllib.request, urllib.error
 
 BASE = "http://127.0.0.1:1234"
 MODEL = "google/gemma-4-e4b"
-OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "resultats")
+OUT = os.environ.get("RESULTATS_DIR") or os.path.join(os.path.dirname(os.path.abspath(__file__)), "resultats")
 os.makedirs(OUT, exist_ok=True)
 NOTHINK = {"reasoning_effort": "none"}
 

@@ -1,0 +1,90 @@
+[
+ {
+  "essai": "E4B Q8_0, ctx 8192",
+  "modele": "google/gemma-4-e4b",
+  "gpu": "max",
+  "ctx": 8192,
+  "estimation_cli": "Estimated GPU Memory:   9.10 GiB | Estimated Total Memory: 9.10 GiB",
+  "ok": true,
+  "load_s": 7.2,
+  "sortie": "Model loaded successfully in 6.89s.\n(8.40 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 6.21,
+   "ram_moteur_ws_go": 8.0,
+   "ram_moteur_privee_go": 7.31,
+   "ram_systeme_delta_go": 8.13
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1772,
+    "ttft_s": 0.46,
+    "prompt_tok_s": 3858.7
+   },
+   "generation_tok_s": 47.37,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.088
+  }
+ },
+ {
+  "essai": "E4B Q8_0, ctx 32768",
+  "modele": "google/gemma-4-e4b",
+  "gpu": "max",
+  "ctx": 32768,
+  "estimation_cli": "Estimated GPU Memory:   10.44 GiB | Estimated Total Memory: 10.44 GiB",
+  "ok": true,
+  "load_s": 7.2,
+  "sortie": "Model loaded successfully in 6.88s.\n(8.40 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 6.6,
+   "ram_moteur_ws_go": 8.03,
+   "ram_moteur_privee_go": 7.73,
+   "ram_systeme_delta_go": 8.05
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1772,
+    "ttft_s": 0.46,
+    "prompt_tok_s": 3886.8
+   },
+   "prompt_6000": {
+    "tokens": 5297,
+    "ttft_s": 0.78,
+    "prompt_tok_s": 6803.9
+   },
+   "generation_tok_s": 47.03,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.098
+  }
+ },
+ {
+  "essai": "E4B Q8_0, ctx 131072",
+  "modele": "google/gemma-4-e4b",
+  "gpu": "max",
+  "ctx": 131072,
+  "estimation_cli": "Estimated GPU Memory:   15.77 GiB | Estimated Total Memory: 15.77 GiB",
+  "ok": true,
+  "load_s": 7.4,
+  "sortie": "Model loaded successfully in 7.14s.\n(8.40 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 8.2,
+   "ram_moteur_ws_go": 8.13,
+   "ram_moteur_privee_go": 9.42,
+   "ram_systeme_delta_go": 8.15
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1772,
+    "ttft_s": 0.46,
+    "prompt_tok_s": 3867.9
+   },
+   "prompt_6000": {
+    "tokens": 5297,
+    "ttft_s": 0.78,
+    "prompt_tok_s": 6798.9
+   },
+   "generation_tok_s": 47.37,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.099
+  }
+ }
+]

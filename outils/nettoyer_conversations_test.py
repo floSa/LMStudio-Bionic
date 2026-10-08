@@ -8,7 +8,8 @@ NOMS = ["Explique en trois ph", "Multiplication simple expliquée", "Multiplicat
         "Multiplication Mathématiques Simple", "Quantification de LLMs expliquée", "Transcris fidèlement",
         "Glossaire LM Studio Définitions", "Invoice Transcription Formatting", "Facturation Service B2B",
         "Facture analyse des coûts", "Invoice Line Item Analysis",
-        "Celsius to Fahrenheit Conversion", "LM Studio API Request Flow"]   # lot 2 : conversation de test des outils MCP
+        "Celsius to Fahrenheit Conversion", "LM Studio API Request Flow",
+        "Calcul de Remise"]   # lot 2 : conversation de test des outils MCP
 
 lm = LM(width=1440, height=900)
 lm.close_dialogs(); lm.click_xy(21, 90); lm.wait(1.5)

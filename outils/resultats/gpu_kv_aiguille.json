@@ -1,0 +1,50 @@
+[
+ {
+  "K": "f16",
+  "V": "f16",
+  "tokens_cibles": 30000,
+  "reponse": "AZ-7741-QUARTZ",
+  "trouve": true,
+  "prompt_tokens": 26451
+ },
+ {
+  "K": "f16",
+  "V": "f16",
+  "tokens_cibles": 50000,
+  "reponse": "AZ-7741-QUARTZ",
+  "trouve": true,
+  "prompt_tokens": 44151
+ },
+ {
+  "K": "q8_0",
+  "V": "q8_0",
+  "tokens_cibles": 30000,
+  "reponse": "AZ-7741-QUARTZ",
+  "trouve": true,
+  "prompt_tokens": 26451
+ },
+ {
+  "K": "q8_0",
+  "V": "q8_0",
+  "tokens_cibles": 50000,
+  "reponse": "AZ-7741-QUARTZ",
+  "trouve": true,
+  "prompt_tokens": 44151
+ },
+ {
+  "K": "q4_0",
+  "V": "q4_0",
+  "tokens_cibles": 30000,
+  "reponse": "AZ-7741-QUARTZ",
+  "trouve": true,
+  "prompt_tokens": 26451
+ },
+ {
+  "K": "q4_0",
+  "V": "q4_0",
+  "tokens_cibles": 50000,
+  "reponse": "AZ-7741-QUARTZ",
+  "trouve": true,
+  "prompt_tokens": 44151
+ }
+]

@@ -19,7 +19,7 @@ import serveur_mcp_demo as srv  # noqa: E402
 BASE = os.environ.get("LMSTUDIO_URL", "http://127.0.0.1:1234")
 TOKEN = os.environ.get("LMSTUDIO_TOKEN")
 MODELE = sys.argv[2] if len(sys.argv) > 2 else "google/gemma-4-e4b"
-SORTIE = os.path.join(ICI, "resultats")
+SORTIE = os.environ.get("RESULTATS_DIR") or os.path.join(ICI, "resultats")
 
 
 def api(chemin, corps=None, entetes=None, flux=False, methode=None, timeout=600):

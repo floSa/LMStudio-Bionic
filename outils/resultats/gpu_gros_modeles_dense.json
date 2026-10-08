@@ -1,0 +1,132 @@
+[
+ {
+  "essai": "Qwen3.8 27B, offload automatique",
+  "modele": "qwen/qwen3.8-27b",
+  "gpu": null,
+  "ctx": 8192,
+  "estimation_cli": "Estimated GPU Memory:   19.24 GiB | Estimated Total Memory: 19.24 GiB",
+  "ok": true,
+  "load_s": 19.1,
+  "sortie": "Model loaded successfully in 18.83s.\n(16.52 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 14.97,
+   "ram_moteur_ws_go": 17.51,
+   "ram_moteur_privee_go": 18.63,
+   "ram_systeme_delta_go": 17.82
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1891,
+    "ttft_s": 3.61,
+    "prompt_tok_s": 524.4
+   },
+   "generation_tok_s": 18.75,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.66
+  }
+ },
+ {
+  "essai": "Qwen3.8 27B, offload max",
+  "modele": "qwen/qwen3.8-27b",
+  "gpu": "max",
+  "ctx": 8192,
+  "estimation_cli": "Estimated GPU Memory:   19.24 GiB | Estimated Total Memory: 19.24 GiB",
+  "ok": true,
+  "load_s": 11.4,
+  "sortie": "Model loaded successfully in 11.09s.\n(16.52 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 15.09,
+   "ram_moteur_ws_go": 18.76,
+   "ram_moteur_privee_go": 19.74,
+   "ram_systeme_delta_go": 19.02
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1891,
+    "ttft_s": 25.12,
+    "prompt_tok_s": 75.3
+   },
+   "generation_tok_s": 12.15,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.849
+  }
+ },
+ {
+  "essai": "Qwen3.8 27B, offload 0.75",
+  "modele": "qwen/qwen3.8-27b",
+  "gpu": "0.75",
+  "ctx": 8192,
+  "estimation_cli": "Estimated GPU Memory:   19.24 GiB | Estimated Total Memory: 19.24 GiB",
+  "ok": true,
+  "load_s": 10.6,
+  "sortie": "Model loaded successfully in 10.33s.\n(16.52 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 13.83,
+   "ram_moteur_ws_go": 16.23,
+   "ram_moteur_privee_go": 16.16,
+   "ram_systeme_delta_go": 16.62
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1891,
+    "ttft_s": 4.22,
+    "prompt_tok_s": 447.6
+   },
+   "generation_tok_s": 11.06,
+   "generation_tokens": 200,
+   "ttft_court_s": 1.344
+  }
+ },
+ {
+  "essai": "Qwen3.8 27B, offload 0.5",
+  "modele": "qwen/qwen3.8-27b",
+  "gpu": "0.5",
+  "ctx": 8192,
+  "estimation_cli": "Estimated GPU Memory:   19.24 GiB | Estimated Total Memory: 19.24 GiB",
+  "ok": true,
+  "load_s": 11.1,
+  "sortie": "Model loaded successfully in 10.82s.\n(16.52 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 9.98,
+   "ram_moteur_ws_go": 16.5,
+   "ram_moteur_privee_go": 12.58,
+   "ram_systeme_delta_go": 16.84
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1891,
+    "ttft_s": 6.04,
+    "prompt_tok_s": 313.2
+   },
+   "generation_tok_s": 6.54,
+   "generation_tokens": 200,
+   "ttft_court_s": 1.834
+  }
+ },
+ {
+  "essai": "Qwen3.8 27B, offload off",
+  "modele": "qwen/qwen3.8-27b",
+  "gpu": "off",
+  "ctx": 8192,
+  "estimation_cli": "Estimated GPU Memory:   19.24 GiB | Estimated Total Memory: 19.24 GiB",
+  "ok": true,
+  "load_s": 12.5,
+  "sortie": "Model loaded successfully in 12.18s.\n(16.52 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 1.52,
+   "ram_moteur_ws_go": 17.01,
+   "ram_moteur_privee_go": 4.6,
+   "ram_systeme_delta_go": 17.35
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1891,
+    "ttft_s": 9.87,
+    "prompt_tok_s": 191.6
+   },
+   "generation_tok_s": 3.29,
+   "generation_tokens": 200,
+   "ttft_court_s": 3.315
+  }
+ }
+]

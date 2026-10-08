@@ -1,0 +1,25 @@
+{
+ "max_tokens=15": {
+  "content": "## Le Fonctionnement d'une Turbine à Vapeur : Une Description D",
+  "reasoning": "",
+  "finish": "length",
+  "prompt_tokens": 20,
+  "completion_tokens": 15,
+  "seconds": 0.44,
+  "tok_s_global": 34.45
+ },
+ "stop=['2.']": {
+  "content": "Voici 5 conseils essentiels pour bien écrire un rapport technique :\n\n1. **Définir clairement l'objectif et le public cible dès le départ.** Avant de rédiger la première phrase, sachez *pourquoi* vous écrivez ce rapport (résoudre un problème, présenter des résultats, proposer une solution) et *à qui* il est destiné (experts techniques, managers non-spécialistes, clients). Cela dictera votre niveau de jargon, le détail des explications nécessaires et la structure globale.\n",
+  "reasoning": "",
+  "finish": "stop",
+  "prompt_tokens": 35,
+  "completion_tokens": 108,
+  "seconds": 2.7,
+  "tok_s_global": 40.03
+ },
+ "seed_repeat": [
+  "Voici plusieurs suggestions de noms originaux pour un robot ménager, classées par **style** pour",
+  "Voici plusieurs suggestions de noms originaux pour un robot ménager, classées par **style** pour",
+  "Voici plusieurs suggestions de noms originaux pour un robot ménager, classées par **style** pour"
+ ]
+}

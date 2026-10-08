@@ -1,0 +1,54 @@
+{
+ "off": {
+  "secondes": 0.23,
+  "reflexion_tokens": 0,
+  "sortie_tokens": 4,
+  "reponse": "391",
+  "types": [
+   "message"
+  ]
+ },
+ "low": {
+  "status": 400,
+  "corps": {
+   "error": {
+    "message": "Reasoning setting 'low' is not supported by model 'google/gemma-4-e4b'. Supported settings: 'off', 'on'.",
+    "type": "invalid_request",
+    "param": "reasoning",
+    "code": "invalid_value"
+   }
+  }
+ },
+ "medium": {
+  "status": 400,
+  "corps": {
+   "error": {
+    "message": "Reasoning setting 'medium' is not supported by model 'google/gemma-4-e4b'. Supported settings: 'off', 'on'.",
+    "type": "invalid_request",
+    "param": "reasoning",
+    "code": "invalid_value"
+   }
+  }
+ },
+ "high": {
+  "status": 400,
+  "corps": {
+   "error": {
+    "message": "Reasoning setting 'high' is not supported by model 'google/gemma-4-e4b'. Supported settings: 'off', 'on'.",
+    "type": "invalid_request",
+    "param": "reasoning",
+    "code": "invalid_value"
+   }
+  }
+ },
+ "on": {
+  "secondes": 3.22,
+  "reflexion_tokens": 122,
+  "sortie_tokens": 130,
+  "reponse": "391",
+  "types": [
+   "reasoning",
+   "message"
+  ]
+ }
+}

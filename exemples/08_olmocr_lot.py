@@ -56,7 +56,9 @@ def pivoter(png_bytes, degres):
     except ImportError:
         print("   (Pillow absent : rotation automatique impossible)")
         return png_bytes
-    img = Image.open(io.BytesIO(png_bytes)).rotate(-degres, expand=True)   # rotation_correction : sens horaire
+    # Constat (7 oct. 2026) : une page tournée de 90° dans le sens horaire est signalée « rotation_correction: 90 » ; la remettre à l'endroit
+    # demande une rotation de 90° dans le sens ANTI-horaire (sens de PIL), donc +degres (la rotation « horaire » doublait l'erreur).
+    img = Image.open(io.BytesIO(png_bytes)).rotate(degres, expand=True)
     out = io.BytesIO()
     img.save(out, format="PNG")
     return out.getvalue()

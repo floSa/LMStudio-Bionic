@@ -1,0 +1,132 @@
+[
+ {
+  "essai": "26B A4B, offload automatique",
+  "modele": "google/gemma-4-26b-a4b",
+  "gpu": null,
+  "ctx": 8192,
+  "estimation_cli": "Estimated GPU Memory:   17.91 GiB | Estimated Total Memory: 17.91 GiB",
+  "ok": true,
+  "load_s": 16.1,
+  "sortie": "Model loaded successfully in 15.80s.\n(16.76 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 12.14,
+   "ram_moteur_ws_go": 15.95,
+   "ram_moteur_privee_go": 13.23,
+   "ram_systeme_delta_go": 15.71
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1776,
+    "ttft_s": 1.9,
+    "prompt_tok_s": 934.5
+   },
+   "generation_tok_s": 36.66,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.444
+  }
+ },
+ {
+  "essai": "26B A4B, offload max",
+  "modele": "google/gemma-4-26b-a4b",
+  "gpu": "max",
+  "ctx": 8192,
+  "estimation_cli": "Estimated GPU Memory:   17.91 GiB | Estimated Total Memory: 17.91 GiB",
+  "ok": true,
+  "load_s": 12.4,
+  "sortie": "Model loaded successfully in 12.13s.\n(16.76 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 14.92,
+   "ram_moteur_ws_go": 18.85,
+   "ram_moteur_privee_go": 18.58,
+   "ram_systeme_delta_go": 18.72
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1776,
+    "ttft_s": 5.25,
+    "prompt_tok_s": 338.5
+   },
+   "generation_tok_s": 25.88,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.324
+  }
+ },
+ {
+  "essai": "26B A4B, offload 0.75",
+  "modele": "google/gemma-4-26b-a4b",
+  "gpu": "0.75",
+  "ctx": 8192,
+  "estimation_cli": "Estimated GPU Memory:   17.91 GiB | Estimated Total Memory: 17.91 GiB",
+  "ok": true,
+  "load_s": 10.9,
+  "sortie": "Model loaded successfully in 10.55s.\n(16.76 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 13.64,
+   "ram_moteur_ws_go": 15.92,
+   "ram_moteur_privee_go": 14.71,
+   "ram_systeme_delta_go": 16.14
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1776,
+    "ttft_s": 1.48,
+    "prompt_tok_s": 1196.7
+   },
+   "generation_tok_s": 43.19,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.337
+  }
+ },
+ {
+  "essai": "26B A4B, offload 0.5",
+  "modele": "google/gemma-4-26b-a4b",
+  "gpu": "0.5",
+  "ctx": 8192,
+  "estimation_cli": "Estimated GPU Memory:   17.91 GiB | Estimated Total Memory: 17.91 GiB",
+  "ok": true,
+  "load_s": 11.1,
+  "sortie": "Model loaded successfully in 10.82s.\n(16.76 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 10.06,
+   "ram_moteur_ws_go": 16.02,
+   "ram_moteur_privee_go": 11.22,
+   "ram_systeme_delta_go": 16.41
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1776,
+    "ttft_s": 2.44,
+    "prompt_tok_s": 726.9
+   },
+   "generation_tok_s": 27.86,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.444
+  }
+ },
+ {
+  "essai": "26B A4B, offload off",
+  "modele": "google/gemma-4-26b-a4b",
+  "gpu": "off",
+  "ctx": 8192,
+  "estimation_cli": "Estimated GPU Memory:   17.91 GiB | Estimated Total Memory: 17.91 GiB",
+  "ok": true,
+  "load_s": 12.7,
+  "sortie": "Model loaded successfully in 12.42s.\n(16.76 GiB)\nTo use the model in the API/SDK, use the identifier \"bench\".",
+  "memoire": {
+   "vram_go": 1.71,
+   "ram_moteur_ws_go": 16.17,
+   "ram_moteur_privee_go": 2.98,
+   "ram_systeme_delta_go": 16.57
+  },
+  "mesures": {
+   "prompt_2000": {
+    "tokens": 1776,
+    "ttft_s": 4.86,
+    "prompt_tok_s": 365.4
+   },
+   "generation_tok_s": 16.26,
+   "generation_tokens": 200,
+   "ttft_court_s": 0.747
+  }
+ }
+]

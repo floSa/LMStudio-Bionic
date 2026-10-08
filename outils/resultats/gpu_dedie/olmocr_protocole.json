@@ -1,0 +1,188 @@
+[
+ {
+  "modele": "OlmOCR 2 7B Q4_K_M",
+  "ok": true,
+  "load_s": 7.4,
+  "sortie": "ully loaded model olmocr-2-7b-1025@q4_k_m in 7232ms\n{\"ok\":true,\"secondes\":7.235,\"identifiant\":\"ocr\",\"contexte\":16384,\"config\":{\"contextLength\":16384,\"gpu\":{\"ratio\":\"max\"},\"maxParallelPredictions\":1}}\n",
+  "pages": {
+   "p1_anglais.png": {
+    "secondes": 5.22,
+    "jetons_entree": 1648,
+    "jetons_sortie": 156,
+    "tok_s_global": 29.9,
+    "finish": "stop",
+    "sortie": "---\nprimary_language: en\nis_rotation_valid: True\nrotation_correction: 0\nis_table: False\nis_diagram: False\n---\nQuarterly Maintenance Report\n\nThe cooling system of Unit 3 was inspected on 12 September 2026.\nTwo pumps showed a pressure drop of 8 percent compared with the previous quarter. The valves V-114 and V-208 were replaced.\n\nFindings:\n1. Pump P-2 vibration level: 4.7 mm/s (limit 7.1 mm/s).\n2. Filter F-17 clogging rate: 62 percent.\n3. Total downtime: 14 hours.\n\nRecommendation: schedule a full overhaul before March 2027.",
+    "exactitude": 1.0,
+    "manquants": [],
+    "entete_yaml": true,
+    "rotation_correction": 0
+   },
+   "p3_tableau_dense.png": {
+    "secondes": 17.01,
+    "jetons_entree": 1648,
+    "jetons_sortie": 745,
+    "tok_s_global": 43.8,
+    "finish": "stop",
+    "sortie": "---\nprimary_language: fr\nis_rotation_valid: True\nrotation_correction: 0\nis_table: True\nis_diagram: False\n---\nBudget prévisionnel 2027 — répartition par service\n\n<table>\n  <tr>\n    <th>Service</th>\n    <th>T1</th>\n    <th>T2</th>\n    <th>T3</th>\n    <th>T4</th>\n    <th>Total</th>\n  </tr>\n  <tr>\n    <td>Maintenance</td>\n    <td>12 450</td>\n    <td>13 120</td>\n    <td>11 980</td>\n    <td>14 300</td>\n    <td>51 850</td>\n  </tr>\n  <tr>\n    <td>Exploitation</td>\n    <td>28 900</td>\n    <td>29 410</td>\n    <td>30 275</td>\n    <td>31 040</td>\n    <td>119 625</td>\n  </tr>\n  <tr>\n    <td>Sécurité</td>\n    <td>7 215</td>\n    <td>7 215</td>\n    <td>7 640</td>\n    <td>8 120</td>\n    <td>30 190</td>\n  </tr>\n  <tr>\n    <td>Formation</td>\n    <td>3 480</td>\n    <td>5 960</td>\n    <td>2 750</td>\n    <td>6 410</td>\n    <td>18 600</td>\n  </tr>\n  <tr>\n    <td>Qualité</td>\n    <td>4 105</td>\n    <td>4 105</td>\n    <td>4 390</td>\n    <td>4 390</td>\n    <td>16 990</td>\n  </tr>\n  <tr>\n    <td>Informatique</td>\n    <td>9 860</td>\n    <td>10 345</td>\n    <td>9 120</td>\n    <td>12 770</td>\n    <td>42 095</td>\n  </tr>\n  <tr>\n    <td>Logistique</td>\n    <td>15 330</td>\n    <td>14 870</td>\n    <td>16 245</td>\n    <td>17 905</td>\n    <td>64 350</td>\n  </tr>\n  <tr>\n    <td>Achats</td>\n    <td>2 640</td>\n    <td>2 815</td>\n    <td>3 090</td>\n    <td>3 255</td>\n    <td>11 800</td>\n  </tr>\n</table>",
+    "exactitude": 1.0,
+    "manquants": [],
+    "entete_yaml": true,
+    "rotation_correction": 0
+   },
+   "p2_facture.png": {
+    "secondes": 8.39,
+    "jetons_entree": 1648,
+    "jetons_sortie": 391,
+    "tok_s_global": 46.6,
+    "finish": "stop",
+    "sortie": "---\nprimary_language: fr\nis_rotation_valid: True\nrotation_correction: 0\nis_table: False\nis_diagram: False\n---\nSOCIÉTÉ EXEMPLE SAS\n12 rue des Tests, 75000 Paris - SIRET 123 456 789 00012\n\nFACTURE N° F-2026-0042\nDate : 06/10/2026    Échéance : 05/11/2026\nClient : Atelier Démo SARL\n\n<table>\n  <tr>\n    <th>Désignation</th>\n    <th>Qté</th>\n    <th>PU HT</th>\n    <th>Total HT</th>\n  </tr>\n  <tr>\n    <td>Audit de configuration</td>\n    <td>2</td>\n    <td>450,00 €</td>\n    <td>900,00 €</td>\n  </tr>\n  <tr>\n    <td>Formation prise en main</td>\n    <td>1</td>\n    <td>1 200,00 €</td>\n    <td>1 200,00 €</td>\n  </tr>\n  <tr>\n    <td>Support mensuel</td>\n    <td>3</td>\n    <td>150,00 €</td>\n    <td>450,00 €</td>\n  </tr>\n</table>\n\nTotal HT : 2 550,00 €\nTVA 20 % : 510,00 €\nTotal TTC : 3 060,00 €",
+    "exactitude": 1.0,
+    "manquants": [],
+    "entete_yaml": true,
+    "rotation_correction": 0
+   },
+   "p4_facture_tournee.png": {
+    "secondes": 9.46,
+    "jetons_entree": 1648,
+    "jetons_sortie": 392,
+    "tok_s_global": 41.4,
+    "finish": "stop",
+    "sortie": "---\nprimary_language: fr\nis_rotation_valid: False\nrotation_correction: 90\nis_table: True\nis_diagram: False\n---\nSOCIÉTÉ EXEMPLE SAS\n12 rue des Tests, 75000 Paris - SIRET 123 456 789 00012\n\nFACTURE N° F-2026-0042\nDate : 06/10/2026    Échéance : 05/11/2026\nClient : Atelier Démo SARL\n\n<table>\n  <tr>\n    <th>Désignation</th>\n    <th>Qté</th>\n    <th>PU HT</th>\n    <th>Total HT</th>\n  </tr>\n  <tr>\n    <td>Audit de configuration</td>\n    <td>2</td>\n    <td>450,00 €</td>\n    <td>900,00 €</td>\n  </tr>\n  <tr>\n    <td>Formation prise en main</td>\n    <td>1</td>\n    <td>1 200,00 €</td>\n    <td>1 200,00 €</td>\n  </tr>\n  <tr>\n    <td>Support mensuel</td>\n    <td>3</td>\n    <td>150,00 €</td>\n    <td>450,00 €</td>\n  </tr>\n</table>\n\nTotal HT : 2 550,00 €\nTVA 20 % : 510,00 €\n\nTotal TTC : 3 060,00 €",
+    "exactitude": 1.0,
+    "manquants": [],
+    "entete_yaml": true,
+    "rotation_correction": 90
+   }
+  },
+  "memoire": {
+   "vram_go": 7.18,
+   "ram_moteur_ws_go": 4.8,
+   "ram_moteur_privee_go": 8.23,
+   "ram_systeme_delta_go": 4.87
+  }
+ },
+ {
+  "modele": "OlmOCR 2 7B Q8_0",
+  "ok": true,
+  "load_s": 7.4,
+  "sortie": "sfully loaded model olmocr-2-7b-1025@q8_0 in 7240ms\n{\"ok\":true,\"secondes\":7.243,\"identifiant\":\"ocr\",\"contexte\":16384,\"config\":{\"contextLength\":16384,\"gpu\":{\"ratio\":\"max\"},\"maxParallelPredictions\":1}}\n",
+  "pages": {
+   "p1_anglais.png": {
+    "secondes": 6.9,
+    "jetons_entree": 1648,
+    "jetons_sortie": 156,
+    "tok_s_global": 22.6,
+    "finish": "stop",
+    "sortie": "---\nprimary_language: en\nis_rotation_valid: True\nrotation_correction: 0\nis_table: False\nis_diagram: False\n---\nQuarterly Maintenance Report\n\nThe cooling system of Unit 3 was inspected on 12 September 2026.\nTwo pumps showed a pressure drop of 8 percent compared with the previous quarter. The valves V-114 and V-208 were replaced.\n\nFindings:\n1. Pump P-2 vibration level: 4.7 mm/s (limit 7.1 mm/s).\n2. Filter F-17 clogging rate: 62 percent.\n3. Total downtime: 14 hours.\n\nRecommendation: schedule a full overhaul before March 2027.",
+    "exactitude": 1.0,
+    "manquants": [],
+    "entete_yaml": true,
+    "rotation_correction": 0
+   },
+   "p3_tableau_dense.png": {
+    "secondes": 26.35,
+    "jetons_entree": 1648,
+    "jetons_sortie": 745,
+    "tok_s_global": 28.3,
+    "finish": "stop",
+    "sortie": "---\nprimary_language: fr\nis_rotation_valid: True\nrotation_correction: 0\nis_table: True\nis_diagram: False\n---\nBudget prévisionnel 2027 — répartition par service\n\n<table>\n  <tr>\n    <th>Service</th>\n    <th>T1</th>\n    <th>T2</th>\n    <th>T3</th>\n    <th>T4</th>\n    <th>Total</th>\n  </tr>\n  <tr>\n    <td>Maintenance</td>\n    <td>12 450</td>\n    <td>13 120</td>\n    <td>11 980</td>\n    <td>14 300</td>\n    <td>51 850</td>\n  </tr>\n  <tr>\n    <td>Exploitation</td>\n    <td>28 900</td>\n    <td>29 410</td>\n    <td>30 275</td>\n    <td>31 040</td>\n    <td>119 625</td>\n  </tr>\n  <tr>\n    <td>Sécurité</td>\n    <td>7 215</td>\n    <td>7 215</td>\n    <td>7 640</td>\n    <td>8 120</td>\n    <td>30 190</td>\n  </tr>\n  <tr>\n    <td>Formation</td>\n    <td>3 480</td>\n    <td>5 960</td>\n    <td>2 750</td>\n    <td>6 410</td>\n    <td>18 600</td>\n  </tr>\n  <tr>\n    <td>Qualité</td>\n    <td>4 105</td>\n    <td>4 105</td>\n    <td>4 390</td>\n    <td>4 390</td>\n    <td>16 990</td>\n  </tr>\n  <tr>\n    <td>Informatique</td>\n    <td>9 860</td>\n    <td>10 345</td>\n    <td>9 120</td>\n    <td>12 770</td>\n    <td>42 095</td>\n  </tr>\n  <tr>\n    <td>Logistique</td>\n    <td>15 330</td>\n    <td>14 870</td>\n    <td>16 245</td>\n    <td>17 905</td>\n    <td>64 350</td>\n  </tr>\n  <tr>\n    <td>Achats</td>\n    <td>2 640</td>\n    <td>2 815</td>\n    <td>3 090</td>\n    <td>3 255</td>\n    <td>11 800</td>\n  </tr>\n</table>",
+    "exactitude": 1.0,
+    "manquants": [],
+    "entete_yaml": true,
+    "rotation_correction": 0
+   },
+   "p2_facture.png": {
+    "secondes": 13.22,
+    "jetons_entree": 1648,
+    "jetons_sortie": 395,
+    "tok_s_global": 29.9,
+    "finish": "stop",
+    "sortie": "---\nprimary_language: fr\nis_rotation_valid: True\nrotation_correction: 0\nis_table: False\nis_diagram: False\n---\nSOCIÉTÉ EXEMPLE SAS\n12 rue des Tests, 75000 Paris - SIRET 123 456 789 00012\n\nFACTURE N° F-2026-0042\nDate : 06/10/2026    Échéance : 05/11/2026\nClient : Atelier Démo SARL\n\n<table>\n  <tr>\n    <th>Désignation</th>\n    <th>Qté</th>\n    <th>PU HT</th>\n    <th>Total HT</th>\n  </tr>\n  <tr>\n    <td>Audit de configuration</td>\n    <td>2</td>\n    <td>450,00 €</td>\n    <td>900,00 €</td>\n  </tr>\n  <tr>\n    <td>Formation prise en main</td>\n    <td>1</td>\n    <td>1 200,00 €</td>\n    <td>1 200,00 €</td>\n  </tr>\n  <tr>\n    <td>Support mensuel</td>\n    <td>3</td>\n    <td>150,00 €</td>\n    <td>450,00 €</td>\n  </tr>\n</table>\n\nTotal HT : 2 550,00 €\nTVA 20 % : 510,00 €\n<b>Total TTC : 3 060,00 €</b>",
+    "exactitude": 1.0,
+    "manquants": [],
+    "entete_yaml": true,
+    "rotation_correction": 0
+   },
+   "p4_facture_tournee.png": {
+    "secondes": 15.16,
+    "jetons_entree": 1648,
+    "jetons_sortie": 392,
+    "tok_s_global": 25.9,
+    "finish": "stop",
+    "sortie": "---\nprimary_language: fr\nis_rotation_valid: False\nrotation_correction: 90\nis_table: True\nis_diagram: False\n---\nSOCIÉTÉ EXEMPLE SAS\n12 rue des Tests, 75000 Paris - SIRET 123 456 789 00012\n\nFACTURE N° F-2026-0042\nDate : 06/10/2026    Échéance : 05/11/2026\nClient : Atelier Démo SARL\n\n<table>\n  <tr>\n    <th>Désignation</th>\n    <th>Qté</th>\n    <th>PU HT</th>\n    <th>Total HT</th>\n  </tr>\n  <tr>\n    <td>Audit de configuration</td>\n    <td>2</td>\n    <td>450,00 €</td>\n    <td>900,00 €</td>\n  </tr>\n  <tr>\n    <td>Formation prise en main</td>\n    <td>1</td>\n    <td>1 200,00 €</td>\n    <td>1 200,00 €</td>\n  </tr>\n  <tr>\n    <td>Support mensuel</td>\n    <td>3</td>\n    <td>150,00 €</td>\n    <td>450,00 €</td>\n  </tr>\n</table>\n\nTotal HT : 2 550,00 €\nTVA 20 % : 510,00 €\n\nTotal TTC : 3 060,00 €",
+    "exactitude": 1.0,
+    "manquants": [],
+    "entete_yaml": true,
+    "rotation_correction": 90
+   }
+  },
+  "memoire": {
+   "vram_go": 10.1,
+   "ram_moteur_ws_go": 7.98,
+   "ram_moteur_privee_go": 11.17,
+   "ram_systeme_delta_go": 8.1
+  }
+ },
+ {
+  "modele": "Gemma 4 E4B Q8_0",
+  "ok": true,
+  "load_s": 7.7,
+  "sortie": "cessfully loaded model google/gemma-4-e4b in 7513ms\n{\"ok\":true,\"secondes\":7.516,\"identifiant\":\"ocr\",\"contexte\":16384,\"config\":{\"contextLength\":16384,\"gpu\":{\"ratio\":\"max\"},\"maxParallelPredictions\":1}}\n",
+  "pages": {
+   "p1_anglais.png": {
+    "secondes": 4.16,
+    "jetons_entree": 548,
+    "jetons_sortie": 132,
+    "tok_s_global": 31.7,
+    "finish": "stop",
+    "sortie": "# Quarterly Maintenance Report\n\nThe cooling system of Unit 3 was inspected on 12 September 2026. Two pumps showed a pressure drop of 8 percent compared with the previous quarter. The valves V-114 and V-208 were replaced.\n\n**Findings:**\n1. Pump P-2 vibration level: 4.7 mm/s (limit 7.1 mm/s).\n2. Filter F-17 clogging rate: 62 percent.\n3. Total downtime: 14 hours.\n\n**Recommendation:** schedule a full overhaul before March 2027.",
+    "exactitude": 1.0,
+    "manquants": [],
+    "entete_yaml": false,
+    "rotation_correction": null
+   },
+   "p3_tableau_dense.png": {
+    "secondes": 9.86,
+    "jetons_entree": 548,
+    "jetons_sortie": 382,
+    "tok_s_global": 38.8,
+    "finish": "stop",
+    "sortie": "# Budget prévisionnel 2027 — répartition par service\n\n| Service | T1 | T2 | T3 | T4 | Total |\n|---|---|---|---|---|---|\n| Maintenance | 12 450 | 13 120 | 11 980 | 14 300 | 51 850 |\n| Exploitation | 28 900 | 29 410 | 30 275 | 31 040 | 119 625 |\n| Sécurité | 7 215 | 7 215 | 7 640 | 8 120 | 30 190 |\n| Formation | 3 480 | 5 960 | 2 750 | 6 410 | 18 600 |\n| Qualité | 4 105 | 4 105 | 4 390 | 4 390 | 16 990 |\n| Informatique | 9 860 | 10 345 | 9 120 | 12 770 | 42 095 |\n| Logistique | 15 330 | 14 870 | 16 245 | 17 905 | 64 350 |\n| Achats | 2 640 | 2 815 | 3 090 | 3 255 | 11 800 |",
+    "exactitude": 1.0,
+    "manquants": [],
+    "entete_yaml": false,
+    "rotation_correction": null
+   },
+   "p2_facture.png": {
+    "secondes": 7.4,
+    "jetons_entree": 548,
+    "jetons_sortie": 288,
+    "tok_s_global": 38.9,
+    "finish": "stop",
+    "sortie": "# SOCIÉTÉ EXEMPLE SAS\n\n12 rue des Tests, 75000 Paris - SIRET 123 456 789 00012\n\n## FACTURE N° F-2026-0042\n\nDate : 06/10/2026 Échéance : 05/11/2026\nClient : Atelier Démo SARL\n\n| Désignation | Qté | PU HT | Total HT |\n| :--- | :---: | :---: | :---: |\n| Audit de configuration | 2 | 450,00 € | 900,00 € |\n| Formation prise en main | 1 | 1 200,00 € | 1 200,00 € |\n| Support mensuel | 3 | 150,00 € | 450,00 € |\n\nTotal HT : 2 550,00 €\nTVA 20 % : 510,00 €\n**Total TTC : 3 060,00 €**\n\nPaiement par virement sous 30 jours. Pénalités de retard : 3 fois le taux légal.",
+    "exactitude": 1.0,
+    "manquants": [],
+    "entete_yaml": false,
+    "rotation_correction": null
+   },
+   "p4_facture_tournee.png": {
+    "secondes": 7.86,
+    "jetons_entree": 548,
+    "jetons_sortie": 296,
+    "tok_s_global": 37.7,
+    "finish": "stop",
+    "sortie": "# SOCIÉTÉ EXEMPLE SAS\n\n**FACTURE N° F-2026-0042**\n\nDate : 06/10/2026\nÉchéance : 05/11/2026\n\n12 rue des Tests, 75000 Paris - SIRET 123 456 789 00012\n\nClient : Atelier Démo SARL\n\n| Désignation | Qté | PU HT | Total HT |\n|---|---|---|---|\n| Audit de configuration | 2 | 450,00 € | 900,00 € |\n| Formation prise en main | 1 | 1 200,00 € | 1 200,00 € |\n| Support mensuel | 3 | 150,00 € | 450,00 € |\n| **Total HT** | | | **2 550,00 €** |\n| TVA 20 % : | | | 510,00 € |\n| **Total TTC :** | | | **3 060,00 €** |\n\nPaiement par virement sous 30 jours. Pénalités de retard : 3 fois le taux légal.",
+    "exactitude": 1.0,
+    "manquants": [],
+    "entete_yaml": false,
+    "rotation_correction": null
+   }
+  },
+  "memoire": {
+   "vram_go": 6.34,
+   "ram_moteur_ws_go": 8.01,
+   "ram_moteur_privee_go": 7.45,
+   "ram_systeme_delta_go": 8.13
+  }
+ }
+]

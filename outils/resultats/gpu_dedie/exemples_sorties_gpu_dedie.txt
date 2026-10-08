@@ -1,0 +1,85 @@
+===== python 01_lister_modeles.py
+== API compatible OpenAI : /v1/models
+ - google/gemma-4-e4b
+ - google/gemma-4-e4b:2
+ - qwen/qwen3.8-27b
+ - allenai/olmocr-2-7b
+ - google/gemma-4-26b-a4b
+ - text-embedding-nomic-embed-text-v1.5
+
+== API native LM Studio : /api/v1/models
+ - qwen/qwen3.8-27b                              type=llm       taille=17.74 Go  contexte max=262144  chargé=False
+ - google/gemma-4-e4b                            type=llm       taille= 9.02 Go  contexte max=131072  chargé=True
+     instance google/gemma-4-e4b : contexte=8192, parallèle=4, flash_attention=True
+     instance google/gemma-4-e4b:2 : contexte=2048, parallèle=4, flash_attention=True
+ - allenai/olmocr-2-7b                           type=llm       taille= 6.04 Go  contexte max=128000  chargé=False
+ - google/gemma-4-26b-a4b                        type=llm       taille=17.99 Go  contexte max=262144  chargé=False
+ - text-embedding-nomic-embed-text-v1.5          type=embedding taille= 0.08 Go  contexte max=2048  chargé=False
+
+===== python 02_chat_simple.py
+La quantification vise à réduire la taille et les exigences de calcul d'un modèle de langage en utilisant des représentations numériques moins précises (par exemple, passer de 32 bits à 8 bits). Cela permet ainsi un déploiement plus rapide et sur des appareils avec moins de ressources.
+
+[stop] 42 tokens en entrée, 61 en sortie, 1.5 s (39.5 tok/s global)
+
+===== python 03_streaming.py
+Un, deux, trois, quatre, cinq, six, sept, huit, neuf, dix, onze, douze, treize, quatorze, quinze, seize, dix-sept, dix-huit, dix-neuf, vingt.
+
+TTFT = 0.13 s ; 51 morceaux en 1.33 s
+
+===== python 04_sortie_json_schema.py
+{
+  "numero": "F-2026-0042",
+  "date": "06/10/2026",
+  "client": "Atelier Démo SARL",
+  "total_ttc": 3060.0
+}
+
+===== python 05_embeddings.py
+dimension des vecteurs : 768
+« La centrale produit de l'électricité. » ~ « Une usine génère du courant électrique. » : 0.724
+« La centrale produit de l'électricité. » ~ « Le chat dort sur le canapé. » : 0.538
+
+===== python 06_ocr_image.py
+# SOCIÉTÉ EXEMPLE SAS
+
+12 rue des Tests, 75000 Paris - SIRET 123 456 789 00012
+
+## FACTURE N° F-2026-0042
+
+Date : 06/10/2026
+Échéance : 05/11/2026
+
+Client : Atelier Démo SARL
+
+| Désignation | Qté | PU HT | Total HT |
+| :--- | :---: | :---: | :---: |
+| Audit de configuration | 2 | 450,00 € | 900,00 € |
+| Formation prise en main | 1 | 1 200,00 € | 1 200,00 € |
+| Support mensuel | 3 | 150,00 € | 450,00 € |
+
+Total HT : 2 550,00 €
+TVA 20 % : 510,00 €
+**Total TTC : 3 060,00 €**
+
+Paiement par virement sous 30 jours. Pénalités de retard : 3 fois le taux légal.
+
+[548 tokens en entrée (dont l'image), 289 en sortie, 7.7 s]
+
+===== python 07_appel_outil.py
+finish_reason : tool_calls
+fonction demandée : get_meteo avec {'ville': 'Lyon'}
+
+===== python 08_olmocr_lot.py ../outils/resultats/gpu_dedie/pages_exemple --modele google/gemma-4-e4b --sans-yaml
+[1/1] facture_test_1288.png
+   ✓ essai 1 (T=0.1) : 548 tok entrée, 288 tok sortie, 8 s, fin=stop
+
+Terminé : 1 page(s), 548 tokens en entrée, 288 en sortie, 8 s (37.8 tok/s global).
+===== python 09_calculateur_memoire.py
+usage: 09_calculateur_memoire.py [-h] [--params PARAMS]
+                                 [--quant {BF16,F16,F32,Q2_K,Q3_K_M,Q4_0,Q4_K_M,Q4_K_S,Q5_K_M,Q5_K_S,Q6_K,Q8_0}]
+                                 [--fichier-go FICHIER_GO] [--couches COUCHES]
+                                 [--tetes-kv TETES_KV] [--dim-tete DIM_TETE]
+                                 [--ko-par-token KO_PAR_TOKEN]
+                                 [--contexte CONTEXTE] [--kv-bits KV_BITS]
+                                 [--tampons-go TAMPONS_GO]
+09_calculateur_memoire.py: error: préciser --params ou --fichier-go

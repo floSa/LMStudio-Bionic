@@ -1,0 +1,30 @@
+{
+ "durees_s": [
+  2.4,
+  6.3,
+  14.2
+ ],
+ "tours": [
+  {
+   "tour": 1,
+   "secondes": 2.4,
+   "jetons_entree": 545,
+   "jetons_sortie": 51,
+   "reponse": "La ligne la plus chère de ce tableau en termes de **montant total HT** est :\n\n* **Désignation :** Formation prise en main\n* **Montant Total HT :** 1 200,00 €"
+  },
+  {
+   "tour": 2,
+   "secondes": 6.3,
+   "jetons_entree": 624,
+   "jetons_sortie": 230,
+   "reponse": "$\\text{Pourcentage} = \\left( \\frac{1200,00}{2550,00} \\right) \\times 100$$\n\n$$\\text{Pourcentage} \\approx 0,470588 \\times 100$$\n\n$$\\text{Pourcentage} \\approx 47,06 \\%$$\n\nLa ligne \"Formation prise en main\" représente environ **47,06 %** du total HT de la facture."
+  },
+  {
+   "tour": 3,
+   "secondes": 14.2,
+   "jetons_entree": 886,
+   "jetons_sortie": 588,
+   "reponse": "3 750,00 € \\times 0,20 = 750,00 €$\n* **Nouveau Total TTC :** $\\text{Nouveau Total HT} + \\text{TVA}$\n$$\\text{Nouveau Total TTC} = 3 750,00 € + 750,00 €$$\n$$\\mathbf{\\text{Nouveau Total TTC}} = \\mathbf{4 500,00 €}$$\n\nLe nouveau total TTC serait de **4 500,00 €**."
+  }
+ ]
+}

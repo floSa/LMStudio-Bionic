@@ -1,0 +1,182 @@
+{
+ "multi_tours": {
+  "status": 200,
+  "reponse": {
+   "id": "msg_qar4f755b9ash8uc921d2j",
+   "type": "message",
+   "role": "assistant",
+   "content": [
+    {
+     "type": "text",
+     "text": "Votre prénom est Camille."
+    }
+   ],
+   "model": "google/gemma-4-e4b",
+   "stop_reason": "end_turn",
+   "stop_sequence": null,
+   "usage": {
+    "input_tokens": 46,
+    "output_tokens": 6,
+    "cache_read_input_tokens": 0
+   }
+  }
+ },
+ "flux": {
+  "status": 200,
+  "types": [
+   "message_start",
+   "content_block_start",
+   "content_block_delta",
+   "content_block_delta",
+   "content_block_delta",
+   "content_block_delta",
+   "content_block_delta",
+   "content_block_delta",
+   "content_block_stop",
+   "message_delta",
+   "message_stop"
+  ],
+  "premiers": [
+   {
+    "event": "message_start",
+    "data": {
+     "type": "message_start",
+     "message": {
+      "id": "msg_kj4m6khkj8pl4u9pcn6c1p",
+      "type": "message",
+      "role": "assistant",
+      "content": [],
+      "model": "google/gemma-4-e4b",
+      "stop_reason": null,
+      "stop_sequence": null,
+      "usage": {
+       "input_tokens": 18,
+       "output_tokens": 0,
+       "cache_read_input_tokens": 13
+      }
+     }
+    }
+   },
+   {
+    "event": "content_block_start",
+    "data": {
+     "type": "content_block_start",
+     "index": 0,
+     "content_block": {
+      "type": "text",
+      "text": ""
+     }
+    }
+   },
+   {
+    "event": "content_block_delta",
+    "data": {
+     "type": "content_block_delta",
+     "index": 0,
+     "delta": {
+      "type": "text_delta",
+      "text": "Un"
+     }
+    }
+   }
+  ]
+ },
+ "outil": {
+  "status": 200,
+  "reponse": {
+   "id": "msg_pueucm12ot72kqc6svbemw",
+   "type": "message",
+   "role": "assistant",
+   "content": [
+    {
+     "type": "tool_use",
+     "id": "DDQM5aEDiSoKHZZIMydEhv4beRSKT6Ay",
+     "name": "convertir_temperature",
+     "input": {
+      "de": "C",
+      "valeur": 100,
+      "vers": "F"
+     }
+    }
+   ],
+   "model": "google/gemma-4-e4b",
+   "stop_reason": "tool_use",
+   "stop_sequence": null,
+   "usage": {
+    "input_tokens": 437,
+    "output_tokens": 29,
+    "cache_read_input_tokens": 432
+   }
+  }
+ },
+ "outil_retour": {
+  "status": 200,
+  "resultat_outil": "100 C = 212.0 F",
+  "reponse": {
+   "id": "msg_4934489vzpdwi8ljzhurk",
+   "type": "message",
+   "role": "assistant",
+   "content": [],
+   "model": "google/gemma-4-e4b",
+   "stop_reason": "end_turn",
+   "stop_sequence": null,
+   "usage": {
+    "input_tokens": 491,
+    "output_tokens": 1,
+    "cache_read_input_tokens": 432
+   }
+  }
+ },
+ "outil_retour_variantes": {
+  "tools_declares_tool_result_seul": [
+   {
+    "tokens_sortie": 1,
+    "texte": ""
+   },
+   {
+    "tokens_sortie": 1,
+    "texte": ""
+   },
+   {
+    "tokens_sortie": 1,
+    "texte": ""
+   }
+  ],
+  "tools_omis": [
+   {
+    "tokens_sortie": 21,
+    "texte": "La conversion de **100 degrés Celsius** en Fahrenheit est **212 degrés Fahrenhei"
+   },
+   {
+    "tokens_sortie": 18,
+    "texte": "**100 degrés Celsius équivaut à 212 degrés Fahrenheit.**"
+   },
+   {
+    "tokens_sortie": 18,
+    "texte": "**100 degrés Celsius équivaut à 212 degrés Fahrenheit.**"
+   }
+  ],
+  "tool_result_plus_texte": [
+   {
+    "tokens_sortie": 19,
+    "texte": "100 degrés Celsius équivaut à 212.0 degrés Fahrenheit."
+   },
+   {
+    "tokens_sortie": 19,
+    "texte": "100 degrés Celsius équivaut à 212.0 degrés Fahrenheit."
+   },
+   {
+    "tokens_sortie": 19,
+    "texte": "100 degrés Celsius équivaut à 212.0 degrés Fahrenheit."
+   }
+  ]
+ },
+ "entetes_anthropic": {
+  "status": 200,
+  "reponse": "{\"id\": \"msg_4rueim0dg0i4dt59an0m8t\", \"type\": \"message\", \"role\": \"assistant\", \"content\": [{\"type\": \"text\", \"text\": \"\\\"Dis ok\\\" is a very informal and abbreviated way of saying **\\\"This is okay.\\\"**\\n\\n…"
+ },
+ "sans_max_tokens": {
+  "status": 400,
+  "reponse": "{\"type\": \"error\", \"error\": {\"type\": \"invalid_request_error\", \"message\": \"request.max_tokens: Required\"}}"
+ }
+}
