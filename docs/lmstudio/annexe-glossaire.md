@@ -4,6 +4,7 @@ Termes utilisés dans les manuels LM Studio, par ordre alphabétique.
 
 | Terme | Définition |
 |---|---|
+| **`--n-cpu-moe N`** | Option de llama.cpp (via `llamaCppArgumentsOverride` du SDK) qui laisse sur le **CPU** les experts des N premières couches d'un modèle MoE : sur 16 Go de VRAM, *Gemma 4 26B A4B* passe de 36,7 à **54,6 tok/s** avec `--n-cpu-moe 8` ([Manuel 15, section 6.2](15-performances-gpu-dedie.md#62-experts-moe-sur-le-cpu---n-cpu-moe-via-le-sdk)). |
 | **Anchor text** | Dans olmOCR (v1), texte extrait du PDF et fourni au modèle en plus de l'image pour l'aider. Les modèles olmOCR 2 **n'utilisent plus** l'anchor text. |
 | **API compatible OpenAI** | Interface HTTP qui reprend le format de l'API d'OpenAI (`/v1/chat/completions`…) : les outils et bibliothèques prévus pour OpenAI fonctionnent en changeant seulement l'adresse (`http://127.0.0.1:1234/v1`). |
 | **Appel d'outil** (*tool call*) | Demande structurée (nom + arguments JSON) produite par le modèle ; l'application l'exécute et renvoie le résultat ([Manuel 10](10-mcp-et-appel-d-outils.md#1-principe)). |
@@ -40,9 +41,10 @@ Termes utilisés dans les manuels LM Studio, par ordre alphabétique.
 | **K-quants** | Famille de quantifications par super-blocs de 256 poids (`Q4_K_M`, `Q6_K`…) : meilleure qualité que les anciennes `_0` / `_1` à taille égale. |
 | **llama.cpp** | Moteur open source d'inférence sur lequel s'appuie LM Studio pour les modèles GGUF. |
 | **LLM** | *Large Language Model*, modèle de langage. |
-| **llmster** | Version « sans interface » de LM Studio pour serveurs. |
+| **llmster** | Version « sans interface » de LM Studio pour serveurs ; sous Windows 0.4.25, `lms daemon` et `lms status` existent mais sont **absentes de `lms --help`** ([Manuel 16, section 5](16-sdk-et-plugins.md#5-le-mode-sans-interface--llmster)). |
 | **LM Link** | Fonction de LM Studio qui relie plusieurs appareils pour utiliser leurs modèles à distance (compte requis). |
 | **`lms`** | Programme en ligne de commande de LM Studio. |
+| **Lot physique** (*physical batch size*) | Nombre de jetons du prompt traités par passe de calcul ; sous 256, la lecture du prompt perd 25 à 30 % de vitesse sur la RTX 4060 Ti ([Manuel 15, section 4](15-performances-gpu-dedie.md#4-flash-attention-lots-et-cache-kv)). |
 | **MCP (Model Context Protocol)** | Protocole standard pour donner à un modèle accès à des outils et sources de données externes. |
 | **`mcp.json`** | Fichier `%USERPROFILE%\.lmstudio\mcp.json` qui déclare les serveurs MCP (commande locale ou URL distante) ([Manuel 10](10-mcp-et-appel-d-outils.md#2-déclarer-un-serveur-mcp--mcpjson)). |
 | **Min P / Top P / Top K** | Réglages d'échantillonnage qui limitent l'ensemble des mots candidats à chaque étape. Voir le [Manuel 04](04-parametrer-l-inference.md). |
@@ -50,9 +52,12 @@ Termes utilisés dans les manuels LM Studio, par ordre alphabétique.
 | **mmproj** | Fichier GGUF auxiliaire (« projecteur multimodal ») qui permet à un modèle de lire des images. |
 | **model.yaml / modèle virtuel** | Fichier ouvert qui décrit un modèle de façon portable (fichiers de base, métadonnées, défauts, champs personnalisés) sans contenir les poids ([Manuel 14](14-personnaliser-les-modeles.md#4-modelyaml-et-modèles-virtuels)). |
 | **MoE (Mixture of Experts)** | Modèle composé d'« experts » dont seuls quelques-uns travaillent à chaque token : mémoire de la taille totale, vitesse de la taille active (ex. « 26B A4B »). |
+| **MTP** (*Multi-Token Prediction*) | Tête de prédiction de plusieurs jetons **intégrée au fichier** du modèle : sert de brouillon au **décodage spéculatif** sans second modèle. Refusé sur un fichier sans tête MTP ; sur *Qwen3.8 27B* : jusqu'à +31 % en code, −11 à −41 % en prose ([Manuel 15](15-performances-gpu-dedie.md)). |
 | **MXFP4 / NVFP4** | Formats flottants 4 bits à échelle partagée par blocs (≈ 4,25 et ≈ 4,5 bits par poids) ; MXFP4 est le format natif de certains modèles (*gpt-oss*). |
 | **OCR** | *Optical Character Recognition* : extraction du texte d'une image ou d'un scan. |
 | **olmOCR** | Famille de modèles et boîte à outils de l'Allen Institute for AI, spécialisés dans la conversion de documents PDF/images en texte. |
+| **Parallélisme** (*max concurrent predictions*) | Nombre de requêtes servies simultanément par un modèle chargé (défaut 4). Sur GPU dédié, le débit total croît presque linéairement (45 → 264 tok/s pour 1 → 8 requêtes) ; sur GPU intégré, il ne croît pas ([Manuel 03, section 5.5](03-charger-un-modele.md#55-concurrence-selon-le-matériel)). |
+| **Plugin (`lms dev`)** | Extension locale (outils, prétraitement du prompt) lancée en développement par `lms dev` ; utilisable depuis le chat de LM Studio avec confirmation d'appel d'outil ([Manuel 16](16-sdk-et-plugins.md)). |
 | **Preset** | Jeu de paramètres enregistré sous un nom, réutilisable d'une conversation à l'autre. |
 | **Prompt (invite)** | Texte envoyé au modèle. Le **prompt système** définit son rôle et ses règles ; le **prompt utilisateur** contient la demande. |
 | **Q4_K_M (décodage)** | **Q** = quantifié ; **4** = ≈ 4 bits par poids ; **K** = méthode K-quants (compression par blocs) ; **M** = medium (S small, L large). |
@@ -63,6 +68,7 @@ Termes utilisés dans les manuels LM Studio, par ordre alphabétique.
 | **RoPE** | *Rotary Positional Embedding* : mécanisme par lequel le modèle repère la position des tokens ; ses réglages permettent d'étendre le contexte. |
 | **Runtime (moteur)** | Composant logiciel qui exécute le modèle (Vulkan, CPU, CUDA…). |
 | **S / M / L / XL, XXS / XS / NL** | Suffixes des quantifications : taille de la recette (*Small*, *Medium*, *Large*, *XL* chez Unsloth) et sous-variantes `IQ` (*extra-extra-small*, *extra-small*, *non-linear*) ([Manuel 02](02-selectionner-et-telecharger-un-modele.md#51-lire-un-nom)). |
+| **SDK** (*Software Development Kit*) | Kit de développement : `@lmstudio/sdk` (JavaScript) et `lmstudio` (Python) donnent accès à des paramètres de chargement absents de `lms load` (ratio GPU, quantification du cache K/V, experts MoE sur CPU) ([Manuel 16](16-sdk-et-plugins.md)). |
 | **Seed (graine)** | Valeur qui fixe le tirage aléatoire ; à graine et réglages identiques, la réponse est reproductible. |
 | **Serve on Local Network** | Réglage qui fait écouter le serveur sur toutes les interfaces (`0.0.0.0`) au lieu de `127.0.0.1` ; équivalent de `--bind` ([Manuel 11](11-securiser-le-serveur.md#2-trois-niveaux-dexposition)). |
 | **Serveur MCP** | Programme (local, par stdio) ou service (distant, par URL) qui expose des outils à une application hôte ([Manuel 10](10-mcp-et-appel-d-outils.md)). |

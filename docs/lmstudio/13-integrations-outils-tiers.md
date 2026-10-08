@@ -3,7 +3,7 @@
 > **Objet** : brancher des outils externes (assistants de code, interfaces de chat) sur le serveur local de LM Studio : réglages à fournir à chaque outil, comportement avec l'authentification, choix du modèle et du contexte.
 > **Prérequis** : [Manuel 06](06-serveur-local-et-api.md) (serveur), [Manuel 11](11-securiser-le-serveur.md) (jetons), [Manuel 12](12-api-avancee.md) (routes).
 > **Version décrite** : LM Studio 0.4.25, Windows 11.
-> **Statut des informations — lecture indispensable** : **aucun de ces outils n'a été lancé** pendant la production du manuel (installation, compte ou téléchargement requis, ou serveur Docker arrêté). Les **réglages** viennent de la documentation officielle de LM Studio [Source] (Claude Code, Codex) ou de la documentation de chaque outil [Source tierce] (Cline, Roo Code, Continue, Open WebUI, Aider). Le seul test réel est un **rejeu des requêtes équivalentes** ([section 4](#4-vérification-par-simulation)) : il prouve que **le serveur accepte les routes et les formats** que ces outils emploient, pas que l'outil fonctionne de bout en bout [Vérifié pour le serveur, [À tester] pour chaque outil].
+> **Statut des informations — lecture indispensable** : le **6 octobre 2026**, aucun de ces outils n'avait été lancé (installation ou compte requis) : seuls les **réglages** ([Source] pour Claude Code et Codex, [Source tierce] pour les autres) et un **rejeu des requêtes équivalentes** ([section 4](#4-vérification-par-simulation)) étaient disponibles. Le **7 octobre 2026**, Node.js étant disponible et une carte graphique dédiée permettant un contexte suffisant, **cinq des sept outils ont été lancés réellement** ([section 4 bis](#4-bis-essais-réels-7-octobre-2026)) : **Claude Code, Codex, Cline (ligne de commande), Continue (ligne de commande) et Aider**. **Roo Code** (extension d'éditeur, sans ligne de commande) et **Open WebUI** (Docker absent ; création de compte requise au premier démarrage) **n'ont pas été lancés**.
 
 ---
 
@@ -210,8 +210,41 @@ Le script [`outils/simuler_clients_tiers.py`](../../outils/simuler_clients_tiers
 ### Pour aller plus loin
 
 - Ce que la simulation **ne** prouve **pas** : le comportement d'un outil réel avec un petit modèle (qualité des modifications de code, respect du format d'édition, longueur du prompt système), ni l'effet de `count_tokens` absent sur Claude Code.
-- Pour valider un outil réel : l'installer sur un poste de test, lancer une tâche courte, et relire dans *Developer Logs* les requêtes reçues (`Received request: POST to …`) et les erreurs éventuelles.
+- Pour valider un outil réel : l'installer sur un poste de test, lancer une tâche courte, et relire dans *Developer Logs* les requêtes reçues (`Received request: POST to …`) et les erreurs éventuelles. C'est ce que fait la [section 4 bis](#4-bis-essais-réels-7-octobre-2026).
 - Le rejeu est reproductible : relancer le script après une mise à jour de LM Studio pour détecter une régression de compatibilité.
+
+---
+
+## 4 bis. Essais réels (7 octobre 2026)
+
+### Essentiel
+
+**Poste** : GPU dédié RTX 4060 Ti 16 Go ([Manuel 15](15-performances-gpu-dedie.md)). **Modèle** : *Gemma 4 26B A4B* (Q4_K_M), contexte **65 536**, experts MoE des 14 premières couches sur le CPU : **13,1 Go de VRAM, ≈ 38 tok/s** en génération. **Installation** : paquets npm (`@anthropic-ai/claude-code` 2.1.292, `@openai/codex` 0.161.0, `cline` 3.0.69, `@continuedev/cli` 1.5.47) dans un **dossier temporaire** ; Aider 0.86.2 par `uvx --python 3.12 --from aider-chat aider` (environnement éphémère). **Configuration isolée** pour chaque outil (dossier de configuration dédié), **aucun compte**, télémétrie coupée quand l'outil le permet. **Tâche** : dans un projet jetable de trois fichiers de test, « Les tests de ce dossier échouent. Lance pytest, trouve la cause dans `tarifs.py`, corrige le code (pas les tests) puis relance pytest. » Bogue : une remise exprimée en taux était **soustraite** au lieu d'être appliquée (`prix * 1,2 - remise`).
+
+| Outil | Réglage minimal | Route | Résultat | Durée |
+|---|---|---|---|---|
+| **Claude Code** 2.1.292 | `ANTHROPIC_BASE_URL=http://localhost:1234`, `ANTHROPIC_AUTH_TOKEN=<valeur quelconque>`, `claude -p --model google/gemma-4-26b-a4b --permission-mode acceptEdits --allowedTools "Read,Edit,Bash(python -m pytest:*)"` | `/v1/messages` | **Réussi** : bogue corrigé, **3 tests sur 3** | **17,7 s**, 5 tours |
+| **Codex** 0.161.0 | `codex exec --oss --local-provider lmstudio -m google/gemma-4-26b-a4b` | `/v1/responses` | **Connexion et réponse obtenues, mais aucune commande exécutée** : bac à sable `read-only` et approbation `never` par défaut, commandes PowerShell « *blocked by policy* » | 15,5 s |
+| **Cline** 3.0.69 (CLI) | `cline auth lmstudio -m <modèle> -k <valeur>` puis `cline -P lmstudio -m <modèle> --cwd <projet>` | `/v1/chat/completions` | **Réussi** (après une consigne plus explicite) ; en mode plan (`-p`) : diagnostic exact sans modification | 14,6 s (plan) ; 20,9 s (action) |
+| **Continue** 1.5.47 (CLI `cn`) | fichier `config.yaml` local (`provider: lmstudio`, `apiBase: http://localhost:1234/v1`) ; `cn --config <fichier> -p [--readonly \| --allow …]` | `/v1/chat/completions` | **Réussi** (3 tests sur 3) ; lecture seule : diagnostic exact | 11,6 s (lecture) ; 16,5 s (action) |
+| **Aider** 0.86.2 | `LM_STUDIO_API_BASE`, `LM_STUDIO_API_KEY`, `aider --model lm_studio/google/gemma-4-26b-a4b --no-auto-commits --yes-always` | `/v1/chat/completions` | **Modification exacte appliquée** (3 tests sur 3 vérifiés à la main) ; l'exécution des tests par Aider a échoué (voir ci-dessous) | 58 s |
+| **Roo Code**, **Open WebUI** | — | — | **Non lancés** | — |
+
+### Constats
+
+- **Le prompt système pèse lourd** : une question triviale (« capitale de la France ? ») envoie **17 823 tokens** à travers Claude Code, soit **26,7 s avant le premier token** ; la tâche complète a consommé 92 617 tokens d'entrée cumulés en 5 tours, ramenés à 17,7 s par le **cache de prompt**. Sur le GPU intégré (≈ 340 tok/s), le seul premier message aurait demandé ≈ 52 s [Estimation]. **Contexte de 25 000 tokens au minimum, confirmé** (17,8 k tokens dès le premier message).
+- **Claude Code fonctionne contre LM Studio sans compte Anthropic** avec les deux variables d'environnement ; il signale que les requêtes passent par `localhost:1234` et que le **classificateur du mode automatique** n'est pas facturable de la même façon (message sans conséquence). Le nom du modèle est affiché comme inconnu (`unrecognized_model`) ; l'outil le traite quand même.
+- **Codex** : le **bac à sable par défaut sous Windows interdit toute commande** (`read-only`, approbation `never`). L'assouplir (`-s workspace-write`, politique d'approbation) est un choix de sécurité que l'essai **n'a pas fait** ; à décider par l'utilisateur, dans un projet jetable. Avertissement : « *Model metadata for `google/gemma-4-26b-a4b` not found. Defaulting to fallback metadata* ».
+- **Cline** (mode action) s'est **arrêté après un plan** sans appeler d'outil avec la première consigne (« corrige… ») ; la consigne « lis d'abord les deux fichiers, puis modifie, puis lance pytest, ne te contente pas d'un plan » a fonctionné (4 itérations, 20 316 tokens en entrée). Par défaut, `cline <consigne>` s'exécute en mode **action avec approbation automatique** : à réserver à un dossier jetable.
+- **Aider** : l'environnement éphémère créé par `uvx` n'a **pas** `pytest`, donc `--test-cmd "python -m pytest"` échoue (« *No module named pytest* ») ; Aider a ensuite fait produire au modèle **deux réponses hors du format d'édition** (« *The LLM did not conform to the edit format* »). Le premier échange avait pourtant appliqué la bonne modification : **les formats d'édition sont la fragilité principale** des petits modèles avec Aider.
+- **Route `count_tokens`** (absente du serveur, [Manuel 12](12-api-avancee.md)) : **aucune conséquence visible** sur Claude Code pendant ces essais.
+- Les résultats bruts figurent dans `outils/resultats/gpu_dedie/outils_tiers.json`.
+
+### Pour aller plus loin
+
+- Les trois extensions d'éditeur (**Cline**, **Roo Code**, **Continue**) partagent le moteur de leur version en ligne de commande ou en diffèrent peu ; **seules les versions en ligne de commande de Cline et de Continue** ont été lancées. L'interface graphique de ces extensions n'a **pas** été pilotée **[À tester]**.
+- **Open WebUI** : non lancé. Le premier démarrage exige la **création d'un compte administrateur** local et le chargement d'un modèle d'embedding ; l'essai relève d'un test manuel par l'utilisateur.
+- **Sécurité** : chacun de ces outils exécute des commandes ou modifie des fichiers avec les droits de l'utilisateur. Les essais ont eu lieu dans un dossier jetable, avec des listes d'outils autorisés minimales ([Manuel 11](11-securiser-le-serveur.md)).
 
 ---
 
@@ -225,9 +258,9 @@ Les outils de code sont **exigeants** : prompt système long (instructions, outi
 |---|---|---|
 | **Contexte ≥ 25 000 tokens** [Source] | Le prompt de l'outil peut occuper une grande partie d'un petit contexte | Contexte du modèle de test : 16 384 : **insuffisant** pour ces outils [Estimation] |
 | **Modèle capable d'appeler des outils** | Les éditions de fichiers passent par des appels d'outils | *Gemma 4 E4B* : 100 % avec 5 outils, 92 % avec 17 ([Manuel 10, section 6](10-mcp-et-appel-d-outils.md#6-fiabilité-et-limites-des-petits-modèles)) |
-| **Débit suffisant** | Chaque action relit tout le contexte | GPU intégré : ≈ 14 tok/s en génération, ≈ 340 tok/s en traitement du prompt [Vérifié, [Manuel 08](08-recettes-par-cas-usage.md)] |
+| **Débit suffisant** | Chaque action relit tout le contexte | GPU intégré : ≈ 14 tok/s en génération, ≈ 340 tok/s en traitement du prompt [Vérifié, [Manuel 08](08-recettes-par-cas-usage.md)] ; GPU dédié : ≈ 38 tok/s (modèle MoE de 26 Md) et 800 à 1 200 tok/s en lecture du prompt [Vérifié] |
 
-> **Exemple d'estimation** — Un prompt de 25 000 tokens se traite en environ **75 secondes** à 340 tok/s avant le premier token de chaque tour ; une session de plusieurs dizaines de tours sur GPU intégré est lente [Estimation d'après le débit mesuré ; non testé avec un outil réel]. Un GPU dédié ou un modèle plus petit change cet ordre de grandeur.
+> **Exemple d'estimation** — Un prompt de 25 000 tokens se traite en environ **75 secondes** à 340 tok/s avant le premier token de chaque tour ; une session de plusieurs dizaines de tours sur GPU intégré est lente [Estimation d'après le débit mesuré]. **Mesuré sur GPU dédié avec Claude Code** : 17,8 k tokens en 26,7 s au premier message (≈ 670 tok/s), puis 5 tours en 17,7 s au total grâce au cache de prompt ([section 4 bis](#4-bis-essais-réels-7-octobre-2026)).
 
 ### Pour aller plus loin
 

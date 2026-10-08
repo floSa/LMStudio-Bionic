@@ -3,7 +3,7 @@
 > **Objet** : envoyer des images et des documents à un modèle dans LM Studio, comprendre ce qui détermine la qualité d'une lecture d'image (OCR), choisir et régler un modèle pour cet usage, de la conversation à l'API.
 > **Prérequis** : [Manuel 03](03-charger-un-modele.md) et [Manuel 04](04-parametrer-l-inference.md).
 > **Version décrite** : LM Studio 0.4.25.
-> **Exemples** : *Gemma 4 E4B* (modèle généraliste avec vision, Q4_K_M) sur le poste de test, avec une **facture fictive** générée pour l'occasion (aucune donnée réelle) ; *OlmOCR 2 7B* (modèle d'OCR dédié) **consulté dans le catalogue mais non téléchargé**.
+> **Exemples** : *Gemma 4 E4B* (modèle généraliste avec vision) avec une **facture fictive** générée pour l'occasion (aucune donnée réelle) ; *OlmOCR 2 7B* (modèle d'OCR dédié). Deux postes : **GPU intégré** (6 octobre 2026 ; Gemma 4 E4B Q4_K_M ; OlmOCR 2 consulté dans le catalogue, **non installé**) et **GPU dédié** RTX 4060 Ti 16 Go (7 octobre 2026 ; Gemma 4 E4B Q8_0 ; **OlmOCR 2 7B installé en Q4_K_M et Q8_0 et testé**, [section 7.8](#78-protocole-de-validation)). Les durées du second poste sont données avec l'ancienne valeur entre parenthèses.
 > **Étiquettes** : **[Vérifié]** observé sur le poste de test (ou mesuré avec Gemma 4 E4B) ; **[Source]** documentation officielle (fiches Hugging Face, dépôt `allenai/olmocr`, documentation LM Studio), consultée le 6 octobre 2026 ; **[Estimation]** calcul à mesurer ; **[À tester]** point non documenté.
 
 ---
@@ -85,9 +85,9 @@ Déroulé testé : une seule image jointe (la facture fictive à 1288 px), think
 
 | Tour | Question | Réponse obtenue | Durée |
 |---|---|---|---|
-| 1 | « Quelle est la ligne la plus chère de ce tableau ? Donne sa désignation et son montant total HT. » | *Formation prise en main*, 1 200,00 € : **exact** (lecture du tableau) | 7,5 s |
-| 2 | « Quelle part du total HT de la facture cette ligne représente-t-elle, en pourcentage ? » | 1 200 / 2 550 ≈ **47,06 %** : **exact**, sans que la ligne ni le total soient rappelés dans la question (mémoire de la conversation) | 15,0 s |
-| 3 | « Si le client commandait 2 de ces formations au lieu d'une, quel serait le nouveau total TTC ? » | Nouveau HT 3 750 €, TVA 750 €, **TTC 4 500 €** : **exact** (réutilise la ligne, les autres montants et le taux de TVA) | 32,6 s |
+| 1 | « Quelle est la ligne la plus chère de ce tableau ? Donne sa désignation et son montant total HT. » | *Formation prise en main*, 1 200,00 € : **exact** (lecture du tableau) | 7,5 s (GPU dédié : **2,4 s**) |
+| 2 | « Quelle part du total HT de la facture cette ligne représente-t-elle, en pourcentage ? » | 1 200 / 2 550 ≈ **47,06 %** : **exact**, sans que la ligne ni le total soient rappelés dans la question (mémoire de la conversation) | 15,0 s (**6,3 s**) |
+| 3 | « Si le client commandait 2 de ces formations au lieu d'une, quel serait le nouveau total TTC ? » | Nouveau HT 3 750 €, TVA 750 €, **TTC 4 500 €** : **exact** (réutilise la ligne, les autres montants et le taux de TVA) | 32,6 s (**14,2 s**) |
 
 ![Conversation sur l'image, tours 1 et 2](../img/lmstudio/05-vision/06-conversation-image-suivi.png)
 *Figure 3 — Début de la conversation : image jointe, question 1 (lecture du tableau), question 2 (mémoire et calcul). Les formules sont rendues en notation mathématique.*
@@ -100,7 +100,7 @@ Ce que cette démonstration illustre :
 - **Lecture structurée** : le modèle retrouve la ligne la plus chère sans transcription préalable.
 - **Mémoire** : les tours 2 et 3 ne répètent ni l'image ni les montants ; la réponse du tour 1 et l'image restent dans l'historique, donc dans le contexte (coût en jetons : [section 1](#1-principe--comment-un-modèle--voit--une-image)).
 - **Calcul** : les trois résultats sont exacts, ce qui n'est pas garanti. Les modèles de cette taille se trompent plus souvent sur les divisions et les pourcentages longs : vérifier avec un programme ou une calculatrice dès que le résultat compte ([section 10](#10-fiabiliser-une-extraction)).
-- **Durée** : elle croît avec la longueur de la réponse (≈ 16 tok/s sur ce poste) ; demander « réponds en une phrase » raccourcit nettement.
+- **Durée** : elle croît avec la longueur de la réponse (≈ 16 tok/s sur le GPU intégré, ≈ 40 tok/s sur le GPU dédié : 2,4 / 6,3 / 14,2 s pour 51 / 230 / 588 tokens de sortie, mêmes questions, même facture, Q8_0) ; demander « réponds en une phrase » raccourcit nettement. Les trois résultats restent **exacts** (47,06 % ; 4 500,00 €) sur le second poste.
 
 ---
 
@@ -139,7 +139,7 @@ Même document, deux résolutions, chacun dans une conversation vierge (thinking
 | **Limit Response Length** | Large (≥ 4000) | Une page dense produit plusieurs milliers de tokens. |
 | **Context Length** (chargement) | ≥ 16 384 | Image + consigne + sortie. |
 | **K/V cache** | F16 (non quantifié) | Ne pas dégrader la précision sans test. |
-| **Max Concurrent Predictions** | 1 | Pages traitées l'une après l'autre. Sur GPU intégré, 4 requêtes simultanées ne donnent **aucun gain de débit** **[Vérifié]** ([Manuel 03](03-charger-un-modele.md#55-concurrence-sur-gpu-intégré)). |
+| **Max Concurrent Predictions** | 1 | Pages traitées l'une après l'autre. Sur GPU intégré, 4 requêtes simultanées ne donnent **aucun gain de débit** **[Vérifié]** ([Manuel 03](03-charger-un-modele.md#55-concurrence-selon-le-matériel)). |
 | **Ordre image / texte** | Image **avant** le texte (Gemma 4) | Recommandation de l'éditeur ; OlmOCR 2 : texte puis image ([section 7.4](#74-prompt)). |
 | **Flash Attention** | Activé | Moins de mémoire, plus de vitesse **[Vérifié]**. |
 
@@ -176,7 +176,7 @@ Deux familles de modèles lisent des images :
 
 ## 7. Exemple : un modèle d'OCR dédié, OlmOCR 2 7B
 
-> **Statut de validation** — **OlmOCR 2 7B n'a pas été téléchargé** sur le poste de test. Cette section n'a donc **pas pu être validée par un essai réel du modèle** ; chaque information porte une étiquette. La procédure de validation figure en [section 7.8](#78-protocole-de-validation).
+> **Statut de validation** — Le 6 octobre 2026, **OlmOCR 2 7B n'avait pas été téléchargé** (connexion limitée) : cette section était une procédure. Le 7 octobre 2026, le modèle étant **installé** (Q4_K_M et Q8_0) sur le poste à GPU dédié, le **protocole de la [section 7.8](#78-protocole-de-validation) a été exécuté** sur quatre pages fictives ; les informations vérifiées sont marquées **[Vérifié]**. Restent non validés : la quantification **Q6_K** (non installée), les documents **réels** et les pages de plusieurs dizaines de lignes.
 
 ### 7.1 Présentation du modèle
 
@@ -289,6 +289,8 @@ Valeurs issues du pipeline officiel (contexte 16 384 tokens, 8 000 tokens de sor
 
 **Estimation mémoire [Estimation]** : fichiers ≈ 6,0 à 7,6 Go + cache KV d'environ 57 Ko par token (28 couches × 4 têtes KV × 128 dimensions × 2 (K et V) × 2 octets), soit ≈ **0,9 Go à 16 384 tokens** ; **≈ 7 à 9 Go au total** selon la quantification (calcul : [Manuel 00](00-notions-fondamentales.md#7-calculer-la-ram-nécessaire), script [`exemples/09_calculateur_memoire.py`](../../exemples/09_calculateur_memoire.py)). L'**Estimated Memory Usage** affichée par LM Studio fait foi.
 
+**Mesure sur GPU dédié [Vérifié]** (contexte 16 384, tout sur la carte, chargement par le SDK) : **Q4_K_M = 7,18 Go de VRAM**, **Q8_0 = 10,10 Go de VRAM** (RAM privée du moteur 8,2 et 11,2 Go). La page de 1 648 jetons d'entrée (image comprise, 1288 px) tient largement dans le contexte.
+
 ### 7.6 Lire la sortie
 
 Forme attendue **[Source]** :
@@ -326,7 +328,7 @@ Le script [`exemples/08_olmocr_lot.py`](../../exemples/08_olmocr_lot.py) appliqu
 python exemples\08_olmocr_lot.py D:\pages --sortie D:\pages_md --modele allenai/olmocr-2-7b
 ```
 
-**Statut** : testé de bout en bout avec Gemma 4 E4B à la place d'OlmOCR (`--modele google/gemma-4-e4b --sans-yaml`) : 1 page, 548 tokens en entrée, 292 en sortie, 25 s **[Vérifié]** ; analyse de l'en-tête YAML validée sur des exemples **[Vérifié]**. Comportement avec OlmOCR 2 **[À tester]**.
+**Statut** : testé de bout en bout avec Gemma 4 E4B à la place d'OlmOCR (`--modele google/gemma-4-e4b --sans-yaml`) : 1 page, 548 tokens en entrée, 292 en sortie, 25 s sur le GPU intégré (**8 s** sur le GPU dédié) **[Vérifié]**. **Testé avec OlmOCR 2** (`--modele allenai/olmocr-2-7b`, Q4_K_M) sur quatre pages : en-tête YAML analysé, un fichier `.md` par page, **4 pages en 53 s** (6 592 tokens en entrée, 1 683 en sortie) **[Vérifié]**. **Correction de l'exemple** : la rotation demandée par `rotation_correction` s'applique dans le sens **anti-horaire** (sens de PIL) ; la version initiale tournait dans le sens horaire et nécessitait deux relances (90° puis 180°) au lieu d'une ; les trois orientations testées (90° horaire, 90° anti-horaire, 180°) sont désormais corrigées en **un** essai supplémentaire **[Vérifié]**.
 
 ### 7.8 Protocole de validation
 
@@ -344,24 +346,37 @@ python exemples\08_olmocr_lot.py D:\pages --sortie D:\pages_md --modele allenai/
 | 8 | Tester une page **tournée** à 90°. | Comportement documenté |
 | 9 | Mettre à jour cette section : convertir les étiquettes **[Estimation]** et **[À tester]** en **[Vérifié]**. | — |
 
-**Performances attendues [Estimation]** — non mesurées. Référence **mesurée** avec Gemma 4 E4B (modèle de vision de taille comparable) sur le même poste **[Vérifié]** :
+**Résultats du protocole (7 octobre 2026, GPU dédié) [Vérifié]** — Pages **fictives** générées (aucune donnée réelle) : (1) texte anglais de 10 lignes ; (2) facture française à tableau (accents) ; (3) tableau dense de 8 lignes × 6 colonnes (chiffres) ; (4) la facture **tournée de 90°**. Contexte 16 384, tout sur le GPU, température 0,1, 8 000 tokens maximum, prompt officiel (section 7.4). Le modèle de comparaison reçoit le prompt générique de Gemma (raisonnement désactivé).
 
-| Mesure (Gemma 4 E4B, Q4_K_M, GPU Vulkan) | Valeur |
+| Étape du protocole | Résultat |
 |---|---|
-| Vitesse de génération | ≈ 14-15 tok/s |
-| Traitement du prompt | ≈ 330-350 tok/s |
-| Facture fictive (image 1288 px → 292 tokens de texte) | 25 à 37 s |
+| 1. Quantification **Q6_K** (7,61 Go) | **Non téléchargée** : les deux fichiers présents sont **Q4_K_M** (6,04 Go) et **Q8_0** (9,45 Go) ; protocole mené avec ces deux |
+| 2. Chargement, mémoire | 7,4 s ; VRAM **7,18 Go** (Q4_K_M) et **10,10 Go** (Q8_0) à 16 384 tokens |
+| 3. Page anglaise | En-tête YAML présent (`primary_language: en`, `is_rotation_valid: True`, `rotation_correction: 0`), **12 éléments sur 12** retrouvés |
+| 4. Page française, accents, tableau | `primary_language: fr` ; accents corrects ; **tableau rendu en HTML** (`<table>`) ; 12 éléments sur 12 |
+| 5. Jetons et vitesse | **1 648 tokens d'entrée** (image comprise ; 548 pour Gemma 4 E4B : 3 fois plus), 156 à 745 tokens de sortie |
+| 6. Comparaison avec Gemma 4 E4B | Voir le tableau ci-dessous : **même exactitude** sur ces pages simples ; Gemma 4 E4B 1,1 à 1,7 fois plus rapide (sorties plus courtes) ; OlmOCR ajoute l'en-tête YAML et le tableau HTML |
+| 7. Q4_K_M contre Q8_0 | **Aucune différence** de contenu sur ces pages (chiffres identiques) ; Q8_0 ≈ 35 % plus lent (≈ 29 contre ≈ 44 tok/s) et 2,9 Go de VRAM de plus |
+| 8. Page tournée de 90° | Signalée : `is_rotation_valid: False`, `rotation_correction: 90` ; **le texte est pourtant lu correctement** (12 éléments sur 12) ; Gemma 4 E4B lit aussi la page tournée correctement |
 
-OlmOCR 2 7B est un modèle **dense** de ≈ 7,6 Md de paramètres (contre ≈ 4,5 Md « effectifs » pour Gemma 4 E4B) : génération attendue **plus lente**, de l'ordre de **9 à 12 tok/s** **[Estimation]**. Une page de texte dense produit 1 000 à 2 000 tokens : **1,5 à 3,5 minutes par page**, soit ≈ **20 à 40 pages par heure** **[Estimation]**. Au-delà de quelques dizaines de pages par jour, un **GPU dédié** ou un serveur est préférable.
+| Modèle (GPU dédié) | Durée page 1 | Page 2 (facture) | Page 3 (tableau dense) | Page 4 (tournée) | Vitesse globale | Exactitude |
+|---|---|---|---|---|---|---|
+| OlmOCR 2 7B **Q4_K_M** | 5,2 s | 8,4 s | 17,0 s | 9,5 s | 41-47 tok/s | 100 % (4 pages) |
+| OlmOCR 2 7B **Q8_0** | 6,9 s | 13,2 s | 26,4 s | 15,2 s | 23-30 tok/s | 100 % |
+| Gemma 4 E4B Q8_0 | 3,9 s | 7,4 s | 9,9 s | 7,9 s | 38-40 tok/s | 100 % |
+
+**L'exactitude de 100 % est celle de pages fictives propres** (texte net, une seule police) ; elle ne dit rien sur des scans dégradés, des tableaux à cellules fusionnées ou des équations **[À tester]**. Le critère « éléments retrouvés » (`outils/essai_olmocr.py`) compte les mentions attendues (numéros, montants, noms) dans la sortie.
+
+**Performances relevées auparavant avec Gemma 4 E4B (GPU intégré, Q4_K_M, Vulkan)** : génération ≈ 14-15 tok/s, traitement du prompt ≈ 330-350 tok/s, facture fictive (1288 px → 292 tokens de texte) 25 à 37 s. Sur le GPU dédié : ≈ 38-47 tok/s, ≈ 3 700 tok/s, **7 à 8 s**. OlmOCR 2 7B est un modèle **dense** de ≈ 7,6 Md de paramètres (contre ≈ 4,5 Md « effectifs » pour Gemma 4 E4B) : la génération prévue « de l'ordre de 9 à 12 tok/s » sur le GPU intégré **[Estimation, non mesurée]** devient **41-47 tok/s** (Q4_K_M) sur le GPU dédié. Une page de texte dense produit 1 000 à 2 000 tokens : ≈ **25 à 50 s par page**, soit **70 à 140 pages par heure** sur ce poste **[Estimation à partir des mesures]**.
 
 ### 7.9 Limites et pièges de ce modèle
 
 | Piège | Détail |
 |---|---|
-| **Langue** | Entraîné sur des documents anglais ; le français peut fonctionner mais **n'est pas garanti** **[À tester]**. |
+| **Langue** | Entraîné sur des documents anglais ; le **français a été lu correctement** (accents, tableau) sur les pages fictives **[Vérifié]** ; non garanti sur des documents réels. |
 | **Contexte** | Défaut LM Studio (8192) insuffisant : prévoir **16384**. |
 | **Résolution** | Grand côté = 1288 px. Trop petit : colonnes décalées **[Vérifié]** ; trop grand : plus de tokens et de temps **[Estimation]**. |
-| **Rotation** | Non corrigée automatiquement par LM Studio. |
+| **Rotation** | Non corrigée automatiquement par LM Studio. Le modèle **détecte** une page tournée (`is_rotation_valid: False`, `rotation_correction: 90`) mais l'a **lue correctement** malgré tout ; la correction s'applique **dans le sens anti-horaire** ([section 7.7](#77-traitement-par-lot)) **[Vérifié]**. |
 | **Une page par requête** | Ne pas envoyer plusieurs pages dans un même message **[Source]**. |
 | **Tableaux en HTML** | Prévoir une conversion en aval (HTML → Markdown ou tableur). |
 | **Figures** | Légendées, non extraites. |
@@ -439,7 +454,7 @@ Mettre en place un **jeu de test** : 10 à 20 pages représentatives, vérité t
 ## 11. Limites
 
 - Les erreurs de lecture sont **silencieuses** : aucune alerte n'est émise lorsqu'un chiffre est mal lu.
-- La vitesse est limitée par la génération (≈ 15 tok/s sur le poste de test) : une facture simple demande ≈ 25 à 37 s ; une page dense plusieurs minutes.
+- La vitesse est limitée par la génération (≈ 15 tok/s sur le GPU intégré ; ≈ 40-47 tok/s sur le GPU dédié) : une facture simple demande ≈ 25 à 37 s sur le GPU intégré et **≈ 7 à 8 s** sur le GPU dédié ; une page dense plusieurs minutes sur le premier, **≈ 17 s** sur le second (tableau de 8 lignes, 745 tokens).
 - Les modèles généralistes (Gemma 4) sont moins spécialisés qu'un modèle d'OCR dédié (OlmOCR 2) sur les **équations**, les **tableaux complexes** et les mises en page denses.
 - **Audio** : Gemma 4 est annoncé comme acceptant l'audio par l'éditeur ; la prise en charge dans LM Studio 0.4.25 n'a pas été testée.
 - Les images très grandes sont réduites (*Image Input*) : vérifier la valeur configurée.

@@ -34,9 +34,9 @@ Règles :
 - **Mémoire nécessaire ≈ fichier + cache KV + 0,5 Go**, soit ≈ fichier + (contexte × coût par token) ; voir [Manuel 03](03-charger-un-modele.md#2-composition-de-la-mémoire).
 - Garder **≥ 20 % de RAM libre** pour le système et les autres applications.
 - La **vitesse de génération** dépend surtout de la **bande passante mémoire** : un modèle deux fois plus gros génère environ deux fois plus lentement.
-- Un GPU **intégré** accélère modérément (≈ +30 % mesuré en génération, [Manuel 03](03-charger-un-modele.md#54-vitesse-selon-le-déchargement-gpu)) ; un GPU dédié change l'échelle de performance.
+- Un GPU **intégré** accélère modérément (≈ +30 % mesuré en génération, [Manuel 03](03-charger-un-modele.md#54-vitesse-selon-le-déchargement-gpu)) ; un GPU **dédié** change l'échelle de performance (**× 5** en génération par rapport au CPU seul, **× 77** en lecture du prompt : [Manuel 15](15-performances-gpu-dedie.md)).
 
-> **Exemple (poste de test)** — Modèle de 7,5 Md (Q4_K_M, 6,33 Go) : ≈ 15 tok/s en génération, ≈ 340 tok/s en traitement du prompt ; mémoire estimée 6,6 Go à 8 192 tokens.
+> **Exemple (poste de test)** — Modèle de 7,5 Md (Q4_K_M, 6,33 Go) : ≈ 15 tok/s en génération, ≈ 340 tok/s en traitement du prompt ; mémoire estimée 6,6 Go à 8 192 tokens. **Sur un GPU dédié de 16 Go** (même modèle en Q8_0, 9,02 Go) : ≈ 45 tok/s et ≈ 3 700 tok/s ; VRAM réelle 6,1 Go à 8 192 tokens (estimation 9,1 Gio).
 
 ---
 
@@ -139,7 +139,7 @@ Règles :
 |---|---|
 | **Sécurité** | Profil B du [Manuel 06](06-serveur-local-et-api.md#5-sécurité) : réseau activé **seulement** avec authentification, jeton par application, pare-feu, journaux |
 | **Chargement** | Contexte = besoin par requête × concurrence ; *Max Concurrent Predictions* ajusté après **mesure du débit total** |
-| **Mesure clé** | Sur GPU intégré, 4 requêtes simultanées : 12,8 tok/s au total (contre 14,8 tok/s pour une seule) — la concurrence **n'augmente pas** le débit |
+| **Mesure clé** | Sur GPU intégré, 4 requêtes simultanées : 12,8 tok/s au total (contre 14,8 tok/s pour une seule) — la concurrence **n'augmente pas** le débit. **Sur GPU dédié** (RTX 4060 Ti) : **152 à 160 tok/s** pour 4 requêtes (45 pour une), **264 tok/s** pour 8 — la concurrence **multiplie** le débit : toujours mesurer sur le matériel cible |
 | **Architecture** | File d'attente côté application ; délais d'attente ; relance ; ne pas dépendre d'une erreur sur nom de modèle erroné (redirection vers le modèle chargé) |
 | **Contrôle** | Test de charge avec le nombre réel d'utilisateurs ; supervision de la mémoire |
 

@@ -3,7 +3,7 @@
 > **Objet** : expliquer ce que fait chaque paramètre de la fenêtre de chargement de LM Studio, son effet sur la mémoire et la vitesse, et la façon de le régler selon le cas d'usage.
 > **Prérequis** : [Manuel 01](01-prise-en-main.md) (Developer mode activé) et [Manuel 02](02-selectionner-et-telecharger-un-modele.md).
 > **Version décrite** : LM Studio 0.4.25, moteur llama.cpp (format GGUF).
-> **Exemples** : mesures réalisées sur le poste de test (Core Ultra 7 255H, 31 Go de RAM, GPU intégré Intel Arc 140T, moteur Vulkan) avec le modèle *Gemma 4 E4B* (Q4_K_M, 6,33 Go). Les valeurs numériques sont propres à cette configuration ; les principes sont généraux.
+> **Exemples** : mesures réalisées sur **deux postes** avec le modèle *Gemma 4 E4B* : un poste à **GPU intégré** (Core Ultra 7 255H, 31 Go de RAM, Intel Arc 140T, moteur Vulkan ; Q4_K_M, 6,33 Go ; 6 octobre 2026) et un poste à **GPU dédié** (Ryzen 5 9600X, 61,6 Go de RAM, RTX 4060 Ti de 16 Go, moteur CUDA 12 ; **Q8_0, 9,02 Go** ; 7 octobre 2026). Le tableau complet du second poste est dans le [Manuel 15](15-performances-gpu-dedie.md). Les valeurs numériques sont propres à cette configuration ; les principes sont généraux.
 
 ---
 
@@ -134,7 +134,7 @@ Les descriptions entre guillemets sont la traduction des infobulles officielles 
 
 | N° | Paramètre | Rôle et effet | Plage / défaut | Quand modifier |
 |---|---|---|---|---|
-| 6 | **Max Concurrent Predictions** *(Experimental)* | « Nombre maximal de prédictions que le modèle peut exécuter simultanément. La vitesse de chaque prédiction peut diminuer, mais chacune démarre plus vite et un débit total plus élevé peut être atteint. » | 4 | **1** pour un usage mono-utilisateur ou un traitement séquentiel ; **≥ 2** pour un serveur partagé **sur matériel offrant de la marge de calcul** (voir [section 5.5](#55-concurrence-sur-gpu-intégré)). |
+| 6 | **Max Concurrent Predictions** *(Experimental)* | « Nombre maximal de prédictions que le modèle peut exécuter simultanément. La vitesse de chaque prédiction peut diminuer, mais chacune démarre plus vite et un débit total plus élevé peut être atteint. » | 4 | **1** pour un usage mono-utilisateur ou un traitement séquentiel ; **≥ 2** pour un serveur partagé **sur matériel offrant de la marge de calcul** (voir [section 5.5](#55-concurrence-selon-le-matériel)). |
 | 7 | **Unified KV Cache** *(Experimental)* | « Les prédictions concurrentes partagent un seul cache KV, ce qui économise de la mémoire. Le désactiver garantit que chaque prédiction peut utiliser toute la longueur de contexte, au prix de plus de mémoire. » | Activé | Désactiver si plusieurs requêtes longues simultanées doivent chacune disposer du contexte complet. |
 | 8 | **Context Checkpoints** | « Nombre maximal de points de contrôle de contexte conservés par slot du serveur llama. 0 désactive les points de contrôle. » Permet de réutiliser le calcul d'un début de prompt identique (cache de prompt), surtout pour les modèles à attention à fenêtre glissante. *Documentation LM Studio : absente ; description par analogie avec llama.cpp.* | 32 | Laisser par défaut. |
 
@@ -154,7 +154,7 @@ Les descriptions entre guillemets sont la traduction des infobulles officielles 
 
 ## 5. Effets mesurés
 
-Mesures sur le poste de test, modèle *Gemma 4 E4B* Q4_K_M. Les relevés d'estimation proviennent de l'interface (valeurs stabilisées) ; les relevés de vitesse proviennent de `lms load` + API (génération de 200 tokens, prompt de 2 119 tokens).
+Deux séries : **GPU intégré** (*Gemma 4 E4B* Q4_K_M ; valeurs principales ci-dessous) et **GPU dédié** (*Gemma 4 E4B* **Q8_0**, mention « **GPU dédié** »). Les écarts entre les deux séries mêlent donc **le matériel et la quantification** ; la comparaison est indicative. Les relevés d'estimation proviennent de l'interface (valeurs stabilisées) ; les relevés de vitesse proviennent de `lms load` + API (génération de 200 tokens, prompt de 2 119 tokens sur le GPU intégré, ≈ 1 770 tokens sur le GPU dédié).
 
 ### 5.1 Taille de contexte et mémoire
 
@@ -177,7 +177,17 @@ Mesures sur le poste de test, modèle *Gemma 4 E4B* Q4_K_M. Les relevés d'estim
 
 *Figure 4 — Estimation mémoire affichée par la fenêtre de chargement pour deux tailles de contexte (6,31 Go et 12,69 Go).*
 
-Chaque doublement du contexte ajoute le double du précédent : **≈ +50 Ko par token**. Le contexte maximal annoncé par un modèle n'est donc pas un réglage par défaut raisonnable : à 131 072 tokens, le cache KV représente à lui seul autant que le modèle.
+Chaque doublement du contexte ajoute le double du précédent : **≈ +50 Ko par token** (estimation). Le contexte maximal annoncé par un modèle n'est donc pas un réglage par défaut raisonnable : à 131 072 tokens, le cache KV représente à lui seul autant que le modèle.
+
+**GPU dédié (Q8_0, 9,02 Go)** — estimation de LM Studio (`--estimate-only`, Gio) et mémoire **réellement occupée** après chargement :
+
+| Contexte (tokens) | 2 048 | 8 192 | 32 768 | 65 536 | 131 072 |
+|---|---|---|---|---|---|
+| **Estimation** (Gio) | 8,77 | 9,10 | 10,44 | 12,21 | 15,77 |
+| **VRAM mesurée** (Go) | 6,08 | 6,12 | 6,62 | 7,20 | 8,22 |
+| RAM privée du moteur (Go) | 7,20 | 7,31 | 7,73 | 8,30 | 9,42 |
+
+L'estimation **surestime** la mémoire GPU (de +2,7 à +7,5 Go) : le cache réel de Gemma 4 E4B coûte ≈ **17 Ko par token** au lieu de ≈ 57 Ko, et la RAM reste mobilisée (≈ 8 Go) même modèle entièrement sur le GPU. Le contexte maximal (131 072 tokens) **tient** dans 8,2 Go de VRAM ([Manuel 15, section 5](15-performances-gpu-dedie.md#5-mémoire-réelle-et-estimation)).
 
 ### 5.2 Effet des autres paramètres sur l'estimation (contexte 8 192)
 
@@ -190,6 +200,8 @@ Chaque doublement du contexte ajoute le double du précédent : **≈ +50 Ko par
 | **Max Concurrent Predictions** | 4 → 1 | Aucun (cache unifié) | Aucun |
 | **Flash Attention** (contexte 32 768) | activé → désactivé | +0,02 Go | — |
 
+**GPU dédié (Q8_0, contexte 8 192, interface)** : *GPU Offload* 0 / 12 / 24 / 36 / 42 couches → part GPU **0,002 / 2,65 / 5,51 / 8,16 / 9,26 Go** (total 9,26 Go) ; *Physical Batch Size* 128 / 512 / 1 024 / 2 048 → total **9,09 / 9,26 / 9,48 / 9,91 Go** ; *Offload KV Cache to GPU* désactivé → part GPU −0,41 Go ; *Evaluation Batch Size* et *Max Concurrent Predictions* : aucun effet sur l'estimation. **L'estimation ne reflète pas l'effet réel** de ces réglages sur la **vitesse** : Flash Attention (lecture du prompt × 3), taille des lots (−25 à −30 % sous 256) et offload du cache K/V (génération −18 %) sont mesurés dans le [Manuel 15, section 4](15-performances-gpu-dedie.md#4-flash-attention-lots-et-cache-kv).
+
 ### 5.3 Quantification du cache KV (contexte 32 768)
 
 | K | V | Mémoire estimée | Économie vs F16 |
@@ -199,7 +211,9 @@ Chaque doublement du contexte ajoute le double du précédent : **≈ +50 Ko par
 | Q8_0 | Q8_0 | 7,07 Go | −0,76 Go (≈ −47 % du cache) |
 | Q4_0 | Q4_0 | 6,67 Go | −1,16 Go (≈ −71 % du cache) |
 
-À contexte maximal (131 072 tokens), le gain se multiplie par quatre : le cache F16 d'environ 6 Go passe à environ 3 Go en Q8_0 *(extrapolation de la mesure à 32 768 tokens)*. Le coût en qualité n'a pas été mesuré : **l'effet varie selon les modèles** (infobulle officielle) et doit être validé sur des cas réels.
+À contexte maximal (131 072 tokens), le gain se multiplie par quatre : le cache F16 d'environ 6 Go passe à environ 3 Go en Q8_0 *(extrapolation de la mesure à 32 768 tokens)*. Le coût en qualité **n'a pas été mesuré de façon fine** : **l'effet varie selon les modèles** (infobulle officielle) et doit être validé sur des cas réels.
+
+**Mesure réelle sur GPU dédié** (Q8_0, contexte 65 536, Flash Attention, SDK) : VRAM 7,19 Go (F16/F16) → **7,03** (K Q8_0) → **6,91** (K et V Q8_0) → **6,63 Go** (K et V Q4_0) ; **vitesse inchangée** (génération 46,1 à 47,2 tok/s) ; un code placé au milieu d'un texte de 26 451 puis 44 151 tokens est **retrouvé** dans tous les cas. Le gain réel est **plus faible que l'estimation** (−0,56 Go au lieu d'environ −2,3 Go extrapolés **[Estimation]**) parce que le cache de ce modèle est petit ([Manuel 15, section 4.3](15-performances-gpu-dedie.md#43-cache-kv--en-vram-ou-en-ram-quantifié-ou-non)).
 
 ![Liste de quantification du cache K](../img/lmstudio/03-chargement/05-quantification-cache-k.png)
 *Figure 5 — Case « K Cache Quantization Type » cochée : liste des types (F32, F16, Q8_0, Q4_0…).*
@@ -212,12 +226,45 @@ Chaque doublement du contexte ajoute le double du précédent : **≈ +50 Ko par
 | GPU 50 % | 250 tok/s | 13,3 tok/s | 17 s |
 | CPU seul (GPU 0) | 215 tok/s | 11,2 tok/s | 15 s |
 
-Sur ce GPU **intégré**, le passage au GPU améliore la génération d'environ **+30 %** et le traitement du prompt d'environ **+65 %**. Un GPU dédié, doté de sa propre mémoire rapide, donne généralement des écarts bien plus importants. Principe général : la génération est limitée par la **bande passante mémoire** ; le traitement du prompt par la **puissance de calcul**.
+Sur ce GPU **intégré**, le passage au GPU améliore la génération d'environ **+30 %** et le traitement du prompt d'environ **+65 %**. Principe général : la génération est limitée par la **bande passante mémoire** ; le traitement du prompt par la **puissance de calcul**.
 
-### 5.5 Concurrence sur GPU intégré
+**GPU dédié** (RTX 4060 Ti 16 Go, moteur CUDA 12 2.53.0, *Gemma 4 E4B* **Q8_0**, contexte 8 192, 1 requête, `lms load --gpu`) — l'ancienne valeur du GPU intégré (Q4_K_M) est donnée entre parenthèses :
+
+| Configuration | Traitement du prompt | Génération | Chargement |
+|---|---|---|---|
+| GPU 100 % (42 couches) | **3 746 tok/s** (GPU intégré : 353) | **45,0 tok/s** (14,8) | 7,5 s (16 s) |
+| GPU 75 % | 1 644 tok/s | 22,4 tok/s | 7,5 s |
+| GPU 50 % | 1 247 tok/s (250) | 13,7 tok/s (13,3) | 7,7 s (17 s) |
+| GPU 25 % | 888 tok/s | 10,0 tok/s | 7,7 s |
+| CPU seul (`--gpu off`, moteur CUDA) | 700 tok/s (215) | 8,9 tok/s (11,2) | 8,1 s (15 s) |
+| Moteur **CPU** AVX2 | 48,5 tok/s | 8,8 tok/s | 6,3 s |
+| Moteur **Vulkan**, GPU 100 % | 2 659 tok/s | 46,0 tok/s | 7,2 s |
+
+Sur une **carte dédiée**, le passage « CPU seul → GPU » multiplie la génération par **5** (au lieu de 1,3) ; la génération progresse **plus que proportionnellement** avec la part de couches sur le GPU. Le moteur CUDA accélère la lecture du prompt même à 0 couche sur le GPU. Détails, interprétation et comparaison des moteurs : [Manuel 15, section 2](15-performances-gpu-dedie.md#2-moteurs-et-nombre-de-couches-sur-le-gpu).
+
+### 5.5 Concurrence selon le matériel
+
+**GPU intégré** (Q4_K_M) :
 
 | Configuration | Génération par requête | Débit total |
 |---|---|---|
+| 1 requête | 14,8 tok/s | 14,8 tok/s |
+| 4 requêtes simultanées (*Max Concurrent Predictions* = 4) | **3,3 tok/s** | **12,8 tok/s** |
+
+Quatre requêtes simultanées se partagent la même bande passante mémoire : le **débit total n'augmente pas** et chaque utilisateur est servi quatre fois plus lentement. Sur machine modeste, préférer **1 requête à la fois** et une file d'attente côté application.
+
+**GPU dédié** (Q8_0, tout sur la carte) :
+
+| Requêtes simultanées | Par requête | Débit total |
+|---|---|---|
+| 1 | 45,2 tok/s | 45 tok/s |
+| 2 | 42,5 tok/s | **83 tok/s** |
+| 4 (*Max Concurrent Predictions* = 4, défaut) | **39,2 tok/s** (rejeu du banc d'origine : 41,2) | **152 tok/s** (rejeu : 160) |
+| 8 | 34,2 tok/s | **264 tok/s** |
+
+**Le résultat s'inverse** : sur une carte dédiée, la génération d'une requête n'occupe qu'une partie du calcul disponible ; la concurrence multiplie le débit total (× 3,4 avec 4 requêtes, × 5,9 avec 8) pour une baisse de 13 à 24 % du débit par requête. Le coût mémoire est faible (+0,15 Go de VRAM pour 8 emplacements, cache unifié). **La règle « 1 requête à la fois » est propre au GPU intégré.**
+
+---|---|---|
 | 1 requête | 14,8 tok/s | 14,8 tok/s |
 | 4 requêtes simultanées (*Max Concurrent Predictions* = 4) | **3,3 tok/s** | **12,8 tok/s** |
 

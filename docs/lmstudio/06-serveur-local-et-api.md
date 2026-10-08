@@ -181,13 +181,15 @@ Les scripts du dossier [`exemples/`](../../exemples/) s'appuient sur un mini-cli
 | Script | Objet | Résultat constaté |
 |---|---|---|
 | `01_lister_modeles.py` | Modèles et configuration des instances | 2 modèles ; instance chargée : contexte 8192, parallélisme 4, Flash Attention |
-| `02_chat_simple.py` | Question / réponse, usage en tokens | 42 tokens en entrée, 62 en sortie, 4,6 s |
-| `03_streaming.py` | Réponse en flux (SSE) | Premier token après **0,94 s**, 50 morceaux en 4,1 s |
+| `02_chat_simple.py` | Question / réponse, usage en tokens | 42 tokens en entrée, 62 en sortie, 4,6 s (GPU dédié : 61 en sortie, **1,5 s**) |
+| `03_streaming.py` | Réponse en flux (SSE) | Premier token après **0,94 s**, 50 morceaux en 4,1 s (GPU dédié : **0,13 s**, 51 morceaux en **1,3 s**) |
 | `04_sortie_json_schema.py` | JSON conforme à un schéma | JSON valide, 4 champs corrects |
 | `05_embeddings.py` | Vecteurs et similarité | Dimension **768** ; similarité 0,74 (phrases proches) contre 0,545 (sans rapport) |
-| `06_ocr_image.py` | OCR d'une image | 548 tokens en entrée (image comprise), 292 en sortie, 25 s |
+| `06_ocr_image.py` | OCR d'une image | 548 tokens en entrée (image comprise), 292 en sortie, 25 s (GPU dédié : 289 en sortie, **7,7 s**) |
 | `07_appel_outil.py` | Appel de fonction | `get_meteo({"ville": "Lyon"})`, `finish_reason: tool_calls` |
-| `08_olmocr_lot.py` | OCR par lot (avec Gemma 4 en substitut) | 1 page traitée, 25 s |
+| `08_olmocr_lot.py` | OCR par lot (avec Gemma 4 en substitut) | 1 page traitée, 25 s (GPU dédié : **8 s** ; **4 pages en 53 s avec OlmOCR 2 7B**) |
+
+Les sorties du 7 octobre 2026 (GPU dédié) sont dans `outils/resultats/gpu_dedie/exemples_sorties_gpu_dedie.txt` ; l'ancien relevé reste dans `exemples/sorties_verifiees.txt`. Les similarités d'embeddings varient peu entre les deux postes (0,724 et 0,538 contre 0,74 et 0,545), la quantification et le matériel différant.
 
 ### 7.1 PowerShell **[exécuté]**
 
@@ -274,7 +276,7 @@ Un paramètre **absent** de la requête prend la valeur par défaut **du modèle
 
 | Champ testé (`/v1/chat/completions`) | Effet constaté |
 |---|---|
-| `reasoning_effort: "none"` | **Réflexion désactivée** : 0 token de raisonnement, 18 s au lieu de 38 s sur une question de calcul |
+| `reasoning_effort: "none"` | **Réflexion désactivée** : 0 token de raisonnement, 18 s au lieu de 38 s sur une question de calcul (GPU dédié, « 17 × 23 » : **0,23 s** au lieu de 3,2 s) |
 | `reasoning_effort: "low"` | Aucun effet visible (réflexion maintenue) |
 | `reasoning: "off"` | Aucun effet sur cette route |
 | `chat_template_kwargs: {"enable_thinking": false}` | Aucun effet sur cette route |
@@ -289,14 +291,14 @@ La réflexion, lorsqu'elle existe, est renvoyée à part dans `reasoning_content
 | Mécanisme | Comportement constaté ou documenté |
 |---|---|
 | **Chargement manuel** | Modèle chargé par l'interface ou `lms load` ; il reste en mémoire jusqu'à éjection. |
-| **Just-in-Time (JIT)** | Une requête sur un modèle non chargé le charge à la volée. *Constaté* : la première requête d'embedding a chargé `text-embedding-nomic-embed-text-v1.5` (≈ 15 s), visible ensuite dans `lms ps` avec un **TTL** (`41m / 1h`). |
+| **Just-in-Time (JIT)** | Une requête sur un modèle non chargé le charge à la volée. *Constaté* : la première requête d'embedding a chargé `text-embedding-nomic-embed-text-v1.5` (≈ 15 s ; **1,6 s** sur le poste à GPU dédié, modèle de 84 Mo), visible ensuite dans `lms ps` avec un **TTL** (`41m / 1h`). |
 | **TTL (durée d'inactivité)** | Les modèles chargés à la volée sont déchargés après le TTL (60 min par défaut) ; un modèle chargé **manuellement** n'est pas concerné. |
 | **Auto-évincement** | Au plus **un** modèle chargé à la volée à la fois (option 9 des réglages) ; le précédent est déchargé. |
 | **Identifiant inconnu** | *Constaté* : une requête dont le champ `model` ne correspond à aucun modèle (`"modele-inexistant"`) a été **traitée par le modèle chargé** et n'a pas renvoyé d'erreur. Ne pas se fier à une erreur pour détecter une faute de nom ; vérifier le champ `model` de la réponse. |
-| **Chargement par l'API** | `POST /api/v1/models/load` (paramètres `context_length`, `flash_attention`, `parallel`, `offload_kv_cache_to_gpu`…) — *non testé ici*. |
+| **Chargement par l'API** | `POST /api/v1/models/load` **[Vérifié, 7 octobre 2026]** : paramètres acceptés `model`, `context_length`, `eval_batch_size`, `flash_attention`, `num_experts`, `offload_kv_cache_to_gpu`, `parallel`, `echo_load_config` ; toute autre clé est refusée (HTTP 400, « *Unrecognized key(s) in object* »). **Absents de cette route** : nombre de couches sur le GPU (`lms load --gpu`), quantification du cache K/V, lot physique, arguments `llama.cpp` : voir le **SDK** ([Manuel 16](16-sdk-et-plugins.md)). Un modèle introuvable renvoie `model_not_found`. |
 | **Contexte différent dans une requête** | Un `context_length` différent de celui du modèle chargé charge une **seconde instance** (`:2`) : voir le [Manuel 12](12-api-avancee.md#9-raisonnement-et-options-de-apiv1chat). |
 
-> **Charge** — Les requêtes simultanées partagent le modèle ; le paramètre *Max Concurrent Predictions* fixe le nombre de requêtes traitées en parallèle. Sur un GPU intégré, **le débit total n'augmente pas** avec le parallélisme ([Manuel 03](03-charger-un-modele.md#55-concurrence-sur-gpu-intégré)).
+> **Charge** — Les requêtes simultanées partagent le modèle ; le paramètre *Max Concurrent Predictions* fixe le nombre de requêtes traitées en parallèle. Sur un GPU intégré, **le débit total n'augmente pas** avec le parallélisme ; sur un **GPU dédié**, il augmente presque linéairement (45 → 264 tok/s avec 8 requêtes) ([Manuel 03](03-charger-un-modele.md#55-concurrence-selon-le-matériel)).
 
 ---
 

@@ -5,8 +5,8 @@
 > **Version décrite** : LM Studio 0.4.25 — captures des 6 et 7 octobre 2026.
 > **Contrainte de rédaction** : le catalogue a été consulté en **lecture seule** ; le bouton *Download* n'a jamais été utilisé sur le poste de test. Les modèles décrits comme installés étaient déjà présents ou ont été copiés à la main.
 > **Exemple fil rouge** : *Gemma 4 E4B*, modèle généraliste (texte, images, outils, raisonnement), installé sur le poste de test.
-> **Poste de test** : GPU **intégré** (mémoire partagée, 17,9 Go de « VRAM » annoncés sur 31 Go de RAM). Les indicateurs d'adéquation observés (section 6) se rapportent à cette configuration, pas à une carte graphique dédiée.
-> **Étiquettes** : **[Vérifié]** observé dans l'application ; **[Source]** documentation officielle ou dépôt du projet cité ; **[Source tierce]** article ou ticket non officiel ; **[Estimation]** calcul ; **[À tester]** point à confirmer, notamment sur machine avec GPU dédié.
+> **Postes de test** : captures et tailles du catalogue relevées sur un poste à **GPU intégré** (17,9 Go de « VRAM » partagés, 31 Go de RAM) ; indicateurs d'adéquation (section 6) **rejoués sur une carte dédiée** (RTX 4060 Ti, 16 Go de VRAM, 61,6 Go de RAM) le 7 octobre 2026.
+> **Étiquettes** : **[Vérifié]** observé dans l'application ; **[Source]** documentation officielle ou dépôt du projet cité ; **[Source tierce]** article ou ticket non officiel ; **[Estimation]** calcul ; **[À tester]** point à confirmer.
 
 ---
 
@@ -143,7 +143,9 @@ Objectif : repérer, dans la liste *Download Options* d'un dépôt de *Gemma 4 E
 | 6 | Icône d'adéquation | Vert : tient entièrement dans la mémoire graphique ; bleu : partiel ([section 6](#6-les-indicateurs-dadéquation-matérielle)). |
 | 7 | Taille | Poids du téléchargement, **vision comprise** si l'œil est présent. |
 
-> **Attention — lignes « Mtp »** — Les quatre premières lignes de ce dépôt (2,01 à 2,08 Go) portent le préfixe **Mtp** **[Vérifié]**. Le README du dépôt mentionne l'ajout d'un « support MTP » (*multi-token prediction*) **[Source]**. Il s'agit de petits modèles destinés à **accompagner** le modèle principal pour accélérer la génération, pas de modèles autonomes. Le premier choix proposé par défaut (et recommandé par le pouce levé) n'est donc **pas** le modèle à télécharger pour discuter : sélectionner une ligne `Gemma 4 E4B Instruct` sans préfixe **[À tester]** (usage réel du drafter dans LM Studio).
+> **Attention — lignes « Mtp »** — Les quatre premières lignes de ce dépôt (2,01 à 2,08 Go) portent le préfixe **Mtp** **[Vérifié]**. Le README du dépôt mentionne l'ajout d'un « support MTP » (*multi-token prediction*) **[Source]**. Il s'agit de petits modèles destinés à **accompagner** le modèle principal pour accélérer la génération, pas de modèles autonomes. Le premier choix proposé par défaut (et recommandé par le pouce levé) n'est donc **pas** le modèle à télécharger pour discuter : sélectionner une ligne `Gemma 4 E4B Instruct` sans préfixe.
+>
+> **Essais sur le poste à GPU dédié (7 octobre 2026)** — Ces lignes sont des **brouillons** (*drafters*) pour le décodage spéculatif. LM Studio 0.4.25 les exploite par `lms load --speculative-draft-mtp` (tête de prédiction multi-jetons **intégrée au fichier du modèle**) ou `--speculative-draft-simple --speculative-draft-model <brouillon>` **[Vérifié]**. Le fichier installé `google/gemma-4-e4b` (Q8_0, 9,02 Go) **n'embarque pas** de tête MTP : « *MTP speculative decoding requires a GGUF model with a bundled supported MTP head* ». Le sélecteur de modèles signale par un badge **MTP** les fichiers qui en contiennent (ici *Qwen3.8 27B*). Les lignes « Mtp » elles-mêmes n'ont **pas** été téléchargées (téléchargement hors périmètre) **[À tester]** ; les gains mesurés avec les autres brouillons sont dans le [Manuel 15, section 7](15-performances-gpu-dedie.md#7-décodage-spéculatif).
 
 Faire défiler la liste jusqu'en bas :
 
@@ -169,7 +171,7 @@ Faire défiler la liste jusqu'en bas :
 
 > **Constat** — Pour ce modèle, passer de `Q8_0` (10,11 Go) à `Q3_K_S` (5,77 Go) ne divise la taille que par **1,75**, au lieu des 2,5 environ attendus d'après les bits par poids. Raison probable **[Estimation]** : les grandes tables d'embeddings (ce qui fait passer le modèle de « 4B effectifs » à 7,9B) et l'adaptateur de vision restent en haute précision. Les modèles de cette famille gagnent donc peu en taille sous Q4 et perdent de la qualité : **Q4_K_M** à **Q6_K** constituent la plage utile.
 
-> **Exemple de décision** — Poste de 32 Go de RAM, GPU intégré, usage général avec images : retenir `Q4_K_M` (6,89 Go) ; viser `Q6_K` (8,99 Go) ou `Q8_0` (10,11 Go) pour des tâches sensibles (chiffres, extraction) si la mémoire reste confortable. La version du catalogue LM Studio `google/gemma-4-e4b` (fiche **Staff Pick**) propose directement une seule option de 6,33 Go.
+> **Exemple de décision** — Poste de 32 Go de RAM, GPU intégré, usage général avec images : retenir `Q4_K_M` (6,89 Go) ; viser `Q6_K` (8,99 Go) ou `Q8_0` (10,11 Go) pour des tâches sensibles (chiffres, extraction) si la mémoire reste confortable. La version du catalogue LM Studio `google/gemma-4-e4b` (fiche **Staff Pick**) propose directement **une seule option** : 6,33 Go sur le premier poste de test ; sur le poste à GPU dédié, la fiche affiche l'option **déjà installée** (Q8_0, 9,02 Go, « *Applicable model file already downloaded* »).
 
 ---
 
@@ -264,45 +266,83 @@ Tailles réelles des fichiers d'un modèle de 7,6 Md publiés par la communauté
 
 ## 6. Les indicateurs d'adéquation matérielle
 
-Sous la liste *Download Options*, une pastille indique si le fichier sélectionné tient dans la machine. **La documentation officielle ne définit pas ces pastilles** ; les sens ci-dessous combinent les observations du poste de test et des sources tierces.
+Sous la liste *Download Options*, une pastille indique si le fichier sélectionné tient dans la machine. **La documentation officielle ne définit pas ces pastilles** ; les sens et les seuils ci-dessous viennent de **mesures** sur deux postes (un GPU intégré, puis une carte dédiée de 16 Go de VRAM).
 
 ![Les trois indicateurs d'adéquation](../img/lmstudio/02-modeles/13-badges-adequation.png)
-*Figure 5 — Les trois états observés. De haut en bas : **vert** (`Q4_K_M`, 6,89 Go), **bleu** (`BF16`, 16,97 Go), **rouge** (`gpt-oss-safeguard-120b`, 63,39 Go).*
+*Figure 5 — Les trois états sur un poste à **GPU dédié** (RTX 4060 Ti, 16 Go de VRAM, 61,6 Go de RAM). De haut en bas : **vert** (`IQ4_XS` de Mistral Small 3.2 24B, 14,54 Go), **bleu** (`IQ4_NL`, 15,22 Go), **bleu** (GLM 4.5 Air `Q3_K_M`, 57,20 Go) et **rouge** (GLM 4.5 Air `IQ4_XS`, 60,48 Go).*
 
 | Pastille | Couleur observée | Sens | Conséquence |
 |---|---|---|---|
-| **Full GPU Offload Possible** | **Vert** | Le modèle entier, au contexte par défaut, tient dans la mémoire graphique | Vitesse maximale : toutes les couches sur le GPU |
-| **Partial GPU Offload Possible** | **Bleu** | Une partie des couches tient dans la mémoire graphique, le reste va en RAM et sur le CPU | Fonctionne, **plus lent** ; réglable avec *GPU Offload* ([Manuel 03](03-charger-un-modele.md)) |
-| **Likely too large** | **Rouge** | Dépasse les ressources estimées, même en répartissant | Chargement déconseillé ; risque de saturer la RAM |
+| **Full GPU Offload Possible** | **Vert** (icône fusée) | Le modèle entier tient dans la mémoire graphique | Vitesse maximale : toutes les couches sur le GPU |
+| **Partial GPU Offload Possible** | **Bleu** (icône quadrillage) | Une partie des couches tient dans la mémoire graphique, le reste va en RAM et sur le CPU | Fonctionne, **plus lent** ; réglable avec *GPU Offload* ([Manuel 03](03-charger-un-modele.md)) |
+| **Likely too large** | **Rouge** (croix) | Dépasse la mémoire du poste, même en répartissant | Chargement déconseillé ; risque de saturer la RAM |
 
 > **Correction d'une idée reçue** — La pastille « partielle » est **bleue** dans LM Studio 0.4.25, non orange **[Vérifié]**.
 
-### Ce qui a été mesuré sur le poste de test (GPU intégré)
+Dans la liste déroulante, chaque ligne porte la même pastille (sous forme d'icône) ; la fiche d'un modèle **déjà installé** affiche en outre « *Applicable model file already downloaded* » et un bouton **Use in New Chat** à la place de *Download* **[Vérifié]**.
+
+### 6.1 Seuils mesurés sur une carte de 16 Go (RAM de 61,6 Go)
+
+Relevé de **toutes les lignes** de plusieurs dépôts du catalogue (≈ 240 fichiers de 2 à 470 Go), en lecture seule ; les tailles sont celles affichées par LM Studio (« GB » = Gio). Les seuils sont les mêmes pour les dépôts de plusieurs éditeurs.
+
+| Transition | Dernier fichier de l'état précédent | Premier fichier de l'état suivant | Lecture |
+|---|---|---|---|
+| **Vert → bleu** | 14,54 Go (Mistral Small 3.2 24B `IQ4_XS`) ; 14,33 Go (autre dépôt, `Q4_K_M`) | 14,83 Go (`Q4_K_L`) ; 15,02 Go (Gemma 4 26B A4B `Q3_K_M`) | Seuil entre **14,5 et 14,8 Go**, soit **≈ 91 à 93 % de la VRAM** (16,00 Go) : le reste est réservé au cache de contexte et aux tampons de calcul |
+| **Bleu → rouge** | 59,10 Go (Mistral Large `Q3_K_M`) ; 58,40 Go (Llama 3.3 70B `Q6_K_L`) | 60,48 Go (GLM 4.5 Air `IQ4_XS`) ; 62,56 Go (gpt-oss-120b `Q3_K_S`) | Seuil entre **59,1 et 60,5 Go**, soit **≈ 96 à 98 % de la RAM** (61,58 Go) : le rouge dépend de la **RAM seule**, non de la RAM **plus** la VRAM (77,6 Go) |
+
+Exemples de classement sur ce poste (contexte par défaut) :
 
 | Fichier | Taille | Indicateur |
 |---|---|---|
-| Toutes les quantifications de Gemma 4 E4B jusqu'à `UD-Q8_K_XL` | 5,46 à 10,62 Go | Vert |
-| `BF16` de Gemma 4 E4B | 16,97 Go | **Bleu** |
-| `gpt-oss-safeguard-120b` (`MXFP4`) | 63,39 Go | **Rouge** |
+| Gemma 4 E4B, toutes les quantifications de `UD-IQ2_M` à `UD-Q8_K_XL` | 5,46 à 10,62 Go | Vert |
+| Gemma 4 E4B `BF16` | 16,97 Go | **Bleu** |
+| Gemma 4 26B A4B, de `UD-IQ2_XXS` à `UD-IQ3_XXS` | 12,21 à 13,71 Go | Vert |
+| Gemma 4 26B A4B, de `UD-Q3_K_M` à `BF16` (dont le `Q4_K_M` installé, 17,99 Go) | 15,02 à 52,80 Go | Bleu |
+| Llama 3.3 70B `Q4_K_M` | 42,52 Go | Bleu |
+| Llama 3.3 70B `Q8_0` et `F16` | 74,98 et 141,12 Go | **Rouge** |
+| gpt-oss-120b, toutes les quantifications | 62,56 à 65,37 Go | **Rouge** |
+| Modèles « Mtp » (brouillons) | 2,01 à 3,15 Go | Vert |
 
-Le panneau *Hardware* annonce **31,4 Go de RAM** et **17,9 Go de « VRAM »** sur ce poste ([Manuel 01](01-prise-en-main.md#69-hardware-ctrl--maj--h)). Le fichier `BF16` de 16,97 Go reste *sous* ces 17,9 Go mais est classé « partiel » : l'estimation ajoute donc au fichier une part pour le **cache KV** et le calcul **[Estimation]**. Cette lecture concorde avec la méthode décrite par la documentation (taille du modèle, longueur de contexte, Flash Attention, présence de vision) **[Source]**.
+> **Sur le poste précédent (GPU intégré)** : 17,9 Go de « VRAM » annoncés (mémoire partagée) sur 31,4 Go de RAM ; toutes les quantifications de Gemma 4 E4B jusqu'à `UD-Q8_K_XL` vertes, le `BF16` (16,97 Go) **bleu**, `gpt-oss-safeguard-120b` (63,39 Go) **rouge**. Le vert d'un GPU intégré signifie « tient dans la mémoire partagée », une portion de la RAM : il n'indique ni la vitesse d'une carte dédiée ni une mémoire rapide.
 
-> **Attention — GPU intégré** — Le vert obtenu ici signifie « tient dans la mémoire partagée », qui est une portion de la RAM. Il n'indique **ni** la vitesse d'un GPU dédié **ni** une mémoire rapide. Voir [Manuel 03, section 5.4](03-charger-un-modele.md) pour l'effet mesuré du passage au GPU sur ce poste.
+### 6.2 Ce qui ne modifie **pas** l'indicateur
+
+Chacun des réglages suivants a été changé, puis les listes de trois dépôts (≈ 80 lignes) ont été relues : **aucune pastille n'a changé** **[Vérifié]**.
+
+| Réglage modifié | Valeurs essayées |
+|---|---|
+| *Settings → Model Defaults → Default Context Length* | 8 192, 32 768, 131 072, 262 144, *Model maximum* |
+| *Model loading guardrails* | OFF, Relaxed, Balanced, Strict |
+| *Settings → Hardware → Limit Model Offload to Dedicated GPU Memory* | désactivé, activé |
+
+**Conséquence** : l'indicateur est une **estimation fixe**, calculée à partir de la **taille du fichier** par rapport à la VRAM et à la RAM détectées. Il **ne tient pas compte du contexte choisi au chargement** : un fichier vert peut dépasser la VRAM avec un contexte très grand (voir ci-dessous). Les réglages d'origine ont été rétablis après l'essai.
+
+### 6.3 L'indicateur contre la réalité
+
+| Cas | Indicateur | Réalité (mesurée) |
+|---|---|---|
+| Gemma 4 E4B Q8_0 (9,02 Go), contexte 131 072 | Vert | VRAM 8,2 Go : **tient**, génération 47 tok/s |
+| Gemma 4 26B A4B Q4_K_M (17,99 Go), contexte 8 192 | Bleu | VRAM 12,1 Go + RAM 13,2 Go : **fonctionne**, 37 tok/s (automatique), jusqu'à **55 tok/s** avec les experts de 8 couches sur le CPU |
+| Qwen3.8 27B Q4_K_M (17,74 Go) | Bleu | **10 à 19 tok/s** selon la répartition choisie au chargement ; 37 Go de RAM à 262 144 jetons |
+| Fichier rouge (> RAM) | Rouge | **Non essayé** : le chargement forcé (*Load anyway*) expose à saturer la mémoire |
+
+Détails et mesures : [Manuel 15](15-performances-gpu-dedie.md). Sur une carte de 16 Go, **un modèle bleu peut être très utilisable** (modèle MoE) ou **peu utilisable** (modèle dense de 27 Md) : le **type de modèle** compte autant que la couleur.
+
+### 6.4 Estimation avant téléchargement
+
+`lms load --estimate-only <modèle>` affiche l'estimation pour un modèle **déjà présent** ([Manuel 07](07-cli-lms.md)). Sur ce poste, elle **surestime** la mémoire GPU de Gemma 4 E4B de **2,7 à 7,5 Go** (écart croissant avec le contexte) et affiche `Confidence: LOW` ([Manuel 15, section 5](15-performances-gpu-dedie.md#5-mémoire-réelle-et-estimation)). Elle est **prudente** : on peut la lire comme un maximum.
 
 ### Utiliser l'indicateur
 
-- **Vert** : choix sûr si la marge de RAM reste ≥ 20 % après réglage du contexte.
-- **Bleu** : essayer une quantification plus basse pour retrouver le vert, ou accepter la baisse de vitesse. Régler **GPU Offload** pour répartir les couches.
-- **Rouge** : choisir une quantification plus basse, un modèle plus petit ou un modèle à experts (MoE) à ≈ 4 Md de paramètres actifs avec offload partiel **[À tester]**.
-- **Estimation avant téléchargement** : `lms load --estimate-only <modèle>` affiche l'estimation pour un modèle déjà présent ([Manuel 07](07-cli-lms.md)).
+- **Vert** : choix sûr si la marge de RAM reste ≥ 20 % après réglage du contexte. Pour un **grand contexte**, recalculer avec l'estimation de la fenêtre de chargement : le vert ne la prévoit pas.
+- **Bleu** : essayer une quantification plus basse pour retrouver le vert, ou accepter la baisse de vitesse. Pour un modèle **MoE**, placer les experts de quelques couches sur le CPU ([Manuel 15, section 6.2](15-performances-gpu-dedie.md#62-experts-moe-sur-le-cpu---n-cpu-moe-via-le-sdk)) ; ne pas forcer `GPU Offload : max` sur un modèle plus gros que la VRAM.
+- **Rouge** : choisir une quantification plus basse, un modèle plus petit ou un modèle MoE à ≈ 4 Md de paramètres actifs.
 
 ### Limites connues
 
-- L'estimation peut s'écarter de la réalité : des tickets publics signalent des valeurs très supérieures aux mesures (par exemple 22,9 Go annoncés pour ≈ 11,5 Go consommés) **[Source tierce]**.
+- L'estimation peut s'écarter de la réalité dans les deux sens selon l'architecture : des tickets publics signalent des valeurs très supérieures aux mesures (22,9 Go annoncés pour ≈ 11,5 Go consommés) **[Source tierce]** ; le relevé ci-dessus la confirme pour Gemma 4 E4B **[Vérifié]**.
 - Le réglage **GPU Offload : Max** exprime une **demande**, non un résultat : le nombre de couches réellement placées figure dans les journaux de chargement **[Source tierce]** ([Manuel 03](03-charger-un-modele.md)).
-- L'option de chargement forcé malgré une pastille rouge (*Load anyway*) n'existe pas en ligne de commande ni par l'API **[Source tierce]**.
-
-> **À compléter sur une machine avec GPU dédié** **[À tester]** — Reprendre la figure 5 avec une carte graphique dédiée : seuil réel de chaque couleur selon la quantité de VRAM, effet du contexte sur le basculement vert / bleu, vitesse mesurée à différents niveaux d'offload ([NOTES-EVOLUTIONS](../../NOTES-EVOLUTIONS.md)).
+- L'option de chargement forcé malgré une pastille rouge (*Load anyway*, [Manuel 01](01-prise-en-main.md#65-model-defaults)) n'existe pas en ligne de commande ni par l'API **[Source tierce]**.
 
 ---
 

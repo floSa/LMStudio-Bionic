@@ -276,6 +276,17 @@ Explications détaillées : [Manuel 00, section 6](00-notions-fondamentales.md#6
 | **Resource Monitor** | Consommation instantanée (RAM + VRAM, CPU). |
 | **Guardrails** | Mêmes garde-fous que *Model Defaults*. |
 
+**Sur un poste à GPU dédié** (RTX 4060 Ti, 16 Go de VRAM, Ryzen 5 9600X, 61,6 Go de RAM) [Vérifié, 7 octobre 2026] :
+
+| Zone | Contenu |
+|---|---|
+| **CPU** | AMD Ryzen 5 9600X, `x86_64`, **AVX** et **AVX2** (✓ *Compatible*). |
+| **Memory Capacity** | **RAM 61,58 Go** ; **VRAM 16,00 Go** (mémoire dédiée réelle, et non une part de la RAM). |
+| **GPUs** | « 1 GPU detected with CUDA » : *NVIDIA GeForce RTX 4060 Ti*, `deviceId: 0`, interrupteur `OFF/ON` ; **Limit Model Offload to Dedicated GPU Memory** (désactivé : « *Allow model weights to offload to shared memory if dedicated GPU memory is full* ») ; **Offload KV Cache to GPU Memory** (activé). |
+| **Guardrails** | *Relaxed* par défaut. |
+
+Le premier interrupteur **ne modifie pas** les indicateurs d'adéquation du catalogue ([Manuel 02, section 6](02-selectionner-et-telecharger-un-modele.md#6-les-indicateurs-dadéquation-matérielle)) ; l'effet de *Model Defaults → Default Context Length* et des garde-fous sur ces indicateurs est également nul **[Vérifié]**. Le chargement d'un modèle de 18 Go sur 16 Go de VRAM n'a **pas** été bloqué en *Relaxed*.
+
 **Copy Info** copie un résumé du matériel (utile pour un ticket de support).
 
 ---

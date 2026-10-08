@@ -117,7 +117,11 @@ Détail : [Manuel 04](04-parametrer-l-inference.md#12-dépannage).
 |---|---|---|
 | Génération lente | Couches sur CPU ; contexte plein ; plusieurs requêtes | Vérifier *GPU Offload* ; vider le contexte ; 1 requête à la fois |
 | Délai long avant le premier mot | Thinking actif ; long prompt ; première requête (chauffe du moteur) | Désactiver le thinking ; réduire le prompt ; ignorer la première requête dans les mesures |
-| Débit total identique avec plusieurs requêtes | GPU intégré limité par la bande passante | Normal ([Manuel 03](03-charger-un-modele.md#55-concurrence-sur-gpu-intégré)) |
+| Débit total identique avec plusieurs requêtes | GPU intégré limité par la bande passante | Normal **sur GPU intégré** ; sur GPU dédié le débit total doit croître : vérifier *Max Concurrent Predictions* ([Manuel 03](03-charger-un-modele.md#55-concurrence-selon-le-matériel)) |
+| Modèle plus gros que la VRAM : génération lente avec `GPU Offload : max` | La carte déborde dans la mémoire partagée (bus PCIe) | Laisser le réglage **automatique**, ou un ratio (0,75), ou placer les experts d'un modèle MoE sur le CPU ([Manuel 15, section 6](15-performances-gpu-dedie.md#6-modèles-plus-gros-que-la-vram)) |
+| Lecture du prompt 3 fois plus lente qu'attendue sur GPU dédié | Flash Attention désactivée, lot d'évaluation ou lot physique trop petit (< 256) | Réactiver Flash Attention ; revenir aux lots par défaut ([Manuel 15, section 4](15-performances-gpu-dedie.md#4-flash-attention-lots-et-cache-kv)) |
+| L'estimation annonce « trop gros » alors que le modèle tient | L'estimation **surestime** la VRAM (jusqu'à × 2 à grand contexte) | Charger avec un contexte réduit puis mesurer ; lire l'estimation comme un maximum ([Manuel 15, section 5](15-performances-gpu-dedie.md#5-mémoire-réelle-et-estimation)) |
+| `Model not found` avec `lms load` sur une variante listée par `lms ls` | Limite de la ligne de commande | Charger par le SDK ou par l'interface ([Manuel 16](16-sdk-et-plugins.md#3-paramètres-de-chargement-accessibles-par-le-sdk)) |
 | Vitesse très inférieure à une autre machine | Matériel, moteur ou quantification différents | Comparer moteur, quantification, contexte, offload |
 | Variation de vitesse d'un essai à l'autre | Mesure sur un seul essai ; charge de la machine | Répéter 3 fois ; fermer les applications |
 

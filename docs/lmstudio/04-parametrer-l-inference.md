@@ -62,7 +62,7 @@ Un **preset** ([section 9](#9-presets)) regroupe un jeu de paramètres réutilis
 
 Par défaut, seules les statistiques du **dernier message** sont affichées ; *Settings → Appearance → Show Gen Info* permet de les afficher toujours ou au survol ([Manuel 01](01-prise-en-main.md#62-appearance)).
 
-> **Exemple** — Réponse en 710 tokens à 17,5 tok/s, délai avant premier token 0,60 s. La même question avec un modèle plus lent ou un contexte plus rempli donne des valeurs différentes : ces statistiques servent à **comparer des réglages**, pas à promettre une performance.
+> **Exemple** — Réponse en 710 tokens à 17,5 tok/s, délai avant premier token 0,60 s (GPU intégré). **Sur le GPU dédié**, le même type de réponse sort à ≈ 40-47 tok/s avec un délai avant premier token de 0,09 à 0,13 s ([Manuel 15](15-performances-gpu-dedie.md)). La même question avec un modèle plus lent ou un contexte plus rempli donne des valeurs différentes : ces statistiques servent à **comparer des réglages**, pas à promettre une performance.
 
 ### 2.2 Bloc de réflexion (③)
 

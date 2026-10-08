@@ -213,6 +213,7 @@ Le fichier du modèle n'est qu'une liste de nombres : il faut un **moteur d'inf�
 - **Pourquoi plusieurs paquets de moteur ?** Les moteurs sont distribués **séparément de l'application** et se mettent à jour indépendamment : de nouveaux modèles ou de nouvelles optimisations arrivent par une mise à jour de moteur, sans changer LM Studio. Une mise à jour télécharge un paquet (de quelques Mo à plus de 200 Mo) : à éviter en connexion limitée ([Manuel 01](01-prise-en-main.md#8-points-de-vigilance)).
 - **« GPU survey unsuccessful »** : LM Studio n'a pas trouvé de matériel compatible avec ce runtime (ex. aucun GPU Nvidia pour CUDA) ; le runtime est alors marqué non compatible, sans conséquence si un autre convient.
 - **Comparer les runtimes** sur une même machine est possible avec la même quantification et le même contexte : mesurer vitesse de lecture du prompt et vitesse de génération ([Manuel 03](03-charger-un-modele.md#54-vitesse-selon-le-déchargement-gpu)).
+- **Mesure sur carte Nvidia (RTX 4060 Ti)**, Gemma 4 E4B Q8_0 entièrement sur le GPU : **CUDA** 3 746 tok/s en lecture du prompt et 45 tok/s en génération ; **Vulkan** 2 659 et 46 tok/s ; **CPU** (AVX2) 49 et 8,8 tok/s. La génération est la même pour CUDA et Vulkan (limitée par la mémoire) ; la lecture du prompt est 41 % plus rapide en CUDA. Le moteur CUDA accélère aussi la lecture du prompt quand **aucune** couche n'est sur le GPU (700 tok/s) ([Manuel 15, section 2](15-performances-gpu-dedie.md#2-moteurs-et-nombre-de-couches-sur-le-gpu)).
 
 ---
 
@@ -287,7 +288,7 @@ Mémoire approximative pour des modèles denses, contexte 8 192 tokens (valeurs 
 
 ### 7.4 Pour aller plus loin
 
-- **Mémoire GPU et RAM** : avec un GPU **dédié**, le déchargement complet exige que poids + cache KV tiennent dans la **VRAM** ; sinon une partie reste en RAM et la vitesse chute. Avec un GPU **intégré**, seule la RAM compte.
+- **Mémoire GPU et RAM** : avec un GPU **dédié**, le déchargement complet exige que poids + cache KV tiennent dans la **VRAM** ; sinon une partie reste en RAM et la vitesse chute (modèle dense de 27 Md sur 16 Go : 3 à 19 tok/s selon la répartition). Avec un GPU **intégré**, seule la RAM compte. **Mesuré** : l'estimation de LM Studio **surestime** la VRAM réellement occupée (jusqu'à × 2 à 131 072 jetons) et la RAM reste mobilisée (≈ 8 Go) même modèle entièrement sur la carte ([Manuel 15, section 5](15-performances-gpu-dedie.md#5-mémoire-réelle-et-estimation)).
 - **Écarts avec la formule** : certains modèles (attention à *fenêtre glissante*, architectures hybrides) ont un cache KV **bien plus petit** que la formule ; la mesure est alors plus fiable. *Exemple mesuré : Gemma 4 E4B ≈ 50 Ko par token en F16, cache réel à 8 192 tokens ≈ 0,4 Go.*
 - **Quantifier le cache KV** (Q8_0, Q4_0) divise son coût par ≈ 2 ou ≈ 3 : utile pour les très longs contextes ([Manuel 03](03-charger-un-modele.md#53-quantification-du-cache-kv-contexte-32-768)).
 - **Modèles MoE** : la mémoire suit la **taille totale** (section 2).
@@ -336,11 +337,13 @@ Deux phases, deux vitesses :
 | **TTFT** (*Time To First Token*) | Délai avant le premier mot de la réponse | Lecture du prompt + éventuelle réflexion |
 
 > **Exemple (poste de test, modèle 7,5 B en Q4_K_M)** — Lecture du prompt : 215 tok/s (CPU seul) → 353 tok/s (GPU intégré). Génération : 11,2 → 14,8 tok/s.
+>
+> **Exemple (GPU dédié RTX 4060 Ti 16 Go, même modèle en Q8_0)** — Lecture du prompt : 49 tok/s (moteur CPU) → **3 746 tok/s** (CUDA). Génération : 8,8 → **45 tok/s**. Le gain du GPU dédié est **bien plus grand** que celui du GPU intégré ([Manuel 15](15-performances-gpu-dedie.md)).
 
 **Pour aller plus loin**
 
 - **Plafond théorique de génération ≈ bande passante ÷ taille lue par token.** Un modèle dense de 4,7 Go sur une mémoire de 80 Go/s ne dépassera pas ≈ 17 tok/s. Pour aller plus vite : modèle **plus petit**, **quantification plus basse**, ou **mémoire plus rapide** (GPU dédié).
-- **Plusieurs requêtes simultanées** partagent cette même bande passante : le débit total ne croît pas ([Manuel 03](03-charger-un-modele.md#55-concurrence-sur-gpu-intégré)).
+- **Plusieurs requêtes simultanées** partagent cette même bande passante : sur un **GPU intégré**, le débit total ne croît pas ; sur un **GPU dédié**, il croît presque linéairement (45 → 264 tok/s avec 8 requêtes) ([Manuel 03](03-charger-un-modele.md#55-concurrence-selon-le-matériel)).
 - **La première requête** après un chargement est plus lente (initialisation du moteur) : l'ignorer dans les mesures.
 - **Leviers de vitesse** : GPU offload maximal, quantification plus basse, contexte réduit, thinking désactivé, un seul utilisateur à la fois.
 

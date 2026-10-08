@@ -182,6 +182,8 @@ Résultats [Vérifié] :
 | `time_to_first_token_seconds` | Délai avant le premier token | 0,69 s |
 | `model_load_time_seconds` | Présent seulement si un chargement a eu lieu | 20,7 s (voir [section 9](#9-raisonnement-et-options-de-apiv1chat)) |
 
+> **Rejeu sur GPU dédié (7 octobre 2026)** — `/api/v1/chat` : **2,06 s**, `stats` : **44,6 tok/s**, premier token **0,056 s**, 30 tokens en entrée, 88 en sortie ; `/v1/chat/completions` : 2,49 s (30 + 109 tokens) ; `/api/v1/chat` en flux : 2,49 s ; `model_load_time_seconds` : **8,0 s** (contre 18,7 à 20,7 s) pour un chargement à la volée avec un contexte différent. Le champ `stats` de `/v1/chat/completions` reste **présent mais vide**.
+>
 > **Exemple (poste de test, GPU intégré)** — Même consigne (« Explique en trois phrases ce qu'est un jeton… ») sur trois routes [Vérifié] :
 >
 > | Route | Durée côté client | Statistiques disponibles |
@@ -265,8 +267,10 @@ Le paramètre `response_format` de `/v1/chat/completions` **contraint** la sorti
 > | Résultat | Valeur |
 > |---|---|
 > | JSON **conforme au schéma** (champs, types, énumération, `minItems`) | **10 / 10** |
-> | Durée typique | 5,3 s (66 tokens) |
-> | Durée du cas le plus long | **40,2 s** (554 tokens dont **484 de réflexion**) |
+> | Durée typique | 5,3 s (66 tokens) ; **GPU dédié : 1,6 à 1,96 s** |
+> | Durée du cas le plus long | **40,2 s** (554 tokens dont **484 de réflexion**) ; **GPU dédié : 17,9 s** (639 tokens dont **563 de réflexion**, consigne créative) |
+>
+> Rejeu du 7 octobre 2026 : **10 / 10** JSON conformes ; la réflexion est revenue **dans la consigne créative** (563 tokens) malgré `reasoning_effort: "none"`, comme sur le premier poste.
 
 ### Pièges constatés
 
@@ -337,11 +341,11 @@ Le champ `reasoning` de `/api/v1/chat` accepte `"off"`, `"low"`, `"medium"`, `"h
 >
 > | `reasoning` | Réflexion | Tokens produits | Durée | Réponse |
 > |---|---|---|---|---|
-> | `"off"` | 0 token | 4 | **2,0 s** | 391 |
-> | `"on"` | 122 tokens | 130 | **10,9 s** | 391 |
+> | `"off"` | 0 token | 4 | **2,0 s** (GPU dédié : **0,23 s**) | 391 |
+> | `"on"` | 122 tokens | 130 | **10,9 s** (GPU dédié : **3,2 s**) | 391 |
 > | `"low"`, `"medium"`, `"high"` | — | — | — | **400** (valeur non prise en charge) |
 
-La réflexion coûte ici **5 fois plus de temps** pour une réponse identique ; elle se justifie sur des tâches de raisonnement ([Manuel 04](04-parametrer-l-inference.md#6-raisonnement-thinking)).
+La réflexion coûte ici **5 fois plus de temps** (14 fois sur le GPU dédié, où la génération sans réflexion est quasi instantanée) pour une réponse identique ; elle se justifie sur des tâches de raisonnement ([Manuel 04](04-parametrer-l-inference.md#6-raisonnement-thinking)).
 
 ### Pour aller plus loin
 

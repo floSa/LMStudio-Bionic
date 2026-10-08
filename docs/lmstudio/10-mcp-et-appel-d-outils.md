@@ -170,8 +170,8 @@ Le bloc d'appel se déplie : les **arguments** et le **résultat brut** renvoyé
 >
 > | Consigne | Outil appelé | Arguments | Réponse |
 > |---|---|---|---|
-> | « Convertis 100 degrés Celsius en Fahrenheit… » | `convertir_temperature` | `de=C, valeur=100, vers=F` | 212.0 °F (réflexion : 8,3 s) |
-> | « Calcule la moyenne et la médiane de 12, 7, 9, 15, 3. » | `calculer_statistiques` | `nombres=[12,7,9,15,3]` | 9.2 et 9 (réflexion : 12,3 s) |
+> | « Convertis 100 degrés Celsius en Fahrenheit… » | `convertir_temperature` | `de=C, valeur=100, vers=F` | 212.0 °F (réflexion : 8,3 s ; **GPU dédié : 4,1 s** au total, 139 tokens de réflexion) |
+> | « Calcule la moyenne et la médiane de 12, 7, 9, 15, 3. » | `calculer_statistiques` | `nombres=[12,7,9,15,3]` | 9.2 et 9 (réflexion : 12,3 s ; **GPU dédié : 5,5 s** au total, 204 tokens de réflexion) |
 > | « Lis la note reunion.txt et donne le budget alloué. » | `lire_note` | `nom=reunion.txt` | appel refusé volontairement ([section 5](#5-confirmer-refuser-autoriser)) |
 
 ### Pour aller plus loin
@@ -179,7 +179,7 @@ Le bloc d'appel se déplie : les **arguments** et le **résultat brut** renvoyé
 - **Un seul serveur à la fois par nom d'outil.** Deux serveurs qui exposent des outils de même nom (cas des deux serveurs de démonstration) rendent la désignation ambiguë pour le modèle : en désactiver un.
 - ![Deux serveurs, local et distant](../img/lmstudio/10-mcp/02b-deux-serveurs-local-et-distant.png)
   *Figure 6 — Un serveur local (`mcp/demo-notes`, ①) et un serveur distant (`mcp/demo-http`, ②) déclarés ensemble ; ③ outils du premier.*
-- **Durée** : la réflexion précède chaque appel (8 à 12 s sur le poste de test, GPU intégré). Désactiver la réflexion accélère nettement, au prix d'une fiabilité parfois moindre ([Manuel 04](04-parametrer-l-inference.md#6-raisonnement-thinking)).
+- **Durée** : la réflexion précède chaque appel (8 à 12 s sur le GPU intégré ; **4 à 5,5 s sur le GPU dédié**, mesure par l'API). Désactiver la réflexion accélère nettement (**0,8 s** sur le GPU dédié pour les mêmes consignes, appels corrects), au prix d'une fiabilité parfois moindre ([Manuel 04](04-parametrer-l-inference.md#6-raisonnement-thinking)).
 
 ---
 
@@ -259,8 +259,10 @@ La documentation prévient que les petits modèles, ou ceux qui n'ont pas été 
 >
 > | Configuration | Essais | Corrects | Durée moyenne |
 > |---|---|---|---|
-> | **5 outils** déclarés | 32 | **32 (100 %)** | 4,3 s |
-> | **17 outils** déclarés (12 outils proches ajoutés : `calculer_moyenne`, `convertir_longueur`, `supprimer_note`…) | 52 | **48 (92,3 %)** | 2,8 s |
+> | **5 outils** déclarés | 32 | **32 (100 %)** | 4,3 s (GPU dédié : **1,1 s**) |
+> | **17 outils** déclarés (12 outils proches ajoutés : `calculer_moyenne`, `convertir_longueur`, `supprimer_note`…) | 52 | **48 (92,3 %)** | 2,8 s (GPU dédié : **0,8 s**) |
+>
+> **Rejeu sur le poste à GPU dédié (7 octobre 2026)**, mêmes consignes et mêmes seuils, trois modèles installés [Vérifié] : *Gemma 4 E4B* (Q8_0) **32/32** et **48/52** ; *Gemma 4 26B A4B* **32/32** (4,3 s en moyenne) et **48/52** (2,6 s) ; *Qwen3.8 27B* **32/32** (6,8 s) et **49/52** (94,2 % ; 5,4 s). **Les échecs portent sur la même consigne** (« Convertis 100 en Fahrenheit. » : unité de départ devinée) pour les trois modèles : la fiabilité mesurée **ne dépend pas de la taille** du modèle sur ce test, seule la **vitesse** change.
 >
 > Les quatre échecs de la seconde série portent sur **une seule consigne** : « Convertis 100 en Fahrenheit. » (unité de départ absente). Le modèle a **deviné** `de = "C"` au lieu de demander l'unité. Les deux consignes sans outil attendu (« capitale du Portugal », « faut-il une veste à 20 degrés ? ») n'ont déclenché **aucun appel inutile**.
 
@@ -270,7 +272,7 @@ La documentation prévient que les petits modèles, ou ceux qui n'ont pas été 
 | **Refus mal interprété** | Le motif d'un refus est repris comme résultat ([section 5](#5-confirmer-refuser-autoriser)) | Relire la réponse suivant un refus |
 | **Coût en contexte** | Voir ci-dessous | Décocher les outils inutiles ; contexte ≥ 8 192 |
 | **Annonce sans appel** | Dans Bionic, le même modèle a annoncé avoir écrit un fichier sans appel réel ([Manuel Bionic 11](../bionic/11-recettes-et-depannage.md)) | Vérifier l'effet (fichier, journal du serveur), pas l'annonce |
-| **Réflexion** | 8 à 12 s avant chaque appel avec la réflexion active | Désactiver la réflexion pour les tâches simples |
+| **Réflexion** | 8 à 12 s avant chaque appel avec la réflexion active sur GPU intégré (4 à 5,5 s sur GPU dédié) | Désactiver la réflexion pour les tâches simples |
 
 **Coût en contexte** — tokens du prompt pour le message « Bonjour » avec *Gemma 4 E4B* [Vérifié] :
 

@@ -54,7 +54,7 @@ lms --help
 | **Serveur** | `lms server start / stop / status` | Gérer le serveur local |
 | | `lms log stream` | Suivre les journaux en direct |
 | **Moteurs** | `lms runtime ls / select / get / update / remove / survey` | Gérer les moteurs d'inférence |
-| **Divers** | `lms status` | État global de LM Studio |
+| **Divers** | `lms status` | État global de LM Studio (« Server: ON (port: 1234) », modèles chargés) **[Testée]** ; absente de `lms --help` |
 | | `lms daemon up / down / status / update` | Gérer le démon `llmster` |
 | | `lms link …` | Gérer LM Link (comptes) |
 | | `clone`, `push`, `dev`, `login`, `logout`, `whoami` | Publication d'artefacts sur le Hub (bêta, hors périmètre) |
@@ -123,9 +123,13 @@ lms load google/gemma-4-e4b --gpu max -c 8192 --parallel 1 --identifier gemma -y
 | `--ttl <secondes>` | Déchargement automatique après inactivité |
 | `--identifier <nom>` | Identifiant attribué dans l'API |
 | `--estimate-only` | **Calcule l'estimation mémoire sans charger** |
-| `--speculative-draft-*` | Réglages du décodage spéculatif |
+| `--speculative-draft-mtp` / `--no-speculative-draft-mtp` | Active ou désactive le décodage spéculatif **MTP** (tête de prédiction multi-jetons **intégrée au fichier** du modèle) **[Testée]** : refusé pour un fichier sans tête MTP (« *requires a GGUF model with a bundled supported MTP head* ») |
+| `--speculative-draft-simple` + `--speculative-draft-model <modèle>` | Décodage spéculatif avec un **modèle brouillon séparé** **[Testée]** |
+| `--speculative-draft-max-tokens`, `--speculative-draft-min-tokens`, `--speculative-draft-min-continue-probability` | Longueur et seuil des brouillons (exigent l'un des deux modes) |
 | `-y, --yes` | Répondre oui aux questions (scripts) |
 | `--auto` | Choix automatique du contexte et du placement : réservé à Bionic |
+
+> **Limites constatées sur `lms load`** — (1) Pas d'option pour Flash Attention, la taille des lots, la quantification du cache K/V, le lot physique ni les experts MoE : utiliser l'API `POST /api/v1/models/load` ([Manuel 06](06-serveur-local-et-api.md)) ou le **SDK** ([Manuel 16](16-sdk-et-plugins.md#3-paramètres-de-chargement-accessibles-par-le-sdk)). (2) Une **variante** listée par `lms ls` peut ne pas se charger (« *Model not found* » pour `olmocr-2-7b-1025@q8_0`) alors que le SDK la charge **[Vérifié]**. (3) Avec `--gpu max` sur un modèle plus gros que la VRAM, la carte déborde en mémoire partagée : **moins rapide** que l'automatique ([Manuel 15, section 6.1](15-performances-gpu-dedie.md#61-offload-partiel-modèle-moe-gemma-4-26b-a4b-q4_k_m-1799-go-contexte-8-192)).
 
 **Estimation sans chargement** **[Testée]** :
 
@@ -142,7 +146,7 @@ Estimated Total Memory: 7.85 GiB
 Estimate: This model may be loaded based on your resource guardrails settings.
 ```
 
-Cette commande permet de **dimensionner une machine avant déploiement** (voir [Manuel 03](03-charger-un-modele.md#2-composition-de-la-mémoire)). Les valeurs sont en **GiB**.
+Cette commande permet de **dimensionner une machine avant déploiement** (voir [Manuel 03](03-charger-un-modele.md#2-composition-de-la-mémoire)). Les valeurs sont en **GiB**. Sur un poste à GPU dédié, la sortie comporte une ligne supplémentaire `Confidence: LOW` et l'estimation **surestime** la VRAM réellement occupée ([Manuel 15, section 5](15-performances-gpu-dedie.md#5-mémoire-réelle-et-estimation)) : la lire comme un **maximum**. À la fin d'un vrai chargement, la valeur « (8.40 GiB) » imprimée est la **taille du modèle**.
 
 ### 3.4 `lms unload` — décharger **[Testée]**
 
@@ -302,7 +306,7 @@ lms log stream
 
 ## 9. Mode sans interface : `llmster`
 
-`llmster` est le cœur de LM Studio packagé **sans interface graphique**, destiné aux serveurs et aux environnements automatisés.
+`llmster` est le cœur de LM Studio packagé **sans interface graphique**, destiné aux serveurs et aux environnements automatisés. **Constat sur Windows (0.4.25)** : `lms daemon` et `lms status` **existent** mais **n'apparaissent pas** dans `lms --help` ; `lms daemon status` désigne l'application ouverte (« *LM Studio v0.4.25+1 is running* ») ; `up`, `down` et `update` n'ont pas été exécutées ([Manuel 16, section 5](16-sdk-et-plugins.md#5-le-mode-sans-interface--llmster)).
 
 | Commande **[Aide]** | Rôle |
 |---|---|
