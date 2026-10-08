@@ -1,0 +1,14 @@
+{
+ "etiquette": "memo_e4b_inactif",
+ "projet": "Démo documents",
+ "modele": "Gemma 4 E4B",
+ "effort": "Désactivé",
+ "mode": null,
+ "consigne": "Rédige un mémo de 6 lignes maximum sur les avantages d'un modèle de langage utilisé en local, et enregistre-le dans un fichier memo-ia-locale.md.",
+ "fin": "terminé",
+ "duree_mesuree_s": 15,
+ "duree_affichee": "29s",
+ "confirmations": [],
+ "texte_final": "Projets\nNouveau projet\nDémo documents\nMémo LLM Local\nMémo LLM Local\nDémo code\nAucune session pour le moment\nDémo jetable\nAucune session pour le moment\nNouvelle conversation\nAucune conversation pour le moment\nNouvel onglet\nMémo LLM Local\nNouvel onglet\nNouvel onglet\nMémo LLM Local\nBionic a terminé sa réponse\nRédige un mémo de 6 lignes maximum sur les avantages d'un modèle de langage utilisé en local, et enregistre-le dans un fichier memo-ia-locale.md.\nTravail effectué en 29s\nmemo-ia-locale.md\nFichiers modifiés\nmemo-ia-locale.md\n+8\n-0\nConfiez une tâche à Bionic\nVérification automatique\nGemma 4 E4B\nActivé\nSe connecter\nDémo documents\nContexte : 6,1 k\nBionic a terminé sa réponse\nRédige un mémo de 6 lignes maximum sur les avantages d'un modèle de langage utilisé en local, et enregistre-le dans un fichier memo-ia-locale.md.\nTravail effectué en 14s\nmemo-ia-locale.md\nLet me know if you would like any changes or further assistance!\nConfiez une tâche à Bionic\nVérification automatique\nGemma 4 E4B\nDésactivé\nSe connecter\nDémo documents\nContexte : 5,7 k\nConfiez une tâche à Bionic\nVérification automatique\nGemma 4 E4B\nDésactivé\nSe connecter\nDémo code\nmaster\nConfiez une tâche à Bionic\nVérification automatique\nGemma 4 E4B\nDésactivé\nSe connecter\nDémo jetable\nConfiez une tâche à Bionic\nVérification automatique\nGemma 4 E4B\nDésactivé\nSe connecter\nSans projet",
+ "commandes": []
+}

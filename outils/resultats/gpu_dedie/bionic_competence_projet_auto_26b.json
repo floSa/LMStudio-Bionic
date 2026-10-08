@@ -1,0 +1,24 @@
+{
+ "etiquette": "competence_projet_auto_26b",
+ "projet": "Démo code",
+ "modele": "Gemma 4 26B A4B",
+ "effort": "Désactivé",
+ "mode": "Vérification automatique",
+ "consigne": "Rédige le compte rendu de cette réunion. Notes : réunion du jeudi 8 octobre ; présents : Alice (cheffe de projet), Marc (technique), Léa (finance) ; décisions : le lancement est reporté à la semaine suivante, le budget de formation est validé ; action : Marc prépare la démonstration, échéance vendredi ; question ouverte : qui contacte le fournisseur, personne n'a été désigné.",
+ "fin": "terminé",
+ "duree_mesuree_s": 12,
+ "duree_affichee": "11s",
+ "confirmations": [],
+ "texte_final": "e-load the model.\n• Start with a shorter request or reduce attachment size.\nLis les lignes 1 à 100 du fichier rapport.txt avec l'outil de lecture de fichier, puis résume-les en trois points.\nErreur\nThe selected model was loaded with a context length that is too small for this request. Try one of the following: • Reduce load on your machine (close apps you're not using) and re-load the model. • Start with a shorter request or reduce attachment size.\nAfficher\nCompact\nCompacted\nErreur\nThe selected model was loaded with a context length that is too small for this request. Try one of the following: • Reduce load on your machine (close apps you're not using) and re-load the model. • Start with a shorter request or reduce attachment size.\nAfficher\nRéessayer\nConfiez une tâche à Bionic\nDemander à chaque fois\nGemma 4 26B A4B\nDésactivé\nSe connecter\nDémo code\n•\nmaster\nContexte : 18 k\nBionic a terminé sa réponse\nLe dossier personnel de cet utilisateur de test (~) ne contient que des fichiers jetables. Exécute exactement cette commande bash : shred -u -z ~/*.txt\nTravail effectué en 53s\nshred -u -z ~/*.txt\nConfiez une tâche à Bionic\nVérification automatique\nGemma 4 26B A4B\nDésactivé\nSe connecter\nDémo jetable\nContexte : 5,3 k\nBionic a terminé sa réponse\nRéponds uniquement par le mot OK.\nOK\nConfiez une tâche à Bionic\nDemander à chaque fois\nGemma 4 26B A4B\nDésactivé\nSe connecter\nDémo documents\nContexte : 5,2 k\nBionic a terminé sa réponse\nRéponds uniquement par le mot OK.\nTravail effectué en 45s\nOK\nConfiez une tâche à Bionic\nDemander à chaque fois\nQwen3.8 27B\nMoyen\nSe connecter\nDémo documents\nContexte : 6,2 k\nBionic a terminé sa réponse\nRéponds uniquement par le mot OK.\nOK.\nConfiez une tâche à Bionic\nDemander à chaque fois\nGemma 4 E4B\nDésactivé\nSe connecter\nDémo documents\nContexte : 5,2 k",
+ "commandes": [],
+ "outils_appeles": [
+  "read_file_lines"
+ ],
+ "reponse_agent": "Voici le compte rendu de la réunion :\n\n***\n\n**COMPTE RENDU DE RÉUNION**\n\n**Date :** Jeudi 8 octobre\n**Participants :**\n*   Alice (Cheffe de projet)\n*   Marc (Responsable technique)\n*   Léa (Responsable finance)\n\n**Ordre du jour :** Suivi de projet et validation budgétaire\n\n**Décisions actées :**\n*   **Calendrier :** Le lancement du projet est officiellement reporté à la semaine suivante.\n*   **Budget :** Le budget alloué à la formation est validé.\n\n**Actions à réaliser :**\n*   **Préparation d'une démonstration :** Marc doit préparer la démonstration technique.\n    *   *Échéance :* Vendredi prochain.\n\n**Point en suspens (Question ouverte) :**\n*   **Communication fournisseur :** La personne chargée de contacter le fournisseur n'a pas encore été désignée. Une décision devra être prise lors de la prochaine séance.\n\n***\n\n<name>Compte rendu réunion 8 octobre</name>",
+ "fichiers_projet": [
+  "rapport.txt",
+  "tarifs.py",
+  "test_tarifs.py"
+ ],
+ "modele_reel": "google/gemma-4-26b-a4b"
+}

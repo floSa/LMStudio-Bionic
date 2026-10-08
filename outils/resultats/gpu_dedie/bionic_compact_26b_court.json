@@ -1,0 +1,22 @@
+{
+ "modeles_reels": [
+  [
+   "Compaction",
+   "google/gemma-4-26b-a4b"
+  ],
+  [
+   null,
+   "google/gemma-4-26b-a4b"
+  ],
+  [
+   null,
+   "google/gemma-4-26b-a4b"
+  ]
+ ],
+ "modele": "Gemma 4 26B A4B",
+ "lecture_s": 15,
+ "contexte_avant_k": "12,3",
+ "compaction_s": 10,
+ "contexte_apres_k": "6,8",
+ "compacting_vu": true
+}

@@ -1,0 +1,23 @@
+{
+ "modele": "Qwen3.8 27B",
+ "effort": "Moyen",
+ "duree_tache_s": 106,
+ "vram_base_mib": 788,
+ "vram_apres_mib": 12673,
+ "vram_modele_go": 11.61,
+ "moteur_ws_go": 21.25,
+ "moteur_prive_go": 18.97,
+ "lms_ps": [
+  {
+   "modelKey": "qwen/qwen3.8-27b",
+   "sizeBytes": 17742040464,
+   "contextLength": 65536,
+   "parallel": 4,
+   "quantization": {
+    "name": "Q4_K_M",
+    "bits": 4
+   }
+  }
+ ],
+ "sortie_tache": "k\nAucun message pour le moment\nConfiez une tâche à Bionic\nVérification automatique\nGemma 4 E4B\nDésactivé\nSe connecter\nDémo documents\nContexte : 6 k\nAucun message pour le moment\nConfiez une tâche à Bionic\nVérification automatique\nGemma 4 26B A4B\nDésactivé\nSe connecter\nDémo documents\nContexte : 7,9 k\n"
+}

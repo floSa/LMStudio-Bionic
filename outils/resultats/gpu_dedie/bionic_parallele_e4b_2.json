@@ -1,0 +1,17 @@
+{
+ "modele": "Gemma 4 E4B",
+ "sessions": 2,
+ "fin": "terminé",
+ "duree_totale_s": 59.8,
+ "duree_par_session_s": [
+  49.2,
+  44.8
+ ],
+ "decalage_envois_s": [
+  0.0,
+  15.0
+ ],
+ "modeles_reels": [
+  "google/gemma-4-e4b"
+ ]
+}

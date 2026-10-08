@@ -1,0 +1,23 @@
+{
+ "modele": "Gemma 4 26B A4B",
+ "effort": "Désactivé",
+ "duree_tache_s": 34,
+ "vram_base_mib": 1004,
+ "vram_apres_mib": 15374,
+ "vram_modele_go": 14.03,
+ "moteur_ws_go": 17.17,
+ "moteur_prive_go": 16.14,
+ "lms_ps": [
+  {
+   "modelKey": "google/gemma-4-26b-a4b",
+   "sizeBytes": 17990933608,
+   "contextLength": 16384,
+   "parallel": 4,
+   "quantization": {
+    "name": "Q4_K_M",
+    "bits": 4
+   }
+  }
+ ],
+ "sortie_tache": "fiez une tâche à Bionic\nDemander à chaque fois\nGemma 4 26B A4B\nDésactivé\nSe connecter\nDémo documents\nContexte : 5,2 k\nBionic a terminé sa réponse\nRéponds uniquement par le mot OK.\nOK\nConfiez une tâche à Bionic\nDemander à chaque fois\nGemma 4 E4B\nDésactivé\nSe connecter\nDémo documents\nContexte : 5,2 k\n"
+}

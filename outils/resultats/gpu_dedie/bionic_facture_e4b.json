@@ -1,0 +1,14 @@
+{
+ "etiquette": "facture_e4b",
+ "projet": "Démo documents",
+ "modele": "Gemma 4 E4B",
+ "effort": "Activé",
+ "mode": null,
+ "consigne": "Lis la facture jointe et enregistre dans un fichier facture.json : le numéro de facture, la date, le nom du client et le total TTC. Réponds en français.",
+ "fin": "terminé",
+ "duree_mesuree_s": 33,
+ "duree_affichee": "29s",
+ "confirmations": [],
+ "texte_final": "n pour le moment\nDémo jetable\nAucune session pour le moment\nNouvelle conversation\nAucune conversation pour le moment\nNouvel onglet\nMémo LLM Local\nNouvel onglet\nNouvel onglet\nMémo LLM Local\nExtraction de Données Facture Exemple SAS\nBionic a terminé sa réponse\nRédige un mémo de 6 lignes maximum sur les avantages d'un modèle de langage utilisé en local, et enregistre-le dans un fichier memo-ia-locale.md.\nTravail effectué en 29s\nmemo-ia-locale.md\nFichiers modifiés\nmemo-ia-locale.md\n+8\n-0\nConfiez une tâche à Bionic\nVérification automatique\nGemma 4 E4B\nActivé\nSe connecter\nDémo documents\nContexte : 6,1 k\nBionic a terminé sa réponse\nRédige un mémo de 6 lignes maximum sur les avantages d'un modèle de langage utilisé en local, et enregistre-le dans un fichier memo-ia-locale.md.\nTravail effectué en 14s\nmemo-ia-locale.md\nLet me know if you would like any changes or further assistance!\nConfiez une tâche à Bionic\nVérification automatique\nGemma 4 E4B\nDésactivé\nSe connecter\nDémo documents\nContexte : 5,7 k\nBionic a terminé sa réponse\nLis la facture jointe et enregistre dans un fichier facture.json : le numéro de facture, la date, le nom du client et le total TTC. Réponds en français.\nTravail effectué en 31s\nfacture.json\njson\n{\n\"numero_facture\"\n:\n\"F-2026-0042\"\n,\n\"date\"\n:\n\"06/10/2026\"\n,\n\"client\"\n:\n\"Atelier Démo SARL\"\n,\n\"total_ttc\"\n:\n3060.00\n}\nN'hésitez pas si vous avez d'autres tâches !\nConfiez une tâche à Bionic\nVérification automatique\nGemma 4 E4B\nActivé\nSe connecter\nDémo documents\nContexte : 7,1 k\nConfiez une tâche à Bionic\nVérification automatique\nGemma 4 E4B\nActivé\nSe connecter\nDémo code\nmaster\nConfiez une tâche à Bionic\nVérification automatique\nGemma 4 E4B\nActivé\nSe connecter\nDémo jetable\nConfiez une tâche à Bionic\nVérification automatique\nGemma 4 E4B\nActivé\nSe connecter\nSans projet",
+ "commandes": []
+}

@@ -1,0 +1,8 @@
+{
+ "modele": "Gemma 4 E4B",
+ "lecture_s": 30,
+ "contexte_avant_k": "18,5",
+ "compaction_s": 12,
+ "contexte_apres_k": "6,7",
+ "compacting_vu": true
+}

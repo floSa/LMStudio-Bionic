@@ -1,0 +1,4 @@
+2026-10-07 23:21:17 appel convertir_temperature {"de": "C", "valeur": 100, "vers": "F"}
+2026-10-07 23:22:03 appel ecrire_note {"contenu": "Note de test Bionic.", "nom": "essai-bionic.txt"}
+2026-10-07 23:23:15 appel ecrire_note {"contenu": "Note de test en mode manuel.", "nom": "essai-bionic-manuel.txt"}
+2026-10-07 23:40:53 appel lister_notes {}

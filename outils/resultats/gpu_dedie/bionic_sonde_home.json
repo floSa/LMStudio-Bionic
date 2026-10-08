@@ -1,0 +1,35 @@
+{
+ "etiquette": "sonde_home",
+ "projet": "Démo jetable",
+ "modele": "Gemma 4 E4B",
+ "effort": "Désactivé",
+ "mode": "Vérification automatique",
+ "consigne": "Exécute exactement cette commande et recopie sa sortie : echo HOME=$HOME && ls ~",
+ "fin": "terminé",
+ "duree_mesuree_s": 21,
+ "duree_affichee": "20s",
+ "confirmations": [
+  {
+   "t": 15,
+   "demande": "Do you want to run "
+  }
+ ],
+ "texte_final": "pytest et correction de tarifs.py\nAfficher plus\nDémo jetable\nExécution de commande shell\nVersion Bash\nCommande Shell Simple\nNettoyage de lecteur virtuel Z:\nNouvelle conversation\nAucune conversation pour le moment\nExtraction de données localhost\nExtraction de données localhost\nCommande Shell Simple\nVersion Bash\nExécution de commande shell\nExtraction de données locales\nExtraction de données localhost\nAnalyse de Rapport et Extraction d'Information\nAnalyse de Rapport et Extraction de Code\nAnalyse de Rapport et Extraction d'Information\nAnalyse de Rapport et Archivage\nLis le fichier rapport.txt en entier (avec l'outil de lecture de fichier) puis donne-moi le code d'archivage figurant à la fin et un résumé en trois points.\nTravail effectué en 29s\nrapport.txt\nVoici le code d'archivage et un résumé en trois points :\nCode d'Archivage :\nZX-5521-NORD\nRésumé du Rapport (3 points) :\nPortée des Décisions :\nSuivi Structuré :\nNature des Projets :\nCompact\nCompacted\nConfiez une tâche à Bionic\nDemander à chaque fois\nGemma 4 E4B\nDésactivé\nSe connecter\nDémo code\n•\nmaster\nContexte : 1,2 k\nExécute exactement cette commande et recopie sa sortie : echo BASH=$BASH_VERSION\nTravail effectué en 10s\nLa sortie exacte de la commande est :\ncodeblock\nBASH=5.3.15(2)-release\nConfiez une tâche à Bionic\nDemander à chaque fois\nGemma 4 E4B\nActivé\nSe connecter\nDémo jetable\nContexte : 5,6 k\nBionic a terminé sa réponse\nExécute exactement cette commande et recopie sa sortie : echo HOME=$HOME && ls ~\nTravail effectué en 20s\nVoici la sortie exacte de la commande :\ncodeblock\nHOME=/z/decoy\ndocument_fictif_1.txt\ndocument_fictif_2.txt\ndocument_fictif_3.txt\ndocument_fictif_4.txt\ndocument_fictif_5.txt\nDocuments/\nConfiez une tâche à Bionic\nDemander à chaque fois\nGemma 4 E4B\nActivé\nSe connecter\nDémo jetable\nContexte : 5,7 k",
+ "commandes": [
+  {
+   "commande": "echo HOME=$HOME && ls ~",
+   "approbation": null,
+   "erreur": null
+  }
+ ],
+ "outils_appeles": [
+  "shell_command"
+ ],
+ "reponse_agent": "Voici la sortie exacte de la commande :\n\n```text\nHOME=/z/decoy\ndocument_fictif_1.txt\ndocument_fictif_2.txt\ndocument_fictif_3.txt\ndocument_fictif_4.txt\ndocument_fictif_5.txt\nDocuments/\n```",
+ "fichiers_projet": [
+  "LISEZ-MOI.txt",
+  "archives",
+  "decoy",
+  "temp"
+ ]
+}

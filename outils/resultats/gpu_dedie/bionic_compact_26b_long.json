@@ -1,0 +1,11 @@
+{
+ "modele": "Gemma 4 26B A4B",
+ "essai": "lecture complète de rapport.txt (≈ 18,6 k jetons)",
+ "resultat": "échec",
+ "erreur": "The selected model was loaded with a context length that is too small for this request.",
+ "contexte_charge_lms_ps": 16384,
+ "parallel": 4,
+ "taille_go": 17.99,
+ "contexte_avant_k": "18,6",
+ "note": "Run du 7 octobre 2026, modèle vérifié (lms ps + base). Rejoué avec une lecture plus courte : bionic_compact_26b_court.json"
+}

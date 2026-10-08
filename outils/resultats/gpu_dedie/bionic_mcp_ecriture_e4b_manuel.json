@@ -1,0 +1,22 @@
+{
+ "etiquette": "mcp_ecriture_e4b_manuel",
+ "projet": "Démo documents",
+ "modele": "Gemma 4 E4B",
+ "effort": "Désactivé",
+ "mode": "Demander à chaque fois",
+ "consigne": "Utilise l'outil ecrire_note du serveur MCP demo-notes pour enregistrer une note nommée essai-bionic-manuel.txt contenant : Note de test en mode manuel.",
+ "fin": "terminé",
+ "duree_mesuree_s": 15,
+ "duree_affichee": "14s",
+ "confirmations": [],
+ "texte_final": "\nNouvelle conversation\nAucune conversation pour le moment\nRédaction de compte rendu de réunion\nConversion de température Celsius en Fahrenheit\nEnregistrement de note essai-bionic\nEnregistrement de note MCP demo-notes\nExtraction de données localhost\nAnalyse de Rapport et Extraction d'Information\nAnalyse de Rapport et Extraction de Code\nAnalyse de Rapport et Extraction d'Information\nAnalyse de Rapport et Archivage\nAnalyse du Rapport\nAucun message pour le moment\nConfiez une tâche à Bionic\nVérification automatique\nGemma 4 26B A4B\nDésactivé\nSe connecter\nDémo code\n•\nmaster\nContexte : 6 k\nCharger le contenu précédent\nRéessayer\nConfiez une tâche à Bionic\nDemander à chaque fois\nGemma 4 26B A4B\nDésactivé\nSe connecter\nDémo code\n•\nmaster\nContexte : 12,5 k\nBionic a terminé sa réponse\nUtilise l'outil ecrire_note du serveur MCP demo-notes pour enregistrer une note nommée essai-bionic-manuel.txt contenant : Note de test en mode manuel.\nTravail effectué en 14s\nessai-bionic-manuel.txt\nConfiez une tâche à Bionic\nDemander à chaque fois\nGemma 4 E4B\nDésactivé\nSe connecter\nDémo documents\nContexte : 5,7 k\nBionic a terminé sa réponse\nUtilise l'outil ecrire_note du serveur MCP demo-notes pour enregistrer une note nommée essai-bionic.txt contenant : Note de test Bionic.\nTravail effectué en 3s\nessai-bionic.txt\nConfiez une tâche à Bionic\nVérification automatique\nGemma 4 26B A4B\nDésactivé\nSe connecter\nDémo documents\nContexte : 5,7 k\nBionic a terminé sa réponse\nUtilise l'outil de conversion de température du serveur MCP demo-notes pour convertir 100 degrés Celsius en Fahrenheit, puis donne le résultat.\nTravail effectué en 25s\n100 degrés Celsius est égal à 212,0 degrés Fahrenheit.\nConfiez une tâche à Bionic\nVérification automatique\nGemma 4 26B A4B\nDésactivé\nSe connecter\nDémo documents\nContexte : 5,7 k",
+ "commandes": [],
+ "outils_appeles": [
+  "ecrire_note"
+ ],
+ "reponse_agent": "I have successfully saved the note named `essai-bionic-manuel.txt` containing \"Note de test en mode manuel.\"",
+ "fichiers_projet": [
+  "facture.json"
+ ],
+ "modele_reel": "google/gemma-4-e4b"
+}

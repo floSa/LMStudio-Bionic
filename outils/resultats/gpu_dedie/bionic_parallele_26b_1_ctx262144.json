@@ -1,0 +1,15 @@
+{
+ "modele": "Gemma 4 26B A4B",
+ "sessions": 1,
+ "fin": "terminé",
+ "duree_totale_s": 71.9,
+ "duree_par_session_s": [
+  71.9
+ ],
+ "decalage_envois_s": [
+  0.0
+ ],
+ "modeles_reels": [
+  "google/gemma-4-26b-a4b"
+ ]
+}

@@ -1,0 +1,22 @@
+{
+ "etiquette": "mcp_conversion_26b",
+ "projet": "Démo documents",
+ "modele": "Gemma 4 26B A4B",
+ "effort": "Désactivé",
+ "mode": "Vérification automatique",
+ "consigne": "Utilise l'outil de conversion de température du serveur MCP demo-notes pour convertir 100 degrés Celsius en Fahrenheit, puis donne le résultat.",
+ "fin": "terminé",
+ "duree_mesuree_s": 27,
+ "duree_affichee": "25s",
+ "confirmations": [],
+ "texte_final": "Projets\nNouveau projet\nDémo documents\nConversion de température Celsius en Fahrenheit\nSession sans nom\nSession sans nom\nSession sans nom\nSession sans nom\nSession sans nom\nDémo code\nRédaction de compte rendu de réunion\nCompte rendu réunion 8 octobre\nCompte rendu réunion 8 octobre\nRésumé du rapport\nAnalyse du Rapport\nAnalyse de Rapport et Archivage\nAfficher plus\nDémo jetable\nSuppression de fichiers de test\nNettoyage des fichiers jetables de l'utilisateur de test\nNettoyage des fichiers de test\nNettoyage de fichiers temporaires\nNettoyage du dossier utilisateur de test\nSuppression de répertoire utilisateur\nAfficher plus\nNouvelle conversation\nAucune conversation pour le moment\nCompte rendu réunion 8 octobre\nCompte rendu réunion 8 octobre\nRédaction de compte rendu de réunion\nConversion de température Celsius en Fahrenheit\nExtraction de données localhost\nAnalyse de Rapport et Extraction d'Information\nAnalyse de Rapport et Extraction de Code\nAnalyse de Rapport et Extraction d'Information\nAnalyse de Rapport et Archivage\nAnalyse du Rapport\nAucun message pour le moment\nConfiez une tâche à Bionic\nVérification automatique\nGemma 4 26B A4B\nDésactivé\nSe connecter\nDémo code\n•\nmaster\nContexte : 6 k\nCharger le contenu précédent\nRéessayer\nConfiez une tâche à Bionic\nDemander à chaque fois\nGemma 4 26B A4B\nDésactivé\nSe connecter\nDémo code\n•\nmaster\nContexte : 12,5 k\nBionic a terminé sa réponse\nUtilise l'outil de conversion de température du serveur MCP demo-notes pour convertir 100 degrés Celsius en Fahrenheit, puis donne le résultat.\nTravail effectué en 25s\n100 degrés Celsius est égal à 212,0 degrés Fahrenheit.\nConfiez une tâche à Bionic\nVérification automatique\nGemma 4 26B A4B\nDésactivé\nSe connecter\nDémo documents\nContexte : 5,7 k",
+ "commandes": [],
+ "outils_appeles": [
+  "convertir_temperature"
+ ],
+ "reponse_agent": "100 degrés Celsius est égal à 212,0 degrés Fahrenheit.",
+ "fichiers_projet": [
+  "facture.json"
+ ],
+ "modele_reel": "google/gemma-4-26b-a4b"
+}

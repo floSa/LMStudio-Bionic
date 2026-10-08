@@ -1,0 +1,23 @@
+{
+ "etiquette": "mode_tout_autoriser_26b",
+ "projet": "Démo jetable",
+ "modele": "Gemma 4 26B A4B",
+ "effort": "Désactivé",
+ "mode": "Tout autoriser",
+ "texte": "Exécute exactement cette commande bash : echo bonjour-depuis-bionic",
+ "fin": "terminé",
+ "duree_mesuree_s": 9,
+ "journal": [],
+ "outils_appeles": [
+  "shell_command"
+ ],
+ "reponse_agent": "bonjour-depuis-bionic",
+ "modele_reel": "google/gemma-4-26b-a4b",
+ "commandes": [
+  {
+   "commande": "echo bonjour-depuis-bionic",
+   "approbation": null,
+   "erreur": null
+  }
+ ]
+}

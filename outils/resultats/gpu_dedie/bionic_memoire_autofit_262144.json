@@ -1,0 +1,23 @@
+{
+ "modele": "Gemma 4 26B A4B",
+ "effort": "Désactivé",
+ "duree_tache_s": 50,
+ "vram_base_mib": 797,
+ "vram_apres_mib": 14867,
+ "vram_modele_go": 13.74,
+ "moteur_ws_go": 17.7,
+ "moteur_prive_go": 16.38,
+ "lms_ps": [
+  {
+   "modelKey": "google/gemma-4-26b-a4b",
+   "sizeBytes": 17990933608,
+   "contextLength": 262144,
+   "parallel": 4,
+   "quantization": {
+    "name": "Q4_K_M",
+    "bits": 4
+   }
+  }
+ ],
+ "sortie_tache": "k\nAucun message pour le moment\nConfiez une tâche à Bionic\nVérification automatique\nGemma 4 26B A4B\nDésactivé\nSe connecter\nDémo documents\nContexte : 5,6 k\nAucun message pour le moment\nConfiez une tâche à Bionic\nVérification automatique\nGemma 4 E4B\nDésactivé\nSe connecter\nDémo documents\nContexte : 6 k\n"
+}

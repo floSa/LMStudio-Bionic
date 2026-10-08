@@ -1,0 +1,17 @@
+{
+ "etiquette": "autofit32k_lecture_26b",
+ "projet": "Démo code",
+ "modele": "Gemma 4 26B A4B",
+ "effort": "Désactivé",
+ "mode": "Vérification automatique",
+ "texte": "Lis le fichier rapport.txt en entier (avec l'outil de lecture de fichier) puis donne-moi le code d'archivage figurant à la fin et un résumé en trois points.",
+ "fin": "terminé",
+ "duree_mesuree_s": 36,
+ "journal": [],
+ "outils_appeles": [
+  "read_file_lines"
+ ],
+ "reponse_agent": "Voici les informations extraites du fichier `rapport.txt` :\n\n**Code d'archivage :**\n`ZX-5521-NORD`\n\n**Résumé de la réunion :**\n*   Le rapport recense 180 points de décisions issus de diverses réunions de services (contrôle qualité, maintenance, migration serveur, etc.).\n*   Chaque point précise un responsable (Marc, Inès, Paul, Léa ou Nadia), une échéance en 2027 et un budget alloué.\n*   Pour chaque décision, le comité exige un suivi hebdomadaire ainsi qu'une note de synthèse avant la prochaine séance.",
+ "modele_reel": "google/gemma-4-26b-a4b",
+ "commandes": []
+}

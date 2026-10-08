@@ -1,0 +1,10 @@
+{
+ "etiquette": "competence_projet_arobase_26b",
+ "modele": "Gemma 4 26B A4B",
+ "modele_reel": "google/gemma-4-26b-a4b",
+ "declenchement": "@ (palette)",
+ "fin": "terminé",
+ "duree_mesuree_s": 6,
+ "outils_appeles": [],
+ "reponse_agent": "CR-STANDARD\n\n## Décisions\n- Report du lancement à la semaine suivante.\n- Validation du budget de formation.\n\n## Actions\n| Action | Responsable | Échéance |\n| :--- | :--- | :--- |\n| Préparation de la démonstration | Marc | Vendredi |\n| Contacter le fournisseur | à définir | à définir |\n\n## Points ouverts\n- Qui doit contacter le fournisseur ?\n\nFin du compte rendu"
+}

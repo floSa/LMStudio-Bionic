@@ -1,0 +1,18 @@
+{
+ "etiquette": "sous_agent_26b",
+ "projet": "Démo code",
+ "modele": "Gemma 4 26B A4B",
+ "effort": "Désactivé",
+ "mode": "Vérification automatique",
+ "texte": "Lance un sous-agent d'exploration pour parcourir le dossier du projet et me dire quels fichiers Python il contient.",
+ "fin": "terminé",
+ "duree_mesuree_s": 12,
+ "journal": [],
+ "outils_appeles": [
+  "agentic_find",
+  "find_files"
+ ],
+ "reponse_agent": "Le sous-agent d'exploration a parcouru le projet et a trouvé les fichiers Python suivants :\n\n* `test_tarifs.py` : Un fichier de test Python.\n* `tarifs.py` : Un fichier source Python lié aux tarifs.",
+ "modele_reel": "google/gemma-4-26b-a4b",
+ "commandes": []
+}

@@ -1,0 +1,15 @@
+{
+ "etiquette": "code_review_26b",
+ "projet": "Démo code",
+ "modele": "Gemma 4 26B A4B",
+ "effort": "Désactivé",
+ "mode": "Vérification automatique",
+ "texte": "/code",
+ "fin": "délai dépassé",
+ "duree_mesuree_s": 402,
+ "journal": [],
+ "outils_appeles": [],
+ "reponse_agent": "",
+ "modele_reel": "google/gemma-4-26b-a4b",
+ "commandes": []
+}

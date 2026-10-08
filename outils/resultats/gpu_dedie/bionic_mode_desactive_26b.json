@@ -1,0 +1,23 @@
+{
+ "etiquette": "mode_desactive_26b",
+ "projet": "Démo jetable",
+ "modele": "Gemma 4 26B A4B",
+ "effort": "Désactivé",
+ "mode": "Désactivé",
+ "texte": "Exécute exactement cette commande bash : echo bonjour-depuis-bionic",
+ "fin": "terminé",
+ "duree_mesuree_s": 9,
+ "journal": [],
+ "outils_appeles": [
+  "shell_command"
+ ],
+ "reponse_agent": "Désolé, mais l'accès au shell est actuellement désactivé dans vos paramètres. Pour que je puisse exécuter des commandes bash, vous devez activer l'accès au shell via le menu déroulant situé dans le composant de saisie de messages (message composer).",
+ "modele_reel": "google/gemma-4-26b-a4b",
+ "commandes": [
+  {
+   "commande": "echo bonjour-depuis-bionic",
+   "approbation": null,
+   "erreur": true
+  }
+ ]
+}

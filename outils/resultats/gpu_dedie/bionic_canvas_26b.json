@@ -1,0 +1,17 @@
+{
+ "etiquette": "canvas_26b",
+ "projet": "Démo documents",
+ "modele": "Gemma 4 26B A4B",
+ "effort": "Désactivé",
+ "mode": "Vérification automatique",
+ "texte": "Crée un schéma dans Canvas montrant trois étapes reliées par des flèches : lecture, correction, test.",
+ "fin": "terminé",
+ "duree_mesuree_s": 21,
+ "journal": [],
+ "outils_appeles": [
+  "run_python"
+ ],
+ "reponse_agent": "Je ne peux pas dessiner directement dans un outil de type \"Canvas\" (comme Excalidraw) avec une interface graphique interactive, mais je peux te générer le code **Mermaid**, que tu peux copier-coller dans n'importe quel éditeur compatible (comme Notion, GitHub ou des extensions VS Code) pour obtenir ton schéma instantanément.\n\nVoici le code pour ton schéma :\n\n```mermaid\ngraph LR\n    A[Lecture] --> B[Correction]\n    B --> C[Test]\n```\n\n### Ce que cela représente :\n*   **Lecture** : L'étape initiale de prise de connaissance.\n*   **Flèche 1** : Transition vers l'action.\n*   **Correction** : La phase d'ajustement ou de modification.\n*   **Flèche 2** : Passage à la vérification.\n*   **Test** : L'étape finale de validation du résultat.\n\nSi tu souhaites que je crée un fichier texte ou un document spécifique contenant ce diagramme dans ton espace de travail, n'hésite pas à me le demander !",
+ "modele_reel": "google/gemma-4-26b-a4b",
+ "commandes": []
+}

@@ -1,0 +1,23 @@
+{
+ "modele": "Gemma 4 E4B",
+ "effort": "Désactivé",
+ "duree_tache_s": 15,
+ "vram_base_mib": 1005,
+ "vram_apres_mib": 9486,
+ "vram_modele_go": 8.28,
+ "moteur_ws_go": 8.47,
+ "moteur_prive_go": 9.87,
+ "lms_ps": [
+  {
+   "modelKey": "google/gemma-4-e4b",
+   "sizeBytes": 9022866683,
+   "contextLength": 131072,
+   "parallel": 4,
+   "quantization": {
+    "name": "Q8_0",
+    "bits": 8
+   }
+  }
+ ],
+ "sortie_tache": "roviding the prompt template directly if that's what you intended.\nSince I cannot create a \"global skill\" programmatically with the provided tools, could you clarify:\nuse\nskills/\nact\nConfiez une tâche à Bionic\nDemander à chaque fois\nGemma 4 E4B\nDésactivé\nSe connecter\nDémo documents\nContexte : 5,6 k\n"
+}
