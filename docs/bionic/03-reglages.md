@@ -212,9 +212,11 @@ Catalogue de modèles (sélection de l'équipe), avec par modèle : nombre de pa
 ![Instances chargées](../img/bionic/02-reglages/12-instances.png)
 *Figure 12 — Réglages → Instances chargées.*
 
-Liste des modèles actuellement **chargés en mémoire** (« 0 instance » tant qu'aucune session n'a démarré), avec pour chacun la taille, le format, la quantification, le **contexte chargé** (262 144 tokens pour *Gemma 4 12B QAT* sur le poste de test), l'état et le bouton **Décharger** ([Manuel 04](04-modeles.md#5-mémoire-chargement-et-déchargement)). Un modèle se charge au premier message d'une session et peut être déchargé ici pour libérer la RAM [Estimation pour le déchargement manuel].
+Liste des modèles actuellement **chargés en mémoire** (« 0 instance » tant qu'aucune session n'a démarré), avec pour chacun la taille, le format, la quantification, le **contexte chargé** (262 144 tokens pour *Gemma 4 12B QAT* sur le poste à GPU intégré ; **131 072** pour *Gemma 4 E4B* Q8_0 de 9,02 Go sur le poste à GPU dédié, état « Chargé », bouton **Décharger**), l'état et le bouton **Décharger** ([Manuel 04](04-modeles.md#5-mémoire-chargement-et-déchargement)). Un modèle se charge au premier message d'une session et peut être déchargé ici pour libérer la RAM [Estimation pour le déchargement manuel].
 
 ### API des modèles locaux
+
+> **Journaux du serveur** [Vérifié, 7 octobre 2026, GPU dédié] — le bas de la page affiche les **derniers événements du serveur local** (niveau `DEBUG` quand *Journaux détaillés* est activé), dont une ligne par tranche de 130 jetons générés et par emplacement : `slot print_timing: id 2 | task 3149 | n_gen = 1140, tg = 42.00 t/s`. C'est un moyen simple de **lire la vitesse de génération réelle** d'une session en cours (≈ 40 à 43 tok/s par emplacement avec 4 sessions simultanées sur *Gemma 4 E4B*) sans outil externe. Boutons **Ouvrir le dossier des journaux** et **Effacer**.
 
 ![API](../img/bionic/02-reglages/13-api-modeles-locaux.png)
 *Figure 13 — Réglages → API des modèles locaux.*
@@ -241,6 +243,8 @@ Voir [Manuel 10](10-securite-compte-api.md#5-api-locale) pour l'usage et la séc
 | **Longueur de contexte minimale pour AutoFit** | Nombre minimal de tokens de contexte que l'ajustement automatique doit fournir ; un modèle qui ne peut pas l'atteindre **ne se charge pas** |
 | **Protection lors du chargement des modèles** | Niveaux : *Désactivée (déconseillé)* · *Souple* · *Équilibrée* · *Stricte* · *Personnalisée* (limite de taille définie) |
 
+> **Valeurs relevées sur le poste à GPU dédié** [Vérifié, 7 octobre 2026] : minimum AutoFit **16 384** ; protection **Souple**. Les modèles de 26 à 27 Md reçoivent **exactement ce minimum** (le petit modèle *Gemma 4 E4B* : 131 072) : cette valeur **explique** le contexte de 16 384 jetons des gros modèles dans Bionic. La relever à 32 768, 65 536, 131 072 ou 262 144 a été essayé avec le 26B (mémoire et vitesse quasi inchangées) et avec Qwen3.8 27B (RAM en hausse) : tableau et recommandations au [Manuel 04, section 5](04-modeles.md#5-mémoire-chargement-et-déchargement).
+>
 > **Exemple** — un agent doit disposer de plusieurs milliers de tokens de contexte : relever la valeur minimale évite qu'un modèle se charge avec un contexte trop court pour travailler, au prix d'un refus de chargement si la mémoire manque. La protection *Équilibrée* ou *Stricte* limite le risque de blocage du système lorsque la taille du modèle approche la RAM disponible.
 
 ### Moteur d'exécution
@@ -251,11 +255,11 @@ Voir [Manuel 10](10-securite-compte-api.md#5-api-locale) pour l'usage et la séc
 | Champ | Rôle | Observé |
 |---|---|---|
 | **Packs installés** | Moteurs et frameworks installés ; **Rechercher des mises à jour** ; **Gérer les packs installés** | 13 moteurs, 2 frameworks, 2 mises à jour disponibles |
-| **Choix des moteurs d'exécution (GGUF)** | Moteur utilisé pour les modèles GGUF | **Vulkan llama.cpp (Windows) 2.52.0** (alternatives : CPU, CUDA ; versions précédentes) |
+| **Choix des moteurs d'exécution (GGUF)** | Moteur utilisé pour les modèles GGUF | **Vulkan llama.cpp (Windows) 2.52.0** (alternatives : CPU, CUDA ; versions précédentes) ; **GPU dédié : CUDA 12 llama.cpp (Windows) 2.54.0** (« 23 moteurs, 7 frameworks. 3 mises à jour disponibles »), plus le pack « ExecuTorch ASR (CUDA) 0.0.8 » |
 | **Niveau de journalisation du moteur llama.cpp** | Verbosité des journaux du moteur | **Info** (Error · Warning · Info · Trace · Debug) |
 | **Afficher les téléchargements de moteurs d'exécution** | Montre les téléchargements de packs dans Explorer → Téléchargements | Désactivé |
 
-Notions (CPU, CUDA, Vulkan) : [Manuel LM Studio 00](../lmstudio/00-notions-fondamentales.md). Sur le poste de test (GPU intégré Intel), Vulkan est le moteur adapté.
+Notions (CPU, CUDA, Vulkan) : [Manuel LM Studio 00](../lmstudio/00-notions-fondamentales.md). Sur le poste à GPU intégré Intel, Vulkan est le moteur adapté ; sur le poste à GPU Nvidia, **CUDA 12** est sélectionné : Bionic utilise sa **propre** version du moteur (2.54.0), distincte de celle choisie dans LM Studio (2.53.0 le même jour) **[Vérifié]**.
 
 ---
 
@@ -281,7 +285,8 @@ Notions (CPU, CUDA, Vulkan) : [Manuel LM Studio 00](../lmstudio/00-notions-fonda
 | Chargement à la demande (JIT) | Activé |
 | CORS | Désactivé |
 | Journaux détaillés | Activé |
-| Moteur GGUF | Vulkan llama.cpp |
+| Moteur GGUF | Vulkan llama.cpp (GPU intégré) ; CUDA 12 llama.cpp (GPU dédié Nvidia) |
+| Longueur de contexte minimale AutoFit / protection du chargement | 16 384 / Souple |
 
 ### Profils de réglage proposés
 

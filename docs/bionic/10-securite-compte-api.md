@@ -137,6 +137,7 @@ Les scripts du dossier [`exemples/`](../../exemples/) fonctionnent à l'identiqu
 | Point | Détail |
 |---|---|
 | **Vérifier l'adresse d'écoute** | `Get-NetTCPConnection -LocalPort 1234 -State Listen` → `127.0.0.1` = local uniquement ; `0.0.0.0` = tout le réseau. |
+| **Appels d'outils MCP** | Aucun réglage d'approbation par outil ; un outil MCP à effet de bord s'exécute **sans confirmation**, même en mode *Demander à chaque fois* [Vérifié, 7 octobre 2026, [Manuel 08](08-competences-et-mcp.md#5-serveurs-mcp)] : n'ajouter que des serveurs de confiance, désactiver ceux qui ne servent pas |
 | **Exposer sur le réseau** | Aucun réglage d'adresse d'écoute n'a été trouvé dans l'interface (seul le **port** est modifiable) [À tester]. |
 | **Absence d'authentification** | Tout processus local de la machine (y compris d'autres utilisateurs de session partagée) peut appeler l'API ; sur un poste multi-utilisateurs, évaluer le risque. |
 | **CORS** | Activer uniquement pour une page web locale précise : toute page ouverte dans le navigateur pourrait sinon appeler l'API. L'activation redémarre le serveur. |

@@ -46,7 +46,7 @@ Ordre conseillé pour qu'un agent local donne un résultat exploitable :
 | Raisonnement | Désactivé pour la rapidité ; activé pour un contenu argumenté |
 | Consigne type | « Rédige un mémo de 6 lignes maximum sur [sujet] et enregistre-le dans [nom].md. » |
 
-> **Résultat mesuré** — mémo de 7 lignes enregistré en **2 min 4 s** avec *Gemma 4 E4B* (GPU intégré) ; fichier créé dans *Fichiers du projet* (`+7 −0`).
+> **Résultat mesuré** — mémo de 7 lignes enregistré en **2 min 4 s** avec *Gemma 4 E4B* (GPU intégré) ; fichier créé dans *Fichiers du projet* (`+7 −0`). **GPU dédié (RTX 4060 Ti)** : **29 s** (raisonnement activé), **≈ 15 s** (désactivé).
 
 ### Recette B — Corriger un bogue dans un dépôt
 
@@ -115,7 +115,7 @@ Voir [Manuel 10](10-securite-compte-api.md#8-configurations-recommandées).
 | L'agent propose un outil absent (`pytest`) | Hypothèse du modèle | Citer la commande exacte dans la consigne ; refuser avec instruction. |
 | Chemin de dossier incorrect dans une commande | Petit modèle | Refuser (**Non, demander autre chose**), préciser le chemin. |
 | Réponses en anglais | Modèle peu stable en français | Consigne « Répondre en français » ; modèle plus grand. |
-| Tâche très lente | Modèle local sur GPU intégré ; trop d'étapes | Réduire la tâche ; modèle plus petit ou plus rapide ; désactiver le raisonnement. |
+| Tâche très lente | Modèle local sur GPU intégré (sur GPU dédié, une tâche courte dure 15 à 60 s) ; trop d'étapes | Réduire la tâche ; modèle plus petit ou plus rapide ; désactiver le raisonnement. |
 | **Contexte** élevé, réponses dégradées | Session trop longue | Nouvelle session ; consigne de reprise concise. |
 | Modèle qui ne se charge pas | Mémoire insuffisante ; protection de chargement | Réglages → **Paramètres par défaut des modèles locaux** : assouplir la protection ou réduire le contexte minimal ; modèle plus petit. |
 | RAM libre quasi nulle après le chargement d'un modèle | Contexte chargé très grand (ex. 262 144 tokens : 14 Go occupés pour un modèle de 7 Go, mesuré) | Décharger le modèle (Réglages → Instances chargées) ; fermer des applications ; charger le modèle avec un contexte réduit dans LM Studio ([Manuel 04](04-modeles.md#5-mémoire-chargement-et-déchargement)). |

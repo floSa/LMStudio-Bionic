@@ -3,7 +3,7 @@
 > **Objet** : suivre une compétence (`SKILL.md`) **de bout en bout** : écriture, installation (de projet ou globale), déclenchement manuel avec `@` et automatique, mesure de l'effet, gestion et retrait.
 > **Prérequis** : [Manuel Bionic 08](08-competences-et-mcp.md) (principe des compétences), [Manuel Bionic 12](12-auto-review.md) (approbations).
 > **Version décrite** : Bionic 1.1.7, Windows 11, interface en français.
-> **Statut des informations** : [Vérifié] observé sur le poste de test (Intel Core Ultra 7 255H, 31 Go de RAM, **GPU intégré**, modèles *Gemma 4 E4B* et *Gemma 4 12B QAT*) ; [Source] fichiers fournis avec l'application (compétence interne `skill-management`) et documentation officielle ; [Estimation] ; [À tester].
+> **Statut des informations** : [Vérifié] observé sur deux postes : GPU intégré (Intel Core Ultra 7 255H, 31 Go de RAM, modèles *Gemma 4 E4B* et *Gemma 4 12B QAT*, 6 octobre 2026) et **GPU dédié** (RTX 4060 Ti, 16 Go de VRAM, modèles *Gemma 4 E4B* et *Gemma 4 26B A4B*, 7 octobre 2026 : sections 3.5 et 5, modèle réel vérifié dans la base de sessions) ; [Source] fichiers fournis avec l'application (compétence interne `skill-management`) et documentation officielle ; [Estimation] ; [À tester].
 > **Précautions** : compétences **fictives** (compte rendu de réunion, résumé en trois points) ; notes de réunion inventées ; la compétence globale installée pour l'essai a été **retirée** à la fin.
 
 ---
@@ -133,6 +133,22 @@ Le journal de session montre le chemin suivi : une **tentative d'appel d'un « o
 
 > **Lecture** — La compétence change **le format et la fiabilité** (plus de date inventée) sans nouvelle explication dans la consigne. Le déclenchement manuel est **plus rapide et plus sûr** : le contenu est fourni d'emblée, alors que l'automatique repose sur la décision du modèle et passe par une lecture de fichier (et, ici, une tentative d'outil erronée). Un seul essai par condition : tendance, non statistique.
 
+### 3.5 Rejeu sur GPU dédié
+
+[Vérifié, 7 octobre 2026] Projet « Démo code », *Gemma 4 26B A4B* (remplace le 12B QAT, absent du poste), raisonnement désactivé, mode Vérification automatique, modèle réel vérifié dans la base de sessions. La **compétence est la même** ; les **notes de réunion sont différentes** (réécrites : mêmes éléments, autres mots) : la comparaison avec le tableau de la section 3.4 est **indicative**.
+
+| Critère | Sans compétence | `@compte-rendu-reunion` | Automatique (sans `@`) |
+|---|---|---|---|
+| Durée | **15 s** | **6 s** (aucun outil appelé : le contenu est fourni d'emblée) | **11 s** (un appel `read_file_lines` : lecture de `SKILL.md`, libellé « Reading skill ») |
+| Première ligne `CR-STANDARD` | **Non** | **Oui** | **Non** |
+| Sections `Décisions` / `Actions` / `Points ouverts` | Intitulés propres (« Décisions actées », « Plan d'action », « Points en suspens ») | **Conformes** | Intitulés propres (« Décisions actées », « Actions à réaliser », « Point en suspens ») |
+| Tableau des actions | Oui | Oui | **Non** (liste à puces) |
+| Dernière ligne `Fin du compte rendu` | **Non** | **Oui** | **Non** |
+| Rien d'inventé | Non : « Une décision devra être prise lors de la prochaine séance » ; rôles ajoutés | **Oui** (« à définir » pour le responsable et l'échéance manquants) ; une ligne d'action ajoutée pour le fournisseur | **Non** : « Ordre du jour » et « prochaine séance » ajoutés |
+| Introduction avant le document | Oui | **Non** | Oui |
+
+> **Lecture** — Résultat **contraire à celui du 12B** sur le déclenchement automatique : le 26B **a bien lu** la compétence (appel d'outil `read_file_lines` sur `.agents/skills/compte-rendu-reunion/SKILL.md`) **mais n'en a pas appliqué le format**. Seul le déclenchement **manuel avec `@`** a donné un résultat **entièrement conforme** : le contenu de la compétence est vraisemblablement placé dans la requête, sans dépendre d'une décision du modèle [Estimation : aucun outil n'a été appelé]. **Pour une compétence dont le format compte, la déclencher avec `@`.** Un seul essai par condition ; la palette a proposé trois entrées « compte-rendu-reunion » (la compétence, puis des références de dossier et de fichier) : l'entrée la plus haute a été choisie ([Piège de recherche](#la-compétence-apparaît-partout)). Les durées sont **mesurées de l'envoi à la fin** ; le contexte affiché n'a pas été relevé.
+
 ---
 
 ## 4. Essai B : installer une compétence globale
@@ -156,6 +172,15 @@ Compétence fictive [`outils/competences_demo/resume-en-trois-points/SKILL.md`](
 
 ![Approbation de l'installation](../img/bionic/13-competences/08-approbation-installation-globale.png)
 *Figure 8 — « Bionic wants to install skill … globally. Do you approve? » : ① question, ② avertissement (« Only install skills from sources you trust »), ③ Yes, ④ refus, ⑤ annulation, ⑥ étape « Installer une compétence globale ».*
+
+**Rejeu sur GPU dédié** [Vérifié, 7 octobre 2026 ; modèle réel vérifié ; `@Install Skill` + le chemin du dossier de la compétence ; réflexion désactivée] :
+
+| Modèle | Durée | Appels d'outils | Boîtes affichées | Résultat |
+|---|---|---|---|---|
+| *Gemma 4 E4B* (GPU intégré : 4 relances nécessaires) | **18 s** | un seul, `bionic_tool` (échec : aucun outil nommé `install-skill`) | aucune | **Rien installé** ; l'agent s'excuse et demande des précisions |
+| *Gemma 4 26B A4B* | **86 s** et **104 s** (deux essais) | 7 : `shell_command`, `bionic_tool`, `read_file_lines`, `get_scratchpad_folder`, `shell_command`, `read_file_lines`, `bionic_tool` | « *Bionic wants to install skill … globally. Do you approve?* » (une fois) | **Compétence installée** dans `~\.lmstudio\skills\resume-en-trois-points\` ; contenu **identique** à la source hors fins de ligne (mélange CRLF et LF : 625 octets contre 630) |
+
+Le 26B réussit **en une seule consigne** là où l'E4B échoue ; l'approbation de l'installation globale reste **obligatoire** dans les deux cas. La compétence installée a été **retirée** après chaque essai.
 
 L'installation **n'est jamais silencieuse** : une compétence globale remplace ou ajoute une instruction **permanente** pour tous les projets ; l'approbation de l'utilisateur est requise [Vérifié ; Source].
 
@@ -194,12 +219,26 @@ L'installation **n'est jamais silencieuse** : une compétence globale remplace o
 
 > **Essai (poste de test)** [Vérifié] — Consigne : « Crée une compétence globale nommée `resume-en-trois-points` : exactement trois puces de 15 mots maximum, ligne finale `FIN-R3`. Ne pose aucune question. »
 >
+> **GPU intégré** :
+>
 > | Modèle | Résultat |
 > |---|---|
 > | *Gemma 4 E4B* | Réponse en 2 min 37 s : « I have successfully created the skill… ». **En réalité** : le fichier a été écrit **dans le dossier du projet** (`<projet>\.lmstudio\.internal\skills\resume-en-trois-points\SKILL.md`), **sans l'en-tête obligatoire** (`name`, `description`), et **rien n'a été installé** (dossier global vide) |
 > | *Gemma 4 12B QAT* | Session **interrompue à la main après plus de 15 minutes** : l'agent explorait des dossiers par commandes (`dir`, `ls -R` sur les dossiers de compétences) et chaque commande passait par la vérification automatique ([Manuel 12](12-auto-review.md)) |
 
-**Conclusion** : avec les modèles locaux testés sur ce poste, la **création assistée** est **peu fiable** et l'annonce de réussite est **fausse**. Procédure recommandée :
+**Rejeu sur GPU dédié** [Vérifié, 7 octobre 2026] — même consigne, projet « Démo documents », raisonnement désactivé, modèle réel vérifié dans la base :
+
+| Modèle | Durée (envoi → fin) | Outils appelés | Résultat |
+|---|---|---|---|
+| *Gemma 4 E4B* | **21 s** (GPU intégré : 2 min 37 s) | un seul : `bionic_tool` (échec) | **Aucune compétence créée.** L'agent répond, en anglais, qu'il n'a pas d'outil direct pour créer des compétences globales et **pose une question** (demande de précision), malgré « Ne pose aucune question ». Aucune fausse annonce de réussite cette fois |
+| *Qwen3.8 27B* (raisonnement « Moyen ») | **242 s** (modèle chargé à la demande, 64 s à lui seul) | 5 : `read_file_lines` (lecture de `skill-management`), `get_scratchpad_folder`, `create_folder`, `replace_file`, `bionic_tool` | **Compétence créée et installée** après approbation, avec **en-tête complet** (`name`, `display-name`, `description`), règles, **exemple de format** ; réponse finale : « Tu peux l'activer à tout moment en tapant `@resume-en-trois-points` » (copie dans `outils/resultats/gpu_dedie/competence_creee_qwen/SKILL.md`). Compétence retirée ensuite |
+| *Gemma 4 26B A4B* | **59 s** (envoi → fin, confirmations comprises) | 12 : `create_folder`, `list_dir`, `agentic_find`, `read_file_lines` (lecture de `skill-management`), `shell_command` (`ls -d …/.internal/skills/*`), `get_scratchpad_folder`, `replace_file`, `bionic_tool`… | **Compétence créée et installée** : boîte « *Bionic wants to install skill Résumé en trois points globally. Do you approve?* » puis `~\.lmstudio\skills\resume-en-trois-points\SKILL.md` écrit. Réponse : « La compétence globale `resume-en-trois-points` a été créée et installée avec succès » : **exacte** cette fois |
+
+Contenu du fichier produit par le 26B (copie dans `outils/resultats/gpu_dedie/competence_creee_26b/SKILL.md`) : en-tête **complet** (`name`, `display-name`, `description`, `user-invocable: true`), puis trois règles : exactement trois puces, 15 mots maximum par puce, ligne finale `FIN-R3`. Le nom du dossier est égal à `name`. La compétence a été **retirée** après l'essai (`~\.lmstudio\skills` vide). Le test d'**usage** de cette compétence (respect des 15 mots) n'a pas été rejoué.
+
+> **Attention** — L'option d'approbation automatique du script de test (« Yes » sur les boîtes d'autorisation) a **accepté l'installation globale** : sans cette option, la boîte « *Bionic wants to install skill* » attend une réponse (et signale « Action requise » dans la barre latérale). **Lire** la boîte avant d'accepter : une compétence globale s'applique à **tous** les projets.
+
+**Conclusion** : la **création assistée** dépend **fortement du modèle**. Avec les petits modèles (E4B sur les deux postes) elle échoue, soit par une **fausse annonce** (GPU intégré), soit par un **abandon** (GPU dédié). Avec le **26B** elle **réussit** en moins d'une minute et sans fausse annonce, sur **un** essai. Procédure recommandée :
 
 1. **Rédiger** soi-même le `SKILL.md` (ou le faire rédiger dans une session ordinaire), avec l'en-tête complet.
 2. **Relire** le fichier (nom = nom du dossier, `description` courte et précise).
@@ -208,7 +247,7 @@ L'installation **n'est jamais silencieuse** : une compétence globale remplace o
 
 ### Pour aller plus loin
 
-- Un modèle plus capable (cloud, ou modèle local plus grand avec un contexte réduit) ou une session guidée pas à pas améliorent la création assistée [Estimation : non testé].
+- Un modèle plus capable améliore la création assistée : **vérifié** avec le 26B sur GPU dédié (un essai) ; un modèle distant n'a pas été testé [À tester]. *Qwen3.8 27B* a été testé (ligne ci-dessus) : création réussie, plus lente (242 s) mais **plus soignée** (exemple de format).
 - *Réglages → Compétences → Ajouter une compétence* propose **Créer avec Bionic** et **Installer une compétence…** ([Manuel Bionic 08](08-competences-et-mcp.md#2-gérer-les-compétences)) ; l'installation par sélecteur de fichier natif n'a pas été pilotée (les boîtes de dialogue natives ne se prêtent pas à l'automatisation).
 
 ---

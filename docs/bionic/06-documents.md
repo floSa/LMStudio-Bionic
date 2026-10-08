@@ -91,11 +91,13 @@ Zone **Fichiers du projet** du panneau de droite : fichiers **gérés par le pro
 |---|---|
 | Modèle | *Gemma 4 E4B* (local), raisonnement **Activé** |
 | Mode shell | Vérification automatique (aucune commande nécessaire) |
-| Durée | **2 min 4 s** |
+| Durée | **2 min 4 s** (GPU dédié : **29 s** ; raisonnement désactivé : **≈ 15 s**) |
 | Résultat | Fichier `memo-ia-locale.md` créé dans *Fichiers du projet* (**+7 −0** : 7 lignes ajoutées) |
 
 ![Mémo généré](../img/bionic/06-documents/01-memo-genere.png)
 *Figure 2 — Réponse et fichier créé (bloc « Fichiers modifiés »), `memo-ia-locale.md` dans le panneau de droite.*
+
+**Sur GPU dédié** (RTX 4060 Ti, 7 octobre 2026, modèle vérifié dans la base de sessions) : *Gemma 4 E4B*, raisonnement **Activé** : **29 s** ; **Désactivé** : **≈ 15 s** (mesuré de l'envoi à la fin) ; fichier créé dans les deux cas. Le **gain du raisonnement désactivé** reste d'environ moitié (GPU intégré : 2 min 4 s → 1 min 23 s, environ un tiers).
 
 **Observation** : le fichier contient 7 lignes pour une consigne de « 6 lignes maximum » : les contraintes numériques sont à **vérifier** ; un petit modèle les respecte approximativement. Contenu rédigé en français, en 5 points (confidentialité, sécurité, hors ligne, personnalisation, coûts).
 
@@ -117,6 +119,16 @@ Deux modèles ont été comparés (même consigne, même image, une session par 
 | Bloc **Fichiers modifiés** | **Absent** | `facture.json` **+6 −0** |
 | `facture.json` sur le disque | **Inexistant** | Présent dans *Fichiers du projet* |
 | Langue de la réponse | Français | Français |
+
+**Rejeu sur GPU dédié** (7 octobre 2026, modèle vérifié dans la base de sessions ; l'ancienne valeur est entre parenthèses) :
+
+| | *Gemma 4 E4B* | *Gemma 4 26B A4B* (remplace le 12B QAT, absent du poste) |
+|---|---|---|
+| Durée | **31 s** affichés (55 s) | **≈ 51 s** mesurés (12B : 4 min 25 s, chargement compris) |
+| Valeurs lues | Correctes : `F-2026-0042`, `06/10/2026`, `Atelier Démo SARL`, `3060.00` | Correctes |
+| Fichier `facture.json` | **Non créé** : le JSON est affiché dans la réponse, sans appel d'outil | **Créé** (bloc *Fichiers modifiés* `facture.json` **+6 −0**) |
+
+Le constat d'**annonce d'action sans exécution** se **reproduit** avec l'E4B sur le GPU dédié, malgré une vitesse multipliée par ≈ 2 : la **vitesse du matériel ne corrige pas** le défaut. Le 26B réalise l'action demandée.
 
 ![Résultat avec Gemma 4 E4B](../img/bionic/06-documents/04-resultat-facture.png)
 *Figure 3 — *Gemma 4 E4B* : réponse en 55 s, contenu juste, mais aucun fichier créé.*

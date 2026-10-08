@@ -82,6 +82,8 @@ Les sessions d'un projet peuvent être déplacées vers un autre projet ([Manuel
 
 Si le dépôt est géré par **Git**, le panneau de fichiers affiche aussi le dépôt et la branche courante [Source].
 
+**Projet sans répertoire de travail natif** [Vérifié, 7 octobre 2026] — les commandes de l'agent s'exécutent dans un dossier propre au projet : `~\.lmstudio\apps\bionic\projects\<identifiant du projet>\workspace` (l'identifiant est celui du projet ; le dossier contient les fichiers du projet et d'éventuels sous-dossiers créés par l'agent). Ce dossier n'est **pas** celui du dossier connecté. Pour un projet dont le dossier de travail est un **dépôt Git**, la **branche** s'affiche sous la zone de saisie, à droite du nom du projet (« Démo code • master »).
+
 ---
 
 ## 4. Créer et gérer des sessions
@@ -110,7 +112,7 @@ Chaque session possède son propre **modèle**, son **mode shell** et son **comp
 
 ## 5. Sessions hors projet
 
-La section **Conversations** de la barre latérale contient des sessions **sans projet** : discussion libre, sans dossier de travail ni fichiers de projet. Convient aux questions rapides ; pas aux tâches qui produisent des fichiers à conserver. Le déplacement d'une session hors projet vers un projet n'a pas été testé (les déplacements entre projets sont documentés) [À tester].
+La section **Conversations** de la barre latérale contient des sessions **sans projet** : discussion libre, sans dossier de travail ni fichiers de projet. Le lien **Nouvelle conversation** ouvre une zone de saisie **sans nom de projet** ; essai avec *Gemma 4 E4B* : question simple, réponse en quelques secondes, compteur de contexte affiché [Vérifié, 7 octobre 2026]. Convient aux questions rapides ; pas aux tâches qui produisent des fichiers à conserver. Le déplacement d'une session hors projet vers un projet n'a pas été testé (les déplacements entre projets sont documentés) [À tester].
 
 ---
 
@@ -126,6 +128,19 @@ La section **Conversations** de la barre latérale contient des sessions **sans 
 
 - **Affichage côte à côte** : glisser un onglet sur la moitié gauche ou droite de la zone d'affichage [Source].
 - Sur un **modèle local**, deux sessions simultanées se partagent la même machine : chaque requête ralentit l'autre. Sur le poste de test (GPU intégré), une seule tâche à la fois est recommandée [Estimation].
+- **Mesure dans Bionic sur GPU dédié** [Vérifié, 7 octobre 2026 ; durées lues dans la base de sessions ; tâche : texte d'environ 1 500 mots en dix parties ; sessions lancées toutes les 15 s, durée par session) :
+
+  | Modèle | Sessions simultanées | Durée par session | Durée totale | Équivalent séquentiel |
+  |---|---|---|---|---|
+  | *Gemma 4 E4B* | 1 | **49,0 s** | 49,0 s | — |
+  | *Gemma 4 E4B* | 2 | **49,2 s** et **44,8 s** | **59,8 s** | 98 s |
+  | *Gemma 4 E4B* | 4 | **67,1 / 60,2 / 59,8 / 62,2 s** (+ 22 à 37 %) | **107,2 s** | 196 s |
+  | *Gemma 4 26B A4B* | 1 | **73,3 s** | 73,3 s | — |
+  | *Gemma 4 26B A4B* | 2 | **69,9 s** et **73,9 s** | **88,9 s** | 146,6 s |
+
+  **Deux sessions** ne ralentissent **pas** chacune, et **quatre** sessions d'E4B ne ralentissent chacune que de **22 à 37 %** pour une durée totale **près de deux fois plus courte** que l'enchaînement. Même résultat avec le 26B, partiellement en RAM, à deux sessions. La règle « une seule tâche à la fois » du GPU intégré **ne s'applique pas** à ce matériel (limite de chargement : `parallel = 4` ; comportement au-delà de quatre sessions non mesuré [À tester]). Les sessions ne sont **pas** réellement simultanées au démarrage (15 s de manipulation d'interface entre deux envois) : la mesure sous-estime l'effet d'un démarrage groupé. Le journal du serveur ([Manuel 03](03-reglages.md#api-des-modèles-locaux)) montre ≈ 40 à 43 tok/s par emplacement pendant la mesure à 4 sessions.
+- **GPU dédié** : Bionic charge les modèles avec **4 requêtes parallèles** (`parallel = 4`, relevé par `lms ps`) ; mesuré dans LM Studio sur ce poste, 4 requêtes simultanées donnent **152 tok/s au total** contre 45 tok/s pour une seule ([Manuel LM Studio 03, section 5.5](../lmstudio/03-charger-un-modele.md#55-concurrence-selon-le-matériel)). Deux sessions en parallèle sont donc **raisonnables** sur ce matériel avec un modèle entièrement sur la carte ; le cas d'un modèle partiellement en RAM (26B, Qwen) n'a pas été mesuré dans Bionic [À tester].
+- **Affichage en colonnes** [Vérifié] : ouvrir une nouvelle session pendant qu'une autre est affichée peut la placer dans une **seconde colonne** (gauche ou droite). Chaque colonne a **sa** zone de saisie, **son** sélecteur de modèle et **son** compteur de contexte : contrôler la colonne avant de saisir ou de changer de modèle. Les sessions en attente d'une réponse restent signalées « Action requise » dans la barre latérale, y compris celles d'autres projets.
 - Un modèle chargé est vraisemblablement **commun** aux sessions qui l'utilisent (Réglages → Instances chargées) [Estimation].
 
 ---

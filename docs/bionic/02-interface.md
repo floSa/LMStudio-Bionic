@@ -206,7 +206,7 @@ Le navigateur intégré s'ouvre dans un onglet **Navigateur** avec les contrôle
 ### Pour aller plus loin
 
 - Les cookies et données de site se règlent dans Réglages → Agent → *Données du navigateur* (**Mémoire uniquement** par défaut) ; l'accès aux sites **externes** est limité par la liste *Sites web autorisés* (aucun site autorisé par défaut ; `localhost` reste accessible) [Vérifié] : voir [Manuel 03](03-reglages.md#3-agent) et [Manuel 10](10-securite-compte-api.md).
-- Le contenu navigué n'a pas été testé au-delà de l'ouverture de l'onglet [À tester].
+- Le contenu navigué a été testé avec l'agent : l'agent **ouvre** la page mais **ne lit pas** son contenu ([Manuel 14, section 4](14-commandes-compaction-navigateur.md#4-le-navigateur-intégré)) [Vérifié, 7 octobre 2026].
 
 ---
 
@@ -236,4 +236,4 @@ Le navigateur intégré s'ouvre dans un onglet **Navigateur** avec les contrôle
 | Ouverture rapide (sessions, fichiers, URL) | `Ctrl + P` | [Source : « Cmd + P » sur macOS, adaptation Windows non vérifiée] |
 | Arrêter l'agent | Bouton carré de la zone de saisie | [Vérifié] |
 
-> La liste complète des raccourcis n'est pas documentée dans les pages consultées [À tester].
+> La liste complète des raccourcis n'est pas documentée dans les pages consultées. Vérifiés le 7 octobre 2026 : `Ctrl + ,` (réglages), `Ctrl + P` (recherche de sessions, [Manuel 14, section 5.3](14-commandes-compaction-navigateur.md#53-recherche-ctrl--p)) ; saisie `/` (commandes) et `@` (références). Les autres restent **[À tester]**.

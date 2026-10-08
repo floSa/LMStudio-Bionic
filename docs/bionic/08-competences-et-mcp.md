@@ -3,7 +3,7 @@
 > **Objet** : étendre les capacités de l'agent avec des **compétences** (instructions réutilisables) et des **serveurs MCP** (outils externes), et référencer des fichiers ou d'autres sessions avec la palette `@`.
 > **Prérequis** : [Manuel Bionic 00](00-notions-agent.md#8-compétences-mcp-sous-agents), [03](03-reglages.md#8-intégrations--mcp-et-compétences).
 > **Version décrite** : Bionic 1.1.7, Windows 11, interface en français.
-> **Statut des informations** : [Vérifié] observé sur le poste de test ; [Source] documentation officielle ; [Estimation] ; [À tester].
+> **Statut des informations** : [Vérifié] observé sur le poste de test (compétences : 6 octobre 2026 ; **serveur MCP ajouté et appelé dans Bionic** : 7 octobre 2026, poste à GPU dédié) ; [Source] documentation officielle ; [Estimation] ; [À tester].
 
 ---
 
@@ -207,11 +207,37 @@ Connexion **Adresse web** :
 | **Portées OAuth** | **Automatique** ou **Personnalisé** (limiter les autorisations demandées ; certains outils peuvent ne pas fonctionner avec des portées réduites). |
 | **Délai d'expiration** | Comme ci-dessus. |
 
+### Essai : ajouter un serveur local et le faire appeler par l'agent
+
+[Vérifié, 7 octobre 2026, GPU dédié ; modèles *Gemma 4 26B A4B* et *Gemma 4 E4B*] Serveur de démonstration fourni dans le dépôt ([`outils/serveur_mcp_demo.py`](../../outils/serveur_mcp_demo.py) : cinq outils inoffensifs, bibliothèque standard).
+
+1. *Réglages → MCP → Ajouter un serveur MCP personnalisé*.
+2. **Nom** : `demo-notes` ; **Connexion** : *Sur cet ordinateur* ; **Commande** : chemin de l'interpréteur Python.
+3. *Afficher les options avancées* : **Arguments** (un champ par argument, bouton *Ajouter un argument*) = chemin du script ; **Variables d'environnement** ; **Répertoire de travail** (chemin absolu) ; **Délai d'expiration de la requête** (60 s par défaut : détection des outils et chaque appel).
+4. **Ajouter un MCP**. La liste « Serveurs MCP connectés » affiche en quelques secondes **« demo-notes · Connecté · 5 outils prêts »**.
+
+![Serveur MCP connecté](../img/bionic/08-skills-mcp/06-mcp-serveur-connecte.png)
+*Figure 5 — Réglages → MCP : ① compteur « Serveurs MCP connectés : 1 », ② le serveur avec l'état « Connecté » et « 5 outils prêts », ③ engrenage (réglages du serveur), ④ interrupteur d'activation.*
+
+La page du serveur (engrenage) reprend les champs de saisie, indique l'état et propose **Retirer le MCP** (« Retirer ce serveur MCP et ses informations d'authentification enregistrées »). **Il n'existe aucun réglage d'approbation par outil.**
+
+**Stockage** : `~\.lmstudio\apps\bionic\.internal\ng-mcp.json` (liste `servers` : identifiant, nom, activation, `connection` avec `type: stdio`, `command`, `args`, `env`). **Ce fichier est distinct du `mcp.json` de LM Studio** (`~\.lmstudio\mcp.json`, resté vide) : un serveur ajouté dans une application **n'apparaît pas** dans l'autre. Les valeurs sont en **clair**.
+
+**Appels par l'agent** (session du projet « Démo documents », raisonnement désactivé) :
+
+| Consigne | Modèle | Mode shell | Durée | Outil appelé | Confirmation |
+|---|---|---|---|---|---|
+| « Utilise l'outil de conversion de température du serveur MCP demo-notes pour convertir 100 degrés Celsius en Fahrenheit… » | *Gemma 4 26B A4B* | Vérification automatique | **25 s** | `convertir_temperature` → réponse « 212,0 degrés Fahrenheit » | **Aucune** |
+| « Utilise l'outil `ecrire_note` du serveur MCP demo-notes pour enregistrer une note nommée `essai-bionic.txt`… » (outil **à effet de bord**) | *Gemma 4 26B A4B* | Vérification automatique | **3 s** | `ecrire_note` : fichier **créé** | **Aucune** |
+| idem avec `essai-bionic-manuel.txt` | *Gemma 4 E4B* | **Demander à chaque fois** | **14 s** | `ecrire_note` : fichier **créé** | **Aucune** |
+
+Le journal du serveur de démonstration (`outils/resultats/mcp_demo_appels.log`) confirme **chaque appel** (horodatage, outil, arguments). Il montre aussi un **appel non demandé** : dans une session sans rapport (référence à une autre session, [Manuel 14, section 5.4](14-commandes-compaction-navigateur.md#54-référencer-une-autre-session-)), l'agent a appelé **de lui-même** `lister_notes` : les outils d'un serveur MCP activé sont **proposés à toutes les sessions**, pas seulement à celle où on les évoque. **Constat** : les appels d'outils MCP **ne passent ni par la vérification automatique ni par la confirmation manuelle des commandes shell**, même pour un outil qui **écrit** des fichiers : le mode shell ne concerne que `shell_command` ([Manuel 12, section 7](12-auto-review.md#7-ce-que-lauto-review-ne-couvre-pas)). **À l'inverse de LM Studio**, qui demande une confirmation pour chaque appel d'outil ([Manuel LM Studio 10](../lmstudio/10-mcp-et-appel-d-outils.md)). Conséquence : **n'ajouter que des serveurs de confiance**, dont on a **lu les outils** ; désactiver (interrupteur) ou **retirer** le serveur quand il n'est pas utilisé. Le serveur de l'essai a été **retiré** ensuite.
+
 ### Pour aller plus loin
 
 - Un **serveur local** exécute un programme **sur l'ordinateur, avec les droits de l'utilisateur**. Un serveur « Adresse web » envoie le contenu des appels d'outils à un **service externe**.
 - La documentation mentionne des **serveurs MCP gérés par l'organisation** (déploiements d'entreprise) [Source : journal des modifications] ; leur configuration n'est pas décrite.
-- Aucun serveur MCP n'a été **ajouté dans Bionic** pendant les tests : les écrans ont été décrits sans enregistrement. Le fonctionnement d'un serveur MCP (déclaration, outils, confirmation) a été testé dans LM Studio avec un serveur local de démonstration ([Manuel LM Studio 10](../lmstudio/10-mcp-et-appel-d-outils.md)).
+- Le fonctionnement d'un serveur MCP a aussi été testé **dans Bionic** (sous-section ci-dessous) et dans LM Studio ([Manuel LM Studio 10](../lmstudio/10-mcp-et-appel-d-outils.md)).
 
 ---
 

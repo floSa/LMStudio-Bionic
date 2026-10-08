@@ -119,6 +119,8 @@ Bionic et LM Studio **ne peuvent pas tourner en même temps** [Vérifié]. Le me
 ### Pour aller plus loin
 
 > **Divergence avec la documentation** — La documentation officielle présente LM Studio comme utilisable « à côté » de Bionic **[Source]**. Sur le poste de test, Bionic 1.1.7 refuse de démarrer tant que LM Studio est ouvert **[Vérifié]**. Le constat de terrain prévaut ici ; le comportement peut dépendre de la version, à revérifier après chaque mise à jour **[À tester]**.
+>
+> **Constat du 7 octobre 2026 (poste à GPU dédié)** — Mêmes versions (Bionic 1.1.7, LM Studio 0.4.25). Le conflit **n'a pas été rejoué** : LM Studio est resté fermé pendant toute la série d'essais. Constat nouveau : pendant que Bionic tourne, la commande `lms` de LM Studio (`lms ps`, `lms unload --all`) **répond sur le port 1234** et pilote les modèles chargés par **Bionic** ; c'est le moyen utilisé pour relever le contexte et la mémoire chargés par AutoFit ([Manuel 04, section 5](04-modeles.md#5-mémoire-chargement-et-déchargement)) **[Vérifié]**.
 
 Les deux applications utilisent le même port d'API par défaut (1234) et les mêmes dossiers de modèles [Vérifié] ; le blocage évite les conflits d'accès [Estimation, cause exacte non documentée]. Le serveur démarré par LM Studio se **relance automatiquement** à l'ouverture de l'application ([Manuel LM Studio 06](../lmstudio/06-serveur-local-et-api.md#2-démarrer-et-arrêter-le-serveur)) ; Bionic fait de même. Vérifier quelle application sert le port :
 

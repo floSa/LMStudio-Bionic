@@ -3,7 +3,7 @@
 > **Objet** : confier une tâche de code à Bionic (comprendre, corriger, tester), maîtriser les autorisations de commandes, relire les modifications et limiter les risques.
 > **Prérequis** : [Manuel Bionic 00](00-notions-agent.md), [05](05-projets-et-sessions.md).
 > **Version décrite** : Bionic 1.1.7, Windows 11, interface en français.
-> **Statut des informations** : [Vérifié] observé sur le poste de test (scénario exécuté de bout en bout) ; [Source] documentation officielle ; [Estimation] ; [À tester].
+> **Statut des informations** : [Vérifié] observé sur le poste de test à GPU intégré (scénario exécuté de bout en bout, 6 octobre 2026) et rejoué sur un poste à **GPU dédié** (RTX 4060 Ti, 7 octobre 2026, modèles *Gemma 4 E4B* et *Gemma 4 26B A4B*, modèle réel vérifié dans la base de sessions) ; [Source] documentation officielle ; [Estimation] ; [À tester]. Les valeurs du GPU intégré sont conservées entre parenthèses.
 
 ---
 
@@ -43,7 +43,7 @@ Les **sessions** décident des autorisations : « les autorisations d'exécution
 
 ## 2. Mise en place
 
-1. Créer un projet avec un **répertoire de travail** = racine du dépôt ([Manuel 05](05-projets-et-sessions.md#3-dossier-de-travail-ou-fichiers-du-projet)).
+1. Créer un projet avec un **répertoire de travail** = racine du dépôt ([Manuel 05](05-projets-et-sessions.md#3-dossier-de-travail-ou-fichiers-du-projet)). Sans répertoire de travail natif, les commandes s'exécutent dans `~\.lmstudio\apps\bionic\projects\<identifiant>\workspace` (dossier propre au projet).
 2. Choisir un modèle **capable d'outils** et de taille suffisante ([Manuel 04](04-modeles.md)).
 3. Vérifier le **mode shell** (bouton à gauche du sélecteur de modèle).
 4. Pour un dépôt Git : valider un état propre (`git status` vide) avant de lancer la tâche, afin que `git diff` ne montre que le travail de l'agent.
@@ -64,9 +64,20 @@ Les **sessions** décident des autorisations : « les autorisations d'exécution
 | **Vérification automatique** *(défaut, recommandé)* | « L'agent vérifie les commandes pour vous » | Les commandes reconnues comme sûres sont approuvées automatiquement ; les autres sont confiées à un **agent de vérification distinct**. |
 | **Tout autoriser** | « Autoriser l'agent à exécuter n'importe quelle commande » | Aucune vérification. |
 
+### Essai des modes extrêmes
+
+[Vérifié, 7 octobre 2026, GPU dédié, *Gemma 4 26B A4B*, projet jetable] Consigne identique : « Exécute exactement cette commande bash : `echo bonjour-depuis-bionic` ».
+
+| Mode | Durée | Résultat |
+|---|---|---|
+| **Désactivé** | 9 s | L'agent **tente** l'appel (`shell_command`), l'appel est **refusé** : réponse indiquant que l'accès au shell est désactivé et qu'il faut l'activer par le menu de la zone de saisie. **Aucune commande exécutée** |
+| **Tout autoriser** | 9 s | `echo` **exécutée immédiatement**, sans boîte ni vérification ; réponse `bonjour-depuis-bionic` |
+
+**Désactivé** est donc le mode à choisir pour une session de lecture ou de rédaction pure ; **Tout autoriser** supprime **toute** barrière ([Manuel 12](12-auto-review.md)). Seule une commande **inoffensive** a été essayée dans ces deux modes.
+
 ### Première utilisation
 
-À la première demande d'exécution, Bionic affiche une boîte d'information :
+À la première demande d'exécution **de chaque session**, Bionic affiche une boîte d'information (constat du 7 octobre 2026 : elle réapparaît dans **chaque nouvelle session**, même lorsque le mode shell est déjà choisi ; elle suspend la session avec la pastille « Action requise » tant qu'aucun choix n'est fait) :
 
 ![Première autorisation du shell](../img/bionic/07-code/02-autorisation-shell-premiere-fois.png)
 *Figure 2 — « Votre agent souhaite exécuter des commandes shell. »*
@@ -137,6 +148,23 @@ python -m unittest
 ```
 
 Les tests passent après la correction [Vérifié].
+
+### Rejeu sur GPU dédié (7 octobre 2026)
+
+Projet « Démo code » (dépôt Git, `tarifs.py` avec bogue, `test_tarifs.py`), mode **Demander à chaque fois**, raisonnement **Activé**, modèle réel vérifié dans la base de sessions :
+
+| | *Gemma 4 E4B* | *Gemma 4 26B A4B* |
+|---|---|---|
+| Consigne | « Exécute les tests, trouve la cause de l'échec dans tarifs.py, corrige-la puis relance les tests. » | idem **avec** la commande : « Exécute les tests avec `python -m pytest` … Réponds en français. » |
+| Durée affichée | **1 min 38 s** (GPU intégré : 6 min 22 s) | **43 s** (12B sur GPU intégré : 4 min 50 s, chargement inclus) |
+| Commandes exécutées | **aucune** : les tests n'ont pas été lancés | **2** : `python -m pytest` (code de sortie en erreur : bogue présent) puis `python -m pytest` (sans erreur, après correction) |
+| Confirmations | aucune demandée | **2** (une par exécution) |
+| Correction | annoncée dans la réponse | appliquée (tests sans erreur à la seconde exécution) |
+| Langue de la réponse | **anglais** | français |
+
+Les consignes **ne sont pas identiques** (la commande de test est nommée pour le 26B, comme elle l'était pour le 12B) : la comparaison est **indicative**. Sur ce poste, `python -m pytest` a pu s'exécuter : l'absence de `pytest` constatée sur le poste à GPU intégré ne s'est pas reproduite. Un seul essai par modèle.
+
+> **Lecture** — La vitesse n'est plus le facteur limitant : le 26B termine le cycle complet (exécuter, corriger, relancer) en **moins d'une minute**. L'écart porte sur la **fiabilité de l'enchaînement** : l'E4B corrige mais ne relance **pas** les tests, et il oublie le paramètre `timeout_ms` de l'outil de commande (voir section 7).
 
 ### Même tâche avec un modèle plus grand
 
@@ -219,7 +247,9 @@ Pour un grand chantier, demander de **découper** l'investigation ; l'agent peut
 | Commande proposée avec un chemin erroné | Petit modèle, ambiguïté de chemin | Mode **Demander à chaque fois** ; indiquer le chemin dans la consigne. |
 | Outil de test inexistant (`pytest`) | Hypothèse du modèle | Citer la commande exacte dans la consigne. |
 | Réponses parfois en anglais | Modèle peu stable en français | Ajouter « Répondre en français » à la consigne [Estimation]. |
-| Durée de 6 min 22 s pour un bogue simple | Modèle local sur GPU intégré, plusieurs étapes | Modèle plus puissant ; tâche plus ciblée. |
+| Durée de 6 min 22 s pour un bogue simple | Modèle local sur GPU intégré, plusieurs étapes | Modèle plus puissant ; tâche plus ciblée. Sur GPU dédié : 1 min 38 s (E4B) et 43 s (26B). |
+| L'agent n'exécute pas les tests ou une commande (GPU dédié, E4B) | L'outil de commande exige **trois** paramètres : `command`, `workdir` et `timeout_ms` ; l'E4B omet régulièrement `timeout_ms`, l'appel est rejeté et l'agent abandonne [Vérifié] | Nommer la commande **et** demander de la lancer ; préférer un modèle plus grand ; mode **Demander à chaque fois** pour détecter l'appel manquant. |
+| Syntaxe de commande | Le **shell de l'agent est `bash`** (Git Bash, version 5.3.15 ; `$BASH_VERSION` renvoyé par la commande) [Vérifié] : `~` désigne le dossier personnel (variable `HOME`), les jokers sont développés par bash. Les commandes PowerShell sont possibles (`powershell -Command …`) mais enveloppées | Écrire les consignes en syntaxe `bash` ; **attention** à `~` et aux jokers ([Manuel 12, essais destructifs](12-auto-review.md#essais-sur-des-commandes-destructives-poste-à-gpu-dédié)). |
 
 ---
 
@@ -227,6 +257,7 @@ Pour un grand chantier, demander de **découper** l'investigation ; l'agent peut
 
 - [ ] Dépôt Git propre avant la tâche ; branche dédiée.
 - [ ] Dossier de travail limité au projet (pas la racine d'un disque ni le profil utilisateur).
+- [ ] **Aucune commande avec `~`, `*` ou `/` sur le vrai profil** pour un essai : un essai `shred -u -z ~/*.txt` approuvé automatiquement a détruit un fichier réel ([Manuel 12](12-auto-review.md#essais-sur-des-commandes-destructives-poste-à-gpu-dédié)).
 - [ ] Aucun secret (clés, mots de passe) dans le dossier de travail ou les fichiers lisibles.
 - [ ] Mode shell adapté : *Demander à chaque fois* pour une première utilisation d'un modèle ou d'un dépôt.
 - [ ] Lecture du **dossier d'exécution** et de la **commande** avant chaque **Yes**.

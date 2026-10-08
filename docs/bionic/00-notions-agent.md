@@ -73,6 +73,8 @@ Dans l'interface, cette boucle apparaît sous la forme d'une ligne repliable **�
 > |---|---|---|
 > | Rédiger un mémo de 6 lignes et l'enregistrer | 1 appel d'outil (écriture de fichier) | 2 min 4 s |
 > | Corriger un bogue et relancer les tests | lecture, recherche, modification, tentative de test | 6 min 22 s |
+>
+> **Même modèle sur GPU dédié** (RTX 4060 Ti, 7 octobre 2026) : mémo **29 s** (2 min 4 s), bogue **1 min 38 s** (6 min 22 s) ; avec *Gemma 4 26B A4B*, le bogue est corrigé et les tests relancés en **43 s**. La vitesse du matériel raccourcit les tâches, mais **le nombre d'étapes et la fiabilité des appels d'outils** dépendent du modèle ([Manuel 04](04-modeles.md#6-comparaison-mesurée)).
 
 ---
 

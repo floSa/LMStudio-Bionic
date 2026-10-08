@@ -3,7 +3,7 @@
 > **Objet** : choisir le modèle adapté à une tâche d'agent, le télécharger depuis Bionic, comprendre la liste du sélecteur, l'effort de raisonnement et la gestion de la mémoire.
 > **Prérequis** : [Manuel Bionic 00](00-notions-agent.md#4-où-sexécute-le-modèle), [Manuel LM Studio 00](../lmstudio/00-notions-fondamentales.md) (taille, quantification, contexte).
 > **Version décrite** : Bionic 1.1.7, Windows 11.
-> **Statut des informations** : [Vérifié] observé et mesuré ; [Source] documentation officielle ; [Estimation] ; [À tester].
+> **Statut des informations** : [Vérifié] observé et mesuré sur **deux postes** : GPU intégré (Intel Core Ultra 7 255H, 31 Go de RAM, 6 octobre 2026) et **GPU dédié** (Ryzen 5 9600X, 61,6 Go de RAM, RTX 4060 Ti de 16 Go, 7 octobre 2026) ; [Source] documentation officielle ; [Estimation] ; [À tester]. Les valeurs du GPU intégré sont conservées entre parenthèses (« GPU intégré : … »).
 
 ---
 
@@ -36,7 +36,8 @@ Un modèle utilisé comme agent doit réunir quatre qualités :
 |---|---|
 | ≈ 4 Md (*Gemma 4 E4B*) | Tâches courtes, cadrées ; une action à la fois |
 | ≈ 12 Md (*Gemma 4 12B QAT*) | Documents, code de taille raisonnable |
-| ≥ 27 Md | Tâches complexes ; mémoire importante (≈ 18 Go en Q4_K_M pour 27 Md) |
+| ≈ 26 Md dont 4 Md actifs (*Gemma 4 26B A4B*, MoE — *Mixture of Experts*, « mélange d'experts ») | Documents, code, enchaînement d'outils fiable ; fichier de 18 Go, **plus gros que les 16 Go de VRAM** d'une RTX 4060 Ti : une partie reste en RAM (voir section 5) |
+| ≥ 27 Md (*Qwen3.8 27B*, dense) | Tâches complexes ; mémoire importante (≈ 18 Go en Q4_K_M pour 27 Md) ; niveaux de raisonnement propres (« Moyen » affiché par défaut dans le sélecteur) |
 | Cloud | Tâches longues et multi-fichiers ([Manuel 10](10-securite-compte-api.md)) |
 
 ### Pour aller plus loin
@@ -81,7 +82,7 @@ Réglages → **Modèles locaux** → **Explorer**.
 | ③ | **Télécharger** | Lance le téléchargement |
 | ④ | **Sélection de l'équipe / Recommandé** | Filtre et tri du catalogue ; recherche sur Hugging Face |
 
-> **Lecture de l'indicateur d'adéquation** — Sur le poste de test, le vert correspond à un **GPU intégré** (mémoire partagée avec la RAM), non à une carte dédiée. Les trois états (vert, bleu « partiel », rouge « trop grand »), leur sens et les quantifications de la liste sont décrits dans le [Manuel LM Studio 02](../lmstudio/02-selectionner-et-telecharger-un-modele.md#6-les-indicateurs-dadéquation-matérielle).
+> **Lecture de l'indicateur d'adéquation** — Sur le poste à **GPU intégré**, le vert correspond à la mémoire partagée avec la RAM. Sur le poste à **GPU dédié** (16 Go de VRAM), le passage vert → bleu se situe entre **14,5 et 14,8 Go** (≈ 91–93 % de la VRAM) et le passage bleu → rouge entre 59,1 et 60,5 Go (≈ 96–98 % de la RAM seule) **[Vérifié]**. Les trois états (vert, bleu « partiel », rouge « trop grand »), leur sens et les quantifications de la liste sont décrits dans le [Manuel LM Studio 02](../lmstudio/02-selectionner-et-telecharger-un-modele.md#6-les-indicateurs-dadéquation-matérielle).
 
 Colonne de gauche : liste des modèles avec, pour chacun, trois pictogrammes (Vision, Outils, Raisonnement), l'ancienneté de la mise à jour et un résumé. La fiche (droite) donne le nombre de **paramètres**, l'**architecture**, les **formats** (GGUF, MLX), les **fonctionnalités** et le **README**.
 
@@ -152,13 +153,44 @@ Bionic **n'expose pas** les réglages détaillés de chargement de LM Studio (no
 
 > **Mesure importante (poste de test, 31 Go de RAM)** — *Gemma 4 12B QAT* (fichier de 7,15 Go) chargé par Bionic avec le contexte par défaut de **262 144 tokens** : le processus du moteur (`llama-server`) occupait **14,1 Go** de mémoire physique (**18,9 Go** de mémoire privée) et il restait **0,4 Go** de RAM libre sur le poste (autres applications comprises). Le modèle seul pèse 7 Go ; le reste est le **cache de contexte** (KV cache), réservé pour la longueur maximale.
 >
-> **Conséquences** : (1) un grand contexte par défaut peut **saturer** la mémoire d'un poste ordinaire ; (2) la **taille de contexte chargée** est le principal levier de mémoire ; (3) Bionic n'expose pas ce réglage par modèle : la valeur dépend de l'ajustement automatique (**AutoFit**) et de la *Longueur de contexte minimale* ([Manuel 03](03-reglages.md#10-modèles-locaux)). Pour réduire la consommation : fermer les applications gourmandes, décharger les modèles inutiles, ou charger le modèle dans LM Studio avec un contexte réduit (le contexte de 32 768 tokens suffit à beaucoup de tâches) [Estimation pour l'effet exact dans Bionic].
+> **Mesure sur GPU dédié (RTX 4060 Ti 16 Go, 61,6 Go de RAM)** — Mémoire occupée **après chargement par Bionic** (ajustement automatique *AutoFit*, `lms ps` + `nvidia-smi` + processus `llama-server`, 7 octobre 2026) **[Vérifié]** :
+>
+> | Modèle | Fichier | Contexte chargé | VRAM occupée | RAM du moteur (physique / privée) |
+> |---|---|---|---|---|
+> | *Gemma 4 E4B* (Q8_0) | 9,02 Go | **131 072** | **8,28 Go** | 8,47 / 9,87 Go |
+> | *Gemma 4 26B A4B* (Q4_K_M) | 17,99 Go | **16 384** | **14,03 Go** | 17,17 / 16,14 Go |
+> | *Qwen3.8 27B* (Q4_K_M) | 17,74 Go | **16 384** | **11,67 Go** | 19,06 / 16,87 Go |
+>
+> VRAM de base du poste sans modèle : 1,0 Go (bureau Windows). Le chargement est limité à **4 requêtes parallèles** (`parallel = 4`). **Le contexte de 16 384 jetons des deux gros modèles n'est pas une limite de mémoire** : c'est la valeur de **« Longueur de contexte minimale pour AutoFit »** (Réglages → Paramètres par défaut des modèles locaux), qui vaut **16 384** par défaut ([Manuel 03](03-reglages.md#10-modèles-locaux)). Le petit modèle obtient 131 072 parce que l'ajustement automatique lui accorde davantage ; les modèles de 26 à 27 Md reçoivent **exactement le minimum**. Conséquence directe : une requête de **18,6 k jetons échoue avec le 26B** (« *The selected model was loaded with a context length that is too small for this request* ») alors que l'E4B la traite ([Manuel 14, section 2](14-commandes-compaction-navigateur.md#2-compacter-une-session--compact)).
+
+![Paramètres par défaut : contexte minimal d'AutoFit](../img/bionic/04-modeles/10-autofit-contexte-minimal.png)
+*Figure 7 — Réglages → Paramètres par défaut des modèles locaux : ① longueur de contexte minimale pour AutoFit (16 384), ② protection lors du chargement (*Souple*).*
+
+**Effet du minimum AutoFit** [Vérifié, 7 octobre 2026 ; modèle déchargé avant chaque mesure ; `lms ps`, `nvidia-smi`, processus `llama-server`] :
+
+| Minimum réglé | Modèle | Contexte chargé | VRAM occupée | RAM du moteur (physique / privée) |
+|---|---|---|---|---|
+| **16 384** (défaut) | *Gemma 4 26B A4B* | 16 384 | 14,03 Go | 17,17 / 16,14 Go |
+| 32 768 | idem | 32 768 | 13,95 Go | 17,21 / 16,10 Go |
+| 65 536 | idem | 65 536 | 14,02 Go | 17,27 / 16,24 Go |
+| 131 072 | idem | 131 072 | 14,03 Go | 17,41 / 16,39 Go |
+| 262 144 | idem | **262 144** | 13,74 Go | 17,70 / 16,38 Go |
+| 16 384 (défaut) | *Qwen3.8 27B* | 16 384 | 11,67 Go | 19,06 / 16,87 Go |
+| 65 536 | idem | 65 536 | 11,61 Go | 21,25 / 18,97 Go |
+| 262 144 | idem | 262 144 | 11,35 Go | **32,89 / 30,38 Go** |
+
+- Pour le **26B**, relever le minimum à **262 144 ne coûte presque rien en mémoire** (VRAM inchangée, RAM +0,5 Go) **et ne ralentit pas** la génération : texte de 1 500 mots en **71,9 s** à 262 144 contre **73,3 s** à 16 384. La lecture complète du fichier de 18,6 k jetons, qui échouait, **réussit** dès le minimum à 32 768 (code d'archivage et résumé corrects).
+- Pour **Qwen3.8 27B**, la RAM du moteur augmente avec le minimum (**+2 Go** à 65 536, **+14 Go** à 262 144) : **65 536** est un compromis raisonnable sur 61,6 Go de RAM ; la vitesse de Qwen à grand contexte n'a pas été mesurée [À tester].
+- Le refus de chargement annoncé pour un minimum inatteignable n'a **pas** été provoqué (tous les essais ont réussi, jusqu'à 262 144, sur 61,6 Go de RAM) [À tester sur un poste à moins de RAM].
+- Le réglage est **global** (tous les modèles locaux) : il a été **remis à 16 384** après les essais.
+
+> **Conséquences** : (1) un grand contexte peut **saturer** la mémoire d'un poste ordinaire (poste à GPU intégré, 31 Go : 12B à 262 144 jetons = 14,1 Go de RAM physique, 0,4 Go de RAM libre) ; (2) la **taille de contexte chargée** est le principal levier de mémoire **pour les modèles denses** (Qwen) mais **très peu pour le MoE** testé (26B) ; (3) Bionic n'expose pas ce réglage **par modèle** : une seule valeur minimale pour tous. Pour un agent qui lit des fichiers volumineux, **relever le minimum d'AutoFit** plutôt que de charger le modèle dans LM Studio.
 
 ---
 
 ## 6. Comparaison mesurée
 
-Mesures sur le poste de test (GPU intégré, moteur Vulkan, **une seule tâche à la fois**). Les durées incluent le chargement initial du modèle lorsqu'il n'était pas déjà en mémoire.
+Deux séries de mesures, **une seule tâche à la fois** : (1) **GPU intégré**, moteur Vulkan (6 octobre 2026) ; (2) **GPU dédié** RTX 4060 Ti, moteur CUDA 12 (7 octobre 2026), avec le **modèle réellement utilisé vérifié dans la base de sessions de Bionic** (champ `modelSpecifier`). Les durées de la seconde série sont **mesurées de l'envoi à la fin de la réponse** (modèle déjà chargé, sauf mention) ; la valeur affichée par Bionic (« Travail effectué en … ») est donnée quand elle est lisible. Les durées de la première série incluent le chargement initial du modèle lorsqu'il n'était pas déjà en mémoire.
 
 | Tâche | Modèle | Raisonnement | Durée affichée | Résultat |
 |---|---|---|---|---|
@@ -169,6 +201,19 @@ Mesures sur le poste de test (GPU intégré, moteur Vulkan, **une seule tâche �
 | Correction d'un bogue + tests | *Gemma 4 E4B* | Activé | 6 min 22 s | Corrigé, après deux obstacles |
 | Idem (consigne précisant la commande) | *Gemma 4 12B QAT* | Activé | 4 min 50 s | Corrigé, 2 confirmations, chemins corrects |
 
+**GPU dédié** (RTX 4060 Ti ; la valeur du GPU intégré figure entre parenthèses) :
+
+| Tâche | Modèle | Raisonnement | Durée | Résultat |
+|---|---|---|---|---|
+| Mémo dans un fichier | *Gemma 4 E4B* | Activé | **29 s** (GPU intégré : 2 min 4 s) | Fichier créé |
+| Idem | *Gemma 4 E4B* | **Désactivé** | **≈ 15 s** (1 min 23 s) | Fichier créé |
+| Facture (image) → `facture.json` | *Gemma 4 E4B* | Activé | **31 s** (55 s) | Valeurs justes, **aucun fichier créé** (comme sur GPU intégré) |
+| Idem | *Gemma 4 26B A4B* | Activé | **≈ 51 s** (4 min 25 s avec le 12B, chargement inclus) | **`facture.json` créé** |
+| Correction d'un bogue + tests | *Gemma 4 E4B* | Activé | **1 min 38 s** (6 min 22 s) | Code corrigé ; **tests non lancés** ; réponse **en anglais** |
+| Idem | *Gemma 4 26B A4B* | Activé | **43 s** (4 min 50 s avec le 12B) | Corrigé ; `pytest` lancé (2 confirmations) |
+| `/compact` d'une session de 18,5 k jetons | *Gemma 4 E4B* | Désactivé | **12 s** (≈ 90 s, 7,2 → 6,9 k) | 18,5 k → 6,7 k |
+| `/compact` d'une session de 12,3 k jetons | *Gemma 4 26B A4B* | Désactivé | **10 s** | 12,3 k → 6,8 k ; sous-session « Compaction » enregistrée en 26B |
+
 ![Mémo sans raisonnement](../img/bionic/04-modeles/08-memo-raisonnement-desactive.png)
 *Figure 5 — Mémo avec raisonnement désactivé : 1 min 23 s, même résultat (`+7 −0`).*
 
@@ -176,7 +221,8 @@ Mesures sur le poste de test (GPU intégré, moteur Vulkan, **une seule tâche �
 
 - **Désactiver le raisonnement** a réduit d'environ **un tiers** la durée d'une tâche de rédaction simple (2 min 4 s → 1 min 23 s) sans effet visible sur le résultat.
 - Le **modèle de 12 Md** est plus lent sur une tâche cadrée (≈ 4 à 5 min) mais **réalise réellement les actions** (fichier créé, commandes correctes), là où le petit modèle a **annoncé** une création de fichier sans l'effectuer.
-- Les durées incluent le **chargement** du modèle lorsqu'il n'était pas déjà en mémoire (indicateur « Chargement du modèle : n % » dans le fil).
+- Les durées incluent le **chargement** du modèle lorsqu'il n'était pas déjà en mémoire (indicateur « Chargement du modèle : n % » dans le fil). Sur GPU dédié, une courte tâche (« Réponds uniquement par le mot OK ») lancée **modèle déchargé** dure **15 s** (E4B), **34 s** (26B) et **64 s** (Qwen), chargement à la demande compris **[Vérifié]**.
+- Sur GPU dédié, le **gain du raisonnement désactivé** reste d'environ **moitié** (29 s → 15 s) pour le mémo. Le **26B** réalise réellement les actions (fichier créé, tests lancés) en **moins d'une minute**, là où l'E4B n'écrit pas le fichier de la facture et ne lance pas les tests : l'écart de fiabilité des outils (voir [Manuel 07](07-code-et-shell.md)) pèse plus que l'écart de vitesse.
 - Les consignes n'avaient pas la même précision (celle du 12 Md pour le code nommait la commande de test) : la comparaison est **indicative**.
 
 ---
@@ -185,4 +231,5 @@ Mesures sur le poste de test (GPU intégré, moteur Vulkan, **une seule tâche �
 
 - Bionic et LM Studio utilisent le **même dossier de modèles** (`~\.lmstudio\models`) : un modèle téléchargé par l'un est **visible** par l'autre [Vérifié : *Gemma 4 E4B*, téléchargé pour LM Studio, apparaît dans Bionic].
 - Les **fichiers `mmproj`** (projecteur de vision) accompagnent le modèle dans le même dossier.
-- Les paramètres de chargement par modèle (contexte, offload) **ne sont pas partagés** [Estimation].
+- Les paramètres de chargement par modèle (contexte, offload) **ne sont pas partagés** [Estimation]. Les deux applications ne cohabitent pas (voir [Manuel 01](01-presentation-installation.md)) : LM Studio doit être **fermé** avant d'ouvrir Bionic, et inversement ; sur le poste à GPU dédié, la même carte de 16 Go est utilisée par l'un ou l'autre.
+- Sur le poste à GPU dédié, `lms ps` (la CLI de LM Studio) **liste le modèle chargé par Bionic** (contexte, parallélisme) : c'est le moyen de relever ce que fait AutoFit [Vérifié].

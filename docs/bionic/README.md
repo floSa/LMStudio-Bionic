@@ -5,12 +5,14 @@ Manuels et tutoriels illustrés pour installer, configurer et utiliser **LM Stud
 | | |
 |---|---|
 | **Version décrite** | Bionic 1.1.7 (build 7), canal Stable, Windows 11 |
-| **Date des captures et mesures** | 6 octobre 2026 |
-| **Poste de test** | Intel Core Ultra 7 255H, 31 Go de RAM, GPU intégré Intel Arc 140T (moteur Vulkan) |
+| **Date des captures et mesures** | 6 octobre 2026 (GPU intégré) ; 7 octobre 2026 (GPU dédié, mesures de durée, mémoire, compaction, compétences et commandes destructives) |
+| **Postes de test** | (1) Intel Core Ultra 7 255H, 31 Go de RAM, GPU intégré Intel Arc 140T (moteur Vulkan) ; (2) AMD Ryzen 5 9600X, 61,6 Go de RAM, **NVIDIA RTX 4060 Ti 16 Go** (moteur CUDA 12), modèles *Gemma 4 E4B*, *Gemma 4 26B A4B*, *Qwen3.8 27B* |
 | **Langue de l'interface** | Français (quelques libellés restent en anglais, cités tels quels) |
 | **Comptes** | Aucun compte connecté pendant les tests |
 
 ## Manuels
+
+> **Où trouver une information ?** [Plan détaillé des manuels](plan-des-manuels.md) : une phrase par manuel et le contenu de chaque section.
 
 | N° | Manuel | Contenu |
 |---|---|---|
@@ -48,9 +50,10 @@ Manuels et tutoriels illustrés pour installer, configurer et utiliser **LM Stud
 
 - **Aucun compte connecté** : modèles cloud, crédits, recherche web, LM Link et gestion de plan sont décrits d'après l'interface et la documentation, non exécutés.
 - **Dictée vocale** non exécutée (pas de microphone ni de téléchargement du modèle vocal).
-- **Compétences** : essai de bout en bout réalisé ([manuel 13](13-competences-en-pratique.md)) ; **MCP** : serveurs décrits dans le manuel 08, essai réalisé côté LM Studio ([manuel LM Studio 10](../lmstudio/10-mcp-et-appel-d-outils.md)).
-- **Auto Review** : niveau `too_destructive` non reproduit (aucun test sans danger).
-- Les performances mesurées dépendent du GPU intégré du poste de test.
+- **Compétences** : essais de bout en bout ([manuel 13](13-competences-en-pratique.md)). **MCP** : serveur local ajouté et appelé **dans Bionic** (7 octobre 2026, [manuel 08](08-competences-et-mcp.md#5-serveurs-mcp)) ; **aucune confirmation** n'est demandée pour un outil MCP, même à effet de bord. Serveurs tiers du catalogue (GitHub, Linear, Notion, Sentry, Atlassian) : **non configurés** (compte requis).
+- **Auto Review** : niveau `too_destructive` (blocage définitif) **non obtenu**, même avec des commandes destructives réelles. Un essai (`shred` sur `~/*.txt`, modèle 26B) a été **approuvé automatiquement et a détruit un fichier réel** : à lire avant tout essai ([manuel 12](12-auto-review.md#essais-sur-des-commandes-destructives-poste-à-gpu-dédié)).
+- Les performances mesurées dépendent du matériel : deux séries sont données (GPU intégré, puis GPU dédié entre parenthèses ou en tableau séparé). Sur le GPU dédié, le modèle réellement utilisé est **vérifié dans la base de sessions** ; les mesures de la première série ne l'ont pas toutes été.
+- **Non testés** : dictée vocale (téléchargement du modèle vocal), modèles cloud, crédits, LM Link et recherche web (compte requis), serveurs MCP du catalogue (compte requis), Canvas (non déclenchable avec le 26B), points de sauvegarde (aucune action dans l'interface), conflit LM Studio / Bionic (non rejoué), modèle *12B QAT* (absent du poste, remplacé par le *26B A4B*).
 - Bionic évolue vite : les libellés, valeurs par défaut et fonctions peuvent changer entre versions.
 
 ## Dossiers associés
