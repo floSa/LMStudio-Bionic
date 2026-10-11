@@ -25,7 +25,7 @@ Plan des 18 manuels LM Studio (00 à 17) avec, pour chacun, le contenu de chaque
 | [14 — Personnaliser les modèles](14-personnaliser-les-modeles.md) | Défauts par modèle, gabarit de conversation, fichier `model.yaml`, Hub, stockage des conversations. |
 | [15 — Performances sur GPU dédié](15-performances-gpu-dedie.md) | Toutes les mesures de la RTX 4060 Ti 16 Go, comparées au GPU intégré. |
 | [16 — SDK et plugins](16-sdk-et-plugins.md) | Aller au-delà de `lms load` : kit de développement, paramètres cachés, plugin local, mode sans interface. |
-| [17 — LM Link](17-lm-link.md) | Utiliser les modèles d'un autre appareil comme s'ils étaient locaux : principe, mise en place, usage, sécurité, protocole de vérification. |
+| [17 — LM Link](17-lm-link.md) | Utiliser les modèles d'un autre appareil comme s'ils étaient locaux : essai réel sur deux machines (portable et PC fixe), captures, réglages, vérification. |
 
 ---
 
@@ -312,21 +312,25 @@ Plan des 18 manuels LM Studio (00 à 17) avec, pour chacun, le contenu de chaque
 
 ## 17 — LM Link
 
-**Utiliser les modèles d'un autre appareil comme s'ils étaient locaux : principe, mise en place, usage, sécurité, protocole de vérification.** [Ouvrir le manuel](17-lm-link.md).
+**Utiliser les modèles d'un autre appareil comme s'ils étaient locaux : essai réel sur deux machines (portable et PC fixe), captures, réglages, vérification.** [Ouvrir le manuel](17-lm-link.md).
 
 | Section | Contenu |
 |---|---|
-| [1. Principe](17-lm-link.md#1-principe) | Principe : lien, appareil, modèle distant, appareil préféré. |
-| [2. Disponibilité et prérequis](17-lm-link.md#2-disponibilité-et-prérequis) | Disponibilité, prix, prérequis. |
-| [3. Mettre en place un lien (appareils avec interface)](17-lm-link.md#3-mettre-en-place-un-lien-appareils-avec-interface) | Mettre en place un lien (appareils avec interface). |
-| [4. Ajouter une machine sans interface (`llmster`)](17-lm-link.md#4-ajouter-une-machine-sans-interface-llmster) | Ajouter une machine sans interface (llmster). |
-| [5. Utiliser les modèles distants](17-lm-link.md#5-utiliser-les-modèles-distants) | Utiliser les modèles distants : application, API, outils de code, Bionic, Locally. |
-| [6. Les commandes `lms link`](17-lm-link.md#6-les-commandes-lms-link) | Commandes lms link. |
-| [7. Sécurité et confidentialité](17-lm-link.md#7-sécurité-et-confidentialité) | Sécurité et confidentialité. |
-| [8. Limites constatées ou annoncées](17-lm-link.md#8-limites-constatées-ou-annoncées) | Limites constatées ou annoncées. |
-| [9. Protocole de vérification sur deux machines](17-lm-link.md#9-protocole-de-vérification-sur-deux-machines) | Protocole de vérification sur deux machines. |
-| [10. Dépannage](17-lm-link.md#10-dépannage) | Dépannage. |
-| [11. Sources](17-lm-link.md#11-sources) | Sources. |
+| [1. Principe](17-lm-link.md#1-principe) | Principe : lien, appareil hôte et client, modèle distant, appareil préféré. |
+| [2. Disponibilité, prix et prérequis](17-lm-link.md#2-disponibilité-prix-et-prérequis) | Disponibilité, prix, prérequis, version 0.4.26. |
+| [3. Activer LM Link et se connecter](17-lm-link.md#3-activer-lm-link-et-se-connecter) | Activer LM Link et se connecter (navigateur). |
+| [4. Lire l'écran LM Link](17-lm-link.md#4-lire-lécran-lm-link) | Lire l'écran LM Link : fiche de l'appareil, appareil préféré, réglages de cet appareil, réseau. |
+| [5. Ajouter un appareil](17-lm-link.md#5-ajouter-un-appareil) | Ajouter un appareil : ordinateur, serveur sans écran (llmster), iPhone ou iPad. |
+| [6. Charger et régler un modèle distant](17-lm-link.md#6-charger-et-régler-un-modèle-distant) | Charger et régler un modèle distant : chargement, contexte, TTL, réglages par défaut, réglages du chat. |
+| [7. Discuter avec le modèle distant et vérifier où il tourne](17-lm-link.md#7-discuter-avec-le-modèle-distant-et-vérifier-où-il-tourne) | Discuter avec le modèle distant et vérifier qu'il tourne sur l'hôte (mesures). |
+| [8. Éjecter le modèle](17-lm-link.md#8-éjecter-le-modèle) | Éjecter le modèle pour libérer la carte graphique. |
+| [9. API, outils de code et Bionic](17-lm-link.md#9-api-outils-de-code-et-bionic) | API, outils de code et Bionic. |
+| [10. Les commandes `lms link`](17-lm-link.md#10-les-commandes-lms-link) | Commandes lms link et sorties observées. |
+| [11. Sécurité et confidentialité](17-lm-link.md#11-sécurité-et-confidentialité) | Sécurité et confidentialité. |
+| [12. Limites constatées ou annoncées](17-lm-link.md#12-limites-constatées-ou-annoncées) | Limites constatées ou annoncées. |
+| [13. Résultats de l'essai et ce qui reste à vérifier](17-lm-link.md#13-résultats-de-lessai-et-ce-qui-reste-à-vérifier) | Résultats de l'essai et protocole pour ce qui reste à vérifier. |
+| [14. Dépannage](17-lm-link.md#14-dépannage) | Dépannage. |
+| [15. Sources](17-lm-link.md#15-sources) | Sources. |
 
 ---
 
