@@ -80,7 +80,7 @@ Get-NetTCPConnection -LocalPort 1234 -State Listen | Select-Object LocalAddress,
 - **Fichier de configuration** : `%USERPROFILE%\.lmstudio\.internal\http-server-config.json` contient `networkInterface` (`"127.0.0.1"` sur le poste de test), `cors`, `autoStartOnLaunch` (`true` : le serveur redémarre avec l'application), `logSensitiveData` et `logIncomingTokens` [Vérifié].
 - **Pare-feu Windows** : l'installation crée deux règles entrantes « LM Studio » (action *Allow*, profil *Public*) [Vérifié]. Le pare-feu **ne** protège donc **pas** un serveur ouvert au réseau : seul le choix de l'adresse d'écoute et l'authentification le font. Ajouter une règle limitant les adresses sources avant tout usage de niveau B.
 - **Cas non exécutés** : l'activation de *Serve on Local Network* et le démarrage avec `--bind 0.0.0.0` n'ont **pas** été testés, par précaution [À tester sur un poste isolé].
-- **Autres chemins d'exposition** : le mode sans interface (`llmster`, [Manuel 07](07-cli-lms.md#9-mode-sans-interface--llmster)) et **LM Link** (accès chiffré entre appareils d'un même compte, compte requis) exposent des modèles à d'autres appareils ; leurs règles sont propres ; pour LM Link, voir le [Manuel 17, section 7](17-lm-link.md#7-sécurité-et-confidentialité) [Source ; non testé, aucun compte connecté].
+- **Autres chemins d'exposition** : le mode sans interface (`llmster`, [Manuel 07](07-cli-lms.md#9-mode-sans-interface--llmster)) et **LM Link** (accès chiffré entre appareils d'un même compte, compte requis) exposent des modèles à d'autres appareils ; leurs règles sont propres ; pour LM Link, voir le [Manuel 17, section 7](17-lm-link.md#11-sécurité-et-confidentialité) [Source ; non testé, aucun compte connecté].
 
 ---
 

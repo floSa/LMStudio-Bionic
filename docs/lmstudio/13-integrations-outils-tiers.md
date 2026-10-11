@@ -88,7 +88,7 @@ codex --oss                          # modèle par défaut : openai/gpt-oss-20b
 codex --oss -m google/gemma-4-e4b    # autre modèle
 ```
 
-L'option `--oss` utilise le serveur local à l'adresse par défaut (port 1234) et l'API *Responses* [Source]. Plus de 25 000 tokens de contexte sont recommandés. La documentation mentionne aussi LM Link pour exécuter Codex sur un poste et le modèle sur un autre (compte requis ; non testé ; [Manuel 17, section 5.4](17-lm-link.md#54-outils-de-code)).
+L'option `--oss` utilise le serveur local à l'adresse par défaut (port 1234) et l'API *Responses* [Source]. Plus de 25 000 tokens de contexte sont recommandés. La documentation mentionne aussi LM Link pour exécuter Codex sur un poste et le modèle sur un autre (compte requis ; non testé ; [Manuel 17, section 5.4](17-lm-link.md#94-outils-de-code)).
 
 ### 2.3 Cline **[Source tierce]**
 
