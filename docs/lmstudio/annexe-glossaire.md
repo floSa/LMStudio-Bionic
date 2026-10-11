@@ -42,7 +42,7 @@ Termes utilisés dans les manuels LM Studio, par ordre alphabétique.
 | **llama.cpp** | Moteur open source d'inférence sur lequel s'appuie LM Studio pour les modèles GGUF. |
 | **LLM** | *Large Language Model*, modèle de langage. |
 | **llmster** | Version « sans interface » de LM Studio pour serveurs ; sous Windows 0.4.25, `lms daemon` et `lms status` existent mais sont **absentes de `lms --help`** ([Manuel 16, section 5](16-sdk-et-plugins.md#5-le-mode-sans-interface--llmster)). |
-| **LM Link** | Fonction de LM Studio qui relie plusieurs appareils pour utiliser leurs modèles à distance (compte requis). |
+| **LM Link** | Fonction de LM Studio qui relie plusieurs appareils d'un même compte (réseau privé chiffré) pour utiliser leurs modèles à distance ; préversion, compte requis. ([17](17-lm-link.md)) |
 | **`lms`** | Programme en ligne de commande de LM Studio. |
 | **Lot physique** (*physical batch size*) | Nombre de jetons du prompt traités par passe de calcul ; sous 256, la lecture du prompt perd 25 à 30 % de vitesse sur la RTX 4060 Ti ([Manuel 15, section 4](15-performances-gpu-dedie.md#4-flash-attention-lots-et-cache-kv)). |
 | **MCP (Model Context Protocol)** | Protocole standard pour donner à un modèle accès à des outils et sources de données externes. |

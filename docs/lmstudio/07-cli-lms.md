@@ -56,7 +56,7 @@ lms --help
 | **Moteurs** | `lms runtime ls / select / get / update / remove / survey` | Gérer les moteurs d'inférence |
 | **Divers** | `lms status` | État global de LM Studio (« Server: ON (port: 1234) », modèles chargés) **[Testée]** ; absente de `lms --help` |
 | | `lms daemon up / down / status / update` | Gérer le démon `llmster` |
-| | `lms link …` | Gérer LM Link (comptes) |
+| | `lms link …` | Gérer LM Link (`enable`, `disable`, `status`, `set-device-name`, `set-preferred-device` ; [Manuel 17, section 6](17-lm-link.md#6-les-commandes-lms-link)) |
 | | `clone`, `push`, `dev`, `login`, `logout`, `whoami` | Publication d'artefacts sur le Hub (bêta, hors périmètre) |
 
 ---

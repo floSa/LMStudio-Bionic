@@ -226,7 +226,7 @@ Liste des outils (plugins, serveurs MCP) autorisés à s'exécuter **sans confir
 ![Réglages — LM Link](../img/lmstudio/01-prise-en-main/08-reglages-lm-link.png)
 *Figure 9 — Settings → LM Link.*
 
-LM Link relie LM Studio à d'autres appareils pour utiliser leurs modèles à distance ; il **exige un compte LM Studio** (« Sign in required »). Inutile pour un usage local.
+LM Link relie LM Studio à d'autres appareils pour utiliser leurs modèles à distance ; il **exige un compte LM Studio** (« Sign in required »). Inutile pour un usage local. Principe, mise en place et usage : [Manuel 17](17-lm-link.md).
 
 ### 6.8 Runtime (`Ctrl + Maj + R`)
 
