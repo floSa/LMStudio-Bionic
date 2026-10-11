@@ -156,6 +156,8 @@ Poste : AMD Ryzen 5 9600X, 61,6 Go de RAM, NVIDIA RTX 4060 Ti 16 Go (pilote 616.
 
 **À supprimer à la main** : projets et sessions de test de Bionic (« Démo documents », « Démo code », « Démo jetable ») ; dossiers `~\.lmstudio\scratchpads\*\resume-en-trois-points` créés par l'agent.
 
+**13. Manuel 17 « LM Link » et offres Bionic (11 octobre 2026)** : manuel LM Studio 17 rédigé d'après la documentation officielle et l'aide de `lms link` (aucun compte connecté, appairage **non essayé** ; protocole de vérification en section 9). Offres Free / Bionic+ / Pro relevées sur la page officielle des prix (manuel Bionic 10, « Offres et prix »). LM Studio **0.4.26** constaté sur le poste (les autres manuels décrivent 0.4.25). Écart non élucidé : `lms link status` répond « Online » alors que l'interface propose « Login & Enable LM Link ».
+
 **Non traité** : quantification Q6_K (non installée) ; lignes « Mtp » (téléchargement) ; Roo Code, Open WebUI ; `lms daemon up/down/update` ; conflit LM Studio / Bionic rejoué ; test d'usage de la compétence créée par Qwen ; serveurs MCP du catalogue Bionic (comptes) ; dictée vocale ; cloud, LM Link, recherche web (comptes).
 
 **Décisions ouvertes** : (1) autoriser le téléchargement d'un brouillon « Mtp » (≈ 2 Go) pour tester le décodage spéculatif sur un modèle entièrement en VRAM ; (2) assouplir le bac à sable de Codex (`workspace-write`) pour la comparaison ; (3) rejouer `too_destructive` dans une machine virtuelle.

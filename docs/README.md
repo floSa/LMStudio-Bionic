@@ -34,6 +34,7 @@ Manuels et tutoriels illustrés pour installer, configurer et utiliser **LM Stud
 | 14 | [Personnaliser les modèles](lmstudio/14-personnaliser-les-modeles.md) | Niveaux de réglage, défauts d'un modèle (effet mesuré sur l'API), gabarit de conversation, `model.yaml`, Hub, stockage des conversations, diagrammes Mermaid |
 | 15 | [Performances sur GPU dédié](lmstudio/15-performances-gpu-dedie.md) | RTX 4060 Ti 16 Go : moteurs, offload, Flash Attention, lots, cache K/V, mémoire réelle et estimation, modèles plus gros que la VRAM (MoE, `--n-cpu-moe`), décodage spéculatif, contexte maximal |
 | 16 | [SDK et plugins](lmstudio/16-sdk-et-plugins.md) | `@lmstudio/sdk` : paramètres de chargement absents de `lms load`, plugin `lms dev`, mode sans interface (llmster) |
+| 17 | [LM Link](lmstudio/17-lm-link.md) | Utiliser les modèles d'un autre appareil : principe, mise en place, `lms link`, API, outils de code, Bionic, sécurité, protocole de vérification (**non testé : compte requis**) |
 | — | [Glossaire](lmstudio/annexe-glossaire.md) | Termes techniques |
 
 ## Manuels Bionic
@@ -52,7 +53,7 @@ Application agent (code, documents, recherche, voix). Version décrite : Bionic 
 | 07 | [Code, shell et autorisations](bionic/07-code-et-shell.md) | Scénario exécuté, modes shell, relecture, sécurité |
 | 08 | [Compétences, `@`, MCP](bionic/08-competences-et-mcp.md) | Compétences, serveurs MCP |
 | 09 | [Saisie vocale](bionic/09-voix.md) | Dictée locale |
-| 10 | [Sécurité, compte, API locale](bionic/10-securite-compte-api.md) | Flux de données, crédits, LM Link, API, menaces |
+| 10 | [Sécurité, compte, API locale](bionic/10-securite-compte-api.md) | Flux de données, **offres et prix (Free, Bionic+, Pro)**, crédits, LM Link, API, menaces |
 | 11 | [Recettes et dépannage](bionic/11-recettes-et-depannage.md) | Fiches par cas d'usage, diagnostic |
 | 12 | [Auto Review](bionic/12-auto-review.md) | Shell Judge, Shell Reviewer, niveaux de risque, instructions personnalisées, limites |
 | 13 | [Compétences en pratique](bionic/13-competences-en-pratique.md) | Compétence de bout en bout : création, déclenchement avec `@`, résultat mesuré |
@@ -93,7 +94,7 @@ Limites connues de la partie Bionic : aucun compte connecté (cloud, crédits, L
 EDF/
 ├── docs/
 │   ├── README.md                (cette page)
-│   ├── lmstudio/                (manuels 00 à 16 et glossaire)
+│   ├── lmstudio/                (manuels 00 à 17 et glossaire)
 │   ├── bionic/                  (manuels Bionic 00 à 14 et glossaire)
 │   └── img/                     (captures et figures : lmstudio/, bionic/)
 ├── exemples/                    (scripts d'API exécutables, sans dépendance)
