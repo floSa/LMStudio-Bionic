@@ -100,3 +100,10 @@ EDF/
 ├── exemples/                    (scripts d'API exécutables, sans dépendance)
 └── outils/                      (production des captures et des mesures)
 ```
+
+## Ce qui reste ouvert
+
+- **Non traité** : quantification Q6_K (non installée) ; lignes « Mtp » (téléchargement) ; Roo Code, Open WebUI ; `lms daemon up/down/update` ; conflit LM Studio / Bionic rejoué ; test d'usage de la compétence créée par Qwen ; serveurs MCP du catalogue Bionic, dictée vocale, cloud, LM Link, recherche web (comptes ou téléchargements).
+- **Décisions en attente** : télécharger un brouillon « Mtp » (≈ 2 Go) pour le décodage spéculatif ; assouplir le bac à sable de Codex (`workspace-write`) pour la comparaison ; rejouer le niveau `too_destructive` d'Auto Review dans une machine virtuelle.
+- **À faire à la main** : supprimer les projets et sessions de test de Bionic (« Démo documents », « Démo code », « Démo jetable ») et les dossiers `~\.lmstudio\scratchpads\*esume-en-trois-points`.
+- **Version** : LM Studio 0.4.26 constaté le 11 octobre 2026 ; les manuels décrivent la 0.4.25 (manuel 17 : 0.4.26).

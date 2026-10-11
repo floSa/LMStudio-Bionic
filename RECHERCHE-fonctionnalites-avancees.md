@@ -1,6 +1,6 @@
 # Recherche : fonctionnalités avancées de LM Studio et de Bionic
 
-> Synthèse de la recherche web du 7 octobre 2026 (rien n'a été téléchargé ni installé). Base de travail pour les évolutions des manuels : voir [NOTES-EVOLUTIONS.md](NOTES-EVOLUTIONS.md).
+> Synthèse de la recherche web du 7 octobre 2026 (rien n'a été téléchargé ni installé). Base de travail pour les évolutions des manuels.
 > Versions de référence : LM Studio **0.4.25** (19 sept. 2026), Bionic **1.1.7** (1er oct. 2026).
 > Statuts : **[DOC]** documentation officielle (dépôt `lmstudio-ai/docs`) ; **[OFF]** blog ou changelog officiel ; **[TIERS]** source tierce ; **[INCERT]** non confirmé, ancien ou contradictoire.
 > Limites : certaines pages du dépôt de documentation sont vides (paramètres de chargement et d'inférence, runtimes) ; d'autres sont périmées (modes d'interface, décodage spéculatif). Les pages ont été lues via un outil qui peut les résumer : revérifier avant publication.
@@ -153,7 +153,7 @@ Formats : LM Studio ne charge que **GGUF** et **MLX** (MLX : 4 ou 8 bits par gro
 
 ## 4. Indicateurs d'adéquation matérielle (Download options)
 
-La documentation officielle **ne définit pas** les badges ; les sens suivants viennent de sources tierces [TIERS] et sont à **vérifier sur une machine avec GPU dédié** (voir NOTES-EVOLUTIONS, point 1).
+La documentation officielle **ne définit pas** les badges ; les sens suivants viennent de sources tierces [TIERS] et sont à **vérifier sur une machine avec GPU dédié** (vérifié depuis : [Manuel LM Studio 02, section 6](docs/lmstudio/02-selectionner-et-telecharger-un-modele.md#6-les-indicateurs-dadéquation-matérielle)).
 
 | Badge | Sens |
 |---|---|
