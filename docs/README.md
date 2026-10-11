@@ -34,7 +34,7 @@ Manuels et tutoriels illustrés pour installer, configurer et utiliser **LM Stud
 | 14 | [Personnaliser les modèles](lmstudio/14-personnaliser-les-modeles.md) | Niveaux de réglage, défauts d'un modèle (effet mesuré sur l'API), gabarit de conversation, `model.yaml`, Hub, stockage des conversations, diagrammes Mermaid |
 | 15 | [Performances sur GPU dédié](lmstudio/15-performances-gpu-dedie.md) | RTX 4060 Ti 16 Go : moteurs, offload, Flash Attention, lots, cache K/V, mémoire réelle et estimation, modèles plus gros que la VRAM (MoE, `--n-cpu-moe`), décodage spéculatif, contexte maximal |
 | 16 | [SDK et plugins](lmstudio/16-sdk-et-plugins.md) | `@lmstudio/sdk` : paramètres de chargement absents de `lms load`, plugin `lms dev`, mode sans interface (llmster) |
-| 17 | [LM Link](lmstudio/17-lm-link.md) | Utiliser les modèles d'un autre appareil : principe, mise en place, `lms link`, API, outils de code, Bionic, sécurité, protocole de vérification (**non testé : compte requis**) |
+| 17 | [LM Link](lmstudio/17-lm-link.md) | Utiliser les modèles d'un autre appareil : principe, mise en place, `lms link`, API, outils de code, Bionic, sécurité, essai réel sur deux machines (portable et PC fixe) : chargement, réglage et discussion avec un modèle distant ; points restant à vérifier |
 | — | [Glossaire](lmstudio/annexe-glossaire.md) | Termes techniques |
 
 ## Manuels Bionic
@@ -60,7 +60,7 @@ Application agent (code, documents, recherche, voix). Version décrite : Bionic 
 | 14 | [Commandes `/`, compaction, navigateur](bionic/14-commandes-compaction-navigateur.md) | Menu `/`, `/compact` mesuré, navigateur intégré et essai avec l'agent, fonctions non reproduites |
 | — | [Glossaire Bionic](bionic/annexe-glossaire.md) | Termes techniques |
 
-Limites connues de la partie Bionic : aucun compte connecté (cloud, crédits, LM Link, recherche web et serveurs MCP du catalogue décrits sans exécution) ; dictée vocale non exécutée ; Canvas et points de sauvegarde non reproduits ; niveau `too_destructive` d'Auto Review **non obtenu** malgré des essais destructifs réels. **Un essai (`shred` sur `~/*.txt`, modèle 26B) a été approuvé automatiquement et a détruit un fichier réel** : lire le [manuel Bionic 12](bionic/12-auto-review.md#essais-sur-des-commandes-destructives-poste-à-gpu-dédié) avant tout essai.
+Limites connues de la partie Bionic : cloud, crédits, recherche web et serveurs MCP du catalogue décrits sans exécution (LM Link essayé, [manuel LM Studio 17](lmstudio/17-lm-link.md)) ; dictée vocale non exécutée ; Canvas et points de sauvegarde non reproduits ; niveau `too_destructive` d'Auto Review **non obtenu** malgré des essais destructifs réels. **Un essai (`shred` sur `~/*.txt`, modèle 26B) a été approuvé automatiquement et a détruit un fichier réel** : lire le [manuel Bionic 12](bionic/12-auto-review.md#essais-sur-des-commandes-destructives-poste-à-gpu-dédié) avant tout essai.
 
 **Parcours conseillés (LM Studio)**
 
@@ -105,5 +105,6 @@ EDF/
 
 - **Non traité** : quantification Q6_K (non installée) ; lignes « Mtp » (téléchargement) ; Roo Code, Open WebUI ; `lms daemon up/down/update` ; conflit LM Studio / Bionic rejoué ; test d'usage de la compétence créée par Qwen ; serveurs MCP du catalogue Bionic, dictée vocale, cloud, LM Link, recherche web (comptes ou téléchargements).
 - **Décisions en attente** : télécharger un brouillon « Mtp » (≈ 2 Go) pour le décodage spéculatif ; assouplir le bac à sable de Codex (`workspace-write`) pour la comparaison ; rejouer le niveau `too_destructive` d'Auto Review dans une machine virtuelle.
-- **À faire à la main** : supprimer les projets et sessions de test de Bionic (« Démo documents », « Démo code », « Démo jetable ») et les dossiers `~\.lmstudio\scratchpads\*esume-en-trois-points`.
+- **À faire à la main** : supprimer les projets et sessions de test de Bionic (« Démo documents », « Démo code », « Démo jetable ») et les dossiers `~\.lmstudio\scratchpads\*
+esume-en-trois-points`.
 - **Version** : LM Studio 0.4.26 constaté le 11 octobre 2026 ; les manuels décrivent la 0.4.25 (manuel 17 : 0.4.26).
