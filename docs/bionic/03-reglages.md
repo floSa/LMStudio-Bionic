@@ -184,7 +184,7 @@ Deux blocs : **Compétences Bionic** (créées ou installées dans Bionic, dispo
 ![Page LM Link](../img/bionic/02-reglages/09-lm-link.png)
 *Figure 9 — Réglages → LM Link (non connecté).*
 
-**LM Link** relie plusieurs appareils pour utiliser les modèles de l'un depuis l'autre « comme s'ils étaient locaux ». L'interface annonce un chiffrement de bout en bout. Trois étapes : **Se connecter** (compte LM Studio) → **Créer un Link** (réseau privé) → **Ajouter un autre appareil**. Non testé (compte requis) [À tester].
+**LM Link** relie plusieurs appareils pour utiliser les modèles de l'un depuis l'autre « comme s'ils étaient locaux ». L'interface annonce un chiffrement de bout en bout. Trois étapes : **Se connecter** (compte LM Studio) → **Créer un Link** (réseau privé) → **Ajouter un autre appareil**. Non testé (compte requis) [À tester]. Détails, commandes et protocole de vérification : [Manuel LM Studio 17](../lmstudio/17-lm-link.md). La formule gratuite comprend LM Link pour 5 appareils ([Manuel 10, offres et prix](10-securite-compte-api.md#offres-et-prix)).
 
 ---
 

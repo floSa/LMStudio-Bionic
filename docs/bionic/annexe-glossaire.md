@@ -14,6 +14,7 @@ Termes utilisés dans les manuels Bionic. Les notions de modèle, de quantificat
 | **Branche** (*fork*) | Nouvelle session qui part d'une réponse d'une session existante. ([05](05-projets-et-sessions.md#7-reprendre-modifier-ramifier)) |
 | **Canal** | Flux de mises à jour de l'application (Stable). |
 | **Checkpoint** | Point de sauvegarde automatique de fichiers avant modification [Source]. |
+| **Free / Bionic+ / Pro** | Offres de Bionic : 0 $, 20 $ et 100 $ par mois ; la formule gratuite couvre l'agent, les modèles locaux, la voix hors ligne, LM Link (5 appareils) et une recherche web limitée. ([10](10-securite-compte-api.md#offres-et-prix)) |
 | **Cloud** (modèle) | Modèle exécuté dans le LM Studio Secure Cloud ; compte et crédits requis. ([10](10-securite-compte-api.md)) |
 | **Compaction** | Résumé des échanges anciens pour libérer du contexte ; déclenchée par la commande `/compact` ou automatiquement ([Manuel 14](14-commandes-compaction-navigateur.md#2-compacter-une-session--compact)). |
 | **Navigateur intégré** | Onglet de Bionic qui affiche une page web à côté de la session ; l'agent peut y ouvrir une adresse ([Manuel 14](14-commandes-compaction-navigateur.md#4-le-navigateur-intégré)). |

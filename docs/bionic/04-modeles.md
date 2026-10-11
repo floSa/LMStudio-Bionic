@@ -62,7 +62,7 @@ Un modèle utilisé comme agent doit réunir quatre qualités :
 
 Le modèle se choisit **par session** ; le modèle par défaut des nouvelles sessions est le **Modèle racine** (Réglages → Agent, [Manuel 03](03-reglages.md#3-agent)).
 
-Les modèles **Remote** (LM Link) et **Cloud** apparaissent dans la même liste lorsque le compte est connecté et que l'appareil lié est disponible [Source].
+Les modèles **Remote** (LM Link, [Manuel LM Studio 17](../lmstudio/17-lm-link.md)) et **Cloud** apparaissent dans la même liste lorsque le compte est connecté et que l'appareil lié est disponible [Source].
 
 ---
 

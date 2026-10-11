@@ -74,9 +74,42 @@ Pour un travail **sans aucune sortie de données** :
 | Ajouter des crédits | Réglages → Général → Compte → **Manage plan** → page du compte LM Studio Hub → **Cloud Inference** → ajouter des crédits → vérifier le solde disponible → actualiser dans Bionic. |
 | Compte de facturation | *Personnel* ; la gestion d'équipe ou d'organisation n'est pas décrite dans la documentation consultée. |
 
+### Offres et prix
+
+Offres affichées par la page officielle des prix de Bionic [Source : `lmstudio.ai/pricing`, consultée le 11 octobre 2026 ; prix en **dollars américains par mois**, sujets à changement].
+
+| | **Free** | **Bionic+** | **Pro** |
+|---|---|---|---|
+| **Prix** | **0 $** | **20 $** par mois | **100 $** par mois |
+| Positionnement | « Run local LLMs on your machine » | modèles open source hébergés aux États-Unis | « More included usage » (davantage d'usage inclus) |
+| Agent Bionic (projets, sessions, code, documents, Auto Review) | Oui | Oui | Oui |
+| Modèles **locaux** (moteurs llama.cpp et MLX) | Oui | Oui | Oui |
+| Transcription vocale **hors ligne** | Oui | Oui | Oui |
+| **LM Link** (modèles d'un autre appareil) | Oui, **5 appareils au plus** | Idem Free | Idem Free |
+| **Recherche web** | **Limitée** | Complète, avec **extraction de pages** | Idem Bionic+ |
+| **Modèles cloud** hébergés aux États-Unis (Kimi K3, GLM 5.3, DeepSeek V4 Flash, « et d'autres ») | **Non listés** dans l'offre | **Oui** | Oui |
+| **Jetons « en gros » à tarif réduit** (*discounted bulk tokens*) | Non | Oui | Oui |
+| **Limites d'usage** | — | Usage inclus (montant non publié) | **5 ×** celles de Bionic+ |
+| **Accès anticipé** aux nouvelles fonctions | Non | Non | **Oui** |
+
+**Ce que la formule Free permet** : tout ce que ces manuels ont testé (agent, projets, code, documents, compétences, serveurs MCP, Auto Review, API locale, dictée) avec des modèles **locaux**, sans abonnement ; LM Link jusqu'à 5 appareils ; recherche web limitée.
+
+**Ce que la formule Free ne comprend pas** [Source] : les modèles open source **hébergés** (gros modèles tournant dans le *LM Studio Secure Cloud* — hébergement américain, sans conservation des données), la recherche web complète avec extraction de pages, les jetons à tarif réduit, les limites d'usage accrues, l'accès anticipé. **Aucune fonction d'agent n'est réservée aux offres payantes** sur la page : la différence porte sur **où le modèle tourne** (cloud ou machine locale) et sur la **quantité d'usage cloud**.
+
+**Autres points de la page** :
+
+- **Zero Data Retention** (rétention nulle) : consignes et réponses non conservées par le fournisseur ; la recherche web y est soumise, avec un avertissement : les requêtes web comportent leurs propres risques ; ne pas y mettre de données sensibles.
+- **Crédits cloud** : ils couvrent l'usage **au-delà de l'allocation incluse** dans la formule. Les modèles locaux et distants ne consomment aucun crédit et n'exigent pas de facturation.
+- **Équipes** : facturation centralisée des crédits d'inférence (création d'une *organisation* depuis le compte) ; **abonnements d'équipe** annoncés « bientôt ». La mention d'une offre *Enterprise* relevée sur certains sites tiers **n'apparaît pas** sur la page officielle.
+- **Changement de formule** : depuis le tableau de bord du compte (Réglages → Général → Compte → *Manage plan*, voir le tableau ci-dessus).
+
+**Points non publiés** [À tester] : montant de l'**allocation incluse** dans Bionic+ et Pro (le facteur « 5 × » est donné sans valeur de départ) ; possibilité d'**acheter des crédits cloud depuis la formule Free** (la documentation dit seulement que les modèles cloud exigent « un compte connecté avec facturation et des crédits disponibles ») ; contenu exact de « recherche web limitée » ; taxes et période de facturation ; durée de la préversion de LM Link. Les articles de blogs tiers donnent d'autres montants (12, 15 $) : **ignorés**, ils ne correspondent pas à la page officielle.
+
+> **Ligne de conduite pour un usage gratuit** — rester sur la formule **Free** couvre l'ensemble des usages décrits dans ces manuels. Une formule payante ne devient utile que pour des **modèles trop gros pour le poste**, pour la **recherche web complète**, ou pour un **usage intensif** en nuage [Estimation d'après le contenu des offres]. Un compte n'est nécessaire que pour LM Link, la recherche web et le cloud ; aucun frais de compte n'apparaît sur la page des prix [Estimation].
+
 ### Pour aller plus loin
 
-- Aucun **tarif** (prix par crédit, forfait) n'est donné dans la documentation consultée [À tester].
+- Les montants des offres sont ceux de la page des prix : voir ci-dessus pour les **points non publiés** (aucune grille de prix par crédit ni de montant d'allocation).
 - **Zero Data Retention** : les données envoyées au cloud sont traitées de façon **transitoire** et non conservées, et ne servent pas à entraîner des modèles [Source : annonce officielle]. Engagement contractuel du service : à valider avec le service juridique avant tout usage sur des données internes.
 - Comportement lorsque les **crédits sont épuisés** (blocage, bascule vers un modèle local) : non documenté [À tester].
 
@@ -92,7 +125,7 @@ Pour un travail **sans aucune sortie de données** :
 2. **Créer un Link** : réseau privé entre appareils.
 3. **Ajouter un autre appareil** : connecter la machine qui héberge les modèles.
 
-Garanties annoncées : **chiffrement de bout en bout** entre appareils associés ; compatibilité avec ordinateurs, stations dédiées, serveurs et machines virtuelles cloud. Dans un modèle **Remote**, le **calcul** s'effectue sur l'appareil distant, la **conversation** reste sur l'appareil qui utilise Bionic [Source].
+Mise en place, commandes et protocole de vérification : [Manuel LM Studio 17](../lmstudio/17-lm-link.md). Garanties annoncées : **chiffrement de bout en bout** entre appareils associés ; compatibilité avec ordinateurs, stations dédiées, serveurs et machines virtuelles cloud. Dans un modèle **Remote**, le **calcul** s'effectue sur l'appareil distant, la **conversation** reste sur l'appareil qui utilise Bionic [Source].
 
 | Cas d'usage | Intérêt |
 |---|---|

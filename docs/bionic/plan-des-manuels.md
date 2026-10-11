@@ -186,7 +186,7 @@ Plan des 15 manuels Bionic (00 à 14) avec, pour chacun, le contenu de chaque se
 |---|---|
 | [1. Cartographie des flux de données](10-securite-compte-api.md#1-cartographie-des-flux-de-données) | Cartographie des flux de données. |
 | [2. Mode entièrement local](10-securite-compte-api.md#2-mode-entièrement-local) | Mode entièrement local. |
-| [3. Compte, crédits et facturation](10-securite-compte-api.md#3-compte-crédits-et-facturation) | Compte, crédits et facturation. |
+| [3. Compte, crédits et facturation](10-securite-compte-api.md#3-compte-crédits-et-facturation) | Compte, crédits et facturation ; offres Free, Bionic+ et Pro (prix, contenu, limites). |
 | [4. LM Link](10-securite-compte-api.md#4-lm-link) | LM Link. |
 | [5. API locale](10-securite-compte-api.md#5-api-locale) | API locale. |
 | [6. Navigateur, recherche web, sites autorisés](10-securite-compte-api.md#6-navigateur-recherche-web-sites-autorisés) | Navigateur, recherche web, sites autorisés. |
@@ -256,6 +256,7 @@ Plan des 15 manuels Bionic (00 à 14) avec, pour chacun, le contenu de chaque se
 
 - **Découverte** : 00 → 01 → 02 → 05 → 06.
 - **Développeur** : 00 → 05 → 07 → 12 → 04 → 08 → 13.
+- **Prix et offres (Free, Bionic+, Pro)** : 10 (section 3, « Offres et prix »).
 - **Sécurité et conformité** : 00 (section 6) → 10 → 12 → 08 (section 5, MCP) → 07 (section 8).
 - **Exploitation d'un poste (mémoire, vitesse)** : 01 → 03 (section 10) → 04 → 05 (section 6) → 11.
 - **Fonctions annexes** : 14 (Code Review, compaction, navigateur).

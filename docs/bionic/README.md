@@ -26,7 +26,7 @@ Manuels et tutoriels illustrés pour installer, configurer et utiliser **LM Stud
 | 07 | [Code, shell et autorisations](07-code-et-shell.md) | Scénario de correction de code exécuté, modes shell, relecture, sécurité |
 | 08 | [Compétences, palette `@`, MCP](08-competences-et-mcp.md) | Écrire et gérer des compétences, serveurs MCP |
 | 09 | [Saisie vocale](09-voix.md) | Dictée locale (Voxtral), réglage, limites |
-| 10 | [Sécurité, compte, cloud, API locale](10-securite-compte-api.md) | Flux de données, crédits, LM Link, API locale, menaces, configurations types |
+| 10 | [Sécurité, compte, cloud, API locale](10-securite-compte-api.md) | Flux de données, offres et prix (Free, Bionic+, Pro), crédits, LM Link, API locale, menaces, configurations types |
 | 11 | [Recettes et dépannage](11-recettes-et-depannage.md) | Fiches par cas d'usage, diagnostic par symptôme |
 | 12 | [Auto Review](12-auto-review.md) | Shell Judge, Shell Reviewer, niveaux de risque, instructions personnalisées, limites |
 | 13 | [Compétences en pratique](13-competences-en-pratique.md) | Compétence de bout en bout : création, déclenchement avec `@`, résultat mesuré |
