@@ -121,8 +121,8 @@ Offres affichées par la page officielle des prix de Bionic [Source : `lmstudio.
 
 **LM Link** permet d'utiliser les modèles d'un autre appareil comme s'ils étaient locaux. Réglages → **LM Link** [Vérifié] :
 
-1. **Se connecter** (compte LM Studio).
-2. **Créer un Link** : réseau privé entre appareils.
+1. **Se connecter** (compte LM Studio ; dans LM Studio 0.4.26, bouton *Login & Enable LM Link*).
+2. **Lien** : créé automatiquement en 0.4.26 (l'étape « Créer un Link » vue en 0.4.25 a disparu de l'interface de LM Studio).
 3. **Ajouter un autre appareil** : connecter la machine qui héberge les modèles.
 
 Mise en place, commandes et protocole de vérification : [Manuel LM Studio 17](../lmstudio/17-lm-link.md). Garanties annoncées : **chiffrement de bout en bout** entre appareils associés ; compatibilité avec ordinateurs, stations dédiées, serveurs et machines virtuelles cloud. Dans un modèle **Remote**, le **calcul** s'effectue sur l'appareil distant, la **conversation** reste sur l'appareil qui utilise Bionic [Source].
@@ -132,7 +132,7 @@ Mise en place, commandes et protocole de vérification : [Manuel LM Studio 17](.
 | Portable léger + station puissante | Modèles volumineux sans changer de poste |
 | Serveur interne | Mutualiser un modèle |
 
-Non testé (compte requis) [À tester] : appairage, authentification, trajet réseau (local ou via Internet).
+**Essayé dans LM Studio** (11 octobre 2026) avec un portable et un PC fixe : le modèle distant se charge en environ 15 s, répond à la même vitesse qu'en local (46,5 jetons par seconde) et le calcul se fait bien sur l'hôte ([Manuel LM Studio 17, sections 6 à 8](../lmstudio/17-lm-link.md#6-charger-et-régler-un-modèle-distant)). **Non essayé dans Bionic** ; trajet réseau (local ou via Internet) non relevé [À tester].
 
 ---
 

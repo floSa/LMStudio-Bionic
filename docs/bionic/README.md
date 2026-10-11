@@ -48,12 +48,12 @@ Manuels et tutoriels illustrés pour installer, configurer et utiliser **LM Stud
 
 ## Limites connues
 
-- **Aucun compte connecté** : modèles cloud, crédits, recherche web, LM Link et gestion de plan sont décrits d'après l'interface et la documentation, non exécutés.
+- **Aucun compte connecté** : modèles cloud, crédits, recherche web et gestion de plan sont décrits d'après l'interface et la documentation, non exécutés.
 - **Dictée vocale** non exécutée (pas de microphone ni de téléchargement du modèle vocal).
 - **Compétences** : essais de bout en bout ([manuel 13](13-competences-en-pratique.md)). **MCP** : serveur local ajouté et appelé **dans Bionic** (7 octobre 2026, [manuel 08](08-competences-et-mcp.md#5-serveurs-mcp)) ; **aucune confirmation** n'est demandée pour un outil MCP, même à effet de bord. Serveurs tiers du catalogue (GitHub, Linear, Notion, Sentry, Atlassian) : **non configurés** (compte requis).
 - **Auto Review** : niveau `too_destructive` (blocage définitif) **non obtenu**, même avec des commandes destructives réelles. Un essai (`shred` sur `~/*.txt`, modèle 26B) a été **approuvé automatiquement et a détruit un fichier réel** : à lire avant tout essai ([manuel 12](12-auto-review.md#essais-sur-des-commandes-destructives-poste-à-gpu-dédié)).
 - Les performances mesurées dépendent du matériel : deux séries sont données (GPU intégré, puis GPU dédié entre parenthèses ou en tableau séparé). Sur le GPU dédié, le modèle réellement utilisé est **vérifié dans la base de sessions** ; les mesures de la première série ne l'ont pas toutes été.
-- **Non testés** : dictée vocale (téléchargement du modèle vocal), modèles cloud, crédits, LM Link et recherche web (compte requis), serveurs MCP du catalogue (compte requis), Canvas (non déclenchable avec le 26B), points de sauvegarde (aucune action dans l'interface), conflit LM Studio / Bionic (non rejoué), modèle *12B QAT* (absent du poste, remplacé par le *26B A4B*).
+- **Non testés** : dictée vocale (téléchargement du modèle vocal), modèles cloud, crédits et recherche web (compte requis) ; LM Link essayé côté LM Studio ([manuel 17](../lmstudio/17-lm-link.md)), **non essayé dans Bionic**, serveurs MCP du catalogue (compte requis), Canvas (non déclenchable avec le 26B), points de sauvegarde (aucune action dans l'interface), conflit LM Studio / Bionic (non rejoué), modèle *12B QAT* (absent du poste, remplacé par le *26B A4B*).
 - Bionic évolue vite : les libellés, valeurs par défaut et fonctions peuvent changer entre versions.
 
 ## Dossiers associés
