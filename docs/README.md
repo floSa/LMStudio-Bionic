@@ -91,7 +91,7 @@ Limites connues de la partie Bionic : cloud, crédits, recherche web et serveurs
 ## Arborescence
 
 ```text
-EDF/
+LMStudio-Bionic/
 ├── docs/
 │   ├── README.md                (cette page)
 │   ├── lmstudio/                (manuels 00 à 17 et glossaire)

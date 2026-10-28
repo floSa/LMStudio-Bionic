@@ -59,7 +59,7 @@ Manuels et tutoriels illustrés pour installer, configurer et utiliser **LM Stud
 ## Dossiers associés
 
 ```text
-EDF/
+LMStudio-Bionic/
 ├── docs/
 │   ├── README.md                (index général)
 │   ├── lmstudio/                (manuels LM Studio)
